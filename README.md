@@ -25,9 +25,9 @@ See this Extension in the Contao Extension-Repository
 
 License
 -------
-This ia a commercial extension for Contao Open Source CMS
-You can buy a license at https://pdir.de/mobilede
-2017 pdir GmbH - All-rights-reserved
+This ia a commercial extension for Contao Open Source CMS<br>
+You can buy a license at https://pdir.de/mobilede<br>
+2017 pdir GmbH - All-rights-reserved<br>
 
 
 ToDo

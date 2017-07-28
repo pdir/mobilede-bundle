@@ -1,0 +1,82 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "a027a2ce420dfd6b660212d5ac6a7cc9",
+      "css": "calendar-times-o",
+      "code": 62067,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "ecede48deb16179e5ef9a3f8ffae62f4",
+      "css": "road",
+      "code": 59392,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "381da2c2f7fd51f8de877c044d7f439d",
+      "css": "picture",
+      "code": 59393,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "0bda4bc779d4c32623dec2e43bd67ee8",
+      "css": "gauge",
+      "code": 61668,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "4109c474ff99cad28fd5a2c38af2ec6f",
+      "css": "filter",
+      "code": 61616,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "56a21935a5d4d79b2e91ec00f760b369",
+      "css": "sort",
+      "code": 61660,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9937d762aee170b7350b15dd02dd34a3",
+      "css": "cab",
+      "code": 61881,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "7f3d8ff1d5f6ee019f0c00ed7a86caec",
+      "css": "truck",
+      "code": 59394,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "326dd5dc5899787161184614d04a50b9",
+      "css": "motorcycle",
+      "code": 61980,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "bf882b30900da12fca090d9796bc3030",
+      "css": "mail",
+      "code": 59395,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9f7e588c66cfd6891f6f507cf6f6596b",
+      "css": "phone",
+      "code": 59396,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "197375a3cea8cb90b02d06e4ddf1433d",
+      "css": "globe",
+      "code": 59398,
+      "src": "fontawesome"
+    }
+  ]
+}

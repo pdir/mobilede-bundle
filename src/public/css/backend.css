@@ -1,0 +1,74 @@
+
+.be_mobilede_setup .right {
+    float: right;
+    padding: 15px;
+    width: 40%;
+}
+.be_mobilede_setup .left {
+    float: left;
+    padding: 15px;
+    width: 50%;
+}
+
+.be_mobilede_setup .logo {
+    margin-bottom: 5px;
+}
+
+.be_mobilede_setup hr {
+    width: 95%;
+    margin: 20px auto;
+}
+
+.be_mobilede_setup .tools,
+.be_mobilede_setup .feed {
+    padding: 4px 15px 6px;
+}
+
+.be_mobilede_setup .feed .item {
+    margin-bottom: 5px;
+}
+
+.be_mobilede_setup .feed .item span {
+    padding-right: 10px;
+}
+
+.be_mobilede_setup .button {
+    float: left;
+    text-align: center;
+    margin-right: 25px;
+}
+
+.be_mobilede_setup .kreis {
+    width: 60px;
+    padding: 13px;
+    box-sizing: border-box;
+    margin:auto;
+}
+
+.be_mobilede_setup small {
+	color: #cccccc;
+}
+
+
+.be_mobilede_setup .api-status .blink {
+	width: 15px;
+	height: 15px;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 10px;
+	background: #ACDA3D;
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	margin-left: 5px;
+}
+
+.be_mobilede_setup .api-status .blink.red {
+	background: #cc3d09;
+}
+
+.be_mobilede_setup .debug-info {
+	background: #ccc;
+	color: #fff;
+	padding: 10px;
+}

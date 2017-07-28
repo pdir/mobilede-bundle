@@ -1,0 +1,62 @@
+<div class="item md-ad-box <?= $this->filterClasses ?>">
+  <div class="image">
+    <a href="<?= $this->link ?>"><img src="<?= $this->imageSrc ?>" alt="<?= $this->desc ?>"></a>
+  </div>
+  <!-- detail -->
+  <div class="detail">
+    <!-- Header -->
+    <header class="clearfix">
+      <h5 class="title">
+        <a href="<?= $this->link ?>"><?= $this->desc ?></a>
+      </h5>
+      <!-- Price -->
+      <div class="price">
+        <span><?= $this->price ?></span>
+      </div>
+      <ul class="custom-list">
+        <li>
+          <i class="icon-gauge"></i><?= $this->power ?> /
+        </li>
+        <li>
+          <?= $this->fuelType ?> /
+        </li>
+        <li>
+          <?= $this->transmission ?>
+        </li>
+      </ul>
+    </header>
+    <!-- Fuel and type -->
+    <p>
+      <?= $this->fuelConsumption[0]['label'] ?> <?= $this->fuelConsumption[0]['value'] ?><br>
+      <?= $this->fuelConsumption[1]['label'] ?> <?= $this->fuelConsumption[1]['value'] ?><br>
+      <?= $this->bodyType ?>, <?= $this->usageType ?>
+    </p>
+    <!-- Features List -->
+    <div class="features-area">
+      <ul class="features-list clearfix">
+        <li>
+          <i class="icon-calendar-times-o"></i>
+          <span><?= $this->firstRegistration ?></span>
+        </li>
+        <li>
+          <i class="icon-road"></i>
+          <span><?= $this->mileage ?></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="md-ad-box-overlap-wrapper">
+      <h2><?= $this->desc ?></h2>
+      <h3><?= $this->price ?></h3>
+
+      <div class="md-ad-box-overlap-btns-area">
+        <a href="<?= $this->link ?>" class="overlap-btn"><i class="icon-picture"></i></a>
+      </div>
+    </div>
+  </div>
+<?php if($this->featured): ?>
+  <div class="corner-ribbon <?= $this->featureCss ?>"><?php if($this->promotion): ?>Empfehlung<?php else: ?>Neu<?php endif ?></div>
+<?php endif; ?>
+
+</div>
+<!-- mobilede ad box end-->

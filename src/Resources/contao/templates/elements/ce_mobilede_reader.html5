@@ -1,0 +1,82 @@
+<!--[if IE 7]><link rel="stylesheet" href="system/modules/pdirMobileDe/assets/vendor/fontello/css/fontello-ie7.css"><![endif]-->
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+  <div class="md-detail">
+    <a href="javascript:history.back();" class="back top">zurück</a>
+    <div class="md-detail-header">
+      <i class="icon-cab"></i>
+      <h1><?= $this->ad['makeModelDescription']['value'] ?></h1>
+      <span class="price"><?= $this->ad['priceModel']['primaryPrice']['countryOfSale']['value'] ?></span>
+    </div>
+    <div class="md-detail-content">
+      <div class="md-detail-left">
+        <div class="ce_sliderStart block">
+          <div class="content-slider" data-config="4000,300,0,1">
+            <div class="slider-wrapper">
+              <?php foreach($this->ad['images'] as $key=>$image): ?>
+                <img src="<?= $image['large']['src'] ?>"/>
+              <?php endforeach; ?>
+            </div>
+          </div>
+          <nav class="slider-control">
+            <a href="#" class="slider-prev">Zurück</a>
+            <span class="slider-menu"></span>
+            <a href="#" class="slider-next">Vorwärts</a>
+          </nav>
+        </div>
+        <div class="md-detail-description">
+          <h2>Beschreibung</h2>
+          <?= $this->ad['description']['value'] ?>
+        </div>
+      </div>
+      <div class="md-detail-right">
+        <div class="md-detail-box additional-attributes">
+          <h2><i class="icon-cab"></i> Technische Daten</h2>
+          <ul class="detail-list">
+          <?php foreach($this->ad['additionalAttributes'] as $key=>$feature): ?>
+            <li><span><?= $feature['label'] ?></span> <?= $feature['value'] ?></li>
+          <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="md-detail-box additional-contact">
+          <h2>Ihr Ansprechpartner</h2>
+          <p><strong>Ihr Musterhändler</strong><br>
+            Max Mustermann<br>
+            Automobilstr. 3<br>
+            012345 Musterhausen</p>
+          <p>
+            <i class="icon-phone" title="Telefon"></i> 012345 / 67890<br>
+            &nbsp;&nbsp;&nbsp;&nbsp; 012345 / 67890 (Fax)<br>
+            <i class="icon-mail" title="E-Mail"></i> <a href="mailto:mustermann@example.com">mustermann@example.com</a><br>
+            <i class="icon-globe" title="Web"></i> <a href="http://www.example.com">www.example.com</a>
+          </p>
+        </div>
+        <div class="md-detail-box additional-form">
+          <h2>Kontaktformular</h2>
+          {{insert_form::1}}
+        </div>
+      </div>
+    </div>
+    <div class="md-detail-footer">
+      <?php if($this->prevAd): ?>
+      <span class="prevAd"><a href="<?php echo $this->prevAd['href']; ?>">&laquo; <?php echo $this->prevAd['title']; ?></a></span>
+      <?php endif; ?>
+      <?php if($this->nextAd): ?>
+      <span class="nextAd"><a href="<?php echo $this->nextAd['href']; ?>"><?php echo $this->nextAd['title']; ?> &raquo;</a></span>
+      <?php endif; ?>
+    </div>
+    <a href="javascript:history.back();" class="back bottom">zurück</a>
+  </div>
+</div>
+
+<?php if($this->debug): ?>
+<div>
+  <h2>DEBUG:</h2>
+  Modulversion: <?= $this->version ?><br>
+  HändlerID: <?= $this->customer ?><br><br>
+  RawData<br><pre> <?php print_r($this->ad); ?></pre>
+</div>
+<?php endif; ?>
