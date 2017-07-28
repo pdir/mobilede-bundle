@@ -1,6 +1,10 @@
 Mobile.de Ads for Contao 4
 ==================================
 
+[![Latest Stable Version](https://poser.pugx.org/pdir/mobilede-bundle/v/stable)](https://packagist.org/packages/pdir/mobilede-bundle)
+[![Total Downloads](https://poser.pugx.org/pdir/mobilede-bundle/downloads)](https://packagist.org/packages/pdir/mobilede-bundle)
+[![License](https://poser.pugx.org/pdir/mobilede-bundle/license)](https://packagist.org/packages/pdir/mobilede-bundle)
+
 About
 -----
 
