@@ -1,0 +1,43 @@
+{
+  "name": "pdir/mobilede-bundle",
+  "type":"contao-bundle",
+  "description": "mobilede Ads for Contao 4",
+  "keywords":["contao","mobile","ads", "cars","automobile"],
+  "license": "paid extension - domain licence available",
+  "authors": [
+    {
+      "name": "Webdesign für Dresden",
+      "homepage": "https://pdir.de",
+      "email" : "develop@pdir.de",
+      "role" : "Developer"
+    }
+  ],
+  "support" : {
+    "email" : "develop@pdir.de",
+    "issues" : "https://github.com/pdir/mobilede-bundle/issues",
+    "source" : "https://github.com/pdir/mobilede-bundle"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "contao/core-bundle": "^4.0"
+  },
+  "conflict": {
+    "contao/core": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pdir\\MobileDeBundle\\": "src/"
+    },
+    "classmap": [
+      "src/Resources/contao/"
+    ]
+  },
+  "extra": {
+    "contao-manager-plugin": "Pdir\\MobileDeBundle\\ContaoManagerPlugin"
+  },
+  "config": {
+    "files": "files"
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}

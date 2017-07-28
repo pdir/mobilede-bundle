@@ -1,0 +1,22 @@
+{
+  "name": "pdir/mobilede-bundle",
+  "version": "1.0.2",
+  "description": "mobilede Ads for Contao 4",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pdir/mobilede-bundle.git"
+  },
+  "keywords": [
+    "Contao",
+    "mobile",
+    "ads",
+    "cars",
+    "automobile"
+  ],
+  "author": "pdir / digital agentur",
+  "license": "paid extension - domain licence available",
+  "bugs": {
+    "url": "https://github.com/pdir/mobilede-bundle/issues"
+  }
+}
