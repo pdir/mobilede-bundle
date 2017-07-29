@@ -1,27 +1,38 @@
 
+.be_mobilede_setup a {
+	color: #7abfbc;
+}
+
 .be_mobilede_setup .right {
     float: right;
-    padding: 15px;
     width: 40%;
+	margin: 15px 0;
 }
 .be_mobilede_setup .left {
     float: left;
-    padding: 15px;
     width: 50%;
+	margin: 15px 0;
 }
 
 .be_mobilede_setup .logo {
     margin-bottom: 5px;
 }
 
+.be_mobilede_setup h2 {
+	margin-bottom: 10px;
+}
+
 .be_mobilede_setup hr {
-    width: 95%;
+    width: 100%;
     margin: 20px auto;
 }
 
-.be_mobilede_setup .tools,
-.be_mobilede_setup .feed {
-    padding: 4px 15px 6px;
+.be_mobilede_setup .devlog {
+	margin: 10px 0;
+}
+
+.be_mobilede_setup .link-list li {
+	padding: 5px 0 5px 0;
 }
 
 .be_mobilede_setup .feed .item {
@@ -30,6 +41,7 @@
 
 .be_mobilede_setup .feed .item span {
     padding-right: 10px;
+	color: #7abfbc;
 }
 
 .be_mobilede_setup .button {
@@ -71,4 +83,5 @@
 	background: #ccc;
 	color: #fff;
 	padding: 10px;
+	margin-top: 15px;
 }

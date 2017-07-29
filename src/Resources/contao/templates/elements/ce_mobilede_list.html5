@@ -3,6 +3,7 @@
 <?php if ($this->headline): ?>
   <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
+<?php if(!$this->hideFilters): ?>
   <div class="md-filters">
     <div class="md-filters-header">
       <button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button>
@@ -48,6 +49,7 @@
       <span><button class="btn-shuffle" id="shuffle">Mischen</button></span>
     </div>
   </div>
+<?php endif; ?>
 <?php if($this->promotion): ?>
   <div class="md-promotion-box list">
     <?= $this->promotion ?>
@@ -73,4 +75,4 @@
   var mdListShuffle = <?= $this->listShuffle ?>;
 </script>
 <!-- indexer::continue -->
-<!--[if IE 7]><link rel="stylesheet" href="system/modules/pdirMobileDe/assets/vendor/fontello/css/fontello-ie7.css"><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/bundles/pdirmobilede/vendor/fontello/css/fontello-ie7.css"><![endif]-->

@@ -32,7 +32,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_readerPage'] = array
 	'reference' => &$GLOBALS['TL_LANG']['tl_module'],
 	'eval' => array(
 		'includeBlankOption' => true,
-		'mandatory' => true
+		'mandatory' => true,
+		'tl_class' => 'w50'
 	),
 	'sql' => "int(10) unsigned NOT NULL default '0'"
 );

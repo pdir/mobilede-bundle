@@ -45,14 +45,22 @@ class ReaderElement extends  \ContentElement
 			\Input::setGet('ad', \Input::get('auto_item'));
 		}
 
+
 		// get alias from auto item
-		$this->alias = \Input::get('auto_item');
+		$this->alias = \Input::get('ad');
 
 		$helper = new Helper();
 		$this->ad = $helper->getAdDetail($this->pdir_md_customer_id, $this->alias);
 
-        // Return if there are no ad
-        if (!is_array($this->ad) || count($this->ad) < 1) {
+        // Return if there are no ad / do not index or cache
+        if (!is_array($this->ad) || count($this->ad) < 1)
+        {
+			/** @var \PageModel $objPage */
+			global $objPage;
+
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
             return '';
         }
         return parent::generate();
@@ -63,15 +71,17 @@ class ReaderElement extends  \ContentElement
      */
     protected function compile()
     {
+		$assetsDir = 'web/bundles/pdirmobilede';
+
 		if(!$this->pdir_md_removeModuleJs)
 		{
-			// not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = 'system/modules/pdirMobileDe/assets/js/ads.js|static';
+			// not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/ads.js|static';
 		}
 		if(!$this->pdir_md_removeModuleCss)
 		{
-			$GLOBALS['TL_CSS']['md_css_1'] = 'system/modules/pdirMobileDe/assets/vendor/fontello/css/fontello.css||static';
-			$GLOBALS['TL_CSS']['md_css_2'] = 'system/modules/pdirMobileDe/assets/vendor/fontello/css/animation.css||static';
-			$GLOBALS['TL_CSS']['md_css_3'] = 'system/modules/pdirMobileDe/assets/css/ads.css||static';
+			$GLOBALS['TL_CSS']['md_css_1'] = $assetsDir . '/vendor/fontello/css/fontello.css||static';
+			$GLOBALS['TL_CSS']['md_css_2'] = $assetsDir . '/vendor/fontello/css/animation.css||static';
+			$GLOBALS['TL_CSS']['md_css_3'] = $assetsDir . '/css/ads.css||static';
 		}
 
 		$this->Template->ad = $this->ad['page']['ad'];

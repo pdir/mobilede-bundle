@@ -18,7 +18,8 @@
  * Module translation
  */
 
-$GLOBALS['TL_LANG']['tl_content']['md_filters_legend'] = 'Filter-Einstellunegn';
+$GLOBALS['TL_LANG']['tl_content']['md_settings_legend'] = 'Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['md_filters_legend'] = 'Filter-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['md_template_legend'] = 'Template-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['md_debug_legend'] = 'Cache & Debugging';
 

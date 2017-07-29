@@ -73,16 +73,18 @@ class ListingElement extends \ContentElement
      */
     protected function compile()
     {
+		$assetsDir = 'web/bundles/pdirmobilede';
+
         if(!$this->pdir_md_removeModuleJs)
         {
-            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = 'system/modules/pdirMobileDe/assets/js/ads.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir . '/js/ads.js|static';
 			$GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
         }
         if(!$this->pdir_md_removeModuleCss)
         {
-			$GLOBALS['TL_CSS']['md_css_1'] = 'system/modules/pdirMobileDe/assets/vendor/fontello/css/fontello.css||static';
-			$GLOBALS['TL_CSS']['md_css_2'] = 'system/modules/pdirMobileDe/assets/vendor/fontello/css/animation.css||static';
-            $GLOBALS['TL_CSS']['md_css_3'] = 'system/modules/pdirMobileDe/assets/css/ads.css||static';
+			$GLOBALS['TL_CSS']['md_css_1'] = $assetsDir . '/vendor/fontello/css/fontello.css||static';
+			$GLOBALS['TL_CSS']['md_css_2'] = $assetsDir . '/vendor/fontello/css/animation.css||static';
+            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir . '/css/ads.css||static';
         }
 
         // Filters
@@ -166,6 +168,9 @@ class ListingElement extends \ContentElement
 
 			if($this->featureCss)
 				$objFilterTemplate->featureCss = $this->featureCss;
+
+			if(!$this->pdir_md_hideFilters)
+				$objFilterTemplate->hideFilters = true;
 
 			$arrReturn[] = $objFilterTemplate->parse();
 		}

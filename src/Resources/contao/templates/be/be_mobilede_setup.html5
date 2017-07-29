@@ -1,83 +1,91 @@
-<div id="pdir" class="be_mobilede_setup clr">
-  <h1 id="tl_welcome">mobile.de Inserate (Version: <?= $this->version ?>)</h1>
-  <div class="intro">
-    <div class="right">
-      <a href="https://pdir.de/mobilede.html" target="_blank"><img
-        src="https://pdir.de/files/01_inhalte/bilder/mobilemodul_logo_267x45px.png"
-        alt="mobile.de Inserate für Contao" width="267" height="45" class="logo"></a>
-      <p>Das mobile.de Inserate Modul für Contao ist ein Produkt der <a href="http://www.pdir.de/" target="_blank">pdir
-        / digital agentur</a></p>
-      <p>WEB: <a href="https://pdir.de/mobilede.html" target="_blank"
-                 style="text-decoration: underline;">https://pdir.de</a></p>
-      <p>DOKU: <a href="https://docs.pdir.de/" target="_blank"
-                  style="text-decoration: underline;">https://docs.pdir.de/</a></p>
-      <p>DEMO: <a href="http://demo.maklermodul.de/mobilede-contao-integration-demo.html" target="_blank"
-                  style="text-decoration: underline;">http://demo.maklermodul.de/</a></p>
+<div class="tl_listing_container">
+  <div id="pdir" class="be_mobilede_setup clr">
+    <h1 id="tl_welcome">mobile.de Inserate (Version: <?= $this->version ?>)</h1>
+    <div class="intro">
+      <div class="right">
+        <a href="https://pdir.de/mobilede.html" target="_blank"><img
+          src="https://pdir.de/files/01_inhalte/bilder/mobilemodul_logo_267x45px.png"
+          alt="mobile.de Inserate für Contao" width="267" height="45" class="logo"></a>
+        <p>Das mobile.de Inserate Modul für Contao ist ein Produkt der <a href="http://www.pdir.de/" target="_blank">pdir
+          / digital agentur</a></p>
+        <h2>Interessante Links</h2>
+        <ul class="link-list">
+        <li><a href="https://docs.pdir.de/" target="_blank"
+                    style="text-decoration: underline;">Dokumentation</a> (In Vorbereitung)</li>
+        <li><a href="https://demo.pdir.de/mobile-de-inserate-demo.html" target="_blank"
+                    style="text-decoration: underline;">Demo</a></li>
+        <li><a href="https://github.com/pdir/mobilede-bundle/issues" target="_blank"
+                    style="text-decoration: underline;">Probleme melden</a></li>
+        <li><a href="https://pdir.de/mobilede.html" target="_blank"
+              style="text-decoration: underline;">Mehr zur Erweiterung bei pdir</a></li>
+        </ul>
+      </div>
+      <div class="left">
+        <h2>Willkommen bei Mobile.de Inserate für Contao</h2>
+        <p>Alle Inserate werden direkt aus der mobile.de* API ausgelesen und in der Erweiterung übersichtlich dargestellt.
+          Umfangreiche Filter- & Sortierungsfunktionen runden die Listenansicht ab. Die Detailansicht enthält alle
+          Fahrzeuginformationen und einen schlanken Produkt-Slider. Auf Wunsch können auch zusätzliche Funktionen
+          integriert werden. Fragen Sie uns an.</p>
+        <p>Besuchen Sie die offizielle <a href="https://pdir.de/mobilede.html"
+                                          target="_blank">Mobile.de Inserate Website</a> für aktuelle News und
+          Konfigurationsanleitungen.</p>
+        <p>Ihr Team der pdir / digital agentur</p>
+      </div>
+      <div class="clr"></div>
     </div>
-    <div class="left">
-      <h2>Willkommen bei Mobile.de Inserate für Contao</h2>
-      <p>Alle Inserate werden direkt aus der mobile.de* API ausgelesen und in der Erweiterung übersichtlich dargestellt.
-        Umfangreiche Filter- & Sortierungsfunktionen runden die Listenansicht ab. Die Detailansicht enthält alle
-        Fahrzeuginformationen und einen schlanken Produkt-Slider. Auf Wunsch können auch zusätzliche Funktionen
-        integriert werden. Fragen Sie uns an.</p>
-      <p>Besuchen Sie die offizielle <a href="https://pdir.de/mobilede.html"
-                                        target="_blank">Mobile.de Inserate Website</a> für aktuelle News und
-        Konfigurationsanleitungen.</p>
-      <p>Ihr Team der pdir / digital agentur</p>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <hr>
-  <div class="tools">
+    <hr>
+    <div class="tools">
 
-    <?php if( is_array($this->message) ): ?>
-      <p class="tl_<?= $this->message[1] ?>"><?= $this->message[0] ?></p>
-    <?php endif; ?>
+      <?php if( is_array($this->message) ): ?>
+        <p class="tl_<?= $this->message[1] ?>"><?= $this->message[0] ?></p>
+      <?php endif; ?>
 
-    <h2>Tools</h2>
-    <?php if($this->extMode == 'DEMO'): ?>
-      <div class="tl_info">Achtung! Das Modul läuft im Demo Modus.</div>
-    <?php endif; ?>
-    <div class="left">
-      <div class="button">
-        <a href="/contao/main.php?do=mobileDeSetup&act=download">
-          <div class="kreis">
-            <img src="<?= $this->base ?>system/modules/pdirMobileDe/assets/img/icon_download.png"
-             alt="Download Vollversion" width="60" height="60"/>
-          </div>
-          <br/>Download Vollversion
-        </a>
+      <h2>Tools</h2>
+      <?php if($this->extMode == 'DEMO'): ?>
+        <div class="tl_info">Achtung! Das Modul läuft im Demo Modus.</div>
+      <?php endif; ?>
+      <div class="left">
+        <div class="button">
+          <a href="/contao/main.php?do=mobileDeSetup&act=download">
+            <div class="kreis">
+              <img src="bundles/pdirmobilede/img/icon_download.png"
+               alt="Download Vollversion" width="60" height="60"/>
+            </div>
+            <br/>Download Vollversion
+          </a>
+        </div>
+        <div class="button">
+          <a href="https://pdir.de/mobilede.html" target="_blank">
+            <div class="kreis">
+              <img src="bundles/pdirmobilede/img/icon_buy.png"
+                alt="Vollversion kaufen" width="60" height="60"/></div>
+            <br/>Vollversion kaufen
+          </a>
+        </div>
       </div>
-      <div class="button">
-        <a href="https://pdir.de/mobilede.html" target="_blank">
-          <div class="kreis">
-            <img src="<?= $this->base ?>system/modules/pdirMobileDe/assets/img/icon_buy.png"
-              alt="Vollversion kaufen" width="60" height="60"/></div>
-          <br/>Vollversion kaufen
-        </a>
+      <div class="right">
+        Debug Infos<br>
+        <h2 class="api-status">API Status <span id="pdirApiStatus" class="blink"></span></h2>
+        <div class="debug-info">
+          Modus: <?= $this->extModeTxt ?><br>
+          IP: <?= $this->ip ?><br>
+          Hostname: <?= $this->hostname ?><br>
+          Domain: <?= $this->domain ?><br>
+        </div>
       </div>
+      <div class="clr"></div>
     </div>
-    <div class="right">
-      Debug Infos<br>
-      <h2 class="api-status">API Status <span id="pdirApiStatus" class="blink"></span></h2>
-      <div class="debug-info">
-        Modus: <?= $this->extModeTxt ?><br>
-        IP: <?= $this->ip ?><br>
-        Hostname: <?= $this->hostname ?><br>
-        Domain: <?= $this->domain ?><br>
-      </div>
+    <hr>
+    <div class="feed">
+      <h2>DevLog</h2>
+      <div id="mobileDeDevLog" class="devlog"></div>
+      <p><a href="https://pdir.de/devlog.html" target="_blank"> [ Alle lesen ] </a></div></p>
     </div>
-    <div class="clr"></div>
-  </div>
-  <hr>
-  <div class="feed">
-    <h2>DevLog</h2>
-    <div id="mobileDeDevLog"></div>
-  </div>
-  <div class="tools">
-    <small>*mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner
-      Verbindung zur pdir GmbH oder der mobile.de* Erweiterung für Contao. Die Erweiterung verwendet die mobile.de* API
-      zum Import der Fahrzeugdaten.
-    </small>
+    <div class="tools">
+      <p><small>*mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner
+        Verbindung zur pdir GmbH oder der mobile.de* Erweiterung für Contao. Die Erweiterung verwendet die mobile.de* API
+        zum Import der Fahrzeugdaten.
+      </small></p>
+    </div>
   </div>
 </div>

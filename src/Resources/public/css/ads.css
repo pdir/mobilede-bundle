@@ -23,6 +23,10 @@
 	color: #7B7B7B;
 }
 
+.md-filters select {
+	min-width: 110px;
+}
+
 .md-filters .select-container {
 	width:50%;
 	float: left;

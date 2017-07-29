@@ -15,13 +15,14 @@ window.addEvent('domready', function() {
                 var temp = new Element('div').set('html', html);
 
                 temp.getElements('item').each(function(el) {
+                	console.log(el);
                     var d = new Date(el.getElements('pubdate')[0].innerText);
                     var curr_date = ((d.getDate()<10)? "0"+d.getDate(): d.getDate());
                     var curr_month = ((d.getMonth()<10)? "0"+(d.getMonth()+1): (d.getMonth()+1));
                     var curr_year = d.getFullYear();
                     var itemHTML = '<span>'+curr_date + "." + curr_month + "." + curr_year+'</span>';
                     itemHTML += '<span>'+el.getElements('title')[0].innerText+'</span>';
-                    itemHTML += '<a href="'+el.getElements('guid')[0].innerText+'" target="_blank"> [ lesen ] </a>';
+                    // itemHTML += '<a href="'+el.getElements('guid')[0].innerText+'" target="_blank"> [ lesen ] </a>';
                     itemHTML += '<div>'+el.getElements('description')[0].innerText.replace(']]>', '')+'</div>';
 
                     var newItem = new Element('div').addClass('item').set('html', itemHTML);

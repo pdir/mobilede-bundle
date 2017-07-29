@@ -10,7 +10,7 @@ class MobileDeSetup extends \BackendModule
     /**
      * Mobile.de Inserate version
      */
-    const VERSION = '1.0.4';
+    const VERSION = '1.0.5';
 
     /**
     * Template
@@ -30,7 +30,7 @@ class MobileDeSetup extends \BackendModule
     */
     protected function compile()
     {
-		$className = 'system/modules/pdirMobileDe/Classes/Helper.php';
+		$className = '/vendor/pdir/mobilede-bundle/src/Resources/contao/Classes/Helper.php';
 		$strDomain = $_SERVER['SERVER_NAME'];
 
 		/* @todo empty cache folder from backend */

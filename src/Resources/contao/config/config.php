@@ -41,20 +41,22 @@ if (!is_array($GLOBALS['BE_MOD']['pdir']))
 	array_insert($GLOBALS['BE_MOD'], 1, array('pdir' => array()));
 }
 
+$assetsDir = 'bundles/pdirmobilede';
+
 array_insert($GLOBALS['BE_MOD']['pdir'], 0, array
 (
 	'mobileDeSetup' => array
 	(
 		'callback'          => 'Pdir\MobileDe\MobileDeSetup',
-		'icon'              => 'system/modules/pdirMobileDe/assets/img/icon.png',
-		//'javascript'        => 'system/modules/pdirMobileDe/assets/js/backend.min.js',
-		'stylesheet'		=> 'system/modules/pdirMobileDe/assets/css/backend.css'
+		'icon'              => $assetsDir . '/img/icon.png',
+		//'javascript'        =>  $assetsDir . '/js/backend.min.js',
+		'stylesheet'		=>  $assetsDir . '/css/backend.css'
 	),
 ));
 
 if (TL_MODE == 'BE')
 {
-	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/pdirMobileDe/assets/js/backend.js';
+	$GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/backend.js';
 }
 
 /**
