@@ -13,24 +13,24 @@
  */
 
 jQuery(function ($) {
-    var $container = $('.md-ads'),
-        $checkboxes = $('.md-filter-attr.checkbox-group input');
+    var $container = $(".md-ads"),
+        $checkboxes = $(".md-filter-attr.checkbox-group input");
 
     var options = {
-        itemSelector: '.item',
-        layoutMode: 'fitRows',
+        itemSelector: ".item",
+        layoutMode: "fitRows",
         getSortData: {
-            price: '.price parseFloat',
+            price: ".price parseFloat",
             title: function(item) {
                 return $(item).find(".title a").text();
             },
-            number: '.number parseInt',
-            category: '[data-category]'
+            number: ".number parseInt",
+            category: "[data-category]"
         }
     };
 
-    if (typeof mdListShuffle != 'undefined')
-        options.sortBy = 'random';
+    if (typeof mdListShuffle != "undefined")
+        options.sortBy = "random";
 
     $container.isotope(options);
 
