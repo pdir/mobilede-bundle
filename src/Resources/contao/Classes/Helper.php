@@ -42,7 +42,7 @@ class Helper extends \Frontend
 	public function getAds($customerID, $apiUsr, $apiPwd)
 	{
 		// only used for demo presentation
-		$json = file_get_contents(self::$apiUrl . 'list/all/' . $_SERVER['SERVER_NAME']);
+		$json = file_get_contents(self::$apiUrl . 'list/all/' . \Environment::get('SERVER_NAME'));
 		$arrAds = json_decode( $json, true );
 		return $arrAds; // load from local cache
 	}
@@ -50,7 +50,7 @@ class Helper extends \Frontend
 	public function getAdDetail($customerID, $alias)
 	{
 		// only used for demo presentation
-		$json = file_get_contents(self::$apiUrl . 'ad/' . $alias . '/' . $_SERVER['SERVER_NAME']);
+		$json = file_get_contents(self::$apiUrl . 'ad/' . $alias . '/' . \Environment::get('SERVER_NAME'));
 		$arrAd = json_decode( $json, true );
 		return $arrAd;
 	}

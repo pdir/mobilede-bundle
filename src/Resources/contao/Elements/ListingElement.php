@@ -177,19 +177,17 @@ class ListingElement extends \ContentElement
 		return $arrReturn;
 	}
 
-	protected function getReaderPageLink($id)
+	protected function getReaderPageLink($pageId)
 	{
+		$paramString = sprintf('/%s/%s',
+		self::PARAMETER_KEY,
+				$pageId
+		);
+
 		if(\Config::get('useAutoItem'))
 		{
 			$paramString = sprintf('/%s',
-				$id
-			);
-		}
-		else
-		{
-			$paramString = sprintf('/%s/%s',
-				self::PARAMETER_KEY,
-				$id
+				$pageId
 			);
 		}
 

@@ -306,10 +306,10 @@ class pdir_md_content extends Backend
 
 	private function getElementsTemplates(DataContainer $dc, $strTmpl = 'list')
 	{
-		if (version_compare(VERSION . BUILD, '2.9.0', '>=')) {
+		return $this->getTemplateGroup('ce_mobilede_' . $strTmpl);
+		if (version_compare(VERSION . BUILD, '2.9.0', '>='))
+		{
 			return $this->getTemplateGroup('ce_mobilede_' . $strTmpl, $dc->activeRecord->pid);
-		} else {
-			return $this->getTemplateGroup('ce_mobilede_' . $strTmpl);
 		}
 	}
 }

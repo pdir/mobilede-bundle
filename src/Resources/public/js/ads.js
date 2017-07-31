@@ -46,41 +46,41 @@ jQuery(function ($) {
 		});
 
 		// combine inclusive filters
-		var filterValue = inclusives.length ? inclusives.join(', ') : '*';
-		$container.isotope({ filter: filterValue })
+		var filterValue = inclusives.length ? inclusives.join(", ") : "*";
+		$container.isotope({ filter: filterValue });
 	});
 
-    $('#shuffle').click(function () {
-        $container.isotope('shuffle');
+    $("#shuffle").click(function () {
+        $container.isotope("shuffle");
     });
 
-	$('#filterReset').click(function () {
-		$('.md-filters input[type="checkbox"]').prop('checked', false);
-		$('.md-filters option:selected').prop("selected", false);
-		$container.isotope( {filter: '*', sortBy: 'original-order'} );
+	$("#filterReset").click(function () {
+		$(".md-filters input[type=checkbox]").prop("checked", false);
+		$(".md-filters option:selected").prop("selected", false);
+		$container.isotope( {filter: "*", sortBy: "original-order"} );
 		return false;
 	});
 
-	$('#showFilters').click(function () {
-		$('.md-filters .md-filters-body').toggle();
+	$("#showFilters").click(function () {
+		$(".md-filters .md-filters-body").toggle();
 	});
 
     // bind sort button click
 	/*
-    $('.md-filter-sort select').on('click', 'button', function () {
-    	console.log( $(this).attr('data-filter') );
+    $(".md-filter-sort select").on("click", "button", function () {
+    	console.log( $(this).attr("data-filter") );
 		console.log( $(".md-filter-sort select option:selected").val() );
-		console.log( $(".md-filter-sort select option:selected").attr('data-filter') );
-        var sortByValue = $(".md-filter-sort select option:selected").attr('data-filter');
+		console.log( $(".md-filter-sort select option:selected").attr("data-filter") );
+        var sortByValue = $(".md-filter-sort select option:selected").attr("data-filter");
         $container.isotope({sortBy: sortByValue});
     });*/
 
     // change is-checked class on buttons
-    $('.button-group').each(function (i, buttonGroup) {
+    $(".button-group").each(function (i, buttonGroup) {
         var $buttonGroup = $(buttonGroup);
-        $buttonGroup.on('click', 'button', function () {
-            $buttonGroup.find('.is-checked').removeClass('is-checked');
-            $(this).addClass('is-checked');
+        $buttonGroup.on("click", "button", function () {
+            $buttonGroup.find(".is-checked").removeClass("is-checked");
+            $(this).addClass("is-checked");
         });
     });
 
@@ -88,26 +88,27 @@ jQuery(function ($) {
     var filterFns = {
         // show if number is greater than 50
         numberGreaterThan50: function() {
-            var number = $(this).find('.number').text();
+            var number = $(this).find(".number").text();
             return parseInt( number, 10 ) > 50;
         },
         // show if name ends with -ium
         ium: function() {
-            var name = $(this).find('.name').text();
+            var name = $(this).find(".name").text();
             return name.match( /ium$/ );
         }
     };
 
     // bind filter on select change
-    $('.md-select').on( 'change', function() {
+    $(".md-select").on( "change", function() {
         // get filter value from option value
         var filterValue = this.value;
         // use filterFn if matches value
         filterValue = filterFns[ filterValue ] || filterValue;
-		var options = {filter: filterValue}
+		var options = {filter: filterValue};
 		// sortierung
-		if( $(this).children('option:selected').attr('data-filter-type') == "sort" )
-			options = {sortBy: filterValue}
+		if( $(this).children("option:selected").attr("data-filter-type") == "sort" ) {
+			options = {sortBy: filterValue};
+		}
         $container.isotope( options );
     });
 });

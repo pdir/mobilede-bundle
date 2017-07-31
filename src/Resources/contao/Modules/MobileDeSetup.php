@@ -31,23 +31,21 @@ class MobileDeSetup extends \BackendModule
     protected function compile()
     {
 		$className = '/vendor/pdir/mobilede-bundle/src/Resources/contao/Classes/Helper.php';
-		$strDomain = $_SERVER['SERVER_NAME'];
+		$strDomain = \Environment::get('SERVER_NAME');
 
 		/* @todo empty cache folder from backend */
 
 		switch (\Input::get('act')) {
 			case 'download':
 				$strHelperData = file_get_contents(self::$apiUrl . 'download/latest/'.$strDomain);
+
+				$this->Template->message = array('Für Ihre IP/Domain wurde noch keine Lizenz gekauft.', 'error');
+
 				if ($strHelperData != 'error')
 				{
 					\File::putContent($className, $strHelperData);
 					$this->Template->message = array('Vollversion wurde erfolgreich heruntergeladen!', 'confirm');
 				}
-				else
-				{
-					$this->Template->message = array('Für Ihre IP/Domain wurde noch keine Lizenz gekauft.', 'error');
-				}
-				// break;
 			default:
 				// do something here
 		}
@@ -56,7 +54,7 @@ class MobileDeSetup extends \BackendModule
 		$this->Template->extModeTxt = Helper::MODE=='FULL' ? 'Vollversion' : 'Demo';
 		$this->Template->version = self::VERSION;
 		$this->Template->hostname = gethostname();
-		$this->Template->ip = $_SERVER['SERVER_ADDR'];
+		$this->Template->ip = \Environment::get('SERVER_ADDR');
 		$this->Template->domain = $strDomain;
     }
 }
