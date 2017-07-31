@@ -33,7 +33,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_readerPage'] = array
 	'eval' => array(
 		'includeBlankOption' => true,
 		'mandatory' => true,
-		'tl_class' => 'w50'
+		'tl_class' => 'w50',
+		'fieldType'=>'radio',
 	),
 	'sql' => "int(10) unsigned NOT NULL default '0'"
 );
