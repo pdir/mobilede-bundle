@@ -10,7 +10,7 @@ class MobileDeSetup extends \BackendModule
     /**
      * Mobile.de Inserate version
      */
-    const VERSION = '1.0.6';
+    const VERSION = '1.0.7';
 
     /**
     * Template
@@ -31,7 +31,7 @@ class MobileDeSetup extends \BackendModule
     protected function compile()
     {
 		$className = '/vendor/pdir/mobilede-bundle/src/Resources/contao/Classes/Helper.php';
-		$strDomain = \Environment::get('SERVER_NAME');
+		$strDomain = \Environment::get('httpHost');
 
 		/* @todo empty cache folder from backend */
 
@@ -54,7 +54,7 @@ class MobileDeSetup extends \BackendModule
 		$this->Template->extModeTxt = Helper::MODE=='FULL' ? 'Vollversion' : 'Demo';
 		$this->Template->version = self::VERSION;
 		$this->Template->hostname = gethostname();
-		$this->Template->ip = \Environment::get('SERVER_ADDR');
+		$this->Template->ip = \Environment::get('server');
 		$this->Template->domain = $strDomain;
     }
 }

@@ -25,7 +25,7 @@ class Helper extends \Frontend
 	/**
 	 * mobilede version
 	 */
-	const VERSION = '1.0.5';
+	const VERSION = '1.0.7';
 
 	/**
 	 * Extension mode
@@ -42,7 +42,7 @@ class Helper extends \Frontend
 	public function getAds($customerID, $apiUsr, $apiPwd)
 	{
 		// only used for demo presentation
-		$json = file_get_contents(self::$apiUrl . 'list/all/' . \Environment::get('SERVER_NAME'));
+		$json = file_get_contents(self::$apiUrl . 'list/all/' . \Environment::get('server'));
 		$arrAds = json_decode( $json, true );
 		return $arrAds; // load from local cache
 	}
@@ -50,7 +50,7 @@ class Helper extends \Frontend
 	public function getAdDetail($customerID, $alias)
 	{
 		// only used for demo presentation
-		$json = file_get_contents(self::$apiUrl . 'ad/' . $alias . '/' . \Environment::get('SERVER_NAME'));
+		$json = file_get_contents(self::$apiUrl . 'ad/' . $alias . '/' . \Environment::get('server'));
 		$arrAd = json_decode( $json, true );
 		return $arrAd;
 	}
