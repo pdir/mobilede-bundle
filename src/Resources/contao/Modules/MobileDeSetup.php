@@ -10,7 +10,7 @@ class MobileDeSetup extends \BackendModule
     /**
      * Mobile.de Inserate version
      */
-    const VERSION = '1.0.7';
+    const VERSION = '1.0.8';
 
     /**
     * Template
@@ -56,5 +56,15 @@ class MobileDeSetup extends \BackendModule
 		$this->Template->hostname = gethostname();
 		$this->Template->ip = \Environment::get('server');
 		$this->Template->domain = $strDomain;
+
+		// email body
+		$this->Template->emailBody = $this->getEmailBody();
     }
+
+	protected function getEmailBody()
+	{
+		$arrSearch = array(':IP:', ':HOST:', ':DOMAIN:', '<br>');
+		$arrReplace = array($this->Template->ip, $this->Template->hostname, $this->Template->domain, '%0d%0a');
+		return str_replace( $arrSearch, $arrReplace, $GLOBALS['TL_LANG']['MOBILEDE']['emailBody'] );
+	}
 }

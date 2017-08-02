@@ -22,13 +22,17 @@
       </div>
       <div class="left">
         <h2>Willkommen bei Mobile.de Inserate für Contao</h2>
-        <p>Alle Inserate werden direkt aus der mobile.de* API ausgelesen und in der Erweiterung übersichtlich dargestellt.
+        <p>Alle Inserate werden direkt aus der mobile.de*&sup1; API ausgelesen und in der Erweiterung übersichtlich dargestellt.
           Umfangreiche Filter- & Sortierungsfunktionen runden die Listenansicht ab. Die Detailansicht enthält alle
           Fahrzeuginformationen und einen schlanken Produkt-Slider. Auf Wunsch können auch zusätzliche Funktionen
           integriert werden. Fragen Sie uns an.</p>
         <p>Besuchen Sie die offizielle <a href="https://pdir.de/mobilede.html"
                                           target="_blank">Mobile.de Inserate Website</a> für aktuelle News und
           Konfigurationsanleitungen.</p>
+        <p><strong>Preis</strong><br>
+          Domainlizenz, einmalig 189€ zzgl. MwSt.<br>
+          Update/Support Abonnement 49€/Jahr zzgl. MwSt.*&sup2;
+        </p>
         <p>Ihr Team der pdir / digital agentur</p>
       </div>
       <div class="clr"></div>
@@ -55,11 +59,11 @@
           </a>
         </div>
         <div class="button">
-          <a href="https://pdir.de/mobilede.html" target="_blank">
+          <a href="mailto:kontakt@pdir.de?subject=mobile.de Erweiterung bestellen&body=<?= $this->emailBody ?>">
             <div class="kreis">
               <img src="bundles/pdirmobilede/img/icon_buy.png"
-                alt="Vollversion kaufen" width="60" height="60"/></div>
-            <br/>Vollversion kaufen
+                alt="Lizenz per Email bestellen" width="60" height="60"/></div>
+            <br/>Lizenz per Email bestellen
           </a>
         </div>
       </div>
@@ -82,9 +86,12 @@
       <p><a href="https://pdir.de/devlog.html" target="_blank"> [ Alle lesen ] </a></div></p>
     </div>
     <div class="tools">
-      <p><small>*mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner
-        Verbindung zur pdir GmbH oder der mobile.de* Erweiterung für Contao. Die Erweiterung verwendet die mobile.de* API
-        zum Import der Fahrzeugdaten.
+      <p><small>*&sup1;mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner
+        Verbindung zur pdir GmbH oder der mobile.de*&sup1; Erweiterung für Contao. Die Erweiterung verwendet die mobile.de*&sup1; API
+        zum Import der Fahrzeugdaten.<br>
+        &sup2; Updates sind solange kostenlos, bis die Version einen kompletten Versionssprung (Upgrade) macht.
+        Hast du beispielsweise Version 1.1 sind alle Updates in der Version 1.x für dich kostenlos, erst mit Upgrade auf Version 2.0 oder höher ist ein vergünstigter Upgrade Preis (wir nennen Abonnement bzw. Subscription) zu zahlen.
+        <a href="https://pdir.de/mobile-de-integration-fuer-contao-cms.html">Mehr Infos im FAQ</a>.
       </small></p>
     </div>
   </div>
