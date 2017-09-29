@@ -84,7 +84,7 @@ class ReaderElement extends  \ContentElement
 			$GLOBALS['TL_CSS']['md_css_3'] = $assetsDir . '/css/ads.css||static';
 		}
 
-		$this->Template->ad = $this->ad['page']['ad'];
+		$this->Template->ad = $this->ad;
 
 		// Debug mode
 		if($this->pdir_md_enableDebugMode)

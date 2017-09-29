@@ -71,8 +71,10 @@
   AutoItems<br><pre> <?php print_r($GLOBALS['TL_AUTO_ITEM']); ?></pre>
 </div>
 <?php endif; ?>
+<?php if($this->listShuffle): ?>
 <script>
   var mdListShuffle = <?= $this->listShuffle ?>;
 </script>
+<?php endif; ?>
 <!-- indexer::continue -->
 <!--[if IE 7]><link rel="stylesheet" href="/bundles/pdirmobilede/vendor/fontello/css/fontello-ie7.css"><![endif]-->

@@ -111,7 +111,7 @@ class ListingElement extends \ContentElement
 		}
 
 		// Shuffle
-        $this->Template->listShuffle = ($this->pdir_md_list_shuffle) ? 'true' : 'false';
+        $this->Template->listShuffle = ($this->pdir_md_list_shuffle) ? true : false;
 
         // Featured corner
 		$arrFeaturedCss = array(
