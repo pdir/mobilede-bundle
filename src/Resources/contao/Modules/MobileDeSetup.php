@@ -10,7 +10,7 @@ class MobileDeSetup extends \BackendModule
     /**
      * Mobile.de Inserate version
      */
-    const VERSION = '1.0.11';
+    const VERSION = '1.0.12';
 
     /**
     * Template
