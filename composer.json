@@ -4,6 +4,7 @@
   "description": "mobilede Ads for Contao 4",
   "keywords":["contao","mobile","ads", "cars","automobile"],
   "license": "proprietary",
+  "homepage": "https://pdir.de/mobile-de-integration-fuer-contao-cms.html",
   "authors": [
     {
       "name": "Webdesign für Dresden",
@@ -13,7 +14,7 @@
     }
   ],
   "support" : {
-    "email" : "develop@pdir.de",
+    "docs" : "https://docs.pdir.de/mobilede/mobilede_inserate.html",
     "issues" : "https://github.com/pdir/mobilede-bundle/issues",
     "source" : "https://github.com/pdir/mobilede-bundle"
   },
