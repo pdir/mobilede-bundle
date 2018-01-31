@@ -58,6 +58,13 @@ class ListingElement extends \ContentElement
             return '';
         }
 
+        // set custom list template
+		if($this->pdir_md_listTemplate && $this->strTemplate != $this->pdir_md_listTemplate)
+			$this->strTemplate = $this->pdir_md_listTemplate;
+		// set custom item template
+		if($this->pdir_md_itemTemplate && $this->strItemTemplate != $this->pdir_md_itemTemplate)
+			$this->strItemTemplate = $this->pdir_md_itemTemplate;
+
         $helper = new Helper();
         $this->ads = $helper->getAds($this->pdir_md_customer_id, $this->pdir_md_customer_username, $this->pdir_md_customer_password);
 
@@ -91,6 +98,9 @@ class ListingElement extends \ContentElement
 		$this->Template->brands = $this->ads['searchReferenceData']['makes'];
 		$this->Template->categories = $this->ads['searchReferenceData']['categories'];
 		$this->Template->colors = $this->ads['searchReferenceData']['colors'];
+
+		if($this->pdir_md_hideFilters)
+			$this->Template->hideFilters = true;
 
 		// Ordering
 
@@ -168,9 +178,6 @@ class ListingElement extends \ContentElement
 
 			if($this->featureCss)
 				$objFilterTemplate->featureCss = $this->featureCss;
-
-			if(!$this->pdir_md_hideFilters)
-				$objFilterTemplate->hideFilters = true;
 
 			$arrReturn[] = $objFilterTemplate->parse();
 		}
