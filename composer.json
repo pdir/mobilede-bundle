@@ -3,7 +3,7 @@
   "type":"contao-bundle",
   "description": "mobilede Ads for Contao 4",
   "keywords":["contao","mobile","ads", "cars","automobile"],
-  "license": "paid extension - domain licence available",
+  "license": "proprietary",
   "authors": [
     {
       "name": "Webdesign für Dresden",
