@@ -1,9 +1,10 @@
 
-.icon-road:before { content: '\e800'; } /* '' */
-.icon-picture:before { content: '\e801'; } /* '' */
-.icon-truck:before { content: '\e802'; } /* '' */
-.icon-mail:before { content: '\e803'; } /* '' */
-.icon-phone:before { content: '\e804'; } /* '' */
+.icon-ok:before { content: '\e800'; } /* '' */
+.icon-road:before { content: '\e801'; } /* '' */
+.icon-picture:before { content: '\e802'; } /* '' */
+.icon-truck:before { content: '\e803'; } /* '' */
+.icon-mail:before { content: '\e804'; } /* '' */
+.icon-phone:before { content: '\e805'; } /* '' */
 .icon-globe:before { content: '\e806'; } /* '' */
 .icon-filter:before { content: '\f0b0'; } /* '' */
 .icon-sort:before { content: '\f0dc'; } /* '' */
