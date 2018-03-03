@@ -6,12 +6,12 @@
         <a href="https://pdir.de/mobilede.html" target="_blank"><img
           src="https://pdir.de/files/01_inhalte/bilder/mobilemodul_logo_267x45px.png"
           alt="mobile.de Inserate für Contao" width="267" height="45" class="logo"></a>
-        <p>Das mobile.de Inserate Modul für Contao ist ein Produkt der <a href="http://www.pdir.de/" target="_blank">pdir
+        <p>Das mobile.de Inserate Modul für Contao ist ein Produkt der<br><a href="http://www.pdir.de/" target="_blank">pdir
           / digital agentur</a></p>
         <h2>Interessante Links</h2>
         <ul class="link-list">
         <li><a href="https://docs.pdir.de/" target="_blank"
-                    style="text-decoration: underline;">Dokumentation</a> (In Vorbereitung)</li>
+                    style="text-decoration: underline;">Dokumentation</a></li>
         <li><a href="https://demo.pdir.de/mobile-de-inserate-demo.html" target="_blank"
                     style="text-decoration: underline;">Demo</a></li>
         <li><a href="https://github.com/pdir/mobilede-bundle/issues" target="_blank"
@@ -26,9 +26,7 @@
           Umfangreiche Filter- & Sortierungsfunktionen runden die Listenansicht ab. Die Detailansicht enthält alle
           Fahrzeuginformationen und einen schlanken Produkt-Slider. Auf Wunsch können auch zusätzliche Funktionen
           integriert werden. Fragen Sie uns an.</p>
-        <p>Besuchen Sie die offizielle <a href="https://pdir.de/mobilede.html"
-                                          target="_blank">Mobile.de Inserate Website</a> für aktuelle News und
-          Konfigurationsanleitungen.</p>
+
         <p><strong>Preis</strong><br>
           Domainlizenz, einmalig 189€ zzgl. MwSt.<br>
           Update/Support Abonnement 49€/Jahr zzgl. MwSt.*&sup2;

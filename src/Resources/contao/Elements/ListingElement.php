@@ -16,6 +16,8 @@
 
 namespace Pdir\MobileDe;
 
+use Contao\CoreBundle\Exception\PageNotFoundException;
+
 class ListingElement extends \ContentElement
 {
 	const PARAMETER_KEY = 'ad';
@@ -65,12 +67,15 @@ class ListingElement extends \ContentElement
 		if($this->pdir_md_itemTemplate && $this->strItemTemplate != $this->pdir_md_itemTemplate)
 			$this->strItemTemplate = $this->pdir_md_itemTemplate;
 
-        $helper = new Helper();
-        $this->ads = $helper->getAds($this->pdir_md_customer_id, $this->pdir_md_customer_username, $this->pdir_md_customer_password);
+        $helper = new Helper($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id);
+        $this->ads = $helper->getAds();
+
+//        echo "<hr><br>ADS:<br><pre>" . print_r($this->ads) . "</pre>";
+//        die();
 
         // Return if there are no ads
         if (!is_array($this->ads) || count($this->ads) < 1) {
-            return '';
+			throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
         }
         return parent::generate();
     }

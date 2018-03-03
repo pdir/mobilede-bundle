@@ -8,11 +8,6 @@ namespace Pdir\MobileDe;
 class MobileDeSetup extends \BackendModule
 {
     /**
-     * Mobile.de Inserate version
-     */
-    const VERSION = '1.0.12';
-
-    /**
     * Template
     * @var string
     */
@@ -52,7 +47,7 @@ class MobileDeSetup extends \BackendModule
 
 		$this->Template->extMode = Helper::MODE;
 		$this->Template->extModeTxt = Helper::MODE=='FULL' ? 'Vollversion' : 'Demo';
-		$this->Template->version = self::VERSION;
+		$this->Template->version = Helper::VERSION;
 		$this->Template->hostname = gethostname();
 		$this->Template->ip = \Environment::get('server');
 		$this->Template->domain = $strDomain;

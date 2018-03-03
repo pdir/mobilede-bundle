@@ -66,7 +66,8 @@
 <div>
   <h2>DEBUG:</h2>
   Modulversion: <?= $this->version ?><br>
-  HändlerID: <?= $this->customer ?><br><br>
+  HändlerID: <?= $this->customer ?><br>
+  Anzahl Fahrzeuge: <?= count($this->rawData); ?><br><br>
   RawData<br><pre> <?php print_r($this->rawData); ?></pre>
   AutoItems<br><pre> <?php print_r($GLOBALS['TL_AUTO_ITEM']); ?></pre>
 </div>

@@ -49,19 +49,16 @@ class ReaderElement extends  \ContentElement
 		// get alias from auto item
 		$this->alias = \Input::get('ad');
 
-		$helper = new Helper();
-		$this->ad = $helper->getAdDetail($this->pdir_md_customer_id, $this->alias);
+		$helper = new Helper($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id);
+		$this->ad = $helper->getAd($this->alias);
+
+		if($this->ad['page'])
+			$this->ad = $this->ad['page']['ad'];
 
         // Return if there are no ad / do not index or cache
         if (!is_array($this->ad) || count($this->ad) < 1)
         {
-			/** @var \PageModel $objPage */
-			global $objPage;
-
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-            return '';
+			throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
         }
         return parent::generate();
     }
