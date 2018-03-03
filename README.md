@@ -54,13 +54,13 @@ https://pdir.de/mobile-de-integration-fuer-contao-cms.html
 Screenshot
 -----------
 
-![screenshot](https://user-images.githubusercontent.com/10244240/36735287-1c4633c0-1bd6-11e8-9771-bbdf89f2a1f7.png)](url)
+![screenshot](https://user-images.githubusercontent.com/10244240/36735287-1c4633c0-1bd6-11e8-9771-bbdf89f2a1f7.png)
 
 System requirements
 -------------------
 
 * [Contao 3](https://contao.org/de/download.html)
-* [Contao 4](https://github.com/contao/standard-edition) or higher
+* [Contao 4](https://github.com/contao/managed-edition) or higher
 
 Installation & Configuration
 ----------------------------

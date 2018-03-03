@@ -22,8 +22,8 @@
           <label>Marke</label>
           <select class="md-select">
             <option value="*">Alle anzeigen</option>
-            <?php foreach($this->brands as $key=>$brand): ?>
-              <option value=".<?= $key ?>"><?= $brand['value'] ?> (<?= $brand['count'] ?>)</option>
+            <?php foreach($this->filters['make'] as $key=>$brand): ?>
+              <option value=".<?= $key ?>"><?= $brand['label'] ?> (<?= $brand['count'] ?>)</option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -31,17 +31,44 @@
           <label>Typ</label>
           <select class="md-select">
             <option value="*">Alle anzeigen</option>
-            <?php foreach($this->categories as $key=>$cat): ?>
-              <option value=".<?= $key ?>"><?= $cat['value'] ?> (<?= $cat['count'] ?>)</option>
+            <?php foreach($this->filters['categories'] as $key=>$cat): ?>
+              <option value=".<?= $key ?>"><?= $cat['label'] ?> (<?= $cat['count'] ?>)</option>
             <?php endforeach; ?>
           </select>
         </div>
       </div>
+      <div class="brands select-container">
+        <label>Kraftstoffart</label>
+        <select class="md-select">
+          <option value="*">Alle anzeigen</option>
+          <?php foreach($this->filters['fuelType'] as $key=>$type): ?>
+            <option value=".<?= $key ?>"><?= $type['label'] ?> (<?= $type['count'] ?>)</option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="brands select-container">
+        <label>Getriebe</label>
+        <select class="md-select">
+          <option value="*">Alle anzeigen</option>
+          <?php foreach($this->filters['gearbox'] as $key=>$type): ?>
+            <option value=".<?= $key ?>"><?= $type['label'] ?> (<?= $type['count'] ?>)</option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="brands select-container">
+        <label>Fahrzeugtyp</label>
+        <select class="md-select">
+          <option value="*">Alle anzeigen</option>
+          <?php foreach($this->filters['usageType'] as $key=>$type): ?>
+            <option value=".<?= $key ?>"><?= $type['label'] ?> (<?= $type['count'] ?>)</option>
+          <?php endforeach; ?>
+        </select>
+      </div>
       <div class="md-filter-attr checkbox-group">
         <label>Farbe</label>
         <ul>
-          <?php foreach($this->colors as $key=>$col): ?>
-            <li><input type="checkbox" name="<?= $key ?>" value=".<?= $key ?>" id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['value'] ?> (<?= $col['count'] ?>)</label></li>
+          <?php foreach($this->filters['colors'] as $key=>$col): ?>
+            <li><input type="checkbox" name="<?= $key ?>" value=".<?= $key ?>" id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> (<?= $col['count'] ?>)</label></li>
           <?php endforeach; ?>
         </ul>
       </div>
@@ -68,6 +95,7 @@
   Modulversion: <?= $this->version ?><br>
   HändlerID: <?= $this->customer ?><br>
   Anzahl Fahrzeuge: <?= count($this->rawData); ?><br><br>
+  Filters<br><pre><?php print_r($this->filters);  ?></pre>
   RawData<br><pre> <?php print_r($this->rawData); ?></pre>
   AutoItems<br><pre> <?php print_r($GLOBALS['TL_AUTO_ITEM']); ?></pre>
 </div>

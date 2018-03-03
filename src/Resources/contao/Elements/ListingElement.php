@@ -70,9 +70,6 @@ class ListingElement extends \ContentElement
         $helper = new Helper($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id);
         $this->ads = $helper->getAds();
 
-//        echo "<hr><br>ADS:<br><pre>" . print_r($this->ads) . "</pre>";
-//        die();
-
         // Return if there are no ads
         if (!is_array($this->ads) || count($this->ads) < 1) {
 			throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
@@ -100,9 +97,7 @@ class ListingElement extends \ContentElement
         }
 
         // Filters
-		$this->Template->brands = $this->ads['searchReferenceData']['makes'];
-		$this->Template->categories = $this->ads['searchReferenceData']['categories'];
-		$this->Template->colors = $this->ads['searchReferenceData']['colors'];
+		$this->Template->filters = $this->ads['searchReferenceData'];
 
 		if($this->pdir_md_hideFilters)
 			$this->Template->hideFilters = true;
