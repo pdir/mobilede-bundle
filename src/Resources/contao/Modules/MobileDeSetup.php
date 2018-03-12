@@ -32,7 +32,7 @@ class MobileDeSetup extends \BackendModule
 
 		switch (\Input::get('act')) {
 			case 'download':
-				$strHelperData = file_get_contents(self::$apiUrl . 'download/latest/'.$strDomain);
+				$strHelperData = file_get_contents(self::$apiUrl . 'download/' . Helper::VERSION . '/'.$strDomain);
 
 				$this->Template->message = array('Für Ihre IP/Domain wurde noch keine Lizenz gekauft.', 'error');
 
