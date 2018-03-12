@@ -47,7 +47,7 @@ class Helper extends \Frontend
 		return $arrAds; // load from local cache
 	}
 
-	public function getAdDetail($alias)
+	public function getAd($alias)
 	{
 		// only used for demo presentation
 		$json = file_get_contents(self::$apiUrl . 'ad/' . $alias . '/' . \Environment::get('server') . '/' . self::VERSION);
