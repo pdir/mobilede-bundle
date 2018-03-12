@@ -25,7 +25,7 @@ class Helper extends \Frontend
 	/**
 	 * mobilede version
 	 */
-	const VERSION = '1.1.0';
+	const VERSION = '1.1.2';
 
 	/**
 	 * Extension mode
