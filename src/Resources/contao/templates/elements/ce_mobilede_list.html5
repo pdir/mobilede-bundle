@@ -71,17 +71,21 @@
         <label>Farbe</label>
         <ul>
           <?php foreach($this->filters['colors'] as $key=>$col): ?>
-            <li><input type="checkbox" name="<?= $key ?>" value=".<?= $key ?>" id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> (<?= $col['count'] ?>)</label></li>
+            <li><input type="checkbox" name="<?= $key ?>" data-filter=".<?= $key ?>" value=".<?= $key ?>" id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> (<?= $col['count'] ?>)</label></li>
           <?php endforeach; ?>
         </ul>
       </div>
+      <?php if($this->priceSlider): ?>
       <div class="range-slider">
           <p>
-              <label for="amount">Preis:</label>
+              <label for="amount">Preis</label>
               <input type="text" id="amount" readonly>
           </p>
-          <div id="slider-range"></div>
+          <span class="min">1.000 €</span><div id="priceSlider" data-filter-group="price"></div><span class="max">500.000 €</span>
+          <br><span class="filter-label">Preisspanne: <span class="filter-selection"></span> </span>
       </div>
+      <?php endif; ?>
+
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
       <span><button class="btn-shuffle" id="shuffle">Mischen</button></span>
     </div>

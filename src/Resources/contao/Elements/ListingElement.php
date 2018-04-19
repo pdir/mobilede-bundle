@@ -123,6 +123,9 @@ class ListingElement extends \ContentElement
 		// Shuffle
         $this->Template->listShuffle = ($this->pdir_md_list_shuffle) ? true : false;
 
+		// Price Slider
+        $this->Template->priceSlider = ($this->pdir_md_priceSlider) ? true : false;
+
         // Featured corner
 		$arrFeaturedCss = array(
 			$this->pdir_md_corner_color,
@@ -159,6 +162,7 @@ class ListingElement extends \ContentElement
 
 			$objFilterTemplate->desc = $ad['makeModelDescription']['value'];
 			$objFilterTemplate->imageSrc = $ad['image']['src'];
+            $objFilterTemplate->plainPrice = $ad['priceModel']['plainPrice']['value'];
 			$objFilterTemplate->price = $ad['priceModel']['primaryPrice']['countryOfSale']['value'];
 			$objFilterTemplate->link = $this->getReaderPageLink($ad['adId']);
 			$objFilterTemplate->fuelType = $ad['fuelType']['value'];

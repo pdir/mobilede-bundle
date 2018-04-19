@@ -12,13 +12,26 @@
  * file that was distributed with this source code.
  */
 
-jQuery(function ($) {
+jQuery(document).ready( function ($) {
     var $container = $(".md-ads"),
-        $checkboxes = $(".md-filter-attr.checkbox-group input");
+        $checkboxes = $(".md-filter-attr.checkbox-group input"),
+        $btnShowFilters = $("#showFilters");
 
+
+    // Create object to store filter for each group
+    var buttonFilters = {};
+    var buttonFilter = '*';
+
+    // Create new object for the range filters and set default values
+    var rangeFilters = {
+        'price': {'min':0, 'max': 100000}
+    };
+
+    // set Options
     var options = {
         itemSelector: ".item",
-        layoutMode: "fitRows",
+        layoutMode: "fitRows", // or masonry
+        // use sort functions
         getSortData: {
             price: ".price parseFloat",
             title: function(item) {
@@ -26,128 +39,138 @@ jQuery(function ($) {
             },
             number: ".number parseInt",
             category: "[data-category]"
+        },
+        // use filter function
+        filter: function() {
+
+            var $this = $(this);
+            var price = $this.attr('data-price');
+            var isInPriceRange = (rangeFilters['price'].min <= price && rangeFilters['price'].max >= price);
+
+            return $this.is( buttonFilter ) && isInPriceRange;
         }
     };
 
-    if (typeof mdListShuffle != "undefined")
-        options.sortBy = "random";
-
+    // Initialise Isotope
     $container.isotope(options);
 
-	$checkboxes.change( function() {
-		// map input values to an array
-		var inclusives = [];
-		// inclusive filters from checkboxes
-		$checkboxes.each( function( i, elem ) {
-			// if checkbox, use value if checked
-			if ( elem.checked ) {
-				inclusives.push( elem.value );
-			}
-		});
+    // show filters
+    $btnShowFilters.click(function () {
+        $(".md-filters .md-filters-body").toggle();
+    });
 
-		// combine inclusive filters
-		var filterValue = inclusives.length ? inclusives.join(", ") : "*";
-		$container.isotope({ filter: filterValue });
-	});
-
+    // shuffle items
     $("#shuffle").click(function () {
         $container.isotope("shuffle");
     });
 
-	$("#filterReset").click(function () {
-		$(".md-filters input[type=checkbox]").prop("checked", false);
-		$(".md-filters option:selected").prop("selected", false);
-		$container.isotope( {filter: "*", sortBy: "original-order"} );
-		return false;
-	});
-
-	$("#showFilters").click(function () {
-		$(".md-filters .md-filters-body").toggle();
-	});
-
-    // bind sort button click
-	/*
-    $(".md-filter-sort select").on("click", "button", function () {
-    	console.log( $(this).attr("data-filter") );
-		console.log( $(".md-filter-sort select option:selected").val() );
-		console.log( $(".md-filter-sort select option:selected").attr("data-filter") );
-        var sortByValue = $(".md-filter-sort select option:selected").attr("data-filter");
-        $container.isotope({sortBy: sortByValue});
-    });*/
-
-    // change is-checked class on buttons
-    $(".button-group").each(function (i, buttonGroup) {
-        var $buttonGroup = $(buttonGroup);
-        $buttonGroup.on("click", "button", function () {
-            $buttonGroup.find(".is-checked").removeClass("is-checked");
-            $(this).addClass("is-checked");
-        });
+    // reset filters
+    $("#filterReset").click(function () {
+        $(".md-filters input[type=checkbox]").prop("checked", false);
+        $(".md-filters option:selected").prop("selected", false);
+        var options = $priceSlider.slider( 'option' );
+        $priceSlider.slider( 'values', [ options.min, options.max ] );
+        $container.isotope();
+        return false;
     });
 
-    // filter functions
-    var filterFns = {
-        // show if number is greater than 50
-        numberGreaterThan50: function() {
-            var number = $(this).find(".number").text();
-            return parseInt( number, 10 ) > 50;
-        },
-        // show if name ends with -ium
-        ium: function() {
-            var name = $(this).find(".name").text();
-            return name.match( /ium$/ );
-        },
-        priceSlider: function() {
-            console.log("test");
-            var min = ui.values[0];
-            var max = ui.values[1];
-            // get number
-            var numberString = $(this).find('.price span').text();
-            // get only the number and remove all after the number
-            numberString = numberString.substr(0,numberString.indexOf("EUR"));
-            var number = numberString.replace(",","");
-            // filtering
-            return parseInt( number, 10 ) > min && parseInt( number, 10 ) < max;
-        }
-    };
+    // Initialize checkboxes
+    $checkboxes.change( function() {
+        var $this = $(this);
+
+        // map input values to an array
+        var inclusives = [];
+        // inclusive filters from checkboxes
+        $checkboxes.each( function( i, elem ) {
+            // if checkbox, use value if checked
+            if ( elem.checked ) {
+                inclusives.push( elem.value );
+            }
+        });
+
+        buttonFilters[ 'checkbox-group' ] = $this.attr('data-filter');
+
+        // combine inclusive filters
+        buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
+
+        $container.isotope();
+    });
 
     // bind filter on select change
     $(".md-select").on( "change", function() {
+        var $this = $(this);
         // get filter value from option value
-        var filterValue = this.value;
-        // use filterFn if matches value
-        filterValue = filterFns[ filterValue ] || filterValue;
-        console.log(filterValue);
-		var options = {filter: filterValue};
-		// sortierung
-		if( $(this).children("option:selected").attr("data-filter-type") == "sort" ) {
-			options = {sortBy: filterValue};
-		}
-        $container.isotope( options );
+        buttonFilters[ 'select-group' ] = $this.val();
+
+        var inclusives = [];
+        // inclusive filters from checkboxes
+        $(".md-select").each( function( i, elem ) {
+            // if checkbox, use value if selected
+            if ( elem.selected ) {
+                inclusives.push( elem.value );
+            }
+        });
+        buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
+
+        $container.isotope();
     });
 
-    // Range Slider
-    $(".md-ads .price span").each( function() {
-        var price = $(this).text();
-        price = price.substr(0,price.indexOf("EUR"));
-        price = price.replace(",","");
-        console.log(price);
-    });
-
-    $( "#slider-range" ).slider({
-        range: true,
+    // Initialize Slider
+    var $priceSlider = $('#priceSlider').slider({
+        tooltip_split: true,
         min: 0,
         max: 50000,
-        values: [ 0, 50000 ],
-        slide: function( event, ui ) {
-            $( "#amount" ).val(ui.values[0] + " € - " + ui.values[1] + " €" );
-            var min = ui.values[0];
-            var max = ui.values[1];
-
-            $(".md-select").trigger("change");
-        }
+        range: true,
+        value: [0, 50000]
     });
-    $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-    " € - " + $( "#slider-range" ).slider( "values", 1 ) + " €" );
 
+    var $priceSliderTooltip = $('#priceSlider .tooltip .tooltip-inner');
 
+    var _changeTooltipFormat = function(){
+        $priceSliderTooltip.text($priceSliderTooltip.text()+'€');
+    }
+
+    //change tooltip format on initial load
+    _changeTooltipFormat();
+
+    function updateRangeSlider(slider, slideEvt, ui) {
+        var sldmin = +ui.values[0],
+            sldmax = +ui.values[1],
+            // Find which filter group this slider is in (in this case it will be either height or weight)
+            // This can be changed by modifying the data-filter-group="age" attribute on the slider HTML
+            filterGroup = slider.attr('data-filter-group'),
+            // Set current selection in variable that can be pass to the label
+            currentSelection = sldmin + ' - ' + sldmax;
+
+        // Update filter label with new range selection
+        slider.siblings('.filter-label').find('.filter-selection').text(currentSelection);
+
+        // Set min and max values for current selection to current selection
+        // If no values are found set min to 0 and max to 100000
+        // Store min/max values in rangeFilters array in the relevant filter group
+        // E.g. rangeFilters['height'].min and rangeFilters['height'].max
+        rangeFilters[filterGroup] = {
+            min: sldmin || 0,
+            max: sldmax || 50000
+        };
+        // Trigger isotope again to refresh layout
+        $container.isotope();
+
+        _changeTooltipFormat();
+    }
+
+    // Trigger Isotope Filter when slider drag has stopped
+    $priceSlider.on('slide', function(slideEvt, ui){
+        var $this =$(this);
+        updateRangeSlider($this, slideEvt, ui);
+    });
 });
+
+// Flatten object by concatting values
+function concatValues( obj ) {
+    var value = '';
+    for ( var prop in obj ) {
+        value += obj[ prop ];
+    }
+    return value;
+}
