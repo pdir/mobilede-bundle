@@ -18,7 +18,7 @@
  * Add palette to tl_content
  */
 
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_sticky,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_sticky,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 
 /**
@@ -99,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_hideFilters'] = array
 	'inputType' => 'checkbox',
 	'eval' => array(
 		'submitOnChange' => true,
-		'tl_class' => 'w50 m12',
+		'tl_class' => 'w50',
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
@@ -111,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_list_shuffle'] = array
 	'inputType' => 'checkbox',
 	'eval' => array(
 		'submitOnChange' => true,
-		'tl_class' => 'w50 m12',
+		'tl_class' => 'w50',
 	),
 	'sql' => "char(1) NOT NULL default ''",
 );
@@ -289,6 +289,18 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_password'] = array
 		'tl_class' => 'w50 m12'
 	),
 	'sql'                     => "varchar(128) NOT NULL default 'demo'"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_priceSlider'] = array
+(
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'],
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => array(
+        'submitOnChange' => true,
+        'tl_class' => 'w50',
+    ),
+    'sql' => "char(1) NOT NULL default ''",
 );
 
 class pdir_md_content extends Backend

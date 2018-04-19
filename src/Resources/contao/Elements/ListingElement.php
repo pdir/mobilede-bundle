@@ -134,6 +134,9 @@ class ListingElement extends \ContentElement
 		// Add ads to template
         $this->Template->ads = $this->renderAdItem($this->ads['searchResultItems']);
 
+        // Price Slider
+        $this->Template->priceSlider = $this->pdir_md_priceSlider;
+
         // Debug mode
 		if($this->pdir_md_enableDebugMode)
 		{

@@ -1,5 +1,6 @@
 <!-- indexer::stop -->
 <?php $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/ui/1.12.1/jquery-ui.js'; ?>
+<?php $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'; ?>
 <?php $GLOBALS['TL_CSS'][] = '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'; ?>
 
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
@@ -71,17 +72,21 @@
         <label>Farbe</label>
         <ul>
           <?php foreach($this->filters['colors'] as $key=>$col): ?>
-            <li><input type="checkbox" name="<?= $key ?>" value=".<?= $key ?>" id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> (<?= $col['count'] ?>)</label></li>
+            <li><input type="checkbox" name="<?= $key ?>" data-filter=".<?= $key ?>" value=".<?= $key ?>" id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> (<?= $col['count'] ?>)</label></li>
           <?php endforeach; ?>
         </ul>
       </div>
+      <?php if($this->priceSlider): ?>
       <div class="range-slider">
           <p>
-              <label for="amount">Preis:</label>
+              <label for="amount">Preis</label>
               <input type="text" id="amount" readonly>
           </p>
-          <div id="slider-range"></div>
+          <span class="min">1.000 €</span><div id="priceSlider" data-filter-group="price"></div><span class="max">500.000 €</span>
+          <br><span class="filter-label">Preisspanne: <span class="filter-selection"></span> </span>
       </div>
+      <?php endif; ?>
+
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
       <span><button class="btn-shuffle" id="shuffle">Mischen</button></span>
     </div>

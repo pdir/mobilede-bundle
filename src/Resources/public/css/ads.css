@@ -25,6 +25,7 @@
 
 .md-filters select {
 	min-width: 110px;
+    width: 70%;
 }
 
 .md-filters .select-container {
@@ -36,10 +37,11 @@
 }
 
 .md-filters .select-container label,
-.md-filters .checkbox-group > label {
+.md-filters .checkbox-group > label,
+.md-filters .range-slider label {
 	display: inline;
 	float: left;
-	width: 15%;
+	width: 30%;
 	font-weight: bold;
 }
 
@@ -53,9 +55,19 @@
 	width: 7.5%;
 }
 
+.md-filters .checkbox-group ul {
+    clear: left;
+    padding: 10px 0;
+}
+
 .md-filters .checkbox-group li {
 	float: left;
 	margin-right: 15px;
+    list-style-type: none;
+}
+
+.md-filters .checkbox-group li label {
+    width: inherit;
 }
 
 .md-filters .md-filters-header .md-filter-sort {
@@ -337,6 +349,11 @@
 	display: inline-block;
 }
 
+.features-list {
+    width: 100%;
+    padding: 0;
+}
+
 /* Corner ribbons */
 .corner-ribbon {
 	width: 200px;
@@ -565,7 +582,8 @@
 /* Range Slider */
 .md-filters .range-slider {
     clear: left;
-    overflow: hidden;
+    padding: 5px;
+    width: 50%;
 }
 
 .md-filters .range-slider label {
@@ -578,6 +596,57 @@
     font-weight: bold;
     color: #fff;
     font-size: inherit;
+}
+
+.md-filters .range-slider .ui-widget.ui-widget-content {
+    border: none;
+    width: 50%;
+    display: inline-block;
+}
+
+.md-filters .range-slider .ui-widget-header {
+    background: #f2f2f2;
+}
+
+.md-filters .range-slider .ui-state-default {
+    background: #f2f2f2;
+    border-radius: 100%;
+    padding: 0 0.5px;
+}
+
+.md-filters .range-slider .ui-state-default:focus {
+    outline: 0;
+    border: 1px solid #c5c5c5;
+}
+
+.md-filters .range-slider .min {
+    padding-right: 20px;
+}
+
+.md-filters .range-slider .max {
+    padding-left: 20px;
+}
+
+.ui-slider-handle:nth-of-type(1):after, .ui-slider-handle:nth-of-type(2):after {
+    position: absolute;
+    background: #fff;
+    text-align: center;
+    font-size: 0.7rem;
+    padding: 5px;
+    color: #000;
+    border-radius: 5px;
+}
+
+.ui-slider-handle:nth-of-type(1):after {
+    content: "10.000€";
+    top: -32px;
+    left: -15px;
+}
+
+.ui-slider-handle:nth-of-type(2):after {
+    content: "1.000.000€";
+    bottom: -32px;
+    right: -15px;
 }
 
 @media (min-width: 768px) {
@@ -660,6 +729,33 @@
         width: 300px;
         left: 50%;
         margin-left: -150px;
+    }
+
+    .md-filters .range-slider {
+        width: 100%;
+    }
+
+    .md-filters .range-slider .ui-state-default {
+        width: 25px;
+        height: 25px;
+        top: -8px;
+    }
+
+    .md-filters .range-slider .ui-widget.ui-widget-content {
+        width: 90%;
+        margin: 15px 5px;
+    }
+
+    .ui-slider-handle:nth-of-type(1):after {
+        left: 0;
+    }
+
+    .ui-slider-handle:nth-of-type(2):after {
+        right: 0;
+    }
+
+    .range-slider .min, .range-slider .max {
+        display: none;
     }
 }
 
