@@ -562,6 +562,24 @@
     color: inherit;
 }
 
+/* Range Slider */
+.md-filters .range-slider {
+    clear: left;
+    overflow: hidden;
+}
+
+.md-filters .range-slider label {
+    width: inherit;
+}
+
+.md-filters .range-slider input {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+    font-size: inherit;
+}
+
 @media (min-width: 768px) {
     .md-ad-box {
         width: 49%;

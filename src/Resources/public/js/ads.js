@@ -95,6 +95,18 @@ jQuery(function ($) {
         ium: function() {
             var name = $(this).find(".name").text();
             return name.match( /ium$/ );
+        },
+        priceSlider: function() {
+            console.log("test");
+            var min = ui.values[0];
+            var max = ui.values[1];
+            // get number
+            var numberString = $(this).find('.price span').text();
+            // get only the number and remove all after the number
+            numberString = numberString.substr(0,numberString.indexOf("EUR"));
+            var number = numberString.replace(",","");
+            // filtering
+            return parseInt( number, 10 ) > min && parseInt( number, 10 ) < max;
         }
     };
 
@@ -104,6 +116,7 @@ jQuery(function ($) {
         var filterValue = this.value;
         // use filterFn if matches value
         filterValue = filterFns[ filterValue ] || filterValue;
+        console.log(filterValue);
 		var options = {filter: filterValue};
 		// sortierung
 		if( $(this).children("option:selected").attr("data-filter-type") == "sort" ) {
@@ -111,4 +124,30 @@ jQuery(function ($) {
 		}
         $container.isotope( options );
     });
+
+    // Range Slider
+    $(".md-ads .price span").each( function() {
+        var price = $(this).text();
+        price = price.substr(0,price.indexOf("EUR"));
+        price = price.replace(",","");
+        console.log(price);
+    });
+
+    $( "#slider-range" ).slider({
+        range: true,
+        min: 0,
+        max: 50000,
+        values: [ 0, 50000 ],
+        slide: function( event, ui ) {
+            $( "#amount" ).val(ui.values[0] + " € - " + ui.values[1] + " €" );
+            var min = ui.values[0];
+            var max = ui.values[1];
+
+            $(".md-select").trigger("change");
+        }
+    });
+    $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+    " € - " + $( "#slider-range" ).slider( "values", 1 ) + " €" );
+
+
 });
