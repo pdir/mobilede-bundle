@@ -58,4 +58,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleCss'] = array('Stylesheet
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_forceRefresh'] = array('Cache übergehen', 'Inserate direkt von der Mobile.de API laden. (nicht empfohlen)');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_cacheTime'] = array('Cache Zeit', 'Hier kann die Cache Zeit in Minuten angegeben werden. Mobile.de empfiehlt keine Cache Zeiten über 60 min zu verwenden.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = array('Debug', 'Debug Modus aktivieren, es werden alle verfügbaren Feldschlüssel ausgegeben.');
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = array('Preis-Slider aktivieren', 'Wenn aktiv wird der Preis-Slider als Filtermöglichkeit angezeigt.');
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = array('Preis-Slider aktivieren', 'Wenn aktiv können Sie den Preis über einen Range Slider filtern lassen.');
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = array('PS-Slider aktivieren', 'Wenn aktiv können Sie den PS-Wert über einen Range Slider filtern lassen.');
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = array('Kilometerstand-Slider aktivieren', 'Wenn aktiv können Sie den Kilometerstand über einen Range Slider filtern lassen.');

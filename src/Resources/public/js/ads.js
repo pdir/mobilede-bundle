@@ -137,7 +137,7 @@ jQuery(document).ready( function ($) {
         min: min,
         max: max,
         range: true,
-        value: [min, max]
+        values: [min, max]
     });
 
     var minString = min.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });

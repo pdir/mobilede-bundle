@@ -82,7 +82,7 @@
               <label for="amount">Preis</label>
               <input type="text" id="amount" readonly>
           </p>
-          <span class="min"></span><div id="priceSlider" data-filter-group="price"></div><span class="max"></span>
+          </span><div id="priceSlider" data-filter-group="price"></div>
       </div>
       <?php endif; ?>
 

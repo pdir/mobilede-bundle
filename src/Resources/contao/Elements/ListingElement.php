@@ -125,6 +125,8 @@ class ListingElement extends \ContentElement
 
 		// Price Slider
         $this->Template->priceSlider = ($this->pdir_md_priceSlider) ? true : false;
+        $this->Template->powerSlider = ($this->pdir_md_powerSlider) ? true : false;
+        $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
 
         // Featured corner
 		$arrFeaturedCss = array(
