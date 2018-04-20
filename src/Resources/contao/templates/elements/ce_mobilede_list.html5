@@ -32,7 +32,7 @@
           </select>
         </div>
         <div class="categories select-container">
-          <label>Typ</label>
+          <label>Fahrzeugtyp</label>
           <select class="md-select">
             <option value="*">Alle anzeigen</option>
             <?php foreach($this->filters['categories'] as $key=>$cat): ?>
@@ -60,7 +60,7 @@
         </select>
       </div>
       <div class="brands select-container">
-        <label>Fahrzeugtyp</label>
+        <label>Fahrzeugart</label>
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
           <?php foreach($this->filters['usageType'] as $key=>$type): ?>
@@ -82,8 +82,7 @@
               <label for="amount">Preis</label>
               <input type="text" id="amount" readonly>
           </p>
-          <span class="min">1.000 €</span><div id="priceSlider" data-filter-group="price"></div><span class="max">500.000 €</span>
-          <br><span class="filter-label">Preisspanne: <span class="filter-selection"></span> </span>
+          <span class="min"></span><div id="priceSlider" data-filter-group="price"></div><span class="max"></span>
       </div>
       <?php endif; ?>
 

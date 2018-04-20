@@ -70,7 +70,7 @@ jQuery(document).ready( function ($) {
         $(".md-filters option:selected").prop("selected", false);
         var options = $priceSlider.slider( 'option' );
         $priceSlider.slider( 'values', [ options.min, options.max ] );
-        $container.isotope();
+        $container.isotope({ filter: '*' });
         return false;
     });
 
@@ -115,20 +115,43 @@ jQuery(document).ready( function ($) {
         $container.isotope();
     });
 
+    // get min and max price
+    var min = parseInt($(".md-ads .item:first-child").data("price"));
+    var max = 0;
+    $(".md-ads .item").each( function() {
+        var price = parseInt($(this).data("price"));
+
+        if(price < min && price != "") {
+            min = price;
+        }
+
+        if(price > max && price != "") {
+            max = price;
+        }
+    });
+
+
     // Initialize Slider
     var $priceSlider = $('#priceSlider').slider({
         tooltip_split: true,
-        min: 0,
-        max: 50000,
+        min: min,
+        max: max,
         range: true,
-        value: [0, 50000]
+        value: [min, max]
     });
+
+    var minString = min.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+    var maxString = max.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+    $(".range-slider .min").text(minString);
+    $(".range-slider .max").text(maxString);
+    $(".ui-slider-handle:nth-of-type(1)").attr('data-min',minString);
+    $(".ui-slider-handle:nth-of-type(2)").attr('data-max',maxString);
 
     var $priceSliderTooltip = $('#priceSlider .tooltip .tooltip-inner');
 
     var _changeTooltipFormat = function(){
         $priceSliderTooltip.text($priceSliderTooltip.text()+'€');
-    }
+    };
 
     //change tooltip format on initial load
     _changeTooltipFormat();
@@ -138,20 +161,22 @@ jQuery(document).ready( function ($) {
             sldmax = +ui.values[1],
             // Find which filter group this slider is in (in this case it will be either height or weight)
             // This can be changed by modifying the data-filter-group="age" attribute on the slider HTML
-            filterGroup = slider.attr('data-filter-group'),
-            // Set current selection in variable that can be pass to the label
-            currentSelection = sldmin + ' - ' + sldmax;
+            filterGroup = slider.attr('data-filter-group');
 
         // Update filter label with new range selection
-        slider.siblings('.filter-label').find('.filter-selection').text(currentSelection);
+
+        var sldminString = sldmin.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+        var sldmaxString = sldmax.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+        $(".ui-slider-handle:nth-of-type(1)").attr('data-min',sldminString);
+        $(".ui-slider-handle:nth-of-type(2)").attr('data-max',sldmaxString);
 
         // Set min and max values for current selection to current selection
         // If no values are found set min to 0 and max to 100000
         // Store min/max values in rangeFilters array in the relevant filter group
         // E.g. rangeFilters['height'].min and rangeFilters['height'].max
         rangeFilters[filterGroup] = {
-            min: sldmin || 0,
-            max: sldmax || 50000
+            min: sldmin || min,
+            max: sldmax || max
         };
         // Trigger isotope again to refresh layout
         $container.isotope();

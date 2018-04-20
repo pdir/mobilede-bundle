@@ -638,13 +638,13 @@
 }
 
 .ui-slider-handle:nth-of-type(1):after {
-    content: "10.000€";
+    content: attr(data-min);
     top: -32px;
     left: -15px;
 }
 
 .ui-slider-handle:nth-of-type(2):after {
-    content: "1.000.000€";
+    content: attr(data-max);
     bottom: -32px;
     right: -15px;
 }
