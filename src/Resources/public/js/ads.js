@@ -24,7 +24,9 @@ jQuery(document).ready( function ($) {
 
     // Create new object for the range filters and set default values
     var rangeFilters = {
-        'price': {'min':0, 'max': 100000}
+        'price': {'min':0, 'max': 100000},
+        'power': {'min':0, 'max': 500},
+        'mileage': {'min':0, 'max': 1000000}
     };
 
     // set Options
@@ -34,6 +36,8 @@ jQuery(document).ready( function ($) {
         // use sort functions
         getSortData: {
             price: ".price parseFloat",
+            power: ".price parseFloat",
+            mileage: ".price parseFloat",
             title: function(item) {
                 return $(item).find(".title a").text();
             },
@@ -47,7 +51,13 @@ jQuery(document).ready( function ($) {
             var price = $this.attr('data-price');
             var isInPriceRange = (rangeFilters['price'].min <= price && rangeFilters['price'].max >= price);
 
-            return $this.is( buttonFilter ) && isInPriceRange;
+            var power = $this.attr('data-power');
+            var isInPowerRange = (rangeFilters['power'].min <= power && rangeFilters['power'].max >= power);
+
+            var mileage = $this.attr('data-mileage');
+            var isInMileageRange = (rangeFilters['mileage'].min <= mileage && rangeFilters['mileage'].max >= mileage);
+
+            return $this.is( buttonFilter ) && isInPriceRange && isInPowerRange && isInMileageRange;
         }
     };
 
@@ -70,6 +80,10 @@ jQuery(document).ready( function ($) {
         $(".md-filters option:selected").prop("selected", false);
         var options = $priceSlider.slider( 'option' );
         $priceSlider.slider( 'values', [ options.min, options.max ] );
+        options = $powerSlider.slider( 'option' );
+        $powerSlider.slider( 'values', [ options.min, options.max ] );
+        options = $mileageSlider.slider( 'option' );
+        $mileageSlider.slider( 'values', [ options.min, options.max ] );
         $container.isotope({ filter: '*' });
         return false;
     });
@@ -134,10 +148,39 @@ jQuery(document).ready( function ($) {
     // Initialize Slider
     var $priceSlider = $('#priceSlider').slider({
         tooltip_split: true,
-        min: min,
-        max: max,
+        min: min ? min : rangeFilters['price'],
+        max: max ? max : rangeFilters['price'],
         range: true,
+        value: [
+            min ? min : rangeFilters['price'],
+            max ? max : rangeFilters['price']
+        ]
+    });
+
+    var $powerSlider = $('#powerSlider').slider({
+        tooltip_split: true,
+        min: min ? min : rangeFilters['power'],
+        max: max ? max : rangeFilters['power'],
+        range: true,
+        value: [
+            min ? min : rangeFilters['power'],
+            max ? max : rangeFilters['power']
+        ]
+    });
+
+    var $mileageSlider = $('#mileageSlider').slider({
+        tooltip_split: true,
+        min: min ? min : rangeFilters['mileage'],
+        max: max ? max : rangeFilters['mileage'],
+        range: true,
+<<<<<<< HEAD
         values: [min, max]
+=======
+        value: [
+            min ? min : rangeFilters['mileage'],
+            max ? max : rangeFilters['mileage']
+        ]
+>>>>>>> 5b5d3f9fc008b056d95053db049bf35e90548d79
     });
 
     var minString = min.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
@@ -147,6 +190,7 @@ jQuery(document).ready( function ($) {
     $(".ui-slider-handle:nth-of-type(1)").attr('data-min',minString);
     $(".ui-slider-handle:nth-of-type(2)").attr('data-max',maxString);
 
+    /*
     var $priceSliderTooltip = $('#priceSlider .tooltip .tooltip-inner');
 
     var _changeTooltipFormat = function(){
@@ -154,7 +198,8 @@ jQuery(document).ready( function ($) {
     };
 
     //change tooltip format on initial load
-    _changeTooltipFormat();
+    // _changeTooltipFormat();
+    */
 
     function updateRangeSlider(slider, slideEvt, ui) {
         var sldmin = +ui.values[0],
@@ -181,11 +226,19 @@ jQuery(document).ready( function ($) {
         // Trigger isotope again to refresh layout
         $container.isotope();
 
-        _changeTooltipFormat();
+        // _changeTooltipFormat();
     }
 
     // Trigger Isotope Filter when slider drag has stopped
     $priceSlider.on('slide', function(slideEvt, ui){
+        var $this =$(this);
+        updateRangeSlider($this, slideEvt, ui);
+    });
+    $powerSlider.on('slide', function(slideEvt, ui){
+        var $this =$(this);
+        updateRangeSlider($this, slideEvt, ui);
+    });
+    $milageSlider.on('slide', function(slideEvt, ui){
         var $this =$(this);
         updateRangeSlider($this, slideEvt, ui);
     });
