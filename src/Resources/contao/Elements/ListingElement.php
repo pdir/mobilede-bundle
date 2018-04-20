@@ -168,6 +168,7 @@ class ListingElement extends \ContentElement
 			$objFilterTemplate->desc = $ad['makeModelDescription']['value'];
 			$objFilterTemplate->imageSrc = $ad['image']['src'];
             $objFilterTemplate->plainPrice = $ad['priceModel']['plainPrice']['value'];
+            $objFilterTemplate->plainPower = substr($ad['power']['value'],0,strpos($ad['power']['value']," KW"));
 			$objFilterTemplate->price = $ad['priceModel']['primaryPrice']['countryOfSale']['value'];
 			$objFilterTemplate->link = $this->getReaderPageLink($ad['adId']);
 			$objFilterTemplate->fuelType = $ad['fuelType']['value'];

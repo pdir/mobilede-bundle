@@ -129,66 +129,97 @@ jQuery(document).ready( function ($) {
         $container.isotope();
     });
 
-    // get min and max price
-    var min = parseInt($(".md-ads .item:first-child").data("price"));
-    var max = 0;
+    // price: get min and max
+    var minPrice = parseInt($(".md-ads .item:first-child").data("price"));
+    var maxPrice = 0;
     $(".md-ads .item").each( function() {
         var price = parseInt($(this).data("price"));
 
-        if(price < min && price != "") {
-            min = price;
+        if(price < minPrice && price != "") {
+            minPrice = price;
         }
 
-        if(price > max && price != "") {
-            max = price;
+        if(price > maxPrice && price != "") {
+            maxPrice = price;
         }
     });
 
+    // power: get min and max
+    var minPower = parseInt($(".md-ads .item:first-child").data("power"));
+    var maxPower = 0;
+    $(".md-ads .item").each( function() {
+        var power = parseInt($(this).data("power"));
+
+        if(power < minPower && power != "") {
+            minPower = power;
+        }
+
+        if(power > maxPower && power != "") {
+            maxPower = power;
+        }
+    });
+
+    // mileage: get min and max
+    var minMileage = parseInt($(".md-ads .item:first-child").data("mileage"));
+    var maxMileage = 0;
+    $(".md-ads .item").each( function() {
+        var mileage = parseInt($(this).data("mileage"));
+
+        if(mileage < minMileage && mileage != "") {
+            minMileage = mileage;
+        }
+
+        if(mileage > maxMileage && mileage != "") {
+            maxMileage = mileage;
+        }
+    });
 
     // Initialize Slider
     var $priceSlider = $('#priceSlider').slider({
         tooltip_split: true,
-        min: min ? min : rangeFilters['price'],
-        max: max ? max : rangeFilters['price'],
+        min: minPrice ? minPrice : rangeFilters['price'],
+        max: maxPrice ? maxPrice : rangeFilters['price'],
         range: true,
-        value: [
-            min ? min : rangeFilters['price'],
-            max ? max : rangeFilters['price']
+        values: [
+            minPrice ? minPrice : rangeFilters['price'],
+            maxPrice ? maxPrice : rangeFilters['price']
         ]
     });
 
     var $powerSlider = $('#powerSlider').slider({
         tooltip_split: true,
-        min: min ? min : rangeFilters['power'],
-        max: max ? max : rangeFilters['power'],
+        min: minPower ? minPower : rangeFilters['power'],
+        max: maxPower ? maxPower : rangeFilters['power'],
         range: true,
-        value: [
-            min ? min : rangeFilters['power'],
-            max ? max : rangeFilters['power']
+        values: [
+            minPower ? minPower : rangeFilters['power'],
+            maxPower ? maxPower : rangeFilters['power']
         ]
     });
 
     var $mileageSlider = $('#mileageSlider').slider({
         tooltip_split: true,
-        min: min ? min : rangeFilters['mileage'],
-        max: max ? max : rangeFilters['mileage'],
+        min: minMileage ? minMileage : rangeFilters['mileage'],
+        max: maxMileage ? maxMileage : rangeFilters['mileage'],
         range: true,
-<<<<<<< HEAD
-        values: [min, max]
-=======
-        value: [
-            min ? min : rangeFilters['mileage'],
-            max ? max : rangeFilters['mileage']
+        values: [
+            minMileage ? minMileage : rangeFilters['mileage'],
+            maxMileage ? maxMileage : rangeFilters['mileage']
         ]
->>>>>>> 5b5d3f9fc008b056d95053db049bf35e90548d79
     });
 
-    var minString = min.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
-    var maxString = max.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
-    $(".range-slider .min").text(minString);
-    $(".range-slider .max").text(maxString);
-    $(".ui-slider-handle:nth-of-type(1)").attr('data-min',minString);
-    $(".ui-slider-handle:nth-of-type(2)").attr('data-max',maxString);
+    var minPriceString = minPrice.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+    var maxPriceString = maxPrice.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+    var minPowerString = minPower.toLocaleString('de-DE', { style: 'decimal' }) + "KW";
+    var maxPowerString = maxPower.toLocaleString('de-DE', { style: 'decimal' }) + "KW";
+    var minMileageString = minMileage.toLocaleString('de-DE', { style: 'decimal' }) + "km";
+    var maxMileageString = maxMileage.toLocaleString('de-DE', { style: 'decimal' }) + "km";
+    $("#priceSlider .ui-slider-handle:nth-of-type(1)").attr('data-price-min',minPriceString);
+    $("#priceSlider .ui-slider-handle:nth-of-type(2)").attr('data-price-max',maxPriceString);
+    $("#powerSlider .ui-slider-handle:nth-of-type(1)").attr('data-power-min',minPowerString);
+    $("#powerSlider .ui-slider-handle:nth-of-type(2)").attr('data-power-max',maxPowerString);
+    $("#mileageSlider .ui-slider-handle:nth-of-type(1)").attr('data-mileage-min',minMileageString);
+    $("#mileageSlider .ui-slider-handle:nth-of-type(2)").attr('data-mileage-max',maxMileageString);
 
     /*
     var $priceSliderTooltip = $('#priceSlider .tooltip .tooltip-inner');
@@ -210,10 +241,28 @@ jQuery(document).ready( function ($) {
 
         // Update filter label with new range selection
 
-        var sldminString = sldmin.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
-        var sldmaxString = sldmax.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
-        $(".ui-slider-handle:nth-of-type(1)").attr('data-min',sldminString);
-        $(".ui-slider-handle:nth-of-type(2)").attr('data-max',sldmaxString);
+        var id = slider.attr("id");
+        console.log(id);
+
+        if(id == "priceSlider") {
+            var sldminString = sldmin.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+            var sldmaxString = sldmax.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
+            $(".ui-slider-handle:nth-of-type(1)").attr('data-price-min',sldminString);
+            $(".ui-slider-handle:nth-of-type(2)").attr('data-price-max',sldmaxString);
+        }
+        if(id == "powerSlider") {
+            var sldminString = sldmin.toLocaleString('de-DE', { style: 'decimal' }) + "KW";
+            var sldmaxString = sldmax.toLocaleString('de-DE', { style: 'decimal' }) + "KW";
+            $(".ui-slider-handle:nth-of-type(1)").attr('data-power-min',sldminString);
+            $(".ui-slider-handle:nth-of-type(2)").attr('data-power-max',sldmaxString);
+        }
+        if(id == "mileageSlider") {
+            var sldminString = sldmin.toLocaleString('de-DE', { style: 'decimal' }) + "km";
+            var sldmaxString = sldmax.toLocaleString('de-DE', { style: 'decimal' }) + "km";
+            $(".ui-slider-handle:nth-of-type(1)").attr('data-mileage-min',sldminString);
+            $(".ui-slider-handle:nth-of-type(2)").attr('data-mileage-max',sldmaxString);
+        }
+
 
         // Set min and max values for current selection to current selection
         // If no values are found set min to 0 and max to 100000
@@ -238,7 +287,7 @@ jQuery(document).ready( function ($) {
         var $this =$(this);
         updateRangeSlider($this, slideEvt, ui);
     });
-    $milageSlider.on('slide', function(slideEvt, ui){
+    $mileageSlider.on('slide', function(slideEvt, ui){
         var $this =$(this);
         updateRangeSlider($this, slideEvt, ui);
     });

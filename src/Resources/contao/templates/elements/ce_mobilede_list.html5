@@ -76,15 +76,27 @@
           <?php endforeach; ?>
         </ul>
       </div>
-      <?php if($this->priceSlider): ?>
-      <div class="range-slider">
+      <div class="range-slider" <?php if(!$this->priceSlider): ?>style="display:none;"<?php endif; ?>>
           <p>
               <label for="amount">Preis</label>
               <input type="text" id="amount" readonly>
           </p>
           </span><div id="priceSlider" data-filter-group="price"></div>
       </div>
-      <?php endif; ?>
+      <div class="range-slider" <?php if(!$this->powerSlider): ?>style="display:none;"<?php endif; ?>>
+          <p>
+              <label for="amount">Leistung</label>
+              <input type="text" id="amount" readonly>
+          </p>
+          </span><div id="powerSlider" data-filter-group="power"></div>
+      </div>
+      <div class="range-slider" <?php if(!$this->mileageSlider): ?>style="display:none;"<?php endif; ?>>
+          <p>
+              <label for="amount">Kilometerstand</label>
+              <input type="text" id="amount" readonly>
+          </p>
+          </span><div id="mileageSlider" data-filter-group="mileage"></div>
+      </div>
 
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
       <span><button class="btn-shuffle" id="shuffle">Mischen</button></span>
