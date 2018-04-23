@@ -1,6 +1,11 @@
+<?php if($this->desc == ''): return ''; endif; ?>
 <div class="item md-ad-box <?= $this->filterClasses ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>">
   <div class="image">
-    <a href="<?= $this->link ?>"><img src="<?= $this->imageSrc ?>" alt="<?= $this->desc ?>" width="300" height="200"></a>
+    <a href="<?= $this->link ?>">
+        <picture>
+            <img src="<?= $this->imageSrc_M ?>" srcset="<?= $this->imageSrc_M ?> 1x, <?= $this->imageSrc_L ?> 1.5x, <?= $this->imageSrc_XL ?> 2x"  alt="<?= $this->desc ?>">
+        </picture>
+    </a>
   </div>
   <!-- detail -->
   <div class="detail">

@@ -110,6 +110,10 @@
 	overflow: hidden;
 }
 
+.md-ad-box .image img {
+    width: 100%;
+}
+
 .featured-car {
     background: #f5f5f5;
 }
@@ -775,6 +779,28 @@
 
     .range-slider .min, .range-slider .max {
         display: none;
+    }
+
+    .list .md-ad-box .image, .list .md-ad-box .detail, .list .md-ad-box .detail p {
+        width: 100%;
+    }
+
+    .list .md-ad-box .detail {
+        height: inherit;
+        background: #f2f2f2;
+    }
+
+    .list .md-ad-box .detail .features-list li {
+        width: 50%;
+    }
+
+    .md-ad-box .image {
+        min-height: inherit;
+        padding-bottom: 20px;
+    }
+
+    .md-ad-box .detail {
+        min-height: inherit;
     }
 }
 
