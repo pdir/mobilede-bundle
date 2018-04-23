@@ -110,12 +110,6 @@
 	overflow: hidden;
 }
 
-.md-ad-box .image img {
-    max-width: inherit;
-	height: 100%;
-	width: auto;
-}
-
 .featured-car {
     background: #f5f5f5;
 }
