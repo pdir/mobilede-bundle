@@ -16,6 +16,8 @@
 
 namespace Pdir\MobileDe;
 
+use Contao\CoreBundle\Exception\PageNotFoundException;
+
 class ReaderElement extends  \ContentElement
 {
     /**
