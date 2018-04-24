@@ -109,6 +109,10 @@ class ListingElement extends \ContentElement
         // Limit
 
         // Promotion
+        if($this->pdir_md_promotion_corner_shadow == 1) {
+            $this->pdir_md_promotion_corner_shadow = "shadow";
+        }
+
         if( $this->pdir_md_hidePromotionBox != 1 AND isset($this->ads['prominent']) ){
 			$arrFeaturedCss = array(
 				$this->pdir_md_promotion_corner_color,
@@ -129,6 +133,10 @@ class ListingElement extends \ContentElement
         $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
 
         // Featured corner
+        if($this->pdir_md_corner_shadow == 1) {
+            $this->pdir_md_corner_shadow = "shadow";
+        }
+
 		$arrFeaturedCss = array(
 			$this->pdir_md_corner_color,
 			$this->pdir_md_corner_position,

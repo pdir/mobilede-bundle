@@ -76,6 +76,10 @@ jQuery(document).ready( function ($) {
         $container.isotope("shuffle");
     });
 
+    if(mdListShuffle == 1) {
+        $("#shuffle").trigger("click");
+    }
+
     // reset filters
     $("#filterReset").click(function () {
         $(".md-filters input[type=checkbox]").prop("checked", false);
@@ -141,7 +145,7 @@ jQuery(document).ready( function ($) {
 
         buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
 
-        $container.isotope(options);
+        $container.isotope();
     });
 
     // price: get min and max

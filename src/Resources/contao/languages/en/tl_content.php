@@ -50,7 +50,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_top_right'] = 'Top Ri
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_left'] = 'Bottom Left';
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_right'] = 'Bottom Right';
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_position'] = array('Corner Hinge Position (Promotion Box)', 'Please choose the position of the corner hinge (only promotion box).');
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_sticky'] = array('Corner Hinge Shadow (Promotion Box)', 'If active the corner hinge gets a shadow.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_shadow'] = array('Show Corner Hinge Shadow (Promotion Box)', 'If active the corner hinge gets a shadow.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_shadow'] = array('Show COrner Hinge Shadow', 'If active the corner hinge gets a shadow.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = array('Skip JavaScript', 'If active the module javascript is not included.');
