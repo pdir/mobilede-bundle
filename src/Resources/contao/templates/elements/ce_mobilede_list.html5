@@ -101,7 +101,7 @@
       </div>
 
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
-      <span><button class="btn-shuffle" id="shuffle">Mischen</button></span>
+      <!-- <span><button class="btn-shuffle" id="shuffle">Mischen</button></span> -->
     </div>
   </div>
 <?php endif; ?>

@@ -15,6 +15,7 @@
 jQuery(document).ready( function ($) {
     var $container = $(".md-ads"),
         $checkboxes = $(".md-filter-attr.checkbox-group input"),
+        $selects = $(".md-select"),
         $btnShowFilters = $("#showFilters");
 
     // Create object to store filter for each group
@@ -117,7 +118,7 @@ jQuery(document).ready( function ($) {
     });
 
     // bind filter on select change
-    $(".md-select").on( "change", function() {
+    $selects.on( "change", function() {
         var $this = $(this);
 
         // check sorting
@@ -133,16 +134,17 @@ jQuery(document).ready( function ($) {
 
         var inclusives = [];
         // inclusive filters from checkboxes
-        $(".md-select").each( function( i, item ) {
+        $selects.each( function( i, item ) {
             var elem = $(item);
-            if(!$this.hasClass('sorting')) {
+
+            if(!$(item).hasClass('sorting')) {
                 // if checkbox, use value if selected
                 if (elem.val() != '*') {
                     inclusives.push(elem.val());
                 }
             }
         });
-
+console.log(inclusives);
         buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
 
         $container.isotope();
@@ -269,7 +271,6 @@ jQuery(document).ready( function ($) {
             $(".ui-slider-handle:nth-of-type(1)").attr('data-mileage-min',sldminString);
             $(".ui-slider-handle:nth-of-type(2)").attr('data-mileage-max',sldmaxString);
         }
-
 
         // Set min and max values for current selection to current selection
         // If no values are found set min to 0 and max to 100000
