@@ -73,6 +73,10 @@ jQuery(document).ready( function ($) {
         $container.isotope("shuffle");
     });
 
+    if(mdListShuffle == 1) {
+        $("#shuffle").trigger("click");
+    }
+
     // reset filters
     $("#filterReset").click(function () {
         $(".md-filters input[type=checkbox]").prop("checked", false);
@@ -120,10 +124,13 @@ jQuery(document).ready( function ($) {
         $(".md-select").each( function( i, item ) {
             var elem = $(item);
             // if checkbox, use value if selected
+            console.log(elem);
             if ( elem.val() != '*' ) {
                 inclusives.push( elem.val() );
             }
         });
+
+        console.log(inclusives);
 
         buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
 

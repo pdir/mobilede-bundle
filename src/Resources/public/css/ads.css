@@ -102,6 +102,7 @@
     border: none;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     width: 100%;
+    overflow: hidden;
 }
 
 .md-ad-box .image {
@@ -365,10 +366,6 @@
 	color: #f0f0f0;
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
-}
-
-.corner-ribbon.sticky {
-	position: fixed;
 }
 
 .corner-ribbon.shadow{

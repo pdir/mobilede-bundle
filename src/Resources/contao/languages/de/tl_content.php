@@ -50,7 +50,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_top_right'] = 'Oben R
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_left'] = 'Unten Links';
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_right'] = 'Unten Rechts';
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_position'] = array('Eckband Position (Promotion)', 'Bitte wähle die gewünschte Position des Eckbandes aus.');
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_sticky'] = array('Eckband Sticky (Promotion)', 'Wenn aktiv wird dem Eckband ein Schatten hinzugefügt.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_shadow'] = array('Eckband Schatten anzeigen (Promotion)', 'Wenn aktiv wird dem Eckband ein Schatten hinzugefügt.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_shadow'] = array('Eckband Schatten anzeigen', 'Wenn aktiv wird dem Eckband ein Schatten hinzugefügt.');
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = array('Javascript auslassen', 'Wenn aktiv wird das moduleigene Javascript ausgelassen.');
