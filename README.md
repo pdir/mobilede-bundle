@@ -82,7 +82,7 @@ License
 -------
 This is a commercial extension for Contao Open Source CMS<br>
 You can buy a license at https://pdir.de/mobilede<br>
-2017 pdir GmbH - All-rights-reserved<br>
+2017-2018 pdir GmbH - All-rights-reserved<br>
 
 
 ToDo
