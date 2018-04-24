@@ -17,7 +17,6 @@ jQuery(document).ready( function ($) {
         $checkboxes = $(".md-filter-attr.checkbox-group input"),
         $btnShowFilters = $("#showFilters");
 
-
     // Create object to store filter for each group
     var buttonFilters = {};
     var buttonFilter = '*';
@@ -118,12 +117,14 @@ jQuery(document).ready( function ($) {
 
         var inclusives = [];
         // inclusive filters from checkboxes
-        $(".md-select").each( function( i, elem ) {
+        $(".md-select").each( function( i, item ) {
+            var elem = $(item);
             // if checkbox, use value if selected
-            if ( elem.selected ) {
-                inclusives.push( elem.value );
+            if ( elem.val() != '*' ) {
+                inclusives.push( elem.val() );
             }
         });
+
         buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
 
         $container.isotope();
