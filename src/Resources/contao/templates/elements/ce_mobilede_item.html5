@@ -1,23 +1,20 @@
 <?php if($this->desc == ''): return ''; endif; ?>
-<div class="item md-ad-box <?= $this->filterClasses ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>">
+<a href="<?= $this->link ?>" class="item md-ad-box <?= $this->filterClasses ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>">
   <div class="image">
-    <a href="<?= $this->link ?>">
-        <picture>
-            <img src="<?= $this->imageSrc_M ?>" srcset="<?= $this->imageSrc_M ?> 1x, <?= $this->imageSrc_L ?> 1.5x, <?= $this->imageSrc_XL ?> 2x"  alt="<?= $this->desc ?>">
-        </picture>
-    </a>
+    <picture>
+        <img src="<?= $this->imageSrc_M ?>" srcset="<?= $this->imageSrc_M ?> 1x, <?= $this->imageSrc_L ?> 1.5x, <?= $this->imageSrc_XL ?> 2x"  alt="<?= $this->desc ?>">
+    </picture>
   </div>
-  <!-- detail -->
+  <div class="price">
+    <span><?= $this->price ?></span>
+  </div>
   <div class="detail">
     <!-- Header -->
     <header class="clearfix">
+
       <h5 class="title">
-        <a href="<?= $this->link ?>"><?= $this->desc ?></a>
+        <?= $this->desc ?>
       </h5>
-      <!-- Price -->
-      <div class="price">
-        <span><?= $this->price ?></span>
-      </div>
       <ul class="custom-list">
         <li>
           <i class="icon-gauge"></i><?= $this->power ?> /
@@ -45,17 +42,16 @@
         </li>
         <li>
           <i class="icon-road"></i>
-          <span><?= $this->mileage ?></span>
+          <span><?= number_format($this->mileage,2,",",".") ?> km</span>
         </li>
       </ul>
     </div>
 
     <div class="md-ad-box-overlap-wrapper">
       <h2><?= $this->desc ?></h2>
-      <h3><?= $this->price ?></h3>
 
       <div class="md-ad-box-overlap-btns-area">
-        <a href="<?= $this->link ?>" class="overlap-btn"><i class="icon-picture"></i></a>
+        <div class="overlap-btn"><i class="icon-picture"></i></div>
       </div>
     </div>
   </div>
@@ -63,5 +59,6 @@
   <div class="corner-ribbon <?= $this->featureCss ?>"><?php if($this->promotion): ?>Empfehlung<?php else: ?>Neu<?php endif ?></div>
 <?php endif; ?>
 
-</div>
+
+</a>
 <!-- mobilede ad box end-->

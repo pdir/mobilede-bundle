@@ -103,12 +103,12 @@
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     width: 100%;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .md-ad-box .image {
-    min-height: 226px;
-	max-height: 226px;
 	overflow: hidden;
+    height: 200px;
 }
 
 .md-ad-box .image img {
@@ -151,16 +151,13 @@
     border: none;
     padding: 0px;
     float: left;
-}
-
-.md-ad-box .detail header h5 a {
     font-weight: 600;
     text-decoration: none;
     font-size: 17px;
     color: #7abfbc;
 }
 
-.md-ad-box .detail header h5 a:hover {
+.md-ad-box .detail header h5:hover {
     color: #7B7B7B;
 }
 
@@ -187,16 +184,14 @@
     color: #7B7B7B;
 }
 
-.md-ad-box .detail header .price {
+.md-ad-box .price {
     font-family: 'Libre Baskerville', serif;
     font-style: italic;
     font-weight: 600;
     display: block;
     font-size: 17px;
-    position: absolute;
     background: rgba(255, 255, 255, 0.8);
 	background: #7ABFBC;
-    top: -27px;
     width: 100%;
     left: 0;
     text-align: center;
@@ -325,7 +320,7 @@
 }
 
 .list .md-ad-box .detail p {
-	width: 50%;
+	width: 100%;
 	float: left;
 }
 
@@ -351,6 +346,41 @@
 .features-list {
     width: 100%;
     padding: 0;
+}
+
+.md-promotion-box a {
+    display: block;
+    padding-bottom: 33px;
+}
+
+.md-promotion-box .md-ad-box .price {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.md-promotion-box .md-ad-box .detail .features-list li {
+    width: 33%;
+    margin-bottom: 0;
+}
+
+.md-promotion-box .md-ad-box .detail p {
+    margin-bottom: 0;
+}
+
+.md-promotion-box .md-ad-box .detail {
+    padding: 15px 30px 0;
+    height: 200px;
+    min-height: inherit;
+}
+
+.md-promotion-box .md-ad-box .detail .features-list {
+    margin-bottom: 0;
+}
+
+.win.chrome .md-ad-box-overlap-wrapper {
+    width: 101%;
 }
 
 /* Corner ribbons */
@@ -798,6 +828,19 @@
 
     .md-ad-box .detail {
         min-height: inherit;
+    }
+
+    .md-promotion-box .md-ad-box .price {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .md-promotion-box a {
+        padding-bottom: 0;
+    }
+
+    .md-promotion-box .md-ad-box .detail {
+        padding: 20px 30px;
     }
 }
 
