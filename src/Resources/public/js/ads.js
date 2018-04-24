@@ -28,6 +28,8 @@ jQuery(document).ready( function ($) {
         'mileage': {'min':0, 'max': 1000000}
     };
 
+    var sorting = 'original-order';
+
     // set Options
     var options = {
         itemSelector: ".item",
@@ -35,14 +37,15 @@ jQuery(document).ready( function ($) {
         // use sort functions
         getSortData: {
             price: ".price parseFloat",
-            power: ".price parseFloat",
-            mileage: ".price parseFloat",
+            power: "[data-power]",
+            mileage: "[data-mileage]",
             title: function(item) {
-                return $(item).find(".title a").text();
+                return $(item).find(".title").text();
             },
             number: ".number parseInt",
             category: "[data-category]"
         },
+        sortBy: sorting,
         // use filter function
         filter: function() {
 
@@ -106,12 +109,21 @@ jQuery(document).ready( function ($) {
         // combine inclusive filters
         buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
 
-        $container.isotope();
+        $container.isotope(options);
     });
 
     // bind filter on select change
     $(".md-select").on( "change", function() {
         var $this = $(this);
+
+        // check sorting
+        if($this.hasClass('sorting'))
+        {
+            options.sortBy = $this.val();
+            $container.isotope(options);
+            return;
+        }
+
         // get filter value from option value
         buttonFilters[ 'select-group' ] = $this.val();
 
@@ -119,15 +131,17 @@ jQuery(document).ready( function ($) {
         // inclusive filters from checkboxes
         $(".md-select").each( function( i, item ) {
             var elem = $(item);
-            // if checkbox, use value if selected
-            if ( elem.val() != '*' ) {
-                inclusives.push( elem.val() );
+            if(!$this.hasClass('sorting')) {
+                // if checkbox, use value if selected
+                if (elem.val() != '*') {
+                    inclusives.push(elem.val());
+                }
             }
         });
 
         buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
 
-        $container.isotope();
+        $container.isotope(options);
     });
 
     // price: get min and max
@@ -222,17 +236,6 @@ jQuery(document).ready( function ($) {
     $("#mileageSlider .ui-slider-handle:nth-of-type(1)").attr('data-mileage-min',minMileageString);
     $("#mileageSlider .ui-slider-handle:nth-of-type(2)").attr('data-mileage-max',maxMileageString);
 
-    /*
-    var $priceSliderTooltip = $('#priceSlider .tooltip .tooltip-inner');
-
-    var _changeTooltipFormat = function(){
-        $priceSliderTooltip.text($priceSliderTooltip.text()+'€');
-    };
-
-    //change tooltip format on initial load
-    // _changeTooltipFormat();
-    */
-
     function updateRangeSlider(slider, slideEvt, ui) {
         var sldmin = +ui.values[0],
             sldmax = +ui.values[1],
@@ -243,7 +246,6 @@ jQuery(document).ready( function ($) {
         // Update filter label with new range selection
 
         var id = slider.attr("id");
-        console.log(id);
 
         if(id == "priceSlider") {
             var sldminString = sldmin.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' });
@@ -274,9 +276,7 @@ jQuery(document).ready( function ($) {
             max: sldmax || max
         };
         // Trigger isotope again to refresh layout
-        $container.isotope();
-
-        // _changeTooltipFormat();
+        $container.isotope(options);
     }
 
     // Trigger Isotope Filter when slider drag has stopped

@@ -13,10 +13,12 @@
       <button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button>
       <div class="md-filter-sort button-group">
         <i class="icon-sort"></i>
-        <select class="md-select">
-          <option value="*" data-filter="original-order" data-filter-type="sort" title="Keine Sortierung" selected>Sortierung</option>
+        <select class="md-select sorting">
+          <option value="original-order" data-filter="original-order" data-filter-type="sort" title="Keine Sortierung" selected>Sortierung</option>
           <option value="price" data-filter="price" data-filter-type="sort" title="nach Preis sortieren">Preis</option>
           <option value="title" data-filter="title" data-filter-type="sort" title="nach Name sortieren">Name</option>
+          <option value="power" data-filter="power" data-filter-type="sort" title="nach Leistung sortieren">Leistung</option>
+          <option value="mileage" data-filter="mileage" data-filter-type="sort" title="nach Kilometerstand sortieren">Kilometerstand</option>
         </select>
       </div>
     </div>
