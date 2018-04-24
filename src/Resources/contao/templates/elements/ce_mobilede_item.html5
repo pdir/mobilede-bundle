@@ -17,12 +17,12 @@
       </h5>
       <ul class="custom-list">
         <li>
-          <i class="icon-gauge"></i><?= $this->power ?> /
+          <i class="icon-gauge"></i><?= $this->power ?>
         </li>
         <li>
-          <?= $this->fuelType ?> /
+          <?= $this->fuelType ?>
         </li>
-        <li>
+        <li class="last">
           <?= $this->transmission ?>
         </li>
       </ul>
