@@ -166,10 +166,10 @@ class ListingElement extends \ContentElement
 			$objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
 			$objFilterTemplate->desc = $ad['makeModelDescription']['value'];
-            $objFilterTemplate->imageSrc_S = $ad['images']['S']['url'];
-            $objFilterTemplate->imageSrc_XL = $ad['images']['XL']['url'];
-            $objFilterTemplate->imageSrc_L = $ad['images']['L']['url'];
-            $objFilterTemplate->imageSrc_M = $ad['images']['M']['url'];
+            $objFilterTemplate->imageSrc_S = $ad['images'][0]['S']['url'];
+            $objFilterTemplate->imageSrc_XL = $ad['images'][0]['XL']['url'];
+            $objFilterTemplate->imageSrc_L = $ad['images'][0]['L']['url'];
+            $objFilterTemplate->imageSrc_M = $ad['images'][0]['M']['url'];
             $objFilterTemplate->plainPrice = $ad['priceModel']['plainPrice']['value'];
             $objFilterTemplate->plainPower = substr($ad['power']['value'],0,strpos($ad['power']['value']," KW"));
 			$objFilterTemplate->price = $ad['priceModel']['primaryPrice']['countryOfSale']['value'];

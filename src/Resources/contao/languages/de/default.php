@@ -69,6 +69,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['schwacke-code'] = 'Schwacke-C
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] = 'Verkäufer seit';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['shipping-volume'] = 'Lieferkapazität';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['speed-control'] = 'Geschwindigkeitskontrolle';
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['trailer-coupling-type'] = 'Anhängerkupplungstyp';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['transmission'] = 'Getriebe';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['usage-type'] = 'Nutzungsart';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['used-car-seal'] = 'Gebrauchtwagensiegel';

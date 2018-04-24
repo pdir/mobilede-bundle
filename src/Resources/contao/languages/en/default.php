@@ -69,6 +69,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['schwacke-code'] = 'Schwacke C
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] = 'Seller since';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['shipping-volume'] = 'Shipping Volume';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['speed-control'] = 'Speed Control';
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['trailer-coupling-type'] = 'Trailer Coupling Type';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['transmission'] = 'Transmission';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['usage-type'] = 'Usage Type';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['used-car-seal'] = 'Used Car Seal';
