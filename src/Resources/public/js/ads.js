@@ -16,11 +16,13 @@ jQuery(document).ready( function ($) {
     var $container = $(".md-ads"),
         $checkboxes = $(".md-filter-attr.checkbox-group input"),
         $selects = $(".md-select"),
-        $btnShowFilters = $("#showFilters");
+        $btnShowFilters = $("#showFilters"),
+        updateLocationHash,
+        updateFiltersFromObject,
+        filters = [];
 
-    // Create object to store filter for each group
-    var buttonFilters = {};
-    var buttonFilter = '*';
+    // set default filter
+    filters['all'] = '*';
 
     // Create new object for the range filters and set default values
     var rangeFilters = {
@@ -37,9 +39,9 @@ jQuery(document).ready( function ($) {
         layoutMode: "fitRows", // or masonry
         // use sort functions
         getSortData: {
-            price: ".price parseFloat",
-            power: "[data-power]",
-            mileage: "[data-mileage]",
+            price: "[data-price] parseFloat",
+            power: "[data-power] parseFloat",
+            mileage: "[data-mileage] parseFloat",
             title: function(item) {
                 return $(item).find(".title").text();
             },
@@ -49,7 +51,6 @@ jQuery(document).ready( function ($) {
         sortBy: sorting,
         // use filter function
         filter: function() {
-
             var $this = $(this);
             var price = $this.attr('data-price');
             var isInPriceRange = (rangeFilters['price'].min <= price && rangeFilters['price'].max >= price);
@@ -60,7 +61,7 @@ jQuery(document).ready( function ($) {
             var mileage = $this.attr('data-mileage');
             var isInMileageRange = (rangeFilters['mileage'].min <= mileage && rangeFilters['mileage'].max >= mileage);
 
-            return $this.is( buttonFilter ) && isInPriceRange && isInPowerRange && isInMileageRange;
+            return $this.is( filters['all'] ) && isInPriceRange && isInPowerRange && isInMileageRange;
         }
     };
 
@@ -81,8 +82,54 @@ jQuery(document).ready( function ($) {
         $("#shuffle").trigger("click");
     }
 
+    //// Event handlers
+    $container.on( 'arrangeComplete', function() {
+        // if no filtered items display no result message
+        if ( !$container.data('isotope').filteredItems.length )
+            $('.md-no-result').show();
+        else
+            $('.md-no-result').hide();
+    });
+
+    // Listen to filter update event and update Isotope filters
+    $container.on('filter-update', function (event, opts) {
+
+        var checkboxes = [],
+            selects = [];
+
+        // Get sorting
+        var sorting = $('.md-filters select.sorting').val();
+        options.sortBy = sorting ? sorting : 'original-order';
+
+        // Get filters from checkboxes, map input values to an array
+        $checkboxes.each( function( i, elem ) {
+            // if checkbox, use value if checked
+            if ( elem.checked ) {
+                checkboxes.push( elem.value );
+            }
+        });
+
+        filters['checkbox-group'] = checkboxes.length ? checkboxes : '';
+
+        // Get filters from selects, map input values to an array
+        $selects.each( function( i, item ) {
+            var elem = $(item);
+
+            if(!$(item).hasClass('sorting')) {
+                // if checkbox, use value if selected
+                if (elem.val() != '*') {
+                    selects.push(elem.val());
+                }
+            }
+        });
+
+        filters['select'] = selects.length ? selects.join("") : false;
+        filters['select-group'] = selects.length ? selects : '';
+        filters['all'] = concatValues(filters);
+    });
+
     // reset filters
-    $("#filterReset").click(function () {
+    $("#filterReset").on( 'click', function () {
         $(".md-filters input[type=checkbox]").prop("checked", false);
         $(".md-filters option:selected").prop("selected", false);
         var options = $priceSlider.slider( 'option' );
@@ -96,65 +143,24 @@ jQuery(document).ready( function ($) {
     });
 
     // Initialize checkboxes
-    $checkboxes.change( function() {
-        var $this = $(this);
-
-        // map input values to an array
-        var inclusives = [];
-        // inclusive filters from checkboxes
-        $checkboxes.each( function( i, elem ) {
-            // if checkbox, use value if checked
-            if ( elem.checked ) {
-                inclusives.push( elem.value );
-            }
-        });
-
-        buttonFilters[ 'checkbox-group' ] = $this.attr('data-filter');
-
-        // combine inclusive filters
-        buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
-
-        $container.isotope(options);
+    $checkboxes.on( 'change', function( event ) {
+        event.preventDefault();
+        $container.trigger('filter-update');
+        updateLocationHash(filters, options.sortBy);
     });
 
     // bind filter on select change
-    $selects.on( "change", function() {
-        var $this = $(this);
-
-        // check sorting
-        if($this.hasClass('sorting'))
-        {
-            options.sortBy = $this.val();
-            $container.isotope(options);
-            return;
-        }
-
-        // get filter value from option value
-        buttonFilters[ 'select-group' ] = $this.val();
-
-        var inclusives = [];
-        // inclusive filters from checkboxes
-        $selects.each( function( i, item ) {
-            var elem = $(item);
-
-            if(!$(item).hasClass('sorting')) {
-                // if checkbox, use value if selected
-                if (elem.val() != '*') {
-                    inclusives.push(elem.val());
-                }
-            }
-        });
-console.log(inclusives);
-        buttonFilter = inclusives.length ? inclusives.join(", ") : "*";
-
-        $container.isotope();
+    $selects.on( 'change', function( event ) {
+        event.preventDefault();
+        $container.trigger('filter-update');
+        updateLocationHash(filters, options.sortBy);
     });
 
     // price: get min and max
-    var minPrice = parseInt($(".md-ads .item:first-child").data("price"));
+    var minPrice = parseInt($('.md-ads .item:first-child').data('price'));
     var maxPrice = 0;
-    $(".md-ads .item").each( function() {
-        var price = parseInt($(this).data("price"));
+    $('.md-ads .item').each( function() {
+        var price = parseInt($(this).data('price'));
 
         if(price < minPrice && price != "") {
             minPrice = price;
@@ -297,13 +303,108 @@ console.log(inclusives);
         var $this =$(this);
         updateRangeSlider($this, slideEvt, ui);
     });
-});
+    //// Helper functions
+    // Update the page history state
+    updateLocationHash = function (filters, sorting) {
 
-// Flatten object by concatting values
-function concatValues( obj ) {
-    var value = '';
-    for ( var prop in obj ) {
-        value += obj[ prop ];
-    }
-    return value;
-}
+        var hash = '';
+
+        // filter
+        if(filters['all'] !== '*')
+            hash = 'filter=' + encodeURIComponent( filters['all'] );
+
+        if(filters['all'] !== '*' && sorting !== 'original-order')
+            hash += '&';
+
+        // sorting
+        if(sorting !== 'original-order')
+            hash += 'sort=' + encodeURIComponent( sorting );
+
+        location.hash = hash;
+
+        console.log('filter now');
+        console.log(options);
+        $container.isotope(options);
+    };
+
+    getHashFilter = function() {
+        // get filter=filterName
+        var matches = location.hash.match( /filter=([^&]+)/i );
+        var hashFilter = matches && matches[1];
+        return hashFilter && decodeURIComponent( hashFilter );
+    };
+
+    getHashSorting = function() {
+        // get filter=filterName
+        var matches = location.hash.match( /sort=([^&]+)/i );
+        var hashSorting = matches && matches[1];
+        return hashSorting && decodeURIComponent( hashSorting );
+    };
+
+    // Update filters from current url
+    updateFiltersFromHash = function () {
+
+        console.log('updateFiltersFromHash');
+
+        var hashFilter = getHashFilter();
+        var sortFilter = getHashSorting();
+
+        if ( !hashFilter && !sortFilter) {
+            return;
+        }
+
+        if(hashFilter !== null)
+        {
+            var filterArr = hashFilter.split('.');
+
+            // unset all selects
+            $('.md-select').val('*');
+
+            // set filters from hash
+            $.each(filterArr, function (key, val) {
+                if(val) {
+                    console.log(key);
+                    console.log(val);
+                    console.log('.md-select option[value=".' + val + '"]');
+                    $('.md-select option[value=".' + val + '"]').parent().val('.'+val);
+                    $('.md-filter-attr :checkbox[value=".' + val + '"]').prop('checked','true');
+                }
+            });
+        }
+
+        // set sorting from hash
+        $('.md-select.sorting').val(sortFilter);
+
+        $container.trigger('filter-update');
+
+        $container.isotope(options);
+    };
+
+    // Flatten object by concatting values
+    concatValues = function( obj ) {
+        var arr = [];
+        // console.log(obj);
+        if(typeof obj['checkbox-group'] !== 'undefined' && obj['checkbox-group'] !== '') {
+            for (var prop in obj['checkbox-group']) {
+                if(obj['select'])
+                    arr.push(obj['checkbox-group'][prop] + obj['select']);
+                else
+                    arr.push(obj['checkbox-group'][prop]);
+            }
+            return arr.join(",");
+        }
+
+        console.log(obj['select'].length);
+        console.log(!obj['select']);
+        if(!obj['select'] || 0 === obj['select'].length)
+        {
+            console.log('select is empty');
+            return '*';
+        }
+
+
+        return obj['select'];
+    };
+
+    $(window).on( 'hashchange', updateFiltersFromHash );
+});

@@ -389,6 +389,11 @@
     margin-right: 5px;
 }
 
+.md-no-result {
+	display:none;
+	float: left;
+}
+
 .custom-list li:not(.last):after {
     position: absolute;
     content: "/";

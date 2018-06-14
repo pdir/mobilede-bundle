@@ -77,6 +77,11 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Wheel Formula';
 
 /**
+ * List View
+ */
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'] = 'No suitable cars could be found.';
+
+/**
  * Detail View
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['back'] = 'Back';

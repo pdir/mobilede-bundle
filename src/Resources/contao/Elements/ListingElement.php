@@ -88,6 +88,7 @@ class ListingElement extends \ContentElement
         {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir . '/js/ads.js|static';
 			$GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir . '/js/URI.min.js|static';
         }
         if(!$this->pdir_md_removeModuleCss)
         {
@@ -149,6 +150,10 @@ class ListingElement extends \ContentElement
 
         // Price Slider
         $this->Template->priceSlider = $this->pdir_md_priceSlider;
+
+        // No result message
+        $this->Template->noResultMessage = $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'];
+        ;
 
         // Debug mode
 		if($this->pdir_md_enableDebugMode)

@@ -77,6 +77,11 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Radantrieb';
 
 /**
+ * List View
+ */
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'] = 'Es konnten keine passenden Fahrzeuge gefunden werden.';
+
+/**
  * Detail View
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['back'] = 'Zurück';

@@ -114,6 +114,7 @@
   <?php foreach($this->ads as $ad): ?>
     <?= $ad; ?>
   <?php endforeach; ?>
+    <div class="md-no-result"><?= $this->noResultMessage ?></div>
   </div> <!-- MobileDe list end -->
   <?php echo $this->pagination; ?>
 </div>
