@@ -25,6 +25,7 @@
 
 .md-filters select {
 	min-width: 110px;
+    width: 70%;
 }
 
 .md-filters .select-container {
@@ -36,10 +37,11 @@
 }
 
 .md-filters .select-container label,
-.md-filters .checkbox-group > label {
+.md-filters .checkbox-group > label,
+.md-filters .range-slider label {
 	display: inline;
 	float: left;
-	width: 15%;
+	width: 30%;
 	font-weight: bold;
 }
 
@@ -53,9 +55,19 @@
 	width: 7.5%;
 }
 
+.md-filters .checkbox-group ul {
+    clear: left;
+    padding: 10px 0;
+}
+
 .md-filters .checkbox-group li {
 	float: left;
 	margin-right: 15px;
+    list-style-type: none;
+}
+
+.md-filters .checkbox-group li label {
+    width: inherit;
 }
 
 .md-filters .md-filters-header .md-filter-sort {
@@ -90,18 +102,17 @@
     border: none;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
     width: 100%;
+    overflow: hidden;
+    text-decoration: none;
 }
 
 .md-ad-box .image {
-    min-height: 226px;
-	max-height: 226px;
 	overflow: hidden;
+    height: 200px;
 }
 
 .md-ad-box .image img {
-    max-width: inherit;
-	height: 100%;
-	width: auto;
+    width: 100%;
 }
 
 .featured-car {
@@ -140,16 +151,13 @@
     border: none;
     padding: 0px;
     float: left;
-}
-
-.md-ad-box .detail header h5 a {
     font-weight: 600;
     text-decoration: none;
     font-size: 17px;
     color: #7abfbc;
 }
 
-.md-ad-box .detail header h5 a:hover {
+.md-ad-box .detail header h5:hover {
     color: #7B7B7B;
 }
 
@@ -176,16 +184,14 @@
     color: #7B7B7B;
 }
 
-.md-ad-box .detail header .price {
+.md-ad-box .price {
     font-family: 'Libre Baskerville', serif;
     font-style: italic;
     font-weight: 600;
     display: block;
     font-size: 17px;
-    position: absolute;
     background: rgba(255, 255, 255, 0.8);
 	background: #7ABFBC;
-    top: -27px;
     width: 100%;
     left: 0;
     text-align: center;
@@ -314,7 +320,7 @@
 }
 
 .list .md-ad-box .detail p {
-	width: 50%;
+	width: 100%;
 	float: left;
 }
 
@@ -337,6 +343,65 @@
 	display: inline-block;
 }
 
+.features-list {
+    width: 100%;
+    padding: 0;
+}
+
+.md-promotion-box a {
+    display: block;
+    padding-bottom: 33px;
+}
+
+.md-promotion-box .md-ad-box .price {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.md-promotion-box .md-ad-box .detail .features-list li {
+    width: 33%;
+    margin-bottom: 0;
+}
+
+.md-promotion-box .md-ad-box .detail p {
+    margin-bottom: 0;
+}
+
+.md-promotion-box .md-ad-box .detail {
+    padding: 15px 30px 0;
+    height: 200px;
+    min-height: inherit;
+}
+
+.md-promotion-box .md-ad-box .detail .features-list {
+    margin-bottom: 0;
+}
+
+.win.chrome .md-ad-box-overlap-wrapper {
+    width: 101%;
+}
+
+.md-ad-box .detail header .custom-list li:not(.last) {
+    position: relative;
+    padding-right: 15px;
+    margin-right: 5px;
+}
+
+.md-no-result {
+	display:none;
+	float: left;
+}
+
+.custom-list li:not(.last):after {
+    position: absolute;
+    content: "/";
+    right: 0;
+    bottom: -1px;
+    font-size: 13px;
+}
+
 /* Corner ribbons */
 .corner-ribbon {
 	width: 200px;
@@ -350,10 +415,6 @@
 	color: #f0f0f0;
 	transform: rotate(-45deg);
 	-webkit-transform: rotate(-45deg);
-}
-
-.corner-ribbon.sticky {
-	position: fixed;
 }
 
 .corner-ribbon.shadow{
@@ -562,6 +623,101 @@
     color: inherit;
 }
 
+/* Range Slider */
+.md-filters .range-slider {
+    clear: left;
+    padding: 5px;
+    width: 32.5%;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.md-filters .range-slider label {
+    width: inherit;
+}
+
+.md-filters .range-slider input {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+    font-size: inherit;
+}
+
+.md-filters .range-slider .ui-widget.ui-widget-content {
+    border: none;
+    width: 95%;
+    display: inline-block;
+    margin: 30px 8px;
+}
+
+.md-filters .range-slider .ui-widget-header {
+    background: #f2f2f2;
+}
+
+.md-filters .range-slider .ui-state-default {
+    background: #f2f2f2;
+    border-radius: 100%;
+    padding: 0 0.5px;
+}
+
+.md-filters .range-slider .ui-state-default:focus {
+    outline: 0;
+    border: 1px solid #c5c5c5;
+}
+
+.md-filters .range-slider .min {
+    padding-right: 20px;
+}
+
+.md-filters .range-slider .max {
+    padding-left: 20px;
+}
+
+.ui-slider-handle:nth-of-type(1):after, .ui-slider-handle:nth-of-type(2):after {
+    position: absolute;
+    background: #fff;
+    text-align: center;
+    font-size: 0.7rem;
+    padding: 5px;
+    color: #000;
+    border-radius: 5px;
+}
+
+.ui-slider-handle:nth-of-type(1):after {
+    top: -32px;
+    left: 0;
+}
+
+.ui-slider-handle:nth-of-type(2):after {
+    bottom: -32px;
+    right: 0;
+}
+
+#priceSlider .ui-slider-handle:nth-of-type(1):after {
+    content: attr(data-price-min);
+}
+
+#priceSlider .ui-slider-handle:nth-of-type(2):after {
+    content: attr(data-price-max);
+}
+
+#powerSlider .ui-slider-handle:nth-of-type(1):after {
+    content: attr(data-power-min);
+}
+
+#powerSlider .ui-slider-handle:nth-of-type(2):after {
+    content: attr(data-power-max);
+}
+
+#mileageSlider .ui-slider-handle:nth-of-type(1):after {
+    content: attr(data-mileage-min);
+}
+
+#mileageSlider .ui-slider-handle:nth-of-type(2):after {
+    content: attr(data-mileage-max);
+}
+
 @media (min-width: 768px) {
     .md-ad-box {
         width: 49%;
@@ -642,6 +798,68 @@
         width: 300px;
         left: 50%;
         margin-left: -150px;
+    }
+
+    .md-filters .range-slider {
+        width: 100%;
+    }
+
+    .md-filters .range-slider .ui-state-default {
+        width: 25px;
+        height: 25px;
+        top: -8px;
+    }
+
+    .md-filters .range-slider .ui-widget.ui-widget-content {
+        width: 90%;
+        margin: 15px 5px;
+    }
+
+    .ui-slider-handle:nth-of-type(1):after {
+        left: 0;
+    }
+
+    .ui-slider-handle:nth-of-type(2):after {
+        right: 0;
+    }
+
+    .range-slider .min, .range-slider .max {
+        display: none;
+    }
+
+    .list .md-ad-box .image, .list .md-ad-box .detail, .list .md-ad-box .detail p {
+        width: 100%;
+    }
+
+    .list .md-ad-box .detail {
+        height: inherit;
+        background: #f2f2f2;
+    }
+
+    .list .md-ad-box .detail .features-list li {
+        width: 50%;
+    }
+
+    .md-ad-box .image {
+        min-height: inherit;
+        padding-bottom: 20px;
+    }
+
+    .md-ad-box .detail {
+        min-height: inherit;
+    }
+
+    .md-promotion-box .md-ad-box .price {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .md-promotion-box a {
+        padding-bottom: 0;
+    }
+
+    .md-promotion-box .md-ad-box .detail {
+        padding: 20px 30px;
     }
 }
 

@@ -88,6 +88,7 @@ class ListingElement extends \ContentElement
         {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir . '/js/ads.js|static';
 			$GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir . '/js/URI.min.js|static';
         }
         if(!$this->pdir_md_removeModuleCss)
         {
@@ -109,6 +110,10 @@ class ListingElement extends \ContentElement
         // Limit
 
         // Promotion
+        if($this->pdir_md_promotion_corner_shadow == 1) {
+            $this->pdir_md_promotion_corner_shadow = "shadow";
+        }
+
         if( $this->pdir_md_hidePromotionBox != 1 AND isset($this->ads['prominent']) ){
 			$arrFeaturedCss = array(
 				$this->pdir_md_promotion_corner_color,
@@ -123,7 +128,16 @@ class ListingElement extends \ContentElement
 		// Shuffle
         $this->Template->listShuffle = ($this->pdir_md_list_shuffle) ? true : false;
 
+		// Price Slider
+        $this->Template->priceSlider = ($this->pdir_md_priceSlider) ? true : false;
+        $this->Template->powerSlider = ($this->pdir_md_powerSlider) ? true : false;
+        $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
+
         // Featured corner
+        if($this->pdir_md_corner_shadow == 1) {
+            $this->pdir_md_corner_shadow = "shadow";
+        }
+
 		$arrFeaturedCss = array(
 			$this->pdir_md_corner_color,
 			$this->pdir_md_corner_position,
@@ -133,6 +147,13 @@ class ListingElement extends \ContentElement
 
 		// Add ads to template
         $this->Template->ads = $this->renderAdItem($this->ads['searchResultItems']);
+
+        // Price Slider
+        $this->Template->priceSlider = $this->pdir_md_priceSlider;
+
+        // No result message
+        $this->Template->noResultMessage = $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'];
+        ;
 
         // Debug mode
 		if($this->pdir_md_enableDebugMode)
@@ -158,7 +179,12 @@ class ListingElement extends \ContentElement
 			$objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
 			$objFilterTemplate->desc = $ad['makeModelDescription']['value'];
-			$objFilterTemplate->imageSrc = $ad['image']['src'];
+            $objFilterTemplate->imageSrc_S = $ad['images'][0]['S']['url'];
+            $objFilterTemplate->imageSrc_XL = $ad['images'][0]['XL']['url'];
+            $objFilterTemplate->imageSrc_L = $ad['images'][0]['L']['url'];
+            $objFilterTemplate->imageSrc_M = $ad['images'][0]['M']['url'];
+            $objFilterTemplate->plainPrice = $ad['priceModel']['plainPrice']['value'];
+            $objFilterTemplate->plainPower = substr($ad['power']['value'],0,strpos($ad['power']['value']," KW"));
 			$objFilterTemplate->price = $ad['priceModel']['primaryPrice']['countryOfSale']['value'];
 			$objFilterTemplate->link = $this->getReaderPageLink($ad['adId']);
 			$objFilterTemplate->fuelType = $ad['fuelType']['value'];
