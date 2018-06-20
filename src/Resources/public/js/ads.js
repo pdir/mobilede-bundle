@@ -322,8 +322,6 @@ jQuery(document).ready( function ($) {
 
         location.hash = hash;
 
-        console.log('filter now');
-        console.log(options);
         $container.isotope(options);
     };
 
@@ -344,8 +342,6 @@ jQuery(document).ready( function ($) {
     // Update filters from current url
     updateFiltersFromHash = function () {
 
-        console.log('updateFiltersFromHash');
-
         var hashFilter = getHashFilter();
         var sortFilter = getHashSorting();
 
@@ -363,9 +359,6 @@ jQuery(document).ready( function ($) {
             // set filters from hash
             $.each(filterArr, function (key, val) {
                 if(val) {
-                    console.log(key);
-                    console.log(val);
-                    console.log('.md-select option[value=".' + val + '"]');
                     $('.md-select option[value=".' + val + '"]').parent().val('.'+val);
                     $('.md-filter-attr :checkbox[value=".' + val + '"]').prop('checked','true');
                 }
@@ -383,7 +376,7 @@ jQuery(document).ready( function ($) {
     // Flatten object by concatting values
     concatValues = function( obj ) {
         var arr = [];
-        // console.log(obj);
+
         if(typeof obj['checkbox-group'] !== 'undefined' && obj['checkbox-group'] !== '') {
             for (var prop in obj['checkbox-group']) {
                 if(obj['select'])
@@ -394,11 +387,8 @@ jQuery(document).ready( function ($) {
             return arr.join(",");
         }
 
-        console.log(obj['select'].length);
-        console.log(!obj['select']);
         if(!obj['select'] || 0 === obj['select'].length)
         {
-            console.log('select is empty');
             return '*';
         }
 
