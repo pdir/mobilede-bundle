@@ -153,7 +153,6 @@ class ListingElement extends \ContentElement
 
         // No result message
         $this->Template->noResultMessage = $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'];
-        ;
 
         // Debug mode
 		if($this->pdir_md_enableDebugMode)
@@ -183,6 +182,15 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->imageSrc_XL = $ad['images'][0]['XL']['url'];
             $objFilterTemplate->imageSrc_L = $ad['images'][0]['L']['url'];
             $objFilterTemplate->imageSrc_M = $ad['images'][0]['M']['url'];
+
+            // image fallback
+            if(!$objFilterTemplate->imageSrc_S && !$objFilterTemplate->imageSrc_XL && !$objFilterTemplate->imageSrc_L &&
+                !$objFilterTemplate->imageSrc_M)
+            {
+                $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
+                $objFilterTemplate->imageSrc_M = str_replace( 'http://', 'https://', $ad['image']['src'] );
+            }
+
             $objFilterTemplate->plainPrice = $ad['priceModel']['plainPrice']['value'];
             $objFilterTemplate->plainPower = substr($ad['power']['value'],0,strpos($ad['power']['value']," KW"));
 			$objFilterTemplate->price = $ad['priceModel']['primaryPrice']['countryOfSale']['value'];

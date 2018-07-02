@@ -61,6 +61,7 @@
           <?php endforeach; ?>
         </select>
       </div>
+      <?php if(isset($this->filters['usageType'])): ?>
       <div class="brands select-container">
         <label>Fahrzeugart</label>
         <select class="md-select">
@@ -70,6 +71,7 @@
           <?php endforeach; ?>
         </select>
       </div>
+      <?php endif; ?>
       <div class="md-filter-attr checkbox-group">
         <label>Farbe</label>
         <ul>
