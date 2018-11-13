@@ -42,7 +42,7 @@
         </li>
         <li>
           <i class="icon-road"></i>
-          <span><?= number_format($this->mileage,2,",",".") ?> km</span>
+          <span><?= $this->mileage ?><?php #= number_format($this->mileage, 2, "," ,".") ?> km</span>
         </li>
       </ul>
     </div>

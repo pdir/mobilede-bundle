@@ -3,7 +3,7 @@
 /**
  * mobilede for Contao Open Source CMS
  *
- * Copyright (C) 2017 pdir / digital agentur <develop@pdir.de>
+ * Copyright (C) 2018 pdir/ digital agentur <develop@pdir.de>
  *
  * @package    mobilede
  * @link       https://pdir.de/mobilede
@@ -75,6 +75,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['usage-type'] = 'Usage Type';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['used-car-seal'] = 'Used Car Seal';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Wheel Formula';
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Delivery Period';
 
 /**
  * List View

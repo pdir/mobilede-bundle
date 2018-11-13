@@ -43,7 +43,7 @@
           </select>
         </div>
       </div>
-      <div class="brands select-container">
+      <div class="fuel select-container">
         <label>Kraftstoffart</label>
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
@@ -52,7 +52,7 @@
           <?php endforeach; ?>
         </select>
       </div>
-      <div class="brands select-container">
+      <div class="gearbox select-container">
         <label>Getriebe</label>
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
@@ -62,7 +62,7 @@
         </select>
       </div>
       <?php if(isset($this->filters['usageType'])): ?>
-      <div class="brands select-container">
+      <div class="type select-container">
         <label>Fahrzeugart</label>
         <select class="md-select">
           <option value="*">Alle anzeigen</option>

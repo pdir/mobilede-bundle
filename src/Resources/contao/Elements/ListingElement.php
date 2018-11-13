@@ -3,7 +3,7 @@
 /**
  * mobilede for Contao Open Source CMS
  *
- * Copyright (C) 2017 pdir / digital agentur <develop@pdir.de>
+ * Copyright (C) 2018 pdir/ digital agentur <develop@pdir.de>
  *
  * @package    mobilede
  * @link       https://pdir.de/mobilede
@@ -82,7 +82,12 @@ class ListingElement extends \ContentElement
      */
     protected function compile()
     {
-		$assetsDir = 'web/bundles/pdirmobilede';
+        $assetsDir = 'system/modules/pdirMobileDe/assets';
+
+        if(VERSION >= 4.0)
+        {
+            $assetsDir = 'web/bundles/pdirmobilede';
+        }
 
         if(!$this->pdir_md_removeModuleJs)
         {
@@ -197,13 +202,13 @@ class ListingElement extends \ContentElement
 			$objFilterTemplate->link = $this->getReaderPageLink($ad['adId']);
 			$objFilterTemplate->fuelType = $ad['fuelType']['value'];
 			$objFilterTemplate->transmission = $ad['transmission']['value'];
-			$objFilterTemplate->power = $ad['power']['value'];
+			$objFilterTemplate->power = $ad['power']['value'] ? $ad['power']['value'] : 'keine Angabe';
 			$objFilterTemplate->bodyType = $ad['bodyType']['value'];
 			$objFilterTemplate->usageType = $ad['usageType']['value'];
 			$objFilterTemplate->fuelConsumption = $ad['fuelConsumption'];
 			$objFilterTemplate->featured = ($ad['newnessMarker'] == 'NONE') ? false : true;
 			$objFilterTemplate->firstRegistration = ($ad['firstRegistration']['value']) ? $ad['firstRegistration']['value'] : 'keine Angabe';
-			$objFilterTemplate->mileage = $ad['mileage']['value'];
+			$objFilterTemplate->mileage = $ad['mileage']['value'] ? $ad['mileage']['value'] : 0;
 			if( isset($ad['filterClasses']) )
 				$objFilterTemplate->filterClasses = strtolower( implode( ' ', $ad['filterClasses'] ) );
 

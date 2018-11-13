@@ -2,7 +2,7 @@
 /**
  * mobilede for Contao Open Source CMS
  *
- * Copyright (C) 2017 pdir / digital agentur <develop@pdir.de>
+ * Copyright (C) 2018 pdir / digital agentur <develop@pdir.de>
  *
  * @package    mobilede
  * @link       https://pdir.de/mobilede
@@ -13,14 +13,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Pdir\MobileDeBundle;
+namespace Pdir\MobileDeBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use Pdir\MobileDeBundle\PdirMobileDeBundle;
 
-class ContaoManagerPlugin implements BundlePluginInterface
+class Plugin implements BundlePluginInterface
 {
 	/**
 	 * {@inheritdoc}

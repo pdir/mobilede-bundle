@@ -3,7 +3,7 @@
 /**
  * mobilede for Contao Open Source CMS
  *
- * Copyright (C) 2017 pdir / digital agentur <develop@pdir.de>
+ * Copyright (C) 2018 pdir/ digital agentur <develop@pdir.de>
  *
  * @package    mobilede
  * @link       https://pdir.de/mobilede

@@ -3,7 +3,7 @@
 /**
  * mobilede for Contao Open Source CMS
  *
- * Copyright (C) 2017 pdir / digital agentur <develop@pdir.de>
+ * Copyright (C) 2018 pdir/ digital agentur <develop@pdir.de>
  *
  * @package    mobilede
  * @link       https://pdir.de/mobilede
@@ -57,6 +57,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['lifting-capacity'] = 'Hubraum
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['lifting-height'] = 'Hubhöhe';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['load-capacity'] = 'Ladekapazität';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['loading-space'] = 'Laderaum';
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['make'] = 'Marke';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['mileage'] = 'Kilometerstand';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['number-of-bunks'] = 'Anzahl der Schlafräume';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['number-of-previous-owners'] = 'Anzahl der Vorbesitzer';
@@ -75,6 +76,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['usage-type'] = 'Nutzungsart';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['used-car-seal'] = 'Gebrauchtwagensiegel';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Radantrieb';
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Lieferfrist';
 
 /**
  * List View

@@ -88,6 +88,13 @@ You can buy a license at https://pdir.de/mobilede<br>
 ToDo
 ---------------
 
+Pull Request
+------------
+Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bundle:
+
+    vendor/bin/php-cs-fixer fix -v
+    vendor/bin/phpunit
+
 
 History
 -------
