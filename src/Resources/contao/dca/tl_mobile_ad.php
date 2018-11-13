@@ -57,10 +57,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
     ],
     'palettes' => [
         '__selector__' => [],
-        'default' => '
-brand,
-name,
-alias'
+        'default' => 'name,alias,type,price,brand'
     ],
     'subpalettes' => [
         '' => ''
@@ -79,7 +76,7 @@ alias'
             'sorting' => true,
             'flag' => 1,
             'inputType' => 'text',
-            'eval' => ['mandatory' => true, 'maxlength' => 255],
+            'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
             'sql' => "varchar(255) NOT NULL default ''"
         ],
         'brand' => [
@@ -89,7 +86,7 @@ alias'
             'sorting' => true,
             'flag' => 1,
             'inputType' => 'text',
-            'eval' => ['mandatory' => true, 'maxlength' => 255],
+            'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
             'sql' => "varchar(255) NOT NULL default ''"
         ],
         'alias' => [
@@ -100,10 +97,37 @@ alias'
             'eval' => ['rgxp' => 'alias', 'unique' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
             'save_callback' => [
                 function ($varValue, DataContainer $dataContainer) {
-                    return \System::getContainer()->get('xuad_car.datacontainer.car')->generateAlias($varValue, $dataContainer);
+                    return \System::getContainer()->get('pdir.mobile_de.ad_service')->generateAlias($varValue, $dataContainer);
                 }
             ],
             'sql' => "varchar(128) COLLATE utf8_bin NOT NULL default ''"
+        ],
+        'price' => array
+        (
+            'label'  => &$GLOBALS['TL_LANG']['tl_mobile_ad']['price'],
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => array('maxlength'=>13, 'rgxp'=>'digit', 'tl_class' => 'w50'),
+            'sql' => "float(10,2) NOT NULL default '0.00'"
+        ),
+        'type' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['type'],
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'select',
+            'options' => $GLOBALS['TL_LANG']['tl_mobile_ad']['type']['options'],
+            'eval' => array(
+                'includeBlankOption'=>false,
+                'tl_class'=>'w50',
+                'readonly'=> true
+            ),
+            'save_callback' => [
+                function ($varValue, DataContainer $dataContainer) {
+                    return \System::getContainer()->get('pdir.mobile_de.ad_service')->generateAlias($varValue, $dataContainer);
+                }
+            ],
+            'sql' => "varchar(4) NOT NULL default 'man'"
         ],
     ]
 ];

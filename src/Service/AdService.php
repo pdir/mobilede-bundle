@@ -13,6 +13,10 @@
  * file that was distributed with this source code.
  */
 
+namespace Pdir\MobileDeBundle\Service;
+
+use Doctrine\ORM\EntityManager;
+
 class AdService
 {
     /**

@@ -22,16 +22,16 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
     'pdirMobileDe' => array
     (
-        'PdirMobileDeList'    => '\Pdir\MobileDe\Listing',
-        'PdirMobileDeReader'  => '\Pdir\MobileDe\Reader',
+        'PdirMobileDeList'    => '\Pdir\MobileDeBundle\Listing',
+        'PdirMobileDeReader'  => '\Pdir\MobileDeBundle\Reader',
     )
 ));*/
 
 /**
  * Add content element
  */
-$GLOBALS['TL_CTE']['includes']['mobileDeList'] = 'Pdir\\MobileDe\\ListingElement';
-$GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDe\\ReaderElement';
+$GLOBALS['TL_CTE']['includes']['mobileDeList'] = 'Pdir\\MobileDeBundle\\ListingElement';
+$GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\ReaderElement';
 
 /**
 * Backend modules
@@ -43,29 +43,29 @@ if (!is_array($GLOBALS['BE_MOD']['pdir']))
 
 $assetsDir = 'bundles/pdirmobilede';
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 0, array
+array_insert($GLOBALS['BE_MOD']['pdir'], 1, array
 (
-	'mobileDeSetup' => array
-	(
-		'callback'          => 'Pdir\MobileDe\MobileDeSetup',
-		'icon'              => $assetsDir . '/img/icon.png',
-		//'javascript'        =>  $assetsDir . '/js/backend.min.js',
-		'stylesheet'		=>  $assetsDir . '/css/backend.css'
-	),
-));
-
-array_insert($GLOBALS['BE_MOD']['pdir'], 1 ,[
     'mobileDeAds'  => [
         'tables'    => ['tl_mobile_ad'],
         'icon'      => $assetsDir . '/img/icon.png',
         'table'     => ['TableWizard', 'importTable'],
         'list'      => ['ListWizard', 'importList']
-    ]
+    ],
+    'mobileDeSetup' => array
+	(
+		'callback'          => 'Pdir\\MobileDeBundle\\MobileDeSetup',
+		'icon'              => $assetsDir . '/img/icon.png',
+	),
+));
+
+array_insert($GLOBALS['BE_MOD']['pdir'], 0 ,[
+
 ]);
 
 if (TL_MODE == 'BE')
 {
 	$GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/backend.js';
+    $GLOBALS['TL_CSS'][] = $assetsDir . '/css/backend.css';
 }
 
 /**

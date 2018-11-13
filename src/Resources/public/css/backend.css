@@ -85,3 +85,15 @@
 	padding: 10px;
 	margin-top: 15px;
 }
+
+#tl_navigation .group-pdir {
+    background: url(/bundles/pdirmobilede/img/icon.svg) 0 0 no-repeat;
+    background-size: 20px 20px;
+}
+
+
+#tl_navigation .mobileDeSetup,
+#tl_navigation .mobileDeAds {
+    background: url(/bundles/pdirmobilede/img/icon.svg) 10px 2px no-repeat;
+    background-size: 20px 20px;
+}

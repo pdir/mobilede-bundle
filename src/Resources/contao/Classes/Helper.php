@@ -18,7 +18,7 @@
  * this class is only used for demo presentation and will be replaced by downloader in extension setup
  */
 
-namespace Pdir\MobileDe;
+namespace Pdir\MobileDeBundle;
 
 class Helper extends \Frontend
 {
