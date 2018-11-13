@@ -54,6 +54,15 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 0, array
 	),
 ));
 
+array_insert($GLOBALS['BE_MOD']['pdir'], 1 ,[
+    'mobileDeAds'  => [
+        'tables'    => ['tl_mobile_ad'],
+        'icon'      => $assetsDir . '/img/icon.png',
+        'table'     => ['TableWizard', 'importTable'],
+        'list'      => ['ListWizard', 'importList']
+    ]
+]);
+
 if (TL_MODE == 'BE')
 {
 	$GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/backend.js';

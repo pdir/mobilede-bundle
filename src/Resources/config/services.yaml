@@ -1,0 +1,9 @@
+services:
+  kernel_bundle:
+    class: Pdir\MobileDeBundle\PdirMobileDeBundle
+
+  pdir.dc.ad:
+    class: Pdir\MobileDeBundle\DataContainer\AutomobileDataContainer
+    arguments:
+    - '@doctrine.orm.default_entity_manager'
+    - '@pdir_mobile_de.service.ad'

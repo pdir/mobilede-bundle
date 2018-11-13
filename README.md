@@ -88,13 +88,6 @@ You can buy a license at https://pdir.de/mobilede<br>
 ToDo
 ---------------
 
-Pull Request
-------------
-Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bundle:
-
-    vendor/bin/php-cs-fixer fix -v
-    vendor/bin/phpunit
-
 
 History
 -------
@@ -106,3 +99,16 @@ History
 
 *mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner Verbindung zur pdir GmbH oder der mobile.de* Erweiterung für Contao. Die Erweiterung verwendet die mobile.de* API zum Import der Fahrzeugdaten.
 DIES IST EINE DEMO VERSION, DIE DURCH DEN KAUF EINER LIZENZ ZUR VOLLVERSION UMGEWANDELT WERDEN KANN.
+
+
+
+Developing & Pull Request
+-------------------------
+Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bundle:
+
+    vendor/bin/php-cs-fixer fix -v
+    vendor/bin/phpunit
+
+Generate getter and setter
+
+    vendor/app/console doctrine:generate:entities Pdir/MobileDeBundle/Entity/Ad
