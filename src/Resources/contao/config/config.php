@@ -30,8 +30,8 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 /**
  * Add content element
  */
-$GLOBALS['TL_CTE']['includes']['mobileDeList'] = 'Pdir\\MobileDeBundle\\ListingElement';
-$GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\ReaderElement';
+$GLOBALS['TL_CTE']['includes']['mobileDeList'] = 'Pdir\\MobileDeBundle\\Elements\\ListingElement';
+$GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\Elements\\ReaderElement';
 
 /**
 * Backend modules
@@ -53,7 +53,7 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, array
     ],
     'mobileDeSetup' => array
 	(
-		'callback'          => 'Pdir\\MobileDeBundle\\MobileDeSetup',
+		'callback'          => 'Pdir\\MobileDeBundle\\Modules\\MobileDeSetup',
 		'icon'              => $assetsDir . '/img/icon.png',
 	),
 ));

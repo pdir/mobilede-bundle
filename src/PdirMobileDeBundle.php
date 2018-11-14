@@ -14,10 +14,11 @@
  */
 
 namespace Pdir\MobileDeBundle;
+
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Configures the Amphtml bundle.
+ * Configures the MobileDeBundle.
  *
  * @author Mathias Arzberger <develop@pdir.de>
  */
