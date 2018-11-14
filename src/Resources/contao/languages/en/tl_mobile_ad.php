@@ -18,6 +18,5 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['copy'] = ['Copy ad', 'Copy %s ad'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['cut'] = ['Cut ad', 'Cut %s ad'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['delete'] = ['Delete ad', 'delete %s ad'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['show'] = ['Show ad info', 'Show ad info %s'];
-$GLOBALS['TL_LANG']['tl_mobile_ad']['name'] = ['Name', 'Name'];
-$GLOBALS['TL_LANG']['tl_mobile_ad']['brand'] = ['Brand', 'Brand'];
-$GLOBALS['TL_LANG']['tl_mobile_ad']['alias'] = ['Alias', 'Alias'];
+
+
