@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Pdir\MobileDeBundle;
+namespace Pdir\MobileDeBundle\Elements;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
 

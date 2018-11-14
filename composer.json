@@ -13,11 +13,6 @@
       "role" : "Developer"
     }
   ],
-  "support" : {
-    "docs" : "https://docs.pdir.de/mobilede/mobilede_inserate.html",
-    "issues" : "https://github.com/pdir/mobilede-bundle/issues",
-    "source" : "https://github.com/pdir/mobilede-bundle"
-  },
   "require": {
     "php": "^5.6 || ^7.0",
     "contao/core-bundle": "^4.4.8",
@@ -47,17 +42,16 @@
   "autoload": {
     "psr-4": {
       "Pdir\\MobileDeBundle\\": "src/"
-    },
-    "classmap": [
-      "src/Resources/contao/"
-    ]
+    }
   },
   "autoload-dev": {
     "psr-4": {
-      "Contao\\MobileDeBundle\\Tests\\": "tests/"
+      "Pdir\\MobileDeBundle\\Tests\\": "tests/"
     }
   },
-  "config": {
-    "files": "files"
+  "support" : {
+    "docs" : "https://docs.pdir.de/mobilede/mobilede_inserate.html",
+    "issues" : "https://github.com/pdir/mobilede-bundle/issues",
+    "source" : "https://github.com/pdir/mobilede-bundle"
   }
 }

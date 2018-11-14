@@ -13,15 +13,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Pdir\MobileDeBundle;
+namespace Pdir\MobileDeBundle\Tests;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Contao\SkeletonBundle\ContaoSkeletonBundle;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Configures the MobileDeBundle.
- *
- * @author Mathias Arzberger <develop@pdir.de>
- */
-class PdirMobileDeBundle extends Bundle
+class PdirMobileDeBundleTest extends TestCase
 {
+    public function testCanBeInstantiated()
+    {
+        $bundle = new PdirMobileDeBundle();
+        $this->assertInstanceOf('Pdir\MobileDeBundle\PdirMobileDeBundle', $bundle);
+    }
 }

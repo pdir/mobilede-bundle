@@ -3,7 +3,9 @@
 /**
  * Namespace
  */
-namespace Pdir\MobileDeBundle;
+namespace Pdir\MobileDeBundle\Modules;
+
+use Pdir\MobileDeBundle\Helper;
 
 class MobileDeSetup extends \BackendModule
 {
