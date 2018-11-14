@@ -17,9 +17,9 @@ namespace Pdir\MobileDeBundle\DataContainer;
 
 use Contao\DataContainer;
 use Doctrine\ORM\EntityManager;
-use Pdir\MobileDeBundle\Service\Ad as AdService;
+use Pdir\MobileDeBundle\Service\AdService;
 
-class Ad
+class AdDataContainer
 {
     /**
      * @var EntityManager

@@ -101,7 +101,6 @@ History
 DIES IST EINE DEMO VERSION, DIE DURCH DEN KAUF EINER LIZENZ ZUR VOLLVERSION UMGEWANDELT WERDEN KANN.
 
 
-
 Developing & Pull Request
 -------------------------
 Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bundle:
@@ -112,3 +111,7 @@ Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bu
 Generate getter and setter
 
     vendor/app/console doctrine:generate:entities Pdir/MobileDeBundle/Entity/Ad
+
+Run cypress tests against demo data
+
+    npm run cypress:open

@@ -2,7 +2,7 @@
   "name": "pdir/mobilede-bundle",
   "type":"contao-bundle",
   "description": "mobilede Ads for Contao 4",
-  "keywords":["contao","mobile","ads", "cars","automobile"],
+  "keywords":["contao","mobile","ads", "cars","automobile", "car","Fahrzeuge", "Wohmobile"],
   "license": "proprietary",
   "homepage": "https://pdir.de/mobile-de-integration-fuer-contao-cms.html",
   "authors": [
@@ -54,7 +54,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Contao\\SkeletonBundle\\Tests\\": "tests/"
+      "Contao\\MobileDeBundle\\Tests\\": "tests/"
     }
   },
   "config": {

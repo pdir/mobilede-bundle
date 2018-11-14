@@ -1,7 +1,9 @@
 {
   "name": "pdir/mobilede-bundle",
   "description": "mobilede Ads for Contao",
-  "scripts": {},
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/pdir/mobilede-bundle.git"
@@ -17,5 +19,9 @@
   "license": "paid extension - domain licence available",
   "bugs": {
     "url": "https://github.com/pdir/mobilede-bundle/issues"
+  },
+  "devDependencies": {
+    "cypress": "^3.1.1",
+    "eslint-plugin-cypress": "^2.1.2"
   }
 }

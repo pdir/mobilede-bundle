@@ -17,7 +17,7 @@ namespace Pdir\MobileDeBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 
-class Ad
+class AdService
 {
     /**
      * @var EntityManager

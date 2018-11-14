@@ -7,3 +7,6 @@
 
 #PhpStorm
 .idea
+
+#cypress Tests
+/node_modules
