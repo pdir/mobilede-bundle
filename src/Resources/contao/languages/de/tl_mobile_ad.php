@@ -333,7 +333,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['price_rating']['options']['reasonablePrice'
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_rating']['options']['increasedPrice'] = 'Erhöhter Preis';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_rating']['options']['highPrice'] = 'Hoher Preis';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_rating']['options']['noRating'] = 'Ohne Bewertung';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['price_vatable'] = ['Günstiger Preis', 'Wählen Sie die Option aus, wenn der Preis günstiger ist.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rating'] = ['Mehrwertsteuer-Satz', 'Wählen Sie hier den Mehrwertsteuer-Satz aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rating']['options']['7.00'] = '7,00 %';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rating']['options']['7.60'] = '7,60 %';
@@ -547,7 +546,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['title_legend'] = 'Name und Typ';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['type'] = ['Typ', ''];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['type']['options']['man'] = 'Manuell';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['type']['options']['sync'] = 'Api Sync';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['options']['CombineHarvester'] = 'Mähdrescher';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['options']['FarmyardTractor'] = 'Hofschlepper';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['options']['FertilizerSpreader'] = 'Düngerstreuer';
@@ -566,7 +564,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['opt
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['options']['Tractor'] = 'Schlepper';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['options']['OtherAgriculturalVehicle'] = 'Andere Agrarfahrzeuge';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_agriculturalVehicle']['options']['OtherSubstructure'] = 'Sonstige Anbauten';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['ArticulatedBus'] = 'Gelenkbus';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['Clubbus'] = 'Kleinbus';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['Coach'] = 'Reisebus';
@@ -574,7 +571,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['CrossCou
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['DoubleDeckerBus'] = 'Doppeldecker';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['PublicServiceVehicleBus'] = 'Linienbus';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_bus']['options']['OtherBus'] = 'Andere Busse';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['Cabrio'] = 'Cabrio/Roadster';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['EstateCar'] = 'Kombi';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['Limousine'] = 'Limousine';
@@ -583,7 +579,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['SmallCar
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['SportsCar'] = 'Sportwagen/Coupé';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['Van'] = 'Van/Kleinbus';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_car']['options']['OtherCar'] = 'Andere';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['options']['CaterpillarDigger'] = 'Kettenbagger';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['options']['CombinedDredgerLoader'] = 'Baggerlader';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['options']['CompactionTechnology'] = 'Verdichtungstechnik';
@@ -601,7 +596,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['opt
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['options']['WorkingPlatform'] = 'Arbeitsbühne';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['options']['OtherConstructionMachine'] = 'Andere Baumaschinen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_constructionMachine']['options']['ConstructionMachine_OtherSubstructure'] = 'Sonstige Anbauten';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']['ContainerForkliftTruck'] = 'Containerstapler';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']['FrontMountedForkliftTruck'] = 'Frontstapler';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']['HighBayRackForkliftTruck'] = 'Hochregalstapler';
@@ -612,7 +606,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']['SideLoadingForkliftTruck'] = 'Seitenstapler';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']['TelescopicForkliftTruck'] = 'Teleskoparmstapler';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_forkliftTruck']['options']['OtherForkliftTruck'] = 'Andere Stapler';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['ChopperAndCruiser'] = 'Chopper/Cruiser';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['CombinationAndSidecar'] = 'Gespann/Seitenwagen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['DirtBike'] = 'Dirt Bike';
@@ -633,7 +626,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['Su
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['Tourer'] = 'Tourer';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['Trike'] = 'Trike';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorbike']['options']['OtherMotorbike'] = 'Andere';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['Alcoves'] = 'Alkoven';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['CabinMotorhome'] = 'Wohnkabine';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['Caravan'] = 'Wohnwagen';
@@ -644,7 +636,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['Pa
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['VanMotorhome'] = 'Kastenwagen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['MotorHomesAndOther'] = 'Wohnmobil andere';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_motorhome']['options']['OtherMotorhome'] = 'Andere';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['BeveragesSemiTrailer'] = 'Getränke';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['BoxAndIsolatedSemiTrailer'] = 'Tiefkühl';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['BoxSemiTrailer'] = 'Koffer';
@@ -667,13 +658,11 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['TruckMountedCraneSemiTrailer'] = 'Autokran';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['WalkingFloorSemiTrailer'] = 'Walkingfloor';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailer']['options']['OtherSemiTrailer'] = 'Andere Auflieger';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailerTruck'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailerTruck']['options']['HazardousLoad'] = 'Gefahrgut';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailerTruck']['options']['HeavyLoad'] = 'Schwerlast';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailerTruck']['options']['StandardTractorAndTrailerUnit'] = 'Standard-SZM';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailerTruck']['options']['VolumeTrailer'] = 'Volumen-SZM';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_semiTrailerTruck']['options']['OtherSemiTrailerTruck'] = 'Andere Sattelzugmaschinen';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['BeveragesTrailer'] = 'Getränke';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['BoatTrailer'] = 'Bootsanhänger';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['BoxTrailer'] = 'Koffer';
@@ -703,7 +692,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['Traf
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['TrailerCar'] = 'Pkw-Anhänger';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['WalkingFloorTrailer'] = 'Walkingfloor';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_trailer']['options']['OtherTrailer'] = 'Andere Anhänger';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']['BeveragesTruck'] = 'Getränkewagen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']['BoxTruck'] = 'Koffer';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']['BreakdownTruck'] = 'Abschleppwagen';
@@ -733,7 +721,6 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']['TruckMountedCraneTruck'] = 'Autokran';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']['VacuumAndPressureVehicleTruck'] = 'Saug- und Druckwagen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_truckOver7500']['options']['OtherTruckOver7500'] = 'Andere Lkw über 7,5 t';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['AmbulanceVan'] = 'Rettungswagen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['BeveragesVan'] = 'Getränke';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['BoxTypeDeliveryVan'] = 'Kastenwagen';
@@ -765,6 +752,7 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['UpTo7500_ThreeSidedTipper'] = 'Dreiseitenkipper';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['VacuumAndPressureVehicleVan'] = 'Saug- und Druckwagen';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_vanUpTo7500']['options']['OtherVanUpTo7500'] = 'Andere Transporter/Lkw bis 7,5 t';
+$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category'] = ['Fahrzeugkategorie', 'Wählen Sie hier die Fahrzeugkategorie aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_class'] = ['Fahrzeugklasse','Wählen Sie hier die Fahrzeugklasse aus.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_class']['options']['agriculturalVehicle'] = 'Agrarfahrzeug';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_class']['options']['bus'] = 'Bus';
