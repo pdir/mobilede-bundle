@@ -1,5 +1,4 @@
 <?php
-
 /**
  * mobilede for Contao Open Source CMS
  *
@@ -17,10 +16,11 @@
 namespace Pdir\MobileDeBundle\Elements;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Pdir\MobileDeBundle\Module\MobileDeSetup;
 
 class ListingElement extends \ContentElement
 {
-	const PARAMETER_KEY = 'ad';
+    const PARAMETER_KEY = 'ad';
 
     /**
      * Template
@@ -29,12 +29,14 @@ class ListingElement extends \ContentElement
     protected $strTemplate = 'ce_mobilede_list';
     protected $strItemTemplate = 'ce_mobilede_item';
 
-	/**
-	 * @var \PageModel
-	 */
-	private $readerPage;
+    /**
+     * @var \PageModel
+     */
+    private $readerPage;
 
-	private $ads = array();
+    private $ads = [];
+    private $filters = [];
+    private $lang = [];
 
     /**
      * Display a wildcard in the back end
@@ -52,8 +54,11 @@ class ListingElement extends \ContentElement
             return $objTemplate->parse();
         }
 
+        // load language file
+        $this->lang = \System::loadLanguageFile('tl_mobile_ad');
+
         // Get reader page model
-		$this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
+        $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
 
         // Return if there is no customer id
         if (!$this->pdir_md_customer_id) {
@@ -61,21 +66,27 @@ class ListingElement extends \ContentElement
         }
 
         // set custom list template
-		if($this->pdir_md_listTemplate && $this->strTemplate != $this->pdir_md_listTemplate)
-			$this->strTemplate = $this->pdir_md_listTemplate;
-		// set custom item template
-		if($this->pdir_md_itemTemplate && $this->strItemTemplate != $this->pdir_md_itemTemplate)
-			$this->strItemTemplate = $this->pdir_md_itemTemplate;
+        if ($this->pdir_md_listTemplate && $this->strTemplate != $this->pdir_md_listTemplate)
+            $this->strTemplate = $this->pdir_md_listTemplate;
 
-        $helper = new Helper($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id);
-        $this->ads = $helper->getAds();
+        // set custom item template
+        if ($this->pdir_md_itemTemplate && $this->strItemTemplate != $this->pdir_md_itemTemplate)
+            $this->strItemTemplate = $this->pdir_md_itemTemplate;
+
+        $objAds = $this->Database->prepare("SELECT * FROM tl_mobile_ad ORDER BY name")->execute();
+
+        while ($objAds->next())
+        {
+            $this->ads['searchResultItems'][] = $objAds->row();
+        }
 
         // Return if there are no ads
         if (!is_array($this->ads) || count($this->ads) < 1) {
-			throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
+            throw new PageNotFoundException('Page not found: ' . \Environment::get('uri'));
         }
-        return parent::generate();
-    }
+
+    return parent::generate();
+  }
 
     /**
      * Generate module
@@ -84,74 +95,72 @@ class ListingElement extends \ContentElement
     {
         $assetsDir = 'system/modules/pdirMobileDe/assets';
 
-        if(VERSION >= 4.0)
-        {
+        if (VERSION >= 4.0) {
             $assetsDir = 'web/bundles/pdirmobilede';
         }
 
-        if(!$this->pdir_md_removeModuleJs)
-        {
+        if (!$this->pdir_md_removeModuleJs) {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir . '/js/ads.js|static';
-			$GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir . '/js/URI.min.js|static';
         }
-        if(!$this->pdir_md_removeModuleCss)
-        {
-			$GLOBALS['TL_CSS']['md_css_1'] = $assetsDir . '/vendor/fontello/css/fontello.css||static';
-			$GLOBALS['TL_CSS']['md_css_2'] = $assetsDir . '/vendor/fontello/css/animation.css||static';
+        if (!$this->pdir_md_removeModuleCss) {
+            $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir . '/vendor/fontello/css/fontello.css||static';
+            $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir . '/vendor/fontello/css/animation.css||static';
             $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir . '/css/ads.css||static';
         }
 
-        // Filters
-		$this->Template->filters = $this->ads['searchReferenceData'];
-
-		if($this->pdir_md_hideFilters)
-			$this->Template->hideFilters = true;
-
-		// Ordering
+        // Ordering
 
         // Pagination
 
         // Limit
 
         // Promotion
-        if($this->pdir_md_promotion_corner_shadow == 1) {
+        if ($this->pdir_md_promotion_corner_shadow == 1) {
             $this->pdir_md_promotion_corner_shadow = "shadow";
         }
 
-        if( $this->pdir_md_hidePromotionBox != 1 AND isset($this->ads['prominent']) ){
-			$arrFeaturedCss = array(
-				$this->pdir_md_promotion_corner_color,
-				$this->pdir_md_promotion_corner_position,
-				$this->pdir_md_promotion_corner_sticky,
-				$this->pdir_md_promotion_corner_shadow
-			);
-        	$this->featureCss =  implode( ' ', $arrFeaturedCss);
-			$this->Template->promotion = $this->renderAdItem(array($this->ads['prominent']))[0];
-		}
+        if ($this->pdir_md_hidePromotionBox != 1 AND isset($this->ads['prominent'])) {
+            $arrFeaturedCss = array(
+                $this->pdir_md_promotion_corner_color,
+                $this->pdir_md_promotion_corner_position,
+                $this->pdir_md_promotion_corner_sticky,
+                $this->pdir_md_promotion_corner_shadow
+            );
+            $this->featureCss = implode(' ', $arrFeaturedCss);
+            $this->Template->promotion = $this->renderAdItem(array($this->ads['prominent']))[0];
+        }
 
-		// Shuffle
+        // Shuffle
         $this->Template->listShuffle = ($this->pdir_md_list_shuffle) ? true : false;
 
-		// Price Slider
+        // Price Slider
         $this->Template->priceSlider = ($this->pdir_md_priceSlider) ? true : false;
         $this->Template->powerSlider = ($this->pdir_md_powerSlider) ? true : false;
         $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
 
         // Featured corner
-        if($this->pdir_md_corner_shadow == 1) {
+        if ($this->pdir_md_corner_shadow == 1) {
             $this->pdir_md_corner_shadow = "shadow";
         }
 
-		$arrFeaturedCss = array(
-			$this->pdir_md_corner_color,
-			$this->pdir_md_corner_position,
-			$this->pdir_md_corner_shadow
-		);
-		$this->featureCss =  implode( ' ', $arrFeaturedCss);
+        $arrFeaturedCss = array(
+            $this->pdir_md_corner_color,
+            $this->pdir_md_corner_position,
+            $this->pdir_md_corner_shadow
+        );
+        $this->featureCss = implode(' ', $arrFeaturedCss);
 
-		// Add ads to template
+        // Add ads to template
         $this->Template->ads = $this->renderAdItem($this->ads['searchResultItems']);
+
+        // Filters
+        $this->Template->filters = $this->filters;
+
+        if ($this->pdir_md_hideFilters)
+            $this->Template->hideFilters = true;
+
 
         // Price Slider
         $this->Template->priceSlider = $this->pdir_md_priceSlider;
@@ -160,83 +169,177 @@ class ListingElement extends \ContentElement
         $this->Template->noResultMessage = $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'];
 
         // Debug mode
-		if($this->pdir_md_enableDebugMode)
-		{
-			$this->Template->debug = true;
-			$this->Template->version = Helper::VERSION;
-			$this->Template->customer = $this->pdir_md_customer_id;
-			$this->Template->rawData = $this->ads;
-		}
+        if ($this->pdir_md_enableDebugMode) {
+            $this->Template->debug = true;
+            $this->Template->version = MobileDeSetup::VERSION;
+            $this->Template->customer = $this->pdir_md_customer_id;
+            $this->Template->rawData = $this->ads;
+        }
     }
 
-	/**
-	 * Return the ads as html string
-	 *
-	 * @param array
-	 * @return array
-	 */
+    /**
+     * Return the ads as html string
+     *
+     * @param array
+     * @return array
+     */
     protected function renderAdItem($arrAds)
-	{
-		$arrReturn = array();
-		foreach($arrAds as $ad)
-		{
-			$objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
+    {
+        $arrReturn = array();
 
-			$objFilterTemplate->desc = $ad['makeModelDescription']['value'];
-            $objFilterTemplate->imageSrc_S = $ad['images'][0]['S']['url'];
-            $objFilterTemplate->imageSrc_XL = $ad['images'][0]['XL']['url'];
-            $objFilterTemplate->imageSrc_L = $ad['images'][0]['L']['url'];
-            $objFilterTemplate->imageSrc_M = $ad['images'][0]['M']['url'];
+        foreach ($arrAds as $ad) {
+            $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
-            // image fallback
-            if(!$objFilterTemplate->imageSrc_S && !$objFilterTemplate->imageSrc_XL && !$objFilterTemplate->imageSrc_L &&
-                !$objFilterTemplate->imageSrc_M)
+            $objFilterTemplate->desc = $ad['name'];
+            $images = deserialize($ad['api_images']);
+            if(is_array($images) && count($images) > 0)
             {
-                $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
-                $objFilterTemplate->imageSrc_M = str_replace( 'http://', 'https://', $ad['image']['src'] );
+                $objFilterTemplate->imageSrc_S = $images[0]['@url'];
+                $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
+                $objFilterTemplate->imageSrc_L = $images[3]['@url'];
+                $objFilterTemplate->imageSrc_M = $images[4]['@url'];
+                $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
             }
 
-            $objFilterTemplate->plainPrice = $ad['priceModel']['plainPrice']['value'];
-            $objFilterTemplate->plainPower = substr($ad['power']['value'],0,strpos($ad['power']['value']," KW"));
-			$objFilterTemplate->price = $ad['priceModel']['primaryPrice']['countryOfSale']['value'];
-			$objFilterTemplate->link = $this->getReaderPageLink($ad['adId']);
-			$objFilterTemplate->fuelType = $ad['fuelType']['value'];
-			$objFilterTemplate->transmission = $ad['transmission']['value'];
-			$objFilterTemplate->power = $ad['power']['value'] ? $ad['power']['value'] : 'keine Angabe';
-			$objFilterTemplate->bodyType = $ad['bodyType']['value'];
-			$objFilterTemplate->usageType = $ad['usageType']['value'];
-			$objFilterTemplate->fuelConsumption = $ad['fuelConsumption'];
-			$objFilterTemplate->featured = ($ad['newnessMarker'] == 'NONE') ? false : true;
-			$objFilterTemplate->firstRegistration = ($ad['firstRegistration']['value']) ? $ad['firstRegistration']['value'] : 'keine Angabe';
-			$objFilterTemplate->mileage = $ad['mileage']['value'] ? $ad['mileage']['value'] : 0;
-			if( isset($ad['filterClasses']) )
-				$objFilterTemplate->filterClasses = strtolower( implode( ' ', $ad['filterClasses'] ) );
+            if($ad['type'] == 'man')
+            {
+                $manImages = unserialize($ad['images']);
 
-			if(!$this->pdir_md_hidePromotionBox)
-				$objFilterTemplate->promotion = true;
+                $objFile = \FilesModel::findByUuid($manImages[0]);
 
-			if($this->featureCss)
-				$objFilterTemplate->featureCss = $this->featureCss;
+                if($objFile)
+                {
+                    $imageObj = new \Image(new \File($objFile->path));
+                    $objFilterTemplate->imageSrc_S = $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                    $objFilterTemplate->imageSrc_XL = $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                    $objFilterTemplate->imageSrc_L = $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                    $objFilterTemplate->imageSrc_M = $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                    $objFilterTemplate->imageSrc_ICON = $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                }
+            }
 
-			$arrReturn[] = $objFilterTemplate->parse();
-		}
-		return $arrReturn;
-	}
+            // image fallback
+            if (!$objFilterTemplate->imageSrc_S && !$objFilterTemplate->imageSrc_XL && !$objFilterTemplate->imageSrc_L &&
+                !$objFilterTemplate->imageSrc_M) {
+                $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
+                $objFilterTemplate->imageSrc_M = str_replace('http://', 'https://', $ad['image']['src']);
+            }
 
-	protected function getReaderPageLink($pageId)
-	{
-		$paramString = sprintf('/%s/%s',
-		self::PARAMETER_KEY,
-				$pageId
-		);
+            $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
+            $objFilterTemplate->plainPower = $ad['specifics_power'];
+            $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2) . ' ' . $ad['price_currency'];
+            $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
+            $objFilterTemplate->fuelType = $ad['specifics_fuel'];
+            $objFilterTemplate->transmission = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'] . ' KW (' . number_format((float)($ad['specifics_power'] * 1.35962), 0, ',', '.') . ' PS)' : 'Keine Angabe';
+            $objFilterTemplate->bodyType = $ad['vehicle_class'];
+            $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
+            $objFilterTemplate->usageType = $ad['specifics_usage_type'];
+            $objFilterTemplate->fuelConsumption = [
+                0 => [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
+                    'value' => $ad['emission_fuel_consumption_combined']
+                ],
+                1 => [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
+                    'value' => $ad['emission_fuel_consumption_co2_emission']
+                ]
+            ];
+            $objFilterTemplate->featured = ($ad['newnessMarker'] == 'NONE') ? false : true;
+            $objFilterTemplate->firstRegistration = ($ad['specifics_first_registration']) ? $ad['specifics_first_registration'] : 'keine Angabe';
+            $objFilterTemplate->mileage = $ad['specifics_mileage'] ? $ad['specifics_mileage'] : 0;
+            $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
 
-		if(\Config::get('useAutoItem'))
-		{
-			$paramString = sprintf('/%s',
-				$pageId
-			);
-		}
+            if (!$this->pdir_md_hidePromotionBox)
+                $objFilterTemplate->promotion = true;
 
-		return $this->generateFrontendUrl($this->readerPage, $paramString);
-	}
+            if ($this->featureCss)
+                $objFilterTemplate->featureCss = $this->featureCss;
+
+            $arrReturn[] = $objFilterTemplate->parse();
+        }
+        return $arrReturn;
+    }
+
+    protected function getReaderPageLink($pageId)
+    {
+        $paramString = sprintf('/%s/%s',
+            self::PARAMETER_KEY,
+            $pageId
+        );
+
+        if (\Config::get('useAutoItem')) {
+            $paramString = sprintf('/%s',
+                $pageId
+            );
+        }
+
+        return $this->generateFrontendUrl($this->readerPage, $paramString);
+    }
+
+    protected function getFilterClasses($ad)
+    {
+        $filter = [];
+        $filter[] = $ad['vehicle_make'];
+        $filter[] = $ad['vehicle_class'];
+        $filter[] = $ad['vehicle_category'];
+        $filter[] = $ad['specifics_exterior_color'];
+        $filter[] = $ad['specifics_fuel'];
+
+        if($ad['vehicle_make'])
+        {
+            $this->filters['make'][$ad['vehicle_make']] = [
+                'label' => $ad['vehicle_make'],
+                'key' => $ad['vehicle_make'],
+                'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? ($this->filters['usageType'][$ad['vehicle_make']]['count'] + 1) : 2)
+            ];
+        }
+
+        if($ad['specifics_exterior_color'])
+        {
+            $this->filters['colors'][$ad['specifics_exterior_color']] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
+                'key' => $ad['specifics_exterior_color'],
+                'count' => (isset($this->filters['colors'][$ad['specifics_exterior_color']]['count']) ? $this->filters['usageType'][$ad['specifics_exterior_color']]['count'] + 1 : 1)
+            ];
+        }
+
+        if($ad['vehicle_category'])
+        {
+            $this->filters['categories'][$ad['vehicle_category']] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category']['options'][$ad['vehicle_category']],
+                'key' => $ad['vehicle_category'],
+                'count' => (isset($this->filters['categories'][$ad['vehicle_category']]['count']) ? $this->filters['usageType'][$ad['vehicle_category']]['count'] + 1 : 1)
+            ];
+        }
+
+        if($ad['specifics_fuel'])
+        {
+            $this->filters['fuelType'][$ad['specifics_fuel']] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_fuel']['options'][$ad['specifics_fuel']],
+                'key' => $ad['specifics_fuel'],
+                'count' => (isset($this->filters['fuelType'][$ad['specifics_fuel']]['count']) ? $this->filters['usageType'][$ad['specifics_fuel']]['count'] + 1 : 1)
+            ];
+        }
+
+        if($ad['specifics_gearbox'])
+        {
+            $this->filters['gearbox'][$ad['specifics_gearbox']] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']],
+                'key' => $ad['specifics_gearbox'],
+                'count' => (isset($this->filters['gearbox'][$ad['specifics_gearbox']]['count']) ? $this->filters['usageType'][$ad['specifics_gearbox']]['count'] + 1 : 1)
+            ];
+        }
+
+        if($ad['specifics_usage_type'])
+        {
+            $this->filters['usageType'][$ad['specifics_usage_type']] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']],
+                'key' => $ad['specifics_usage_type'],
+                'count' => (isset($this->filters['usageType'][$ad['specifics_usage_type']]['count']) ? $this->filters['usageType'][$ad['specifics_usage_type']]['count'] + 1 : 1)
+            ];
+        }
+
+        return implode(' ', $filter);
+    }
 }

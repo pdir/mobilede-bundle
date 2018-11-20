@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class PdirMobileDeBundleExtension extends Extension
+class MobileDeExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -31,6 +31,7 @@ class PdirMobileDeBundleExtension extends Extension
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
+        $loader->load('listener.yml');
         $loader->load('services.yml');
     }
 }

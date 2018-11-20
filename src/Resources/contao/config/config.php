@@ -53,7 +53,7 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, array
     ],
     'mobileDeSetup' => array
 	(
-		'callback'          => 'Pdir\\MobileDeBundle\\Modules\\MobileDeSetup',
+		'callback'          => 'Pdir\\MobileDeBundle\\Module\\MobileDeSetup',
 		'icon'              => $assetsDir . '/img/icon.png',
 	),
 ));
@@ -64,11 +64,17 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 0 ,[
 
 if (TL_MODE == 'BE')
 {
-	$GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/backend.js';
-    $GLOBALS['TL_CSS'][] = $assetsDir . '/css/backend.css';
+	$GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/mobilede_backend.js';
+    $GLOBALS['TL_CSS'][] = $assetsDir . '/css/mobilede_backend.css';
 }
 
 /**
  * Register auto_item
  */
 $GLOBALS['TL_AUTO_ITEM'][] = 'ad';
+
+/*
+ * Hooks
+ */
+// $GLOBALS['TL_HOOKS']['outputFrontendTemplate'][] = ['pdir_mobile_de.listener.hooks', 'outputFrontendTemplate'];
+$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['Pdir\\MobileDeBundle\\EventListener\\HooksListener', 'parseFrontendTemplate'];

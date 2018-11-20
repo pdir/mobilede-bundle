@@ -6,7 +6,8 @@
     </picture>
   </div>
   <div class="price">
-    <span><?= $this->price ?></span>
+    <span><?= $this->
+        ?></span>
   </div>
   <div class="detail">
     <!-- Header -->
@@ -55,9 +56,9 @@
       </div>
     </div>
   </div>
-<?php if($this->featured): ?>
+<?php /* if($this->featured): ?>
   <div class="corner-ribbon <?= $this->featureCss ?>"><?php if($this->promotion): ?>Empfehlung<?php else: ?>Neu<?php endif ?></div>
-<?php endif; ?>
+<?php endif; */ ?>
 
 
 </a>

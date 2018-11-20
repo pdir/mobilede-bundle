@@ -47,17 +47,29 @@
         <div class="tl_info">Achtung! Das Modul läuft im Demo Modus.</div>
       <?php endif; ?>
       <div class="left">
+        <?php if($this->extModeTxt === 'Vollversion'): ?>
+        <div class="button">
+          <a href="/contao/main.php?do=mobileDeSetup&act=import">
+            <div class="kreis">
+              <img src="bundles/pdirmobilede/img/icon_index.png" alt="Import starten" width="60" height="60"/>
+            </div>
+            <br/>Import starten
+          </a>
+          <br><br><small>Achtung: Die mobile.de Inserate<br>vom Typ Sync werden entfernt.</small>
+        </div>
+        <?php endif; ?>
         <div class="button">
           <a href="/contao/main.php?do=mobileDeSetup&act=download">
             <div class="kreis">
               <img src="bundles/pdirmobilede/img/icon_download.png"
-               alt="Download Vollversion" width="60" height="60"/>
+               alt="Demo Daten importieren" width="60" height="60"/>
             </div>
-            <br/>Download Vollversion
+            <br/>Demo Daten importieren
           </a>
+          <br><br><small>Achtung: Die mobile.de Inserate<br>Tabelle wird vollständig geleert.</small>
         </div>
         <div class="button">
-          <a href="mailto:kontakt@pdir.de?subject=mobile.de Erweiterung bestellen&body=<?= $this->emailBody ?>">
+          <a href="mailto:support@pdir.de?subject=mobile.de Erweiterung bestellen&body=<?= $this->emailBody ?>">
             <div class="kreis">
               <img src="bundles/pdirmobilede/img/icon_buy.png"
                 alt="Lizenz per Email bestellen" width="60" height="60"/></div>

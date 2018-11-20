@@ -114,4 +114,4 @@ Generate getter and setter
 
 Run cypress tests against demo data
 
-    npm run cypress:open
+    npm run cypress:open or yarn run cypress open

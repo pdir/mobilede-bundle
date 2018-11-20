@@ -11,10 +11,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 (function(window, document, $, undefined){
-
-    window.listView = {};
+    // "use strict";
+    var listView = {};
 
     listView.init = function() {
         // get it started
@@ -29,13 +28,13 @@
         listView.filters['all'] = '*';
 
         // Create new object for the range filters and set default values
-        var rangeFilters = {
+        let rangeFilters = {
             'price': {'min': 0, 'max': 100000},
             'power': {'min': 0, 'max': 500},
             'mileage': {'min': 0, 'max': 1000000}
         };
 
-        var sorting = 'original-order';
+        let sorting = 'original-order';
 
         // set Options
         listView.options = {

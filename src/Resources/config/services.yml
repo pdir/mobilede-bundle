@@ -1,13 +1,9 @@
 services:
-  pdir.mobile_de.ad_service:
-    class: Pdir\MobileDeBundle\Service\AdService
+  pdir.mobile_de.dca.ad:
+    class: Pdir\MobileDeBundle\Dca\Ad
     arguments:
-    - "@doctrine.orm.entity_manager"
-    public: true
-
-  pdir.mobile_de.ad_dc:
-    class: Pdir\MobileDeBundle\DataContainer\AdDataContainer
-    arguments:
-    - "@doctrine.orm.default_entity_manager"
-    - "@pdir.mobile_de.ad_service"
+      - "@contao.framework"
+      - "@security.token_storage"
+      - "@session"
+      - "doctrine.orm.entity_manager"
     public: true

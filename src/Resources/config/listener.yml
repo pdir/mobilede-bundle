@@ -1,0 +1,3 @@
+services:
+    pdir_mobile_de.listener.hooks:
+        class: Pdir\MobileDeBundle\EventListener\HooksListener
