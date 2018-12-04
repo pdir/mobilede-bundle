@@ -6,8 +6,7 @@
     </picture>
   </div>
   <div class="price">
-    <span><?= $this->
-        ?></span>
+    <span><?= $this->price ?></span>
   </div>
   <div class="detail">
     <!-- Header -->
