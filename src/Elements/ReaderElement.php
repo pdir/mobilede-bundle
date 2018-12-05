@@ -136,6 +136,9 @@ class ReaderElement extends  \ContentElement
                     ];
                 }
             }
+
+            $this->ad['htmlDescription']['value'] = $this->ad['vehicle_free_text'];
+            $this->ad['makeModelDescription']['value'] = $this->ad['name'];
         }
 
         if($this->pdir_md_customer_username != 'demo' && $this->ad['type'] != 'man')
@@ -158,8 +161,10 @@ class ReaderElement extends  \ContentElement
 
                 $this->ad['description'] = $tmpArr['ad']['description'];
                 $this->ad['enrichedDescription'] = $tmpArr['ad']['enrichedDescription'];
-                $this->ad['htmlDescription']['value'] = $tmpArr['ad']['enrichedDescription'] ? $this->htmlString($tmpArr['ad']['enrichedDescription']) : $tmpArr['ad']['description'];
+                $this->ad['htmlDescription']['value'] = $this->htmlString($tmpArr['ad']['enrichedDescription']);
                 $this->ad['highlights'] = $tmpArr['ad']['highlights'];
+                echo "<pre style='display:none;'>"; print_r($tmpArr['ad']); echo "</pre>";
+                $this->ad['makeModelDescription']['value'] = $tmpArr['ad']['vehicle']['make']['@key'] . " " . $tmpArr['ad']['vehicle']['model-description']['@value'];
             }
         }
         $this->ad['images'] = $newGallery;

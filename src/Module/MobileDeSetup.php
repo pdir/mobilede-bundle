@@ -11,7 +11,7 @@ class MobileDeSetup extends \BackendModule
     /**
      * mobilede version
      */
-    const VERSION = '2.0.3';
+    const VERSION = '2.0.1';
 
     /**
      * Extension mode
@@ -91,9 +91,16 @@ class MobileDeSetup extends \BackendModule
 
             // unzip files
             $objArchive = new \ZipReader($strFile);
+			$images = array();
             while ($objArchive->next())
             {
                 \File::putContent($this->strPath . $objArchive->file_name, $objArchive->unzip());
+
+				// get uuid and push to array
+				$uuid = \FilesModel::findByPath($this->strPath . $objArchive->file_name)->uuid;
+				if( strpos($objArchive->file_name,"list/") !== false ) {
+					array_push($images,$uuid);
+				}
             }
 
             // read local sql file
@@ -105,6 +112,23 @@ class MobileDeSetup extends \BackendModule
             \Database::getInstance()->query($strQueries);
 
             $this->Template->message = array('Demo Daten wurden erfolgreich heruntergeladen!', 'confirm');
+
+            // set images
+            $adIds = \Database::getInstance()->prepare("SELECT ad_id FROM tl_mobile_ad")->execute();
+            $numbers = range(0,count($images)-1);
+            while($adIds->next())
+            {
+                $uuidArr = array();
+                shuffle($numbers);
+                $randomNumber = $numbers[0];
+                for($i = 0; $i <= $randomNumber; $i++) {
+                    $uuidArr = $this->randomImage($uuidArr,$numbers,$images);
+                }
+                $uuidArr = serialize($uuidArr);
+
+                // update
+                \Database::getInstance()->prepare("UPDATE tl_mobile_ad SET images=?, orderSRC=? WHERE ad_id=?")->execute($uuidArr,$uuidArr,$adIds->ad_id);
+            }
         }
     }
 
@@ -114,4 +138,15 @@ class MobileDeSetup extends \BackendModule
         $arrReplace = array($this->Template->ip, $this->Template->hostname, $this->Template->domain, '%0d%0a');
         return str_replace($arrSearch, $arrReplace, $GLOBALS['TL_LANG']['MOBILEDE']['emailBody']);
     }
+
+	protected function randomImage($uuidArr,$numbers,$images)
+	{
+		// shuffe uuid
+		shuffle($numbers);
+		$image_uuid = $images[ $numbers[0] ];
+
+		// set uuid array
+		array_push($uuidArr,$image_uuid);
+		return $uuidArr;
+	}
 }
