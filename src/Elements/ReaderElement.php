@@ -158,7 +158,7 @@ class ReaderElement extends  \ContentElement
 
                 $this->ad['description'] = $tmpArr['ad']['description'];
                 $this->ad['enrichedDescription'] = $tmpArr['ad']['enrichedDescription'];
-                $this->ad['htmlDescription']['value'] = $this->htmlString($tmpArr['ad']['enrichedDescription']);
+                $this->ad['htmlDescription']['value'] = $tmpArr['ad']['enrichedDescription'] ? $this->htmlString($tmpArr['ad']['enrichedDescription']) : $tmpArr['ad']['description'];
                 $this->ad['highlights'] = $tmpArr['ad']['highlights'];
             }
         }
