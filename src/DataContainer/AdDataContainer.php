@@ -6,7 +6,7 @@
  * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
- * @link       https://www.maklermodul.de
+ * @link       https://pdir.de/mobilede.html
  * @license    proprietary / pdir license - All-rights-reserved - commercial extension
  * @author     Mathias Arzberger <develop@pdir.de>
  *

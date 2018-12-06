@@ -6,7 +6,7 @@
  * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
- * @link       https://www.maklermodul.de
+ * @link       https://pdir.de/mobilede.html
  * @license    proprietary / pdir license - All-rights-reserved - commercial extension
  * @author     Mathias Arzberger <develop@pdir.de>
  *
@@ -160,14 +160,10 @@ class ReaderElement extends \ContentElement
                 $this->ad['enrichedDescription'] = $tmpArr['ad']['enrichedDescription'];
                 $this->ad['htmlDescription']['value'] = $this->htmlString($tmpArr['ad']['enrichedDescription']);
                 $this->ad['highlights'] = $tmpArr['ad']['highlights'];
-                echo "<pre style='display:none;'>";
-                print_r($tmpArr['ad']);
-                echo '</pre>';
                 $this->ad['makeModelDescription']['value'] = $tmpArr['ad']['vehicle']['make']['@key'].' '.$tmpArr['ad']['vehicle']['model-description']['@value'];
-                echo "<pre style='display:none;font-size:1rem;background:#fff;'>"; print_r($tmpArr['ad']['seller']); echo "</pre>";
-                $this->ad['makeModelDescription']['value'] = $tmpArr['ad']['vehicle']['make']['@key'] . " " . $tmpArr['ad']['vehicle']['model-description']['@value'];
+                $this->ad['makeModelDescription']['value'] = $tmpArr['ad']['vehicle']['make']['@key'].' '.$tmpArr['ad']['vehicle']['model-description']['@value'];
                 $this->ad['seller']['company-name']['value'] = $tmpArr['ad']['seller']['company-name']['@value'];
-                if($tmpArr['ad']['seller']['logo-image']) {
+                if ($tmpArr['ad']['seller']['logo-image']) {
                     $this->ad['seller']['logo-image'][0]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][0]['@url'];
                     $this->ad['seller']['logo-image'][1]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][1]['@url'];
                     $this->ad['seller']['logo-image'][2]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][2]['@url'];
@@ -177,8 +173,8 @@ class ReaderElement extends \ContentElement
                 $this->ad['seller']['address']['street']['value'] = $tmpArr['ad']['seller']['address']['street']['@value'];
                 $this->ad['seller']['address']['zipcode']['value'] = $tmpArr['ad']['seller']['address']['zipcode']['@value'];
                 $this->ad['seller']['address']['city']['value'] = $tmpArr['ad']['seller']['address']['city']['@value'];
-                if($tmpArr['ad']['seller']['phone']) {
-                    $this->ad['seller']['phone']['value'] = "+" . $tmpArr['ad']['seller']['phone'][0]['@country-calling-code'] . " " . $tmpArr['ad']['seller']['phone'][0]['@area-code'] . " " . $tmpArr['ad']['seller']['phone'][0]['@number'];
+                if ($tmpArr['ad']['seller']['phone']) {
+                    $this->ad['seller']['phone']['value'] = '+'.$tmpArr['ad']['seller']['phone'][0]['@country-calling-code'].' '.$tmpArr['ad']['seller']['phone'][0]['@area-code'].' '.$tmpArr['ad']['seller']['phone'][0]['@number'];
                 }
                 $this->ad['seller']['email']['value'] = $tmpArr['ad']['seller']['email']['@value'];
                 $this->ad['seller']['homepage']['value'] = $tmpArr['ad']['seller']['homepage']['@value'];
