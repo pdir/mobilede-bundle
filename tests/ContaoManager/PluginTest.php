@@ -14,13 +14,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Pdir\MaklermodulBundle\Tests\ContaoManager;
+namespace Pdir\MobileDeBundle\Tests\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
-use Pdir\MaklermodulBundle\ContaoManager\Plugin;
-use Pdir\MaklermodulBundle\PdirMaklermodulBundle;
+use Pdir\MobileDeBundle\ContaoManager\Plugin;
+use Pdir\MobileDeBundle\PdirMobileDeBundle;
 use PHPUnit\Framework\TestCase;
 
 class PluginTest extends TestCase
@@ -33,8 +33,8 @@ class PluginTest extends TestCase
         $config = (new Plugin())->getBundles($parser)[0];
 
         $this->assertInstanceOf(BundleConfig::class, $config);
-        $this->assertSame(PdirMaklermodulBundle::class, $config->getName());
+        $this->assertSame(PdirMobileDeBundle::class, $config->getName());
         $this->assertSame([ContaoCoreBundle::class], $config->getLoadAfter());
-        $this->assertSame(['makler_modul_mplus'], $config->getReplace());
+        $this->assertSame(['pdirMobileDe'], $config->getReplace());
     }
 }

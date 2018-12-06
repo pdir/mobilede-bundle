@@ -30,7 +30,7 @@ class PdirMobileDeBundleTest extends ContaoTestCase
 
     public function testGetContainerExtension()
     {
-        $bundle = new PdirMaklermodulBundle();
+        $bundle = new PdirMobileDeBundle();
         $this->assertInstanceOf(MobileDeExtension::class, $bundle->getContainerExtension());
     }
 }
