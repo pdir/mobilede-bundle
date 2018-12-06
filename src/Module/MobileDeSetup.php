@@ -98,7 +98,7 @@ class MobileDeSetup extends \BackendModule
 
 				// get uuid and push to array
 				$uuid = \FilesModel::findByPath($this->strPath . $objArchive->file_name)->uuid;
-				if( strpos($objArchive->file_name,"list/") !== false ) {
+				if( strpos($objArchive->file_name,"detail/") !== false ) {
 					array_push($images,$uuid);
 				}
             }
