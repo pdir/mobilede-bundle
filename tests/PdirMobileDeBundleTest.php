@@ -16,7 +16,7 @@
 
 namespace Pdir\MobileDeBundle\Tests;
 
-use Pdir\MobileDeBundle\DependencyInjection\MobileDeExtension;
+use Pdir\MobileDeBundle\DependencyInjection\PdirMobileDeExtension;
 use Pdir\MobileDeBundle\PdirMobileDeBundle;
 use PHPUnit\Framework\TestCase;
 
@@ -31,6 +31,6 @@ class PdirMobileDeBundleTest extends TestCase
     public function testGetContainerExtension()
     {
         $bundle = new PdirMobileDeBundle();
-        $this->assertInstanceOf(MobileDeExtension::class, $bundle->getContainerExtension());
+        $this->assertInstanceOf(PdirMobileDeExtension::class, $bundle->getContainerExtension());
     }
 }
