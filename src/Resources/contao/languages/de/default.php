@@ -1,21 +1,21 @@
 <?php
 
-/**
- * mobilede for Contao Open Source CMS
+/*
+ * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (C) 2018 pdir/ digital agentur <develop@pdir.de>
+ * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
  *
- * @package    mobilede
- * @link       https://pdir.de/mobilede
- * @license    pdir license - All-rights-reserved - commercial extension
- * @author     pdir GmbH <develop@pdir.de>
+ * @package    mobilede-bundle
+ * @link       https://www.maklermodul.de
+ * @license    proprietary / pdir license - All-rights-reserved - commercial extension
+ * @author     Mathias Arzberger <develop@pdir.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
- * Label translation
+ * Label translation.
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['airbag'] = 'Airbag';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['axles'] = 'Achsen';
@@ -78,12 +78,12 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Radantrieb';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Lieferfrist';
 
-/**
+/*
  * List View
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'] = 'Es konnten keine passenden Fahrzeuge gefunden werden.';
 
-/**
+/*
  * Detail View
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['back'] = 'Zurück';

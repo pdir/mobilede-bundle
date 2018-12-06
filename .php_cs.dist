@@ -1,13 +1,19 @@
 <?php
 
+$date = date('Y');
+
 $header = <<<EOF
-This file is part of [package name].
+mobile.de bundle for Contao Open Source CMS
 
-mobilede for Contao Open Source CMS
+Copyright (c) $date pdir / digital agentur // pdir GmbH
 
-Copyright (C) 2018 pdir/ digital agentur <develop@pdir.de>
+@package    mobilede-bundle
+@link       https://www.maklermodul.de
+@license    proprietary / pdir license - All-rights-reserved - commercial extension
+@author     Mathias Arzberger <develop@pdir.de>
 
-@license proprietary
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
 EOF;
 
 $finder = PhpCsFixer\Finder::create()
@@ -47,12 +53,7 @@ return PhpCsFixer\Config::create()
             'sort_algorithm' => 'none',
         ],
         'strict_comparison' => true,
-        'strict_param' => true,
-        // Remove when https://github.com/FriendsOfPHP/PHP-CS-Fixer/pull/3222 has been merged
-        'LeoFeyer/optimize_native_functions' => true,
-    ])
-    ->registerCustomFixers([
-        new LeoFeyer\PhpCsFixer\OptimizeNativeFunctionsFixer()
+        'strict_param' => true
     ])
     ->setFinder($finder)
     ->setRiskyAllowed(true)

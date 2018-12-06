@@ -1,7 +1,17 @@
 <?php
 
-/**
- * Namespace
+/*
+ * mobile.de bundle for Contao Open Source CMS
+ *
+ * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ *
+ * @package    mobilede-bundle
+ * @link       https://www.maklermodul.de
+ * @license    proprietary / pdir license - All-rights-reserved - commercial extension
+ * @author     Mathias Arzberger <develop@pdir.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Pdir\MobileDeBundle\Module;
@@ -9,48 +19,54 @@ namespace Pdir\MobileDeBundle\Module;
 class MobileDeSetup extends \BackendModule
 {
     /**
-     * mobilede version
+     * mobilede version.
      */
     const VERSION = '2.0.1';
 
     /**
-     * Extension mode
-     * @var boolean
+     * Extension mode.
+     *
+     * @var bool
      */
-
     const MODE = 'DEMO';
+
     /**
-     * Template
+     * API Url.
+     *
+     * @var string
+     */
+    public static $apiUrl = 'https://pdir.de/api/mobilede/';
+    /**
+     * Template.
+     *
      * @var string
      */
     protected $strTemplate = 'be_mobilede_setup';
 
     /**
-     * API Url
-     * @var string
-     */
-    static $apiUrl = 'https://pdir.de/api/mobilede/';
-
-    /**
-     * Table
+     * Table.
+     *
      * @var string
      */
     protected $strTable = 'tl_mobile_ad';
 
     /**
-     * Demo data path
+     * Demo data path.
+     *
      * @var string
      */
     protected $strPath = 'files/mobilede/demodata/';
 
     /**
-     * Active Domain
+     * Active Domain.
+     *
      * @var string
      */
     protected $strDomain = '';
 
     /**
-     * Generate the module
+     * Generate the module.
+     *
      * @throws \Exception
      */
     protected function compile()
@@ -60,12 +76,13 @@ class MobileDeSetup extends \BackendModule
         switch (\Input::get('act')) {
             case 'download':
                 $this->downloadDemoData();
+                // no break
             default:
                 // do something here
         }
 
         $this->Template->extMode = self::MODE;
-        $this->Template->extModeTxt = self::MODE == 'FULL' ? 'Vollversion' : 'Demo';
+        $this->Template->extModeTxt = self::MODE === 'FULL' ? 'Vollversion' : 'Demo';
         $this->Template->version = self::VERSION;
         $this->Template->hostname = gethostname();
         $this->Template->ip = \Environment::get('server');
@@ -77,76 +94,76 @@ class MobileDeSetup extends \BackendModule
 
     protected function downloadDemoData()
     {
-        $strFile = $this->strPath . 'demo.zip';
+        $strFile = $this->strPath.'demo.zip';
 
-        if(!is_dir($this->strPath)) {
+        if (!is_dir($this->strPath)) {
             new \Folder($this->strPath);
         }
 
-        $strHelperData = file_get_contents(self::$apiUrl . 'demodata/' . self::VERSION . '/' . $this->strDomain);
-        $this->Template->message = array('Beim herunterladen der Demo Daten ist ein Fehler aufgetreten. (support@pdir.de)', 'error');
+        $strHelperData = file_get_contents(self::$apiUrl.'demodata/'.self::VERSION.'/'.$this->strDomain);
+        $this->Template->message = ['Beim herunterladen der Demo Daten ist ein Fehler aufgetreten. (support@pdir.de)', 'error'];
 
-        if ($strHelperData != 'error') {
+        if ('error' !== $strHelperData) {
             \File::putContent($strFile, $strHelperData);
 
             // unzip files
             $objArchive = new \ZipReader($strFile);
-			$images = array();
-            while ($objArchive->next())
-            {
-                \File::putContent($this->strPath . $objArchive->file_name, $objArchive->unzip());
+            $images = [];
+            while ($objArchive->next()) {
+                \File::putContent($this->strPath.$objArchive->file_name, $objArchive->unzip());
 
-				// get uuid and push to array
-				$uuid = \FilesModel::findByPath($this->strPath . $objArchive->file_name)->uuid;
-				if( strpos($objArchive->file_name,"list/") !== false ) {
-					array_push($images,$uuid);
-				}
+                // get uuid and push to array
+                $uuid = \FilesModel::findByPath($this->strPath.$objArchive->file_name)->uuid;
+                if (false !== strpos($objArchive->file_name, 'list/')) {
+                    array_push($images, $uuid);
+                }
             }
 
             // read local sql file
-            $fileModel = new  \File($this->strPath . 'tl_mobile_ad-demodata.sql');
+            $fileModel = new  \File($this->strPath.'tl_mobile_ad-demodata.sql');
             $strQueries = $fileModel->getContent();
 
             // empty table and insert demo data
             \Database::getInstance()->execute("DELETE FROM $this->strTable WHERE type = 'sync'");
             \Database::getInstance()->query($strQueries);
 
-            $this->Template->message = array('Demo Daten wurden erfolgreich heruntergeladen!', 'confirm');
+            $this->Template->message = ['Demo Daten wurden erfolgreich heruntergeladen!', 'confirm'];
 
             // set images
-            $adIds = \Database::getInstance()->prepare("SELECT ad_id FROM tl_mobile_ad")->execute();
-            $numbers = range(0,count($images)-1);
-            while($adIds->next())
-            {
-                $uuidArr = array();
+            $adIds = \Database::getInstance()->prepare('SELECT ad_id FROM tl_mobile_ad')->execute();
+            $numbers = range(0, count($images) - 1);
+            while ($adIds->next()) {
+                $uuidArr = [];
                 shuffle($numbers);
                 $randomNumber = $numbers[0];
-                for($i = 0; $i <= $randomNumber; $i++) {
-                    $uuidArr = $this->randomImage($uuidArr,$numbers,$images);
+                for ($i = 0; $i <= $randomNumber; ++$i) {
+                    $uuidArr = $this->randomImage($uuidArr, $numbers, $images);
                 }
                 $uuidArr = serialize($uuidArr);
 
                 // update
-                \Database::getInstance()->prepare("UPDATE tl_mobile_ad SET images=?, orderSRC=? WHERE ad_id=?")->execute($uuidArr,$uuidArr,$adIds->ad_id);
+                \Database::getInstance()->prepare('UPDATE tl_mobile_ad SET images=?, orderSRC=? WHERE ad_id=?')->execute($uuidArr, $uuidArr, $adIds->ad_id);
             }
         }
     }
 
     protected function getEmailBody()
     {
-        $arrSearch = array(':IP:', ':HOST:', ':DOMAIN:', '<br>');
-        $arrReplace = array($this->Template->ip, $this->Template->hostname, $this->Template->domain, '%0d%0a');
+        $arrSearch = [':IP:', ':HOST:', ':DOMAIN:', '<br>'];
+        $arrReplace = [$this->Template->ip, $this->Template->hostname, $this->Template->domain, '%0d%0a'];
+
         return str_replace($arrSearch, $arrReplace, $GLOBALS['TL_LANG']['MOBILEDE']['emailBody']);
     }
 
-	protected function randomImage($uuidArr,$numbers,$images)
-	{
-		// shuffe uuid
-		shuffle($numbers);
-		$image_uuid = $images[ $numbers[0] ];
+    protected function randomImage($uuidArr, $numbers, $images)
+    {
+        // shuffe uuid
+        shuffle($numbers);
+        $image_uuid = $images[$numbers[0]];
 
-		// set uuid array
-		array_push($uuidArr,$image_uuid);
-		return $uuidArr;
-	}
+        // set uuid array
+        array_push($uuidArr, $image_uuid);
+
+        return $uuidArr;
+    }
 }

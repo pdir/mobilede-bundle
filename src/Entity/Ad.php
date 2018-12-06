@@ -1,13 +1,14 @@
 <?php
-/**
- * mobilede for Contao Open Source CMS
+
+/*
+ * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (C) 2018 pdir / digital agentur <develop@pdir.de>
+ * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
  *
- * @package    mobilede
- * @link       https://pdir.de/mobilede
- * @license    pdir license - All-rights-reserved - commercial extension
- * @author     pdir GmbH <develop@pdir.de>
+ * @package    mobilede-bundle
+ * @link       https://www.maklermodul.de
+ * @license    proprietary / pdir license - All-rights-reserved - commercial extension
+ * @author     Mathias Arzberger <develop@pdir.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,9 +52,9 @@ class Ad
     protected $tstamp;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,7 +62,7 @@ class Ad
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -70,11 +71,12 @@ class Ad
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -84,7 +86,7 @@ class Ad
     }
 
     /**
-     * Set brand
+     * Set brand.
      *
      * @param string $brand
      *
@@ -93,11 +95,12 @@ class Ad
     public function setBrand($brand)
     {
         $this->brand = $brand;
+
         return $this;
     }
 
     /**
-     * Get brand
+     * Get brand.
      *
      * @return string
      */
@@ -107,7 +110,7 @@ class Ad
     }
 
     /**
-     * Set alias
+     * Set alias.
      *
      * @param string $alias
      *
@@ -116,11 +119,12 @@ class Ad
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
     /**
-     * Get alias
+     * Get alias.
      *
      * @return string
      */
@@ -130,22 +134,23 @@ class Ad
     }
 
     /**
-     * Set tstamp
+     * Set tstamp.
      *
-     * @param integer $tstamp
+     * @param int $tstamp
      *
      * @return Ad
      */
     public function setTstamp($tstamp)
     {
         $this->tstamp = $tstamp;
+
         return $this;
     }
-    
+
     /**
-     * Get tstamp
+     * Get tstamp.
      *
-     * @return integer
+     * @return int
      */
     public function getTstamp()
     {

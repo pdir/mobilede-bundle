@@ -1,13 +1,14 @@
 <?php
-/**
- * mobilede for Contao Open Source CMS
+
+/*
+ * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (C) 2018 pdir / digital agentur <develop@pdir.de>
+ * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
  *
- * @package    mobilede
- * @link       https://pdir.de/mobilede
- * @license    pdir license - All-rights-reserved - commercial extension
- * @author     pdir GmbH <develop@pdir.de>
+ * @package    mobilede-bundle
+ * @link       https://www.maklermodul.de
+ * @license    proprietary / pdir license - All-rights-reserved - commercial extension
+ * @author     Mathias Arzberger <develop@pdir.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,7 +35,7 @@ class AdDataContainer
     /**
      * Constructor.
      *
-     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param \Doctrine\ORM\EntityManager            $entityManager
      * @param \Pdir\MobileDeBundle\Service\AdService $adService
      */
     public function __construct(EntityManager $entityManager, AdService $adService)
@@ -44,37 +45,35 @@ class AdDataContainer
     }
 
     /**
-     * Generate alias
+     * Generate alias.
      *
      * @param $varValue
      * @param \Contao\DataContainer $dc
      *
-     * @return mixed
      * @throws \Exception
+     *
+     * @return mixed
      */
     public function generateAlias($varValue, DataContainer $dc)
     {
         $autoAlias = false;
 
-        if ($varValue === '')
-        {
+        if ('' === $varValue) {
             $autoAlias = true;
 
-            $varValue = \StringUtil::generateAlias($dc->activeRecord->brand . '-' . $dc->activeRecord->name);
+            $varValue = \StringUtil::generateAlias($dc->activeRecord->brand.'-'.$dc->activeRecord->name);
         }
 
         $ads = $this->adService->findByAlias($varValue);
 
         // Check whether the news alias exists
-        if (count($ads) > 1 && $autoAlias === false)
-        {
+        if (count($ads) > 1 && false === $autoAlias) {
             throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
         // Add ID to alias
-        if (count($ads) > 0 && $autoAlias === true)
-        {
-            $varValue .= '-' . $dc->id;
+        if (count($ads) > 0 && true === $autoAlias) {
+            $varValue .= '-'.$dc->id;
         }
 
         return $varValue;
