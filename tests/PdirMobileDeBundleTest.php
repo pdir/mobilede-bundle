@@ -17,7 +17,7 @@
 namespace Pdir\MobileDeBundle\Tests;
 
 use Contao\TestCase\ContaoTestCase;
-use Pdir\MobileDeBundle\DependencyInjection\MobileDeExtension;
+use Pdir\MobileDeBundle\DependencyInjection\PdirMobileDeExtension;
 use Pdir\MobileDeBundle\PdirMobileDeBundle;
 
 class PdirMobileDeBundleTest extends ContaoTestCase
@@ -31,6 +31,6 @@ class PdirMobileDeBundleTest extends ContaoTestCase
     public function testGetContainerExtension()
     {
         $bundle = new PdirMobileDeBundle();
-        $this->assertInstanceOf(MobileDeExtension::class, $bundle->getContainerExtension());
+        $this->assertInstanceOf(PdirMobileDeExtension::class, $bundle->getContainerExtension());
     }
 }
