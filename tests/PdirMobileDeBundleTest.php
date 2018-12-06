@@ -16,11 +16,11 @@
 
 namespace Pdir\MobileDeBundle\Tests;
 
-use Contao\TestCase\ContaoTestCase;
 use Pdir\MobileDeBundle\DependencyInjection\MobileDeExtension;
 use Pdir\MobileDeBundle\PdirMobileDeBundle;
+use PHPUnit\Framework\TestCase;
 
-class PdirMobileDeBundleTest extends ContaoTestCase
+class PdirMobileDeBundleTest extends TestCase
 {
     public function testCanBeInstantiated()
     {
