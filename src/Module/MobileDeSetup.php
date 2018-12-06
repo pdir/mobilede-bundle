@@ -112,11 +112,11 @@ class MobileDeSetup extends \BackendModule
             while ($objArchive->next()) {
                 \File::putContent($this->strPath.$objArchive->file_name, $objArchive->unzip());
 
-                // get uuid and push to array
-                $uuid = \FilesModel::findByPath($this->strPath.$objArchive->file_name)->uuid;
-                if (false !== strpos($objArchive->file_name, 'list/')) {
-                    array_push($images, $uuid);
-                }
+				// get uuid and push to array
+				$uuid = \FilesModel::findByPath($this->strPath . $objArchive->file_name)->uuid;
+				if( strpos($objArchive->file_name,"detail/") !== false ) {
+					array_push($images,$uuid);
+				}
             }
 
             // read local sql file

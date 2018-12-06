@@ -115,6 +115,8 @@
             <?php endif; ?>
           </ul>
         </div>
+
+        <?php if($this->ad['seller']): ?>
         <div class="md-detail-box additional-contact">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-seller'] ?></h2>
           <?php if($this->ad['seller']['company-name']['value'] != ""): ?>
@@ -149,6 +151,8 @@
           <?php endif; ?>
           </p>
         </div>
+        <?php endif; ?>
+
         <div class="md-detail-box additional-form">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-contact-form'] ?></h2>
           {{insert_form::6}}
