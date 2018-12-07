@@ -29,13 +29,13 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
         'sorting' => [
             'mode' => 1,
             'fields' => ['vehicle_model_description'],
-            'headerFields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category'],
+            'headerFields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category', 'type'],
             'flag' => 1,
             'panelLayout' => 'debug;filter;sort,search,limit',
         ],
         'label' => [
-            'fields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category'],
-            'format' => '%s %s - %s [<span style="font-weight: bold;">%s</span>]',
+            'fields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category', 'type'],
+            // 'format' => '%s %s - %s [<span style="font-weight: bold;">%s</span>]',
             'showColumns' => true,
         ],
         'global_operations' => [
