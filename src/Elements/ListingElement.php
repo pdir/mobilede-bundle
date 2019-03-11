@@ -289,10 +289,11 @@ class ListingElement extends \ContentElement
     {
         $filter = [];
         $filter[] = $ad['vehicle_make'];
-        $filter[] = $ad['vehicle_class'];
-        $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_exterior_color'];
+        $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_fuel'];
+        $filter[] = $ad['specifics_gearbox'];
+        $filter[] = $ad['specifics_usage_type'];
 
         if ($ad['vehicle_make']) {
             $this->filters['make'][$ad['vehicle_make']] = [
