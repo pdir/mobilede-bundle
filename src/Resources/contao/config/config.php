@@ -71,5 +71,5 @@ $GLOBALS['TL_AUTO_ITEM'][] = 'ad';
 /*
  * Hooks
  */
-// $GLOBALS['TL_HOOKS']['outputFrontendTemplate'][] = ['pdir_mobile_de.listener.hooks', 'outputFrontendTemplate'];
-$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['Pdir\\MobileDeBundle\\EventListener\\HooksListener', 'parseFrontendTemplate'];
+$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['pdir.mobileDe.listener.hooks', 'parseFrontendTemplate'];
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', 'onReplaceInsertTags'];

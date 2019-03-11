@@ -1,3 +1,14 @@
 services:
-    pdir_mobile_de.listener.hooks:
-        class: Pdir\MobileDeBundle\EventListener\HooksListener
+  _instanceof:
+    Contao\CoreBundle\Framework\FrameworkAwareInterface:
+      calls:
+        - ["setFramework", ["@contao.framework"]]
+
+    Symfony\Component\DependencyInjection\ContainerAwareInterface:
+      calls:
+        - ["setContainer", ["@service_container"]]
+  _defaults:
+    public: true
+
+  pdir.mobileDe.listener.hooks:
+    class: Pdir\MobileDeBundle\EventListener\HooksListener
