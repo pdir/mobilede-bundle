@@ -1,6 +1,9 @@
 <div class="tl_listing_container">
   <div id="pdir" class="be_mobilede_setup clr">
-    <h1 id="tl_welcome">mobile.de Inserate (Version: <?= $this->version ?>)</h1>
+    <h1 id="tl_welcome">
+        mobile.de Inserate (Version: <?= $this->version ?>)
+        <?php if(isset($this->syncVersion)): ?><br>mobile.de Sync (Version: <?= $this->syncVersion ?>)<?php endif; ?>
+    </h1>
     <div class="intro">
       <div class="right">
         <a href="https://pdir.de/mobilede.html" target="_blank"><img
