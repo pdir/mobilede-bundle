@@ -38,7 +38,7 @@
           <select class="md-select">
             <option value="*">Alle anzeigen</option>
             <?php foreach($this->filters['make'] as $key=>$brand): ?>
-            <option value=".<?= $key ?>"><?= $brand['label'] ?> <?php /*(<?= $brand['count'] ?>)*/ ?></option>
+            <option value=".<?= $brand['key'] ?>"><?= $brand['label'] ?> <?php /*(<?= $brand['count'] ?>)*/ ?></option>
             <?php endforeach; ?>
           </select>
         </div>
