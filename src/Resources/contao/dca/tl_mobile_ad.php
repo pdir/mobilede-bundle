@@ -39,6 +39,12 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'showColumns' => true,
         ],
         'global_operations' => [
+            'all' => [
+                'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
+                'href'                => 'act=select',
+                'class'               => 'header_edit_all',
+                'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
+            ]
         ],
         'operations' => [
             'edit' => [
