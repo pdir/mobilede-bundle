@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -288,7 +288,7 @@ class ListingElement extends \ContentElement
     protected function getFilterClasses($ad)
     {
         $filter = [];
-        $filter[] = str_replace(' ' , '_', $ad['vehicle_make']);
+        $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
         $filter[] = $ad['specifics_exterior_color'];
         $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_fuel'];
@@ -298,7 +298,7 @@ class ListingElement extends \ContentElement
         if ($ad['vehicle_make']) {
             $this->filters['make'][$ad['vehicle_make']] = [
                 'label' => $ad['vehicle_make'],
-                'key' => str_replace(' ' , '_', $ad['vehicle_make']),
+                'key' => str_replace(' ', '_', $ad['vehicle_make']),
                 'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? ($this->filters['usageType'][$ad['vehicle_make']]['count'] + 1) : 2),
             ];
         }
