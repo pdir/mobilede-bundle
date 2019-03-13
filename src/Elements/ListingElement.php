@@ -295,6 +295,8 @@ class ListingElement extends \ContentElement
         $filter[] = $ad['specifics_gearbox'];
         $filter[] = $ad['specifics_usage_type'];
 
+        $filter = array_filter($filter,'strlen'); // remove empty fields
+
         if ($ad['vehicle_make']) {
             $this->filters['make'][$ad['vehicle_make']] = [
                 'label' => $ad['vehicle_make'],
