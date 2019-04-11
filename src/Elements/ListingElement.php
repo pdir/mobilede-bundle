@@ -105,7 +105,7 @@ class ListingElement extends \ContentElement
         }
 
         if (!$this->pdir_md_removeModuleJs) {
-            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/ads.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }

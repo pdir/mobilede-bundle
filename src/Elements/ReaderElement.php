@@ -79,7 +79,7 @@ class ReaderElement extends \ContentElement
         $assetsDir = 'web/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
-            // not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/ads.js|static';
+            // not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/mobilede_module.js|static';
         }
         if (!$this->pdir_md_removeModuleCss) {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
