@@ -84,7 +84,7 @@ class ReaderElement extends \ContentElement
         if (!$this->pdir_md_removeModuleCss) {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
-            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/ads.css||static';
+            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
 
         // features
