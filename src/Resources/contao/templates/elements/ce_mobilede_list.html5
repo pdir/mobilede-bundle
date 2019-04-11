@@ -38,7 +38,7 @@
           <select class="md-select">
             <option value="*">Alle anzeigen</option>
             <?php foreach($this->filters['make'] as $key=>$brand): ?>
-            <option value=".<?= $key ?>"><?= $brand['label'] ?> <?php /*(<?= $brand['count'] ?>)*/ ?></option>
+            <option value=".<?= $key ?>"><?= $brand['label'] ?><?php /*(<?= $brand['count'] ?>)*/ ?></option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -49,7 +49,7 @@
           <select class="md-select">
             <option value="*">Alle anzeigen</option>
             <?php foreach($this->filters['categories'] as $key=>$cat): ?>
-            <option value=".<?= $key ?>"><?= $cat['label'] ?> <?php /*(<?= $cat['count'] ?>)*/ ?></option>
+            <option value=".<?= $key ?>"><?= $cat['label'] ?><?php /*(<?= $cat['count'] ?>)*/ ?></option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -61,7 +61,7 @@
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
           <?php foreach($this->filters['fuelType'] as $key=>$type): ?>
-          <option value=".<?= $key ?>"><?= $type['label'] ?> <?php /*(<?= $type['count'] ?>)*/ ?></option>
+          <option value=".<?= $key ?>"><?= $type['label'] ?><?php /*(<?= $type['count'] ?>)*/ ?></option>
           <?php endforeach; ?>
         </select>
       </div>
@@ -72,7 +72,7 @@
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
           <?php foreach($this->filters['gearbox'] as $key=>$type): ?>
-          <option value=".<?= $key ?>"><?= $type['label'] ?> <?php /*(<?= $type['count'] ?>)*/ ?></option>
+          <option value=".<?= $key ?>"><?= $type['label'] ?><?php /*(<?= $type['count'] ?>)*/ ?></option>
           <?php endforeach; ?>
         </select>
       </div>
@@ -83,7 +83,7 @@
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
           <?php foreach($this->filters['usageType'] as $key=>$type): ?>
-          <option value=".<?= $key ?>"><?= $type['label'] ?> <?php /*(<?= $type['count'] ?>)*/ ?></option>
+          <option value=".<?= $key ?>"><?= $type['label'] ?><?php /*(<?= $type['count'] ?>)*/ ?></option>
           <?php endforeach; ?>
         </select>
       </div>
@@ -94,7 +94,7 @@
         <ul>
           <?php foreach($this->filters['colors'] as $key=>$col): ?>
           <li><input type="checkbox" name="<?= $key ?>" data-filter=".<?= $key ?>" value=".<?= $key ?>"
-                     id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> <?php /*(<?= $col['count'] ?>)*/ ?></label></li>
+                     id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?><?php /*(<?= $col['count'] ?>)*/ ?></label></li>
           <?php endforeach; ?>
         </ul>
       </div>

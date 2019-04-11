@@ -129,9 +129,13 @@ class MobileDeSetup extends \BackendModule
 
             $this->Template->message = ['Demo Daten wurden erfolgreich heruntergeladen!', 'confirm'];
 
+            // sync files
+            \Dbafs::syncFiles();
+
             // set images
             $adIds = \Database::getInstance()->prepare('SELECT ad_id FROM tl_mobile_ad')->execute();
             $numbers = range(0, count($images) - 1);
+
             while ($adIds->next()) {
                 $uuidArr = [];
                 shuffle($numbers);
