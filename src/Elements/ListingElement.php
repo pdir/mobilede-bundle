@@ -62,7 +62,14 @@ class ListingElement extends \ContentElement
         $this->lang = \System::loadLanguageFile('tl_mobile_ad');
 
         // Get reader page model
-        $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
+        if(!$this->pdir_md_readerPage || $this->pdir_md_readerPage == 0) {
+            throw new \Exception('Please select a reader page in element.');
+        }
+
+        $pageModel = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage);
+        if($pageModel !== null) {
+            $this->readerPage = $pageModel->current()->row();
+        }
 
         // Return if there is no customer id
         if (!$this->pdir_md_customer_id) {
