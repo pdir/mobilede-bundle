@@ -95,3 +95,8 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-features'] = 'Featur
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-technical-specifics'] = 'Technische Daten';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-seller'] = 'Verkäufer';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-contact-form'] = 'Kontaktformular';
+
+/*
+ * Setup View
+ */
+$GLOBALS['TL_LANG']['pdirMobileDe']['messages']['x-objects-were-imported'] = '%s Objekte wurden importiert.';

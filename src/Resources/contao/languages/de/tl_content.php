@@ -59,3 +59,4 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = ['Debug', 'Debug 
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Preis-Slider aktivieren', 'Wenn aktiv können Sie den Preis über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['PS-Slider aktivieren', 'Wenn aktiv können Sie den PS-Wert über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Kilometerstand-Slider aktivieren', 'Wenn aktiv können Sie den Kilometerstand über einen Range Slider filtern lassen.'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron', 'Poor-Man-Cron für Import aktivieren (stündlich).'];

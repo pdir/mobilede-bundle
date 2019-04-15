@@ -59,3 +59,4 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = ['Debug', 'If act
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Activate Price Slider', 'If active you can filter the price with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['Activate Power Slider', 'If active you can filter the power with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Activate Mileage Slider', 'If active you can filter the mileage with a range slider.'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron', 'Activate Poor-Man-Cron for import (hourly).'];
