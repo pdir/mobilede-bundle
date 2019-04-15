@@ -17,8 +17,8 @@
 /**
  * Add palette to tl_content.
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_number,pdir_md_customer_id,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_number,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 
 /*
  * Add fields to tl_content
@@ -65,6 +65,17 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_itemTemplate'] = [
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_id'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_id'],
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => [
+        'tl_class' => 'w50',
+        'decodeEntities' => true,
+    ],
+    'sql' => "varchar(64) NOT NULL default 'demo'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_number'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_number'],
     'exclude' => true,
     'inputType' => 'text',
     'eval' => [

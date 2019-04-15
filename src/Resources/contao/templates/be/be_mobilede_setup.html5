@@ -40,7 +40,6 @@
     </div>
     <hr>
     <div class="tools">
-
       <?php if( is_array($this->message) ): ?>
         <p class="tl_<?= $this->message[1] ?>"><?= $this->message[0] ?></p>
       <?php endif; ?>

@@ -189,7 +189,8 @@ class ReaderElement extends \ContentElement
         if ($this->pdir_md_enableDebugMode) {
             $this->Template->debug = true;
             $this->Template->version = MobileDeSetup::VERSION;
-            $this->Template->customer = $this->pdir_md_customer_id;
+            $this->Template->customerId = $this->pdir_md_customer_id;
+            $this->Template->customerNumber = $this->pdir_md_customer_number;
             $this->Template->rawData = $this->ad;
         }
     }

@@ -72,7 +72,7 @@ class ListingElement extends \ContentElement
         }
 
         // Return if there is no customer id
-        if (!$this->pdir_md_customer_id) {
+        if (!$this->pdir_md_customer_id && !$this->pdir_md_customer_number) {
             return '';
         }
 
@@ -184,7 +184,8 @@ class ListingElement extends \ContentElement
         if ($this->pdir_md_enableDebugMode) {
             $this->Template->debug = true;
             $this->Template->version = MobileDeSetup::VERSION;
-            $this->Template->customer = $this->pdir_md_customer_id;
+            $this->Template->customerId = $this->pdir_md_customer_id;
+            $this->Template->customerNumber = $this->pdir_md_customer_number;
             $this->Template->rawData = $this->ads;
         }
     }

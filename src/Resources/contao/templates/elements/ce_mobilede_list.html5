@@ -148,7 +148,8 @@
 <div>
   <h2>DEBUG:</h2>
   Modulversion: <?= $this->version ?><br>
-  HändlerID: <?= $this->customer ?><br>
+  Händler Kundennummer: <?= $this->customerId ?><br>
+  Händler ID: <?= $this->customerId ?><br>
   Anzahl Fahrzeuge: <?= count($this->ads); ?><br><br>
   Filters<br>
   <pre><?php print_r($this->filters);  ?></pre>

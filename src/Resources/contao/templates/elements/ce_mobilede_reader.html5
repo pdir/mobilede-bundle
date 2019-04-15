@@ -177,7 +177,8 @@
 <div>
   <h2>DEBUG:</h2>
   Modulversion: <?= $this->version ?><br>
-  HändlerID: <?= $this->customer ?><br><br>
+  Händler Kundennummer: <?= $this->customerNumber ?><br><br>
+  Händler ID: <?= $this->customer ?><br><br>
   RawData<br>
   <pre><?php print_r($this->ad); ?></pre>
 </div>
