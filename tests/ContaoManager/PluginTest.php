@@ -19,11 +19,11 @@ namespace Pdir\MobileDeBundle\Tests\ContaoManager;
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
+use Contao\TestCase\ContaoTestCase;
 use Pdir\MobileDeBundle\ContaoManager\Plugin;
 use Pdir\MobileDeBundle\PdirMobileDeBundle;
-use PHPUnit\Framework\TestCase;
 
-class PluginTest extends TestCase
+class PluginTest extends ContaoTestCase
 {
     public function testReturnsTheBundles()
     {

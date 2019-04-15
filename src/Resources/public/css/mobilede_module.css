@@ -155,6 +155,7 @@
     text-decoration: none;
     font-size: 17px;
     color: #7abfbc;
+    width: 100%;
 }
 
 .md-ad-box .detail header h5:hover {

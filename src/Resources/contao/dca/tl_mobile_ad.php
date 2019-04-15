@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -29,16 +29,22 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
         'sorting' => [
             'mode' => 1,
             'fields' => ['vehicle_model_description'],
-            'headerFields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category'],
+            'headerFields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category', 'type'],
             'flag' => 1,
             'panelLayout' => 'debug;filter;sort,search,limit',
         ],
         'label' => [
-            'fields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category'],
-            'format' => '%s %s - %s [<span style="font-weight: bold;">%s</span>]',
+            'fields' => ['vehicle_model_description', 'vehicle_make', 'vehicle_class', 'vehicle_category', 'type'],
+            // 'format' => '%s %s - %s [<span style="font-weight: bold;">%s</span>]',
             'showColumns' => true,
         ],
         'global_operations' => [
+            'all' => [
+                'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
+                'href' => 'act=select',
+                'class' => 'header_edit_all',
+                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
+            ],
         ],
         'operations' => [
             'edit' => [

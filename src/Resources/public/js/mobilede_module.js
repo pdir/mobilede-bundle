@@ -218,34 +218,34 @@
         // Initialize Slider
         var $priceSlider = $('#priceSlider').slider({
             tooltip_split: true,
-            min: minPrice ? minPrice : rangeFilters['price'],
-            max: maxPrice ? maxPrice : rangeFilters['price'],
+            min: Number(minPrice ? minPrice : rangeFilters.price.min),
+            max: Number(maxPrice ? maxPrice : rangeFilters.price.max),
             range: true,
             values: [
-                minPrice ? minPrice : rangeFilters['price'],
-                maxPrice ? maxPrice : rangeFilters['price']
+                Number(minPrice ? minPrice : rangeFilters.price.min),
+                Number(maxPrice ? maxPrice : rangeFilters.price.max)
             ]
         });
 
         var $powerSlider = $('#powerSlider').slider({
             tooltip_split: true,
-            min: minPower ? minPower : rangeFilters['power'],
-            max: maxPower ? maxPower : rangeFilters['power'],
+            min: Number(minPower ? minPower : rangeFilters.power.min),
+            max: Number(maxPower ? maxPower : rangeFilters.power.max),
             range: true,
             values: [
-                minPower ? minPower : rangeFilters['power'],
-                maxPower ? maxPower : rangeFilters['power']
+                Number(minPower ? minPower : rangeFilters.power.min),
+                Number(maxPower ? maxPower : rangeFilters.power.max)
             ]
         });
 
         var $mileageSlider = $('#mileageSlider').slider({
             tooltip_split: true,
-            min: minMileage ? minMileage : rangeFilters['mileage'],
-            max: maxMileage ? maxMileage : rangeFilters['mileage'],
+            min: Number(minMileage ? minMileage : rangeFilters.mileage.min),
+            max: Number(maxMileage ? maxMileage : rangeFilters.mileage.max),
             range: true,
             values: [
-                minMileage ? minMileage : rangeFilters['mileage'],
-                maxMileage ? maxMileage : rangeFilters['mileage']
+                Number(minMileage ? minMileage : rangeFilters.mileage.min),
+                Number(maxMileage ? maxMileage : rangeFilters.mileage.max)
             ]
         });
 

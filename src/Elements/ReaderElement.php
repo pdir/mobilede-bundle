@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -79,12 +79,12 @@ class ReaderElement extends \ContentElement
         $assetsDir = 'web/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
-            // not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/ads.js|static';
+            // not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/mobilede_module.js|static';
         }
         if (!$this->pdir_md_removeModuleCss) {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
-            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/ads.css||static';
+            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
 
         // features

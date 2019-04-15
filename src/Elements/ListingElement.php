@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -112,14 +112,14 @@ class ListingElement extends \ContentElement
         }
 
         if (!$this->pdir_md_removeModuleJs) {
-            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/ads.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
         if (!$this->pdir_md_removeModuleCss) {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
-            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/ads.css||static';
+            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
 
         // Ordering
@@ -295,16 +295,19 @@ class ListingElement extends \ContentElement
     protected function getFilterClasses($ad)
     {
         $filter = [];
-        $filter[] = $ad['vehicle_make'];
-        $filter[] = $ad['vehicle_class'];
-        $filter[] = $ad['vehicle_category'];
+        $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
         $filter[] = $ad['specifics_exterior_color'];
+        $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_fuel'];
+        $filter[] = $ad['specifics_gearbox'];
+        $filter[] = $ad['specifics_usage_type'];
+
+        $filter = array_filter($filter,'strlen'); // remove empty fields
 
         if ($ad['vehicle_make']) {
             $this->filters['make'][$ad['vehicle_make']] = [
                 'label' => $ad['vehicle_make'],
-                'key' => $ad['vehicle_make'],
+                'key' => str_replace(' ', '_', $ad['vehicle_make']),
                 'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? ($this->filters['usageType'][$ad['vehicle_make']]['count'] + 1) : 2),
             ];
         }

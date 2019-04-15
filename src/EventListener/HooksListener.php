@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -16,6 +16,8 @@
 
 namespace Pdir\MobileDeBundle\EventListener;
 
+use Pdir\MobileDeBundle\Entity\Ad;
+
 class HooksListener
 {
     public function parseFrontendTemplate($strContent, $strTemplate)
@@ -26,5 +28,47 @@ class HooksListener
         }
 
         return $strContent;
+    }
+
+    /**
+     * Replace the insert tag.
+     *
+     * @param string $tag the insert tag
+     *
+     * @return bool|string
+     */
+    public function onReplaceInsertTags($tag)
+    {
+        if (preg_match('/^mobileDe([bsrl]?)\:\:/', $tag)) {
+            return $this->replaceMobileDeInsertTag($tag);
+        }
+
+        return false;
+    }
+
+    /**
+     * Replace the mobilede insert tag.
+     *
+     * @param string $tag the given tag
+     *
+     * @return string
+     */
+    private function replaceMobileDeInsertTag($tag)
+    {
+        $parts = explode('::', $tag);
+
+        try {
+            // @todo use model
+            $db = \Database::getInstance();
+            $stmt = $db->prepare('SELECT * FROM tl_mobile_ad WHERE id=? OR alias =?');
+            $res = $stmt->execute($parts[1], $parts[1]);
+            $ad = $res->fetchAssoc();
+            if ($ad[$parts[2]]) {
+                return $ad[$parts[2]];
+            }
+        } catch (\RuntimeException $e) {
+            // property of ad item not found
+            return '';
+        }
     }
 }
