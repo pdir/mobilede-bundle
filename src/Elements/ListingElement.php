@@ -234,7 +234,7 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
-            $objFilterTemplate->fuelType = $ad['specifics_fuel'];
+            $objFilterTemplate->fuelType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_fuel']['options'][$ad['specifics_fuel']];
             $objFilterTemplate->transmission = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
             $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'].' KW ('.number_format((float) ($ad['specifics_power'] * 1.35962), 0, ',', '.').' PS)' : 'Keine Angabe';
             $objFilterTemplate->bodyType = $ad['vehicle_class'];
