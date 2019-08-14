@@ -17,7 +17,7 @@
 /**
  * Add palette to tl_content.
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 
 /*
@@ -31,6 +31,19 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_readerPage'] = [
     'eval' => [
         'includeBlankOption' => true,
         'mandatory' => true,
+        'tl_class' => 'w50',
+        'fieldType' => 'radio',
+    ],
+    'sql' => "int(10) unsigned NOT NULL default '0'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_listingPage'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'],
+    'exclude' => true,
+    'inputType' => 'pageTree',
+    'reference' => &$GLOBALS['TL_LANG']['tl_module'],
+    'eval' => [
+        'includeBlankOption' => true,
         'tl_class' => 'w50',
         'fieldType' => 'radio',
     ],
@@ -305,6 +318,17 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cronPoorMan'] = [
     'eval' => [
         'doNotCopy' => true,
         'tl_class' => 'w50 m12',
+    ],
+    'sql' => "char(1) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_only_filter'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'],
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => [
+        'submitOnChange' => true,
+        'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
 ];

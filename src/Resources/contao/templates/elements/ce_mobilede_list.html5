@@ -4,7 +4,7 @@
 <?php $GLOBALS['TL_CSS'][] = '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'; ?>
 
 <div
-  class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+  class="<?php echo $this->class; ?> block<?php if($this->onlyFilter == 1): ?> only-filter<?php endif; ?>"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 
   <?php if ($this->headline): ?>
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
@@ -12,6 +12,7 @@
 
   <?php if(!$this->hideFilters): ?>
   <div class="md-filters">
+    <?php if($this->onlyFilter == 0): ?>
     <div class="md-filters-header">
       <button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button>
       <div class="md-filter-sort button-group">
@@ -30,7 +31,8 @@
         </select>
       </div>
     </div>
-    <div class="md-filters-body">
+    <?php endif; ?>
+    <div class="md-filters-body"<?php if($this->onlyFilter == 1): ?> style='display:block;'<?php endif; ?>>
       <div class="md-filter-select select-group">
         <?php if($this->filters['make']): ?>
         <div class="brands select-container">
@@ -123,6 +125,10 @@
       </div>
 
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
+
+      <?php if($this->onlyFilter == 1): ?>
+        <span><a href="{{link_url::<?= $this->listingPage ?>}}" class="submit">Absenden</a></span>
+      <?php endif; ?>
       <!-- <span><button class="btn-shuffle" id="shuffle">Mischen</button></span> -->
     </div>
   </div> <!-- end md-filter -->
@@ -134,12 +140,14 @@
   </div>
   <?php endif; ?>
 
+  <?php //if($this->onlyFilter == 0): ?>
   <div class="md-ads">
     <?php foreach($this->ads as $ad): ?>
     <?= $ad; ?>
     <?php endforeach; ?>
     <div class="md-no-result"><?= $this->noResultMessage ?></div>
   </div> <!-- MobileDe list end -->
+  <?php //endif; ?>
 
   <?php echo $this->pagination; ?>
 </div>

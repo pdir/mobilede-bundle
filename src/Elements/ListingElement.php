@@ -159,6 +159,8 @@ class ListingElement extends \ContentElement
 
         // Add ads to template
         $this->Template->ads = $this->renderAdItem($this->ads['searchResultItems']);
+        $this->Template->onlyFilter = $this->pdir_md_only_filter;
+        $this->Template->listingPage = $this->pdir_md_listingPage;
 
         // Filters
         $this->Template->filters = $this->filters;
@@ -251,6 +253,7 @@ class ListingElement extends \ContentElement
                 ],
             ];
             $objFilterTemplate->featured = ('NONE' === $ad['newnessMarker']) ? false : true;
+            $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter;
             $objFilterTemplate->firstRegistration = ($ad['specifics_first_registration']) ? $ad['specifics_first_registration'] : 'keine Angabe';
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? $ad['specifics_mileage'] : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);

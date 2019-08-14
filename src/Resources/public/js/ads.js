@@ -29,69 +29,25 @@
 
         // Create new object for the range filters and set default values
         let rangeFilters = {
-            'price': {'min': 0, 'max': 100000},
-            'power': {'min': 0, 'max': 500},
-            'mileage': {'min': 0, 'max': 1000000}
+            'price': {'min': 0, 'max': 10000000},
+            'power': {'min': 0, 'max': 10000000},
+            'mileage': {'min': 0, 'max': 10000000}
         };
 
         let sorting = 'original-order';
 
-        // set Options
-        listView.options = {
-            itemSelector: ".item",
-            layoutMode: "fitRows", // or masonry
-            // use sort functions
-            getSortData: {
-                price: "[data-price] parseFloat",
-                power: "[data-power] parseFloat",
-                mileage: "[data-mileage] parseFloat",
-                title: function (item) {
-                    return $(item).find(".title").text();
-                },
-                number: ".number parseInt",
-                category: "[data-category]"
-            },
-            sortBy: sorting,
-            // use filter function
-            filter: function () {
-                var $this = $(this);
-                var price = $this.attr('data-price');
-                var isInPriceRange = (rangeFilters['price'].min <= price && rangeFilters['price'].max >= price);
-
-                var power = $this.attr('data-power');
-                var isInPowerRange = (rangeFilters['power'].min <= power && rangeFilters['power'].max >= power);
-
-                var mileage = $this.attr('data-mileage');
-                var isInMileageRange = (rangeFilters['mileage'].min <= mileage && rangeFilters['mileage'].max >= mileage);
-
-                return $this.is(listView.filters['all']) && isInPriceRange && isInPowerRange && isInMileageRange;
-            }
-        };
-
-        // Initialise Isotope
-        listView.container.isotope(listView.options);
-
-        // show filters
-        listView.btnShowFilters.click(function () {
-            $(".md-filters .md-filters-body").toggle();
+        // Initialize checkboxes
+        listView.checkboxes.on('change', function (event) {
+            event.preventDefault();
+            listView.container.trigger('filter-update');
+            listView.updateLocationHash(listView.filters, listView.options.sortBy);
         });
 
-        // shuffle items
-        $("#shuffle").click(function () {
-            listView.container.isotope("shuffle");
-        });
-
-        if (typeof mdListShuffle !== 'undefined' && mdListShuffle === 1) {
-            $("#shuffle").trigger("click");
-        }
-
-        //// Event handlers
-        listView.container.on('arrangeComplete', function () {
-            // if no filtered items display no result message
-            if (!listView.container.data('isotope').filteredItems.length)
-                $('.md-no-result').show();
-            else
-                $('.md-no-result').hide();
+        // bind filter on select change
+        listView.selects.on('change', function (event) {
+            event.preventDefault();
+            listView.container.trigger('filter-update');
+            listView.updateLocationHash(listView.filters, listView.options.sortBy);
         });
 
         // Listen to filter update event and update Isotope filters
@@ -129,45 +85,6 @@
             listView.filters['select'] = selects.length ? selects.join("") : false;
             listView.filters['select-group'] = selects.length ? selects : '';
             listView.filters['all'] = listView.concatValues(listView.filters);
-        });
-
-        // reset filters
-        $("#filterReset").on('click', function () {
-            $(".md-filters input[type=checkbox]").prop("checked", false);
-            $(".md-filters option:selected").prop("selected", false);
-
-            if(typeof $priceSlider !== 'undefined') {
-                var options = $priceSlider.slider('option');
-                $priceSlider.slider('values', [options.min, options.max]);
-            }
-
-            if(typeof $powerSlider !== 'undefined') {
-                options = $powerSlider.slider('option');
-                $powerSlider.slider('values', [options.min, options.max]);
-            }
-
-            if(typeof $mileageSlider !== 'undefined') {
-                options = $mileageSlider.slider('option');
-                $mileageSlider.slider('values', [options.min, options.max]);
-            }
-
-            listView.container.isotope({filter: '*'});
-            listView.container.trigger('filter-update');
-            return false;
-        });
-
-        // Initialize checkboxes
-        listView.checkboxes.on('change', function (event) {
-            event.preventDefault();
-            listView.container.trigger('filter-update');
-            listView.updateLocationHash(listView.filters, listView.options.sortBy);
-        });
-
-        // bind filter on select change
-        listView.selects.on('change', function (event) {
-            event.preventDefault();
-            listView.container.trigger('filter-update');
-            listView.updateLocationHash(listView.filters, listView.options.sortBy);
         });
 
         // price: get min and max
@@ -262,6 +179,152 @@
         $("#mileageSlider .ui-slider-handle:nth-of-type(1)").attr('data-mileage-min', minMileageString);
         $("#mileageSlider .ui-slider-handle:nth-of-type(2)").attr('data-mileage-max', maxMileageString);
 
+        // update range slider filters
+        var priceMin = location.hash.match(/priceMin=([^&]+)/i);
+        if(priceMin != null) priceMin = parseFloat(priceMin[1]);
+
+        var priceMax = location.hash.match(/priceMax=([^&]+)/i);
+        if(priceMax != null) priceMax = parseFloat(priceMax[1]);
+
+        var powerMin = location.hash.match(/powerMin=([^&]+)/i);
+        if(powerMin != null) powerMin = parseFloat(powerMin[1]);
+
+        var powerMax = location.hash.match(/powerMax=([^&]+)/i);
+        if(powerMax != null) powerMax = parseFloat(powerMax[1]);
+
+        var mileageMin = location.hash.match(/mileageMin=([^&]+)/i);
+        if(mileageMin != null) mileageMin = parseFloat(mileageMin[1]);
+
+        var mileageMax = location.hash.match(/mileageMax=([^&]+)/i);
+        if(mileageMax != null) mileageMax = parseFloat(mileageMax[1]);
+
+        if(priceMin != null && priceMax != null) {
+            $priceSlider.slider('values', [priceMin, priceMax]);
+            $('#priceSlider span:nth-of-type(1)').attr('data-price-min',priceMin.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'}));
+            $('#priceSlider span:nth-of-type(2)').attr('data-price-max',priceMax.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'}));
+            $('#priceSlider').closest('.range-slider').addClass('updated');
+            rangeFilters['price'].min = priceMin;
+            rangeFilters['price'].max = priceMax;
+        }
+
+        if(powerMin != null && powerMax != null) {
+            $powerSlider.slider('values', [powerMin, powerMax]);
+            $('#powerSlider span:nth-of-type(1)').attr('data-power-min',powerMin.toLocaleString('de-DE', {style: 'decimal'}) + "KW");
+            $('#powerSlider span:nth-of-type(2)').attr('data-power-max',powerMax.toLocaleString('de-DE', {style: 'decimal'}) + "KW");
+            $('#powerSlider').closest('.range-slider').addClass('updated');
+            rangeFilters['power'].min = powerMin;
+            rangeFilters['power'].max = powerMax;
+        }
+
+        if(mileageMin != null && mileageMax != null) {
+            $mileageSlider.slider('values', [mileageMin, mileageMax]);
+            $('#mileageSlider span:nth-of-type(1)').attr('data-mileage-min',mileageMin.toLocaleString('de-DE', {style: 'decimal'}) + "km");
+            $('#mileageSlider span:nth-of-type(2)').attr('data-mileage-max',mileageMax.toLocaleString('de-DE', {style: 'decimal'}) + "km");
+            $('#mileageSlider').closest('.range-slider').addClass('updated');
+            rangeFilters['mileage'].min = mileageMin;
+            rangeFilters['mileage'].max = mileageMax;
+        }
+
+        // set Options
+        listView.options = {
+            itemSelector: ".item",
+            layoutMode: "fitRows", // or masonry
+            // use sort functions
+            getSortData: {
+                price: "[data-price] parseFloat",
+                power: "[data-power] parseFloat",
+                mileage: "[data-mileage] parseFloat",
+                title: function (item) {
+                    return $(item).find(".title").text();
+                },
+                number: ".number parseInt",
+                category: "[data-category]"
+            },
+            sortBy: sorting,
+            // use filter function
+            filter: function () {
+                var $this = $(this);
+                var price = $this.attr('data-price');
+                var isInPriceRange = (rangeFilters['price'].min <= price && rangeFilters['price'].max >= price);
+
+                var power = $this.attr('data-power');
+                var isInPowerRange = (rangeFilters['power'].min <= power && rangeFilters['power'].max >= power);
+
+                var mileage = $this.attr('data-mileage');
+                var isInMileageRange = (rangeFilters['mileage'].min <= mileage && rangeFilters['mileage'].max >= mileage);
+
+                return $this.is(listView.filters['all']) && isInPriceRange && isInPowerRange && isInMileageRange;
+            }
+        };
+
+        // update select and checkbox filters
+        listView.updateFiltersFromHash();
+
+        // Initialise Isotope
+        listView.container.isotope(listView.options);
+
+        // show filters
+        listView.btnShowFilters.click(function () {
+            $(".md-filters .md-filters-body").toggle();
+        });
+
+        // shuffle items
+        $("#shuffle").click(function () {
+            listView.container.isotope("shuffle");
+        });
+
+        if (typeof mdListShuffle !== 'undefined' && mdListShuffle === 1) {
+            $("#shuffle").trigger("click");
+        }
+
+        //// Event handlers
+        listView.container.on('arrangeComplete', function () {
+            // if no filtered items display no result message
+            if (!listView.container.data('isotope').filteredItems.length)
+                $('.md-no-result').show();
+            else
+                $('.md-no-result').hide();
+        });
+
+        // reset filters
+        $("#filterReset").on('click', function () {
+            $(".md-filters input[type=checkbox]").prop("checked", false);
+            $(".md-filters select").val("*");
+            $(".range-slider").removeClass("updated");
+
+            if(typeof $priceSlider !== 'undefined') {
+                var options = $priceSlider.slider('option');
+                $priceSlider.slider('values', [options.min, options.max]);
+                $('#priceSlider span:nth-of-type(1)').attr('data-price-min',options.min.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'}));
+                $('#priceSlider span:nth-of-type(2)').attr('data-price-max',options.max.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'}));
+            }
+
+            if(typeof $powerSlider !== 'undefined') {
+                options = $powerSlider.slider('option');
+                $powerSlider.slider('values', [options.min, options.max]);
+                $('#powerSlider span:nth-of-type(1)').attr('data-power-min',options.min.toLocaleString('de-DE', {style: 'decimal'}) + "KW");
+                $('#powerSlider span:nth-of-type(2)').attr('data-power-max',options.max.toLocaleString('de-DE', {style: 'decimal'}) + "KW");
+            }
+
+            if(typeof $mileageSlider !== 'undefined') {
+                options = $mileageSlider.slider('option');
+                $mileageSlider.slider('values', [options.min, options.max]);
+                $('#mileageSlider span:nth-of-type(1)').attr('data-mileage-min',options.min.toLocaleString('de-DE', {style: 'decimal'}) + "km");
+                $('#mileageSlider span:nth-of-type(2)').attr('data-mileage-max',options.max.toLocaleString('de-DE', {style: 'decimal'}) + "km");
+            }
+
+            rangeFilters = {
+                'price': {'min': 0, 'max': 10000000},
+                'power': {'min': 0, 'max': 10000000},
+                'mileage': {'min': 0, 'max': 10000000}
+            };
+
+            listView.container.isotope({filter: '*'});
+            listView.container.trigger('filter-update');
+            listView.updateLocationHash(listView.filters, listView.options.sortBy);
+            return false;
+        });
+
         function updateRangeSlider(slider, slideEvt, ui) {
             var sldmin = +ui.values[0],
                 sldmax = +ui.values[1],
@@ -292,6 +355,8 @@
                 $(".ui-slider-handle:nth-of-type(2)").attr('data-mileage-max', sldmaxString);
             }
 
+            slider.closest('.range-slider').addClass('updated');
+
             // Set min and max values for current selection to current selection
             // If no values are found set min to 0 and max to 100000
             // Store min/max values in rangeFilters array in the relevant filter group
@@ -302,6 +367,8 @@
             };
             // Trigger isotope again to refresh layout
             listView.container.isotope(listView.options);
+
+            listView.updateLocationHash(listView.filters, listView.options.sortBy);
         }
 
         // Trigger Isotope Filter when slider drag has stopped
@@ -336,7 +403,43 @@
         if (sorting !== 'original-order')
             hash += 'sort=' + encodeURIComponent(sorting);
 
+        $('.range-slider.updated').each( function() {
+            if( $(this).find('> div').attr('id') == 'priceSlider' ) {
+                var min = $(this).find('span:nth-of-type(1)').attr('data-price-min').replace('€','').replace('.','').replace(',','.');
+                var max = $(this).find('span:nth-of-type(2)').attr('data-price-max').replace('€','').replace('.','').replace(',','.');
+
+                if (hash != '') hash += '&';
+                hash += 'priceMin=' + $.trim(min);
+                hash += '&priceMax=' + $.trim(max);
+            }
+
+            if( $(this).find('> div').attr('id') == 'powerSlider' ) {
+                var min = $(this).find('span:nth-of-type(1)').attr('data-power-min').replace('KW','').replace('.','').replace(',','.');
+                var max = $(this).find('span:nth-of-type(2)').attr('data-power-max').replace('KW','').replace('.','').replace(',','.');
+
+                if (hash != '') hash += '&';
+                hash += 'powerMin=' + min;
+                hash += '&powerMax=' + max;
+            }
+
+            if( $(this).find('> div').attr('id') == 'mileageSlider' ) {
+                var min = $(this).find('span:nth-of-type(1)').attr('data-mileage-min').replace('km','').replace('.','').replace(',','.');
+                var max = $(this).find('span:nth-of-type(2)').attr('data-mileage-max').replace('km','').replace('.','').replace(',','.');
+
+                if (hash != '') hash += '&';
+                hash += 'mileageMin=' + min;
+                hash += '&mileageMax=' + max;
+            }
+        });
+
+        hash = hash.replace(new RegExp("%2C", "g"),'');
         location.hash = hash;
+
+        var submit = $('.md-filters .submit');
+        if( submit.length > 0 ) {
+            var href = submit.attr('href').split('#');
+            submit.attr('href',href[0] + '#' + hash);
+        }
 
         listView.container.isotope(listView.options);
     };
@@ -384,7 +487,6 @@
         $('.md-select.sorting').val(sortFilter);
 
         listView.container.trigger('filter-update');
-
         listView.container.isotope(listView.options);
     };
 

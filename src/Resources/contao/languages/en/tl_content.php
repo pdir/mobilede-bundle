@@ -23,6 +23,7 @@ $GLOBALS['TL_LANG']['tl_content']['md_template_legend'] = 'Template Settings';
 $GLOBALS['TL_LANG']['tl_content']['md_debug_legend'] = 'Cache & Debugging';
 
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detail View', 'Please choose here the page for the detail view.'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listing View', 'Please choose here the page for the listing view, if the <strong>Only Filter</strong> option is active.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listTemplate'] = ['List View Template', 'Please choose here the template for the list view.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_itemTemplate'] = ['Advertisement Template', 'Please choose here the template for the presentation of the advertisements.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_id'] = ['Mobile.de Customer Number', 'Please enter here your Mobile.de customer number.'];
@@ -59,3 +60,4 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = ['Debug', 'If act
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Activate Price Slider', 'If active you can filter the price with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['Activate Power Slider', 'If active you can filter the power with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Activate Mileage Slider', 'If active you can filter the mileage with a range slider.'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Only Filter','If active the objects are not shown and only the filter form is displayed.'];

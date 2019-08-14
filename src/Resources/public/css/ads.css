@@ -635,6 +635,7 @@
 
 .md-filters .range-slider label {
     width: inherit;
+	margin-bottom: 15px;
 }
 
 .md-filters .range-slider input {
@@ -643,6 +644,7 @@
     font-weight: bold;
     color: #fff;
     font-size: inherit;
+	display: none;
 }
 
 .md-filters .range-slider .ui-widget.ui-widget-content {
@@ -717,6 +719,14 @@
 
 #mileageSlider .ui-slider-handle:nth-of-type(2):after {
     content: attr(data-mileage-max);
+}
+
+.md-ads .hidden {
+	display: none;
+}
+
+.only-filter .md-filters .md-filters-body {
+	margin-top: 0;
 }
 
 @media (min-width: 768px) {
