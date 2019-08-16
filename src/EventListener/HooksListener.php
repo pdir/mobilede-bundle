@@ -16,8 +16,6 @@
 
 namespace Pdir\MobileDeBundle\EventListener;
 
-use Pdir\MobileDeBundle\Entity\Ad;
-
 class HooksListener
 {
     public function parseFrontendTemplate($strContent, $strTemplate)
