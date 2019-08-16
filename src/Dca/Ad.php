@@ -84,7 +84,7 @@ class Ad
             ->execute($varValue);
         // Check whether the page alias exists
         if ($objAlias->numRows > 1) {
-            $varValue .= '-'.mt_rand();
+            $varValue .= '-'.mt_rand(0,1000000);
         }
 
         return $varValue;
