@@ -83,7 +83,7 @@ class Ad
         $objAlias = $this->Database->prepare('SELECT id FROM tl_mobile_ad WHERE alias=?')
             ->execute($varValue);
         // Check whether the page alias exists
-        if ($objAlias->numRows > 1) {
+        if ($objAlias->numRows > 0) {
             $varValue .= '-'.mt_rand(0,1000000);
         }
 
