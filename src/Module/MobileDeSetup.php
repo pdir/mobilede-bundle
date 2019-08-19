@@ -120,12 +120,15 @@ class MobileDeSetup extends \BackendModule
             }
 
             // read local sql file
-            $fileModel = new  \File($this->strPath.'tl_mobile_ad-demodata.sql');
-            $strQueries = $fileModel->getContent();
+            $fileModel = new \File($this->strPath.'tl_mobile_ad-demodata.sql');
+            $strQueries = $fileModel->getContentAsArray();
 
             // empty table and insert demo data
             \Database::getInstance()->execute("DELETE FROM $this->strTable WHERE type = 'sync'");
-            \Database::getInstance()->query($strQueries);
+
+            foreach($strQueries as $query) {
+                \Database::getInstance()->query($query);
+            }
 
             $this->Template->message = ['Demo Daten wurden erfolgreich heruntergeladen!', 'confirm'];
 
