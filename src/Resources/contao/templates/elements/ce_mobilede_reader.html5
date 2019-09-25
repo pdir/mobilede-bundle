@@ -89,8 +89,8 @@
             </li>
             <?php endif; ?>
             <?php if($this->ad['specifics_first_registration']): ?>
-            <li><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration'] ?></span><span class="value"><?= date('d.m.Y',strtotime($this->
-              ad['specifics_first_registration'])) ?></span></li>
+            <li><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration'] ?></span><span class="value"><?= $this->
+              ad['specifics_first_registration'] ?></span></li>
             <?php endif; ?>
             <?php if($this->ad['specifics_mileage']): ?>
             <li><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['mileage'] ?></span><span class="value"><?= $this->ad['specifics_mileage'] ?></span>
@@ -147,7 +147,7 @@
             <?php endif; ?>
 
             <?php if($this->ad['seller']['mobile-seller-since']['value'] != ""): ?>
-          <p><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] ?> <?= date('d.m.Y',strtotime($this->ad['seller']['mobile-seller-since']['value'])) ?></p>
+          <p><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] ?> <?= date($GLOBALS['TL_CONFIG']['dateFormat'] ,strtotime($this->ad['seller']['mobile-seller-since']['value'])) ?></p>
           <?php endif; ?>
           </p>
         </div>

@@ -110,14 +110,36 @@ class ReaderElement extends \ContentElement
                 continue;
             }
 
-            $newSpecifics[] = [
-                'key' => $specific,
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific][0],
-                'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: $this->ad['specifics_'.$specific],
-                'plainValue' => $this->ad['specifics_'.$specific],
-            ];
+            if($specific != "exhaust_inspection" && $specific != "general_inspection" && $specific != "construction_date" && $specific != "first_registration" && $specific != "delivery_date" && $specific != "first_models_production_date") {
+                $newSpecifics[] = [
+                    'key' => $specific,
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific][0],
+                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: $this->ad['specifics_'.$specific],
+                    'plainValue' => $this->ad['specifics_'.$specific],
+                ];
+            } else {
+                $newSpecifics[] = [
+                    'key' => $specific,
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific][0],
+                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_'.$specific]),
+                    'plainValue' => $this->ad['specifics_'.$specific],
+                ];
+            }
+
         }
         $this->ad['specifics'] = $newSpecifics;
+
+        if($this->ad['specifics_general_inspection']) $this->ad['specifics_general_inspection'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_general_inspection']);
+
+        if($this->ad['specifics_exhaust_inspection']) $this->ad['specifics_exhaust_inspection'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_exhaust_inspection']);
+
+        if($this->ad['specifics_delivery_date']) $this->ad['specifics_delivery_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_delivery_date']);
+
+        if($this->ad['specifics_first_registration']) $this->ad['specifics_first_registration'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_registration']);
+
+        if($this->ad['specifics_construction_date']) $this->ad['specifics_construction_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_construction_date']);
+
+        if($this->ad['specifics_first_models_production_date']) $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
 
         // images
         $newGallery = [];
