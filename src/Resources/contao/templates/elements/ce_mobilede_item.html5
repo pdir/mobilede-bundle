@@ -17,15 +17,21 @@
         <?= $this->desc ?>
       </h5>
       <ul class="custom-list">
+        <?php if($this->power): ?>
         <li>
           <i class="icon-gauge"></i><?= $this->power ?>
         </li>
+        <?php endif; ?>
+        <?php if($this->fuelType): ?>
         <li>
           <?= $this->fuelType ?>
         </li>
+        <?php endif; ?>
+        <?php if($this->transmission): ?>
         <li class="last">
           <?= $this->transmission ?>
         </li>
+        <?php endif; ?>
       </ul>
     </header>
     <!-- Fuel and type -->
