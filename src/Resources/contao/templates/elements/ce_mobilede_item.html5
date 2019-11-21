@@ -30,9 +30,9 @@
     </header>
     <!-- Fuel and type -->
     <p>
-      <?= $this->fuelConsumption[0]['label'] ?> <?= $this->fuelConsumption[0]['value'] ?><br>
-      <?= $this->fuelConsumption[1]['label'] ?> <?= $this->fuelConsumption[1]['value'] ?><br>
-      <?= $this->bodyType ?>, <?= $this->usageType ?>
+      <?php if($this->fuelConsumption[0]['value']): ?><?= $this->fuelConsumption[0]['label'] ?> <?= $this->fuelConsumption[0]['value'] ?><br><?php endif; ?>
+      <?php if($this->fuelConsumption[1]['value']): ?><?= $this->fuelConsumption[1]['label'] ?> <?= $this->fuelConsumption[1]['value'] ?><br><?php endif; ?>
+      <?php if($this->usageType): ?><?= $this->bodyType ?>, <?= $this->usageType ?><?php endif; ?>
     </p>
     <!-- Features List -->
     <div class="features-area">
