@@ -1,0 +1,111 @@
+<div class="tl_listing_container">
+  <div id="pdir" class="be_mobilede_setup clr">
+    <h1 id="tl_welcome">
+        mobile.de Inserate (Version: <?= $this->version ?>)
+        <?php if(isset($this->syncVersion)): ?><br>mobile.de Sync (Version: <?= $this->syncVersion ?>)<?php endif; ?>
+    </h1>
+    <div class="intro">
+      <div class="right">
+        <a href="https://pdir.de/mobilede.html" target="_blank"><img
+          src="https://pdir.de/files/01_inhalte/bilder/mobilemodul_logo_267x45px.png"
+          alt="mobile.de Inserate für Contao" width="267" height="45" class="logo"></a>
+        <p>Das mobile.de Inserate Modul für Contao ist ein Produkt der<br><a href="http://www.pdir.de/" target="_blank">pdir
+          / digital agentur</a></p>
+        <h2>Interessante Links</h2>
+        <ul class="link-list">
+        <li><a href="https://docs.pdir.de/" target="_blank"
+                    style="text-decoration: underline;">Dokumentation</a></li>
+        <li><a href="https://demo.pdir.de/mobile-de-inserate-demo.html" target="_blank"
+                    style="text-decoration: underline;">Demo</a></li>
+        <li><a href="https://github.com/pdir/mobilede-bundle/issues" target="_blank"
+                    style="text-decoration: underline;">Probleme melden</a></li>
+        <li><a href="https://pdir.de/mobilede.html" target="_blank"
+              style="text-decoration: underline;">Mehr zur Erweiterung bei pdir</a></li>
+        </ul>
+      </div>
+      <div class="left">
+        <h2>Willkommen bei Mobile.de Inserate für Contao</h2>
+        <p>Alle Inserate werden direkt aus der mobile.de*&sup1; API ausgelesen und in der Erweiterung übersichtlich dargestellt.
+          Umfangreiche Filter- & Sortierungsfunktionen runden die Listenansicht ab. Die Detailansicht enthält alle
+          Fahrzeuginformationen und einen schlanken Produkt-Slider. Auf Wunsch können auch zusätzliche Funktionen
+          integriert werden. Fragen Sie uns an.</p>
+
+        <p><strong>Preis</strong><br>
+          Domainlizenz, einmalig 189€ zzgl. MwSt.<br>
+          Update/Support Abonnement 49€/Jahr zzgl. MwSt.*&sup2;
+        </p>
+        <p>Ihr Team der pdir / digital agentur</p>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <hr>
+    <div class="tools">
+
+      <?php if( is_array($this->message) ): ?>
+        <p class="tl_<?= $this->message[1] ?>"><?= $this->message[0] ?></p>
+      <?php endif; ?>
+
+      <h2>Tools</h2>
+      <?php if($this->extMode == 'DEMO'): ?>
+        <div class="tl_info">Achtung! Das Modul läuft im Demo Modus.</div>
+      <?php endif; ?>
+      <div class="left">
+        <?php if($this->extModeTxt === 'Vollversion'): ?>
+        <div class="button">
+          <a href="/contao/main.php?do=mobileDeSetup&act=import">
+            <div class="kreis">
+              <img src="bundles/pdirmobilede/img/icon_index.png" alt="Import starten" width="60" height="60"/>
+            </div>
+            <br/>Import starten
+          </a>
+          <br><br><small>Achtung: Die mobile.de Inserate<br>vom Typ Sync werden entfernt.</small>
+        </div>
+        <?php endif; ?>
+        <div class="button">
+          <a href="/contao/main.php?do=mobileDeSetup&act=download">
+            <div class="kreis">
+              <img src="bundles/pdirmobilede/img/icon_download.png"
+               alt="Demo Daten importieren" width="60" height="60"/>
+            </div>
+            <br/>Demo Daten importieren
+          </a>
+          <br><br><small>Achtung: Die mobile.de Inserate<br>Tabelle wird vollständig geleert.</small>
+        </div>
+        <div class="button">
+          <a href="mailto:support@pdir.de?subject=mobile.de Erweiterung bestellen&body=<?= $this->emailBody ?>">
+            <div class="kreis">
+              <img src="bundles/pdirmobilede/img/icon_buy.png"
+                alt="Lizenz per Email bestellen" width="60" height="60"/></div>
+            <br/>Lizenz per Email bestellen
+          </a>
+        </div>
+      </div>
+      <div class="right">
+        Debug Infos<br>
+        <h2 class="api-status">API Status <span id="pdirApiStatus" class="blink"></span></h2>
+        <div class="debug-info">
+          Modus: <?= $this->extModeTxt ?><br>
+          IP: <?= $this->ip ?><br>
+          Hostname: <?= $this->hostname ?><br>
+          Domain: <?= $this->domain ?><br>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+    <hr>
+    <div class="feed">
+      <h2>DevLog</h2>
+      <div id="mobileDeDevLog" class="devlog"></div>
+      <p><a href="https://pdir.de/devlog.html" target="_blank"> [ Alle lesen ] </a></div></p>
+    </div>
+    <div class="tools">
+      <p><small>*&sup1;mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner
+        Verbindung zur pdir GmbH oder der mobile.de*&sup1; Erweiterung für Contao. Die Erweiterung verwendet die mobile.de*&sup1; API
+        zum Import der Fahrzeugdaten.<br>
+        &sup2; Updates sind solange kostenlos, bis die Version einen kompletten Versionssprung (Upgrade) macht.
+        Hast du beispielsweise Version 1.1 sind alle Updates in der Version 1.x für dich kostenlos, erst mit Upgrade auf Version 2.0 oder höher ist ein vergünstigter Upgrade Preis (wir nennen Abonnement bzw. Subscription) zu zahlen.
+        <a href="https://pdir.de/mobile-de-integration-fuer-contao-cms.html">Mehr Infos im FAQ</a>.
+      </small></p>
+    </div>
+  </div>
+</div>

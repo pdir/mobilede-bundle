@@ -1,0 +1,65 @@
+{
+  "name": "pdir/mobilede-bundle",
+  "type": "contao-bundle",
+  "description": "mobilede Ads for Contao 4",
+  "keywords": [
+    "contao",
+    "mobile",
+    "ads",
+    "cars",
+    "automobile",
+    "car",
+    "Fahrzeuge",
+    "Wohnmobile",
+    "LKW",
+    "Trucks"
+  ],
+  "license": "proprietary",
+  "homepage": "https://pdir.de/mobile-de-integration-fuer-contao-cms.html",
+  "authors": [
+    {
+      "name": "Webdesign für Dresden",
+      "homepage": "https://pdir.de",
+      "email": "develop@pdir.de",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "contao/core-bundle": "^4.4.8"
+  },
+  "conflict": {
+    "contao/core": "*",
+    "contao/manager-plugin": "<2.0 || >=3.0"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.3.1",
+    "contao/test-case": "^1.4.1",
+    "php-http/guzzle6-adapter": "^1.1",
+    "phpunit/phpunit": "^7.0",
+    "symfony/phpunit-bridge": "^3.4.5",
+    "doctrine/doctrine-cache-bundle": "^1.3",
+    "doctrine/data-fixtures": "1.0.*",
+    "doctrine/dbal": "~2.4",
+    "doctrine/orm": "~2.4,>=2.4.5",
+    "doctrine/doctrine-bundle": "~1.2"
+  },
+  "extra": {
+    "contao-manager-plugin": "Pdir\\MobileDeBundle\\ContaoManager\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pdir\\MobileDeBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Pdir\\MobileDeBundle\\Tests\\": "tests/"
+    }
+  },
+  "support": {
+    "docs": "https://docs.pdir.de/mobilede/mobilede_inserate.html",
+    "issues": "https://github.com/pdir/mobilede-bundle/issues",
+    "source": "https://github.com/pdir/mobilede-bundle"
+  }
+}

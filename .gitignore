@@ -1,0 +1,12 @@
+# Composer
+/composer.lock
+/vendor/
+
+# PhpUnit
+/phpunit.xml
+
+#PhpStorm
+.idea
+
+#cypress Tests
+/node_modules
