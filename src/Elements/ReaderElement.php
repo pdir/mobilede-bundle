@@ -163,6 +163,58 @@ class ReaderElement extends \ContentElement
             $this->ad['makeModelDescription']['value'] = $this->ad['name'];
         }
 
+        $fuelConsumption = [];
+
+        if($this->ad['emission_fuel_consumption_co2_emission'])
+        {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
+                'value' => $this->ad['emission_fuel_consumption_co2_emission'],
+            ];
+        }
+
+        if($this->ad['emission_fuel_consumption_inner'])
+        {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
+                'value' => $this->ad['emission_fuel_consumption_inner'],
+            ];
+        }
+
+        if($this->ad['emission_fuel_consumption_outer'])
+        {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
+                'value' => $this->ad['emission_fuel_consumption_outer'],
+            ];
+        }
+
+        if($this->ad['emission_fuel_consumption_combined'])
+        {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
+                'value' => $this->ad['emission_fuel_consumption_combined'],
+            ];
+        }
+
+        if($this->ad['emission_fuel_consumption_petrol_type'])
+        {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'][0],
+                'value' => $this->ad['emission_fuel_consumption_petrol_type'],
+            ];
+        }
+
+        if($this->ad['emission_fuel_consumption_combined_power_consumption'])
+        {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
+                'value' => $this->ad['emission_fuel_consumption_combined_power_consumption'],
+            ];
+        }
+
+        $this->ad['fuelConsumption'] = $fuelConsumption;
+
         if ('demo' !== $this->pdir_md_customer_username && 'man' !== $this->ad['type']) {
             $objRequest = new \Request();
             $strAuthorization = 'Basic '.base64_encode("{$this->pdir_md_customer_username}:{$this->pdir_md_customer_password}");

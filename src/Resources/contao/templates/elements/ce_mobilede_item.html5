@@ -36,8 +36,11 @@
     </header>
     <!-- Fuel and type -->
     <p>
-      <?php if($this->fuelConsumption[0]['value']): ?><?= $this->fuelConsumption[0]['label'] ?> <?= $this->fuelConsumption[0]['value'] ?><br><?php endif; ?>
-      <?php if($this->fuelConsumption[1]['value']): ?><?= $this->fuelConsumption[1]['label'] ?> <?= $this->fuelConsumption[1]['value'] ?><br><?php endif; ?>
+      <?php if(is_array($this->fuelConsumption) && count($this->fuelConsumption) > 0): ?>
+        <?php foreach($this->fuelConsumption as $fuelItem)
+        <?= $fuelItem['label'] ?> <?= $fuelItem['value'] ?><br>
+        <?php endforeach; ?>
+      <?php endif; ?>
       <?php if($this->usageType): ?><?= $this->bodyType ?>, <?= $this->usageType ?><?php endif; ?>
     </p>
     <!-- Features List -->

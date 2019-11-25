@@ -241,17 +241,60 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'].' KW ('.number_format((float) ($ad['specifics_power'] * 1.35962), 0, ',', '.').' PS)' : 'Keine Angabe';
             $objFilterTemplate->bodyType = $ad['vehicle_class'];
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
-            $objFilterTemplate->usageType = $ad['specifics_usage_type'];
-            $objFilterTemplate->fuelConsumption = [
-                0 => [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
-                    'value' => $ad['emission_fuel_consumption_combined'],
-                ],
-                1 => [
+            $objFilterTemplate->usageType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] ? $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] : $ad['specifics_usage_type'];
+
+            $fuelConsumption = [];
+
+            if($ad['emission_fuel_consumption_co2_emission'])
+            {
+                $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
                     'value' => $ad['emission_fuel_consumption_co2_emission'],
-                ],
-            ];
+                ];
+            }
+
+            if($ad['emission_fuel_consumption_inner'])
+            {
+                $fuelConsumption[] = [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
+                    'value' => $ad['emission_fuel_consumption_inner'],
+                ];
+            }
+
+            if($ad['emission_fuel_consumption_outer'])
+            {
+                $fuelConsumption[] = [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
+                    'value' => $ad['emission_fuel_consumption_outer'],
+                ];
+            }
+
+            if($ad['emission_fuel_consumption_combined'])
+            {
+                $fuelConsumption[] = [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
+                    'value' => $ad['emission_fuel_consumption_combined'],
+                ];
+            }
+
+            if($ad['emission_fuel_consumption_petrol_type'])
+            {
+                $fuelConsumption[] = [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'][0],
+                    'value' => $ad['emission_fuel_consumption_petrol_type'],
+                ];
+            }
+
+            if($ad['emission_fuel_consumption_combined_power_consumption'])
+            {
+                $fuelConsumption[] = [
+                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
+                    'value' => $ad['emission_fuel_consumption_combined_power_consumption'],
+                ];
+            }
+
+            $objFilterTemplate->fuelConsumption = $fuelConsumption;
+
             $objFilterTemplate->featured = ('NONE' === $ad['newnessMarker']) ? false : true;
             $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter;
             $objFilterTemplate->firstRegistration = ($ad['specifics_first_registration']) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $ad['specifics_first_registration']) : 'keine Angabe';
