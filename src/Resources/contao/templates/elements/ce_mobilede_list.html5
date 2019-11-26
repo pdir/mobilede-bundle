@@ -1,6 +1,6 @@
 <!-- indexer::stop -->
-<?php $GLOBALS['TL_JAVASCRIPT'][] = 'https://code.jquery.com/ui/1.12.1/jquery-ui.js'; ?>
-<?php $GLOBALS['TL_JAVASCRIPT'][] = 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'; ?>
+<?php $GLOBALS['TL_JAVASCRIPT']['9998'] = 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'; ?>
+<?php $GLOBALS['TL_JAVASCRIPT']['9999'] = 'https://code.jquery.com/ui/1.12.1/jquery-ui.js'; ?>
 <?php $GLOBALS['TL_CSS'][] = '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'; ?>
 
 <div

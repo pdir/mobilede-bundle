@@ -105,14 +105,14 @@ class ListingElement extends \ContentElement
         }
 
         if (!$this->pdir_md_removeModuleJs) {
-            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/ads.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
         if (!$this->pdir_md_removeModuleCss) {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
-            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/ads.css||static';
+            $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
 
         // Ordering
