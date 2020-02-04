@@ -249,7 +249,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
-                    'value' => $ad['emission_fuel_consumption_co2_emission'],
+                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'], 1),
                 ];
             }
 
@@ -257,7 +257,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
-                    'value' => $ad['emission_fuel_consumption_inner'],
+                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_inner'], 1),
                 ];
             }
 
@@ -265,7 +265,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
-                    'value' => $ad['emission_fuel_consumption_outer'],
+                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_outer'], 1),
                 ];
             }
 
@@ -273,15 +273,15 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
-                    'value' => $ad['emission_fuel_consumption_combined'],
+                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_combined'], 1),
                 ];
             }
 
-            if($ad['emission_fuel_consumption_petrol_type'])
+            if($ad['emission_fuel_consumption_petrol_type'] && $ad['emission_fuel_consumption_petrol_type'] == 'DIESEL')
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'][0],
-                    'value' => $ad['emission_fuel_consumption_petrol_type'],
+                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options'][$ad['emission_fuel_consumption_petrol_type']],
                 ];
             }
 
@@ -289,7 +289,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
-                    'value' => $ad['emission_fuel_consumption_combined_power_consumption'],
+                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'], 1),
                 ];
             }
 
@@ -297,7 +297,7 @@ class ListingElement extends \ContentElement
 
             $objFilterTemplate->featured = ('NONE' === $ad['newnessMarker']) ? false : true;
             $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter;
-            $objFilterTemplate->firstRegistration = ($ad['specifics_first_registration']) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $ad['specifics_first_registration']) : 'keine Angabe';
+            $objFilterTemplate->firstRegistration = $this->formatFirstRegistration($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? $ad['specifics_mileage'] : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
 
@@ -392,5 +392,18 @@ class ListingElement extends \ContentElement
         }
 
         return implode(' ', $filter);
+    }
+
+    function formatFirstRegistration($str) {
+        if(strlen($str) == 7)
+            return $str;
+
+        $res = ($str) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $str) : $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
+
+        if($res == '01.01.1970'){
+            return $str;
+        }
+
+        return $res;
     }
 }

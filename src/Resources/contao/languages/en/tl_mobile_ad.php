@@ -31,7 +31,10 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_envkv_compliant']
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'] = ['Consumption (combined)', 'Enter consumption for inner and outer, e.g. ≈ 6,5 l/100km (kg for CNG)'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'] = ['Consumption (inner)', 'Enter consumption for inner, e.g. ≈ 8,9 l/100km (kg for CNG)'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'] = ['Consumption (outer)', 'Enter consumption for outer, e.g. ≈ 5,2 l/100km (kg for CNG)'];
-$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'] = ['German EnvKV compliant values', 'When you want to provide EnVKV compliant values, for fuel type petrol, you have to specify the exact petrol type, that the consumption values are based on.'];
+$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'] = ['Petrol Type', 'When you want to provide EnVKV compliant values, for fuel type petrol, you have to specify the exact petrol type, that the consumption values are based on.'];
+$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options']['SUPER'] = 'Super';
+$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options']['SUPER_PLUS'] = 'Super Plus';
+$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options']['NORMAL'] = 'Normal';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'] = ['Combined electric energy consumption', 'Combined electric energy consumption for plugin hybrid.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_unit'] = ['Energy consumption unit', 'Enter the unit of energy consumption here.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['features'] = ['Features', 'Select here the features which can differ according to the chosen vehicle class.'];

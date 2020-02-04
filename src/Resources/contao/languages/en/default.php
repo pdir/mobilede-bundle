@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Wheel Formula';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Delivery Period';
 
+$GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'] = 'No information';
 /*
  * List View
  */

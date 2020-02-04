@@ -52,9 +52,9 @@
 
             <?php if($this->ad['fuelConsumptionSE']): ?>
             <li><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['consumption'] ?></span><span class="value">
-              <?php if($this->ad['fuelConsumptionSE']['combined']): ?>≈ <?= $this->ad['fuelConsumptionSE']['combined'] ?>l/100 km (kombiniert) <?php endif; ?>
-              <?php if($this->ad['fuelConsumptionSE']['outer']): ?>≈ <?= $this->ad['fuelConsumptionSE']['outer'] ?>l/100 km (außerorts) <?php endif; ?>
-              <?php if($this->ad['fuelConsumptionSE']['inner']): ?>≈ <?= $this->ad['fuelConsumptionSE']['inner'] ?>l/100 km (innerorts) <?php endif; ?>
+              <?php if($this->ad['fuelConsumptionSE']['combined']): ?>≈ <?= $this->ad['fuelConsumptionSE']['combined'] ?> l/100 km (kombiniert) <?php endif; ?>
+              <?php if($this->ad['fuelConsumptionSE']['outer']): ?>≈ <?= $this->ad['fuelConsumptionSE']['outer'] ?> l/100 km (außerorts) <?php endif; ?>
+              <?php if($this->ad['fuelConsumptionSE']['inner']): ?>≈ <?= $this->ad['fuelConsumptionSE']['inner'] ?> l/100 km (innerorts) <?php endif; ?>
               </span></li>
             <?php endif; ?>
 

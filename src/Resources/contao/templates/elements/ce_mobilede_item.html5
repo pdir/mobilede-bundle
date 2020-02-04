@@ -38,7 +38,7 @@
     <p>
       <?php if(is_array($this->fuelConsumption) && count($this->fuelConsumption) > 0): ?>
         <?php foreach($this->fuelConsumption as $fuelItem): ?>
-        <?= $fuelItem['label'] ?> <?= $fuelItem['value'] ?><br>
+        <?= $fuelItem['label'] ?>: <?= $fuelItem['value'] ?><br>
         <?php endforeach; ?>
       <?php endif; ?>
       <?php if($this->usageType): ?><?= $this->bodyType ?>, <?= $this->usageType ?><?php endif; ?>
