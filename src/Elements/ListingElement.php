@@ -16,6 +16,7 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
+use Contao\System;
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 
@@ -59,7 +60,7 @@ class ListingElement extends \ContentElement
         }
 
         // load language file
-        $this->lang = \System::loadLanguageFile('tl_mobile_ad');
+        $this->lang = System::loadLanguageFile('tl_mobile_ad');
 
         // Get reader page model
         $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
@@ -249,7 +250,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
-                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'], 1),
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'], 1),
                 ];
             }
 
@@ -257,7 +258,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
-                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_inner'], 1),
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_inner'], 1),
                 ];
             }
 
@@ -265,7 +266,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
-                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_outer'], 1),
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_outer'], 1),
                 ];
             }
 
@@ -273,7 +274,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
-                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_combined'], 1),
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined'], 1),
                 ];
             }
 
@@ -289,7 +290,7 @@ class ListingElement extends \ContentElement
             {
                 $fuelConsumption[] = [
                     'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
-                    'value' => \System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'], 1),
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'], 1),
                 ];
             }
 
@@ -297,8 +298,8 @@ class ListingElement extends \ContentElement
 
             $objFilterTemplate->featured = ('NONE' === $ad['newnessMarker']) ? false : true;
             $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter;
-            $objFilterTemplate->firstRegistration = $this->formatFirstRegistration($ad['specifics_first_registration']);
-            $objFilterTemplate->mileage = $ad['specifics_mileage'] ? $ad['specifics_mileage'] : 0;
+            $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
+            $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
 
             if (!$this->pdir_md_hidePromotionBox) {
@@ -394,9 +395,12 @@ class ListingElement extends \ContentElement
         return implode(' ', $filter);
     }
 
-    function formatFirstRegistration($str) {
+    public function formatDate($str) {
         if(strlen($str) == 7)
-            return $str;
+        {
+            $date = explode('-', $str);
+            return $date[1] . '.' . $date[0];
+        }
 
         $res = ($str) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $str) : $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
 
