@@ -101,25 +101,25 @@
         </ul>
       </div>
       <?php endif; ?>
-      <div class="range-slider" <?php if(!$this->priceSlider): ?>style="display:none;"<?php endif; ?>>
+      <div class="range-slider"<?php if(!$this->priceSlider): ?> style="display:none;"<?php endif; ?>>
         <p>
-          <label for="amount">Preis</label>
-          <input type="text" id="amount" readonly>
+          <label for="price">Preis</label>
+          <input type="text" id="price" readonly>
         </p>
         <div id="priceSlider" data-filter-group="price"></div>
       </div>
 
-      <div class="range-slider" <?php if(!$this->powerSlider): ?>style="display:none;"<?php endif; ?>>
+      <div class="range-slider"<?php if(!$this->powerSlider): ?> style="display:none;"<?php endif; ?>>
         <p>
-          <label for="amount">Leistung</label>
-          <input type="text" id="amount" readonly>
+          <label for="power">Leistung</label>
+          <input type="text" id="power" readonly>
         </p>
         <div id="powerSlider" data-filter-group="power"></div>
       </div>
-      <div class="range-slider" <?php if(!$this->mileageSlider): ?>style="display:none;"<?php endif; ?>>
+      <div class="range-slider"<?php if(!$this->mileageSlider): ?> style="display:none;"<?php endif; ?>>
         <p>
-          <label for="amount">Kilometerstand</label>
-          <input type="text" id="amount" readonly>
+          <label for="mileage">Kilometerstand</label>
+          <input type="text" id="mileage" readonly>
         </p>
         <div id="mileageSlider" data-filter-group="mileage"></div>
       </div>
