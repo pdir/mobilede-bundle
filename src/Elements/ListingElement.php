@@ -80,7 +80,29 @@ class ListingElement extends \ContentElement
             $this->strItemTemplate = $this->pdir_md_itemTemplate;
         }
 
-        $objAds = $this->Database->prepare('SELECT * FROM tl_mobile_ad ORDER BY name')->execute();
+        if($this->pdirVehicleFilterByAccount == 0) {
+            if(!$this->pdirVehicleFilterByType){
+                $objAds = $this->Database
+                    ->prepare('SELECT * FROM tl_mobile_ad ORDER BY name')->execute('*');
+            } else {
+                $objAds = $this->Database
+                    ->prepare('SELECT * FROM tl_mobile_ad WHERE type=? ORDER BY name')
+                    ->execute($this->pdirVehicleFilterByType);
+            }
+        }
+
+        if($this->pdirVehicleFilterByAccount > 0) {
+            if(!$this->pdirVehicleFilterByType){
+                $objAds = $this->Database
+                    ->prepare('SELECT * FROM tl_mobile_ad WHERE account=? ORDER BY name')
+                    ->execute($this->pdirVehicleFilterByAccount);
+            } else {
+                $objAds = $this->Database
+                    ->prepare('SELECT * FROM tl_mobile_ad WHERE account=? AND type=?  ORDER BY name')
+                    ->execute($this->pdirVehicleFilterByAccount, $this->pdirVehicleFilterByType);
+            }
+        }
+
 
         while ($objAds->next()) {
             $this->ads['searchResultItems'][] = $objAds->row();
@@ -106,7 +128,7 @@ class ListingElement extends \ContentElement
         }
 
         if (!$this->pdir_md_removeModuleJs) {
-            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|satic';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
@@ -201,7 +223,7 @@ class ListingElement extends \ContentElement
             $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
-            $images = deserialize($ad['api_images']);
+            $images = deserialize($ad['api_images'])['image']['representation'];
             if (is_array($images) && count($images) > 0) {
                 $objFilterTemplate->imageSrc_S = $images[0]['@url'];
                 $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
@@ -309,6 +331,9 @@ class ListingElement extends \ContentElement
             if ($this->featureCss) {
                 $objFilterTemplate->featureCss = $this->featureCss;
             }
+
+            // add account
+            $objFilterTemplate->account = $ad['account'];
 
             $arrReturn[] = $objFilterTemplate->parse();
         }

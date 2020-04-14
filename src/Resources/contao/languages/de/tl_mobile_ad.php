@@ -20,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['cut'] = ['Inserat ausschneiden', 'Scheide I
 $GLOBALS['TL_LANG']['tl_mobile_ad']['delete'] = ['Lösche Inserat', 'Lösche %s Inserat'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['show'] = ['Zeige Inserat Information an', 'Zeige Information zu Inserat %s'];
 
+$GLOBALS['TL_LANG']['tl_mobile_ad']['ad_id'] = ['mobile.de ID', 'Die eindeutige mobile.de ID.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['alias'] = ['Alias', 'Alias'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['consumer_price_amount'] = ['Endverbraucherpreis (Euro)', 'Geben Sie hier den Endverbraucherpreisbetrag (Bruttopreis) ein.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_currency'] = ['Währung', 'Geben sie hier die Währung an.'];
@@ -555,6 +556,7 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['title_legend'] = 'Name und Typ';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['type'] = ['Typ', ''];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['type']['options']['man'] = 'Manuell';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['type']['options']['sync'] = 'Api Sync';
+$GLOBALS['TL_LANG']['tl_mobile_ad']['account'] = ['Konto', 'Hier können Sie eine ID für das Import Konto vergeben. Standard: 0 (nur notwendig für mehrere Import Konten)'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_AgriculturalVehicle']['options']['CombineHarvester'] = 'Mähdrescher';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_AgriculturalVehicle']['options']['FarmyardTractor'] = 'Hofschlepper';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_AgriculturalVehicle']['options']['FertilizerSpreader'] = 'Düngerstreuer';

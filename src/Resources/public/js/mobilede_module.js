@@ -11,13 +11,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 (function(window, document, $, undefined){
-    // "use strict";
+    "use strict";
     var listView = {};
 
     listView.init = function() {
         // get it started
-
         listView.container = $(".md-ads"),
         listView.checkboxes = $(".md-filter-attr.checkbox-group input"),
         listView.selects = $(".md-select"),
@@ -25,7 +25,7 @@
         listView.filters = [];
 
         // set default filter
-        listView.filters['all'] = '*';
+        listView.filters.all = '*';
 
         // Create new object for the range filters and set default values
         let rangeFilters = {
@@ -513,6 +513,7 @@
     };
 
     $(window).on( 'hashchange', listView.updateFiltersFromHash );
-    $(document).on( 'ready', listView.init );
+    $(window).on("load", listView.init );
 
 })(window, document, jQuery);
+
