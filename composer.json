@@ -58,7 +58,7 @@
     }
   },
   "support": {
-    "docs": "https://docs.pdir.de/mobilede/mobilede_inserate.html",
+    "docs": "https://pdir.de/docs/de/contao/extensions/mobilede/",
     "issues": "https://github.com/pdir/mobilede-bundle/issues",
     "source": "https://github.com/pdir/mobilede-bundle"
   }
