@@ -264,7 +264,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'vehicle_model' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_model'],
@@ -274,7 +274,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(100) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'vehicle_model_description' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_model_description'],
@@ -336,7 +336,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_mileage' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_mileage'],
@@ -346,7 +346,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_exhaust_inspection' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_exhaust_inspection'],
@@ -356,7 +356,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_general_inspection' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_general_inspection'],
@@ -366,7 +366,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_delivery_date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_delivery_date'],
@@ -376,7 +376,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_delivery_period' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_delivery_period'],
@@ -386,7 +386,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_door_count' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_door_count'],
@@ -407,7 +407,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_emission_class' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_emission_class'],
@@ -450,7 +450,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_hsn' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_hsn'],
@@ -480,7 +480,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_gearbox' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox'],
@@ -512,7 +512,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_axles' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_axles'],
@@ -522,7 +522,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_load_capacity' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_load_capacity'],
@@ -532,7 +532,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_num_seats' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_num_seats'],
@@ -552,7 +552,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_installation_height' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_installation_height'],
@@ -562,7 +562,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_lifting_capacity' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_lifting_capacity'],
@@ -572,7 +572,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_lifting_height' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_lifting_height'],
@@ -582,7 +582,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_construction_year' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_construction_year'],
@@ -592,7 +592,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_construction_date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_construction_date'],
@@ -602,7 +602,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_cubic_capacity' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_cubic_capacity'],
@@ -612,7 +612,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_driving_mode' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_driving_mode'],
@@ -677,7 +677,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_hydraulic_installation' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_hydraulic_installation'],
@@ -698,7 +698,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_dimension_length' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_dimension_length'],
@@ -708,7 +708,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_dimension_width' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_dimension_width'],
@@ -718,7 +718,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_dimension_height' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_dimension_height'],
@@ -728,7 +728,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_shipping_volume' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_shipping_volume'],
@@ -738,7 +738,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_loading_space_length' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_loading_space_length'],
@@ -748,7 +748,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_loading_space_width' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_loading_space_width'],
@@ -758,7 +758,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_identification_number' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_identification_number'],
@@ -768,7 +768,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_interior_color' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_color'],
@@ -952,7 +952,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_model_range' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_model_range'],
@@ -962,7 +962,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_first_models_production_date' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_first_models_production_date'],
@@ -972,7 +972,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'specifics_battery_capacity' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_battery_capacity'],
@@ -982,7 +982,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_envkv_compliant' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_envkv_compliant'],
@@ -1013,7 +1013,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_inner' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'],
@@ -1023,7 +1023,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_outer' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'],
@@ -1033,7 +1033,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_combined' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'],
@@ -1043,7 +1043,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_petrol_type' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'],
@@ -1053,7 +1053,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_combined_power_consumption' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'],
@@ -1063,7 +1063,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_unit' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_unit'],
@@ -1077,7 +1077,7 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
                 'maxlength' => 255,
                 'tl_class' => 'w50',
             ],
-            'sql' => "varchar(50) NOT NULL default ''",
+            'sql' => "text NULL",
         ],
         'images' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['images'],
