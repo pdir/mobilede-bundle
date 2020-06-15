@@ -168,6 +168,7 @@
 	overflow: hidden;
 	float: left;
 	min-height: 40px;
+    width: 100%;
 }
 
 .md-ad-box .detail header .custom-list li {
@@ -730,6 +731,10 @@
 
 .only-filter .md-filters .md-filters-body {
 	margin-top: 0;
+}
+
+.md-ads .clearfix:after {
+    clear: both;
 }
 
 @media (min-width: 768px) {

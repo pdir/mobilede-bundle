@@ -256,8 +256,10 @@ class ReaderElement extends \ContentElement
             $tmpArr = (array) json_decode($objRequest->response, true);
 
             if (!$objRequest->hasError()) {
-                foreach ($tmpArr['ad']['images']['image'] as $key => $group) {
-                    $newGallery[] = $group['representation'];
+                if(0 == count($newGallery)) {
+                    foreach ($tmpArr['ad']['images']['image'] as $key => $group) {
+                        $newGallery[] = $group['representation'];
+                    }
                 }
 
                 $this->ad['description'] = $tmpArr['ad']['description'];

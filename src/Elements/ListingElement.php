@@ -421,18 +421,23 @@ class ListingElement extends \ContentElement
     }
 
     public function formatDate($str) {
+        // return no value info
+        if($str == '')
+            return $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
+
+        // validate date
+        if(date('Y-m-d', $timestamp = strtotime($str)) === $str)
+        {
+            return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $timestamp);
+        }
+
+        // fix date with month only | 2020-02
         if(strlen($str) == 7)
         {
             $date = explode('-', $str);
             return $date[1] . '.' . $date[0];
         }
 
-        $res = ($str) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $str) : $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
-
-        if($res == '01.01.1970'){
-            return $str;
-        }
-
-        return $res;
+        return $str;
     }
 }
