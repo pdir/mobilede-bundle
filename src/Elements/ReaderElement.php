@@ -158,19 +158,22 @@ class ReaderElement extends \ContentElement
         $newGallery = [];
         $apiImages = deserialize($this->ad['api_images']);
 
-        $mobileDe = new MobileDe($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id, $this->pdir_md_customer_number);
-        $newImages = $mobileDe->getGalleryImages($apiImages['@url']);
+        if ('demo' !== $this->pdir_md_customer_username)
+        {
+            $mobileDe = new MobileDe($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id, $this->pdir_md_customer_number);
+            $newImages = $mobileDe->getGalleryImages($apiImages['@url']);
 
-        foreach ($newImages['images']['image'] as $item) {
-            $image = $item['representation'];
+            foreach ($newImages['images']['image'] as $item) {
+                $image = $item['representation'];
 
-            $newGallery[] = [
-                ['@size' => 'S', '@url' => $image[0]['@url']],
-                ['@size' => 'XL', '@url' => $image[1]['@url']],
-                ['@size' => 'L', '@url' => $image[3]['@url']],
-                ['@size' => 'M', '@url' => $image[4]['@url']],
-                ['@size' => 'ICON', '@url' => $image[2]['@url']],
-            ];
+                $newGallery[] = [
+                    ['@size' => 'S', '@url' => $image[0]['@url']],
+                    ['@size' => 'XL', '@url' => $image[1]['@url']],
+                    ['@size' => 'L', '@url' => $image[3]['@url']],
+                    ['@size' => 'M', '@url' => $image[4]['@url']],
+                    ['@size' => 'ICON', '@url' => $image[2]['@url']],
+                ];
+            }
         }
 
         if ('man' === $this->ad['type']) {
