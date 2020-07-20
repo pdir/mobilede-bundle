@@ -264,7 +264,11 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'].' KW ('.number_format((float) ($ad['specifics_power'] * 1.35962), 0, ',', '.').' PS)' : 'Keine Angabe';
             $objFilterTemplate->bodyType = $ad['vehicle_class'];
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
+            $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
+            $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
             $objFilterTemplate->usageType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] ? $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] : $ad['specifics_usage_type'];
+            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_condition']['options'][$ad['specifics_condition']];
+            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
 
             $fuelConsumption = [];
 
