@@ -28,13 +28,13 @@
         listView.filters.all = '*';
 
         // Create new object for the range filters and set default values
-        let rangeFilters = {
+        var rangeFilters = {
             'price': {'min': 0, 'max': 10000000},
             'power': {'min': 0, 'max': 10000000},
             'mileage': {'min': 0, 'max': 10000000}
         };
 
-        let sorting = 'original-order';
+        var sorting = 'original-order';
 
         // Initialize checkboxes
         listView.checkboxes.on('change', function (event) {
