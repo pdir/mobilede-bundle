@@ -181,14 +181,7 @@ class ReaderElement extends \ContentElement
             foreach ($manImages as $uuid) {
                 $objFile = \FilesModel::findByUuid($uuid);
                 if ($objFile) {
-                    $imageObj = new \Image(new \File($objFile->path));
-                    $newGallery[] = [
-                        ['@size' => 'S', '@url' => $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-                        ['@size' => 'XL', '@url' => $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-                        ['@size' => 'L', '@url' => $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-                        ['@size' => 'M', '@url' => $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-                        ['@size' => 'ICON', '@url' => $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-                    ];
+                    $newGallery[] = $this->getImageByPath($objFile->path);
                 }
             }
 
@@ -290,6 +283,13 @@ class ReaderElement extends \ContentElement
                 $this->ad['seller']['mobile-seller-since']['value'] = $tmpArr['ad']['seller']['mobile-seller-since']['@value'];
             }
         }
+
+        // use placeholder if no image exists
+        if(is_array($newGallery) && count($newGallery) === 0)
+        {
+            $newGallery[] = $this->getImageByPath('web/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
+        }
+
         $this->ad['images'] = $newGallery;
 
         $this->Template->ad = $this->ad;
@@ -301,6 +301,18 @@ class ReaderElement extends \ContentElement
             $this->Template->customer = $this->pdir_md_customer_id;
             $this->Template->rawData = $this->ad;
         }
+    }
+
+    protected function getImageByPath($str)
+    {
+        $imageObj = new \Image(new \File($str));
+        return [
+            ['@size' => 'S', '@url' => $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+            ['@size' => 'XL', '@url' => $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+            ['@size' => 'L', '@url' => $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+            ['@size' => 'M', '@url' => $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+            ['@size' => 'ICON', '@url' => $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+        ];
     }
 
     protected function htmlString($str)
