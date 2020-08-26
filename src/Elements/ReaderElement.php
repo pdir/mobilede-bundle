@@ -171,7 +171,7 @@ class ReaderElement extends \ContentElement
                     ['@size' => 'XL', '@url' => $image[1]['@url']],
                     ['@size' => 'L', '@url' => $image[3]['@url']],
                     ['@size' => 'M', '@url' => $image[4]['@url']],
-                    ['@size' => 'ICON', '@url' => $image[2]['@url']],
+                    ['@size' => 'ICON', '@url' => $image[2]['@url']]
                 ];
             }
         }
@@ -188,6 +188,7 @@ class ReaderElement extends \ContentElement
                         ['@size' => 'L', '@url' => $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath()],
                         ['@size' => 'M', '@url' => $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath()],
                         ['@size' => 'ICON', '@url' => $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+                        ['@size' => 'ORIGINAL', '@url' => $objFile->path]
                     ];
                 }
             }
