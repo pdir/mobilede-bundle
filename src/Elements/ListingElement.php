@@ -370,6 +370,8 @@ class ListingElement extends \ContentElement
         $filter[] = $ad['specifics_fuel'];
         $filter[] = $ad['specifics_gearbox'];
         $filter[] = $ad['specifics_usage_type'];
+        $filter[] = $ad['specifics_condition'];
+        $filter[] = $ad['consumer_price_amount'];
 
         $filter = array_filter($filter,'strlen'); // remove empty fields
 
@@ -418,6 +420,22 @@ class ListingElement extends \ContentElement
                 'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']],
                 'key' => $ad['specifics_usage_type'],
                 'count' => (isset($this->filters['usageType'][$ad['specifics_usage_type']]['count']) ? $this->filters['usageType'][$ad['specifics_usage_type']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['specifics_condition']) {
+            $this->filters['specifics_condition'][$ad['specifics_condition']] = [
+                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_condition']['options'][$ad['specifics_condition']],
+                'key' => $ad['specifics_condition'],
+                'count' => (isset($this->filters['specifics_condition'][$ad['specifics_condition']]['count']) ? $this->filters['specifics_condition'][$ad['specifics_condition']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['consumer_price_amount']) {
+            $this->filters['consumer_price_amount'][$ad['consumer_price_amount']] = [
+                'label' => $ad['consumer_price_amount'],
+                'key' => $ad['consumer_price_amount'],
+                'count' => (isset($this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count']) ? $this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count'] + 1 : 1),
             ];
         }
 
