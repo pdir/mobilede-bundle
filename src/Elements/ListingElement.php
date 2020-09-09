@@ -372,6 +372,7 @@ class ListingElement extends \ContentElement
         $filter[] = $ad['specifics_usage_type'];
         $filter[] = $ad['specifics_condition'];
         $filter[] = $ad['consumer_price_amount'];
+        $filter[] = $ad['specifics_num_seats'];
 
         $filter = array_filter($filter,'strlen'); // remove empty fields
 
@@ -436,6 +437,14 @@ class ListingElement extends \ContentElement
                 'label' => $ad['consumer_price_amount'],
                 'key' => $ad['consumer_price_amount'],
                 'count' => (isset($this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count']) ? $this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['specifics_num_seats']) {
+            $this->filters['specifics_num_seats'][$ad['specifics_num_seats']] = [
+                'label' => $ad['specifics_num_seats'],
+                'key' => $ad['specifics_num_seats'],
+                'count' => (isset($this->filters['specifics_num_seats'][$ad['specifics_num_seats']]['count']) ? $this->filters['specifics_num_seats'][$ad['specifics_num_seats']]['count'] + 1 : 1),
             ];
         }
 
