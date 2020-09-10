@@ -223,7 +223,12 @@ class ListingElement extends \ContentElement
             $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
-            $images = deserialize($ad['api_images'])['image']['representation'];
+            $images = deserialize($ad['api_images']);
+            	
+            if (is_array($images) && $images['image'] !== '' ){
+                $images = $images['image']['representation'];
+            }
+            
             if (is_array($images) && count($images) > 0) {
                 $objFilterTemplate->imageSrc_S = $images[0]['@url'];
                 $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
