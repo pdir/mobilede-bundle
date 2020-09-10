@@ -129,7 +129,7 @@ class ListingElement extends \ContentElement
 
         if (!$this->pdir_md_removeModuleJs) {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.min.js|static';
-            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = 'https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
         if (!$this->pdir_md_removeModuleCss) {
