@@ -23,6 +23,14 @@ class VehicleAccount extends DcaDefault
     private $description;
 
     /**
+     * @ORM\Column(name="apiType", type="string", options={"default": ""})
+     *
+     * @var string
+     */
+    private $apiType;
+
+
+    /**
      * @ORM\Column(name="enabled", type="boolean", options={"default": false})
      *
      * @var bool
@@ -51,14 +59,19 @@ class VehicleAccount extends DcaDefault
         $this->vehicles = new ArrayCollection();
     }
 
-    public function getCredentials(): Credentials
-    {
-        return $this->credentials;
-    }
-
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getApiType(): string
+    {
+        return $this->apiType;
+    }
+
+    public function getCredentials(): Credentials
+    {
+        return $this->credentials;
     }
 
     public function isSyncEnabled(): bool

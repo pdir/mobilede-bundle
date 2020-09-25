@@ -29,6 +29,7 @@ class ReaderElement extends \ContentElement
      * @var string
      */
     protected $strTemplate = 'ce_mobilede_reader';
+    protected $strTable = 'tl_vehicle';
 
     protected $ad = [];
     private $lang = [];
@@ -52,7 +53,7 @@ class ReaderElement extends \ContentElement
         }
 
         // load language file
-        \System::loadLanguageFile('tl_mobile_ad');
+        \System::loadLanguageFile($this->strTable);
 
         // Set auto item
         if (!isset($_GET['ad']) && \Config::get('useAutoItem') && isset($_GET['auto_item'])) {
@@ -62,7 +63,7 @@ class ReaderElement extends \ContentElement
         // get alias from auto item
         $strAlias = \Input::get('ad');
 
-        $objAd = $this->Database->prepare('SELECT * FROM tl_mobile_ad WHERE alias=?')->execute($strAlias);
+        $objAd = $this->Database->prepare('SELECT * FROM ' . $this->strTable . ' WHERE alias=?')->execute($strAlias);
         $this->ad = $objAd->fetchAssoc();
 
         // Return if there are no ad / do not index or cache
@@ -98,7 +99,7 @@ class ReaderElement extends \ContentElement
             }
 
             $newFeatures[] = [
-                'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['features']['options'][$feature],
+                'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
                 'key' => $feature,
             ];
         }
@@ -115,14 +116,14 @@ class ReaderElement extends \ContentElement
             if($specific != "exhaust_inspection" && $specific != "general_inspection" && $specific != "construction_date" && $specific != "first_registration" && $specific != "delivery_date" && $specific != "first_models_production_date" && $specific != "mileage") {
                 $newSpecifics[] = [
                     'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_' . $specific][0],
-                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_' . $specific]['options'][$this->ad['specifics_' . $specific]] ?: $this->ad['specifics_' . $specific],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_' . $specific][0],
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_' . $specific]['options'][$this->ad['specifics_' . $specific]] ?: $this->ad['specifics_' . $specific],
                     'plainValue' => $this->ad['specifics_' . $specific],
                 ];
             } elseif($specific == "mileage") {
                 $newSpecifics[] = [
                     'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_' . $specific][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_' . $specific][0],
                     'value' => $this->ad['specifics_' . $specific] ? System::getFormattedNumber($this->ad['specifics_' . $specific], 0) : 0,
                     'plainValue' => $this->ad['specifics_' . $specific],
                 ];
@@ -130,8 +131,8 @@ class ReaderElement extends \ContentElement
             } else {
                 $newSpecifics[] = [
                     'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific][0],
-                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: ListingElement::formatDate($this->ad['specifics_'.$specific]),
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: ListingElement::formatDate($this->ad['specifics_'.$specific]),
                     'plainValue' => $this->ad['specifics_'.$specific],
                 ];
             }
@@ -194,7 +195,7 @@ class ReaderElement extends \ContentElement
         if($this->ad['emission_fuel_consumption_co2_emission'])
         {
             $fuelConsumption[] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_co2_emission'], 1),
             ];
         }
@@ -202,7 +203,7 @@ class ReaderElement extends \ContentElement
         if($this->ad['emission_fuel_consumption_inner'])
         {
             $fuelConsumption[] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_inner'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_inner'], 1),
             ];
         }
@@ -210,7 +211,7 @@ class ReaderElement extends \ContentElement
         if($this->ad['emission_fuel_consumption_outer'])
         {
             $fuelConsumption[] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_outer'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_outer'], 1),
             ];
         }
@@ -218,7 +219,7 @@ class ReaderElement extends \ContentElement
         if($this->ad['emission_fuel_consumption_combined'])
         {
             $fuelConsumption[] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined'], 1),
             ];
         }
@@ -226,15 +227,15 @@ class ReaderElement extends \ContentElement
         if($this->ad['emission_fuel_consumption_petrol_type'])
         {
             $fuelConsumption[] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'][0],
-                'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options'][$this->ad['emission_fuel_consumption_petrol_type']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type'][0],
+                'value' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type_options'][$this->ad['emission_fuel_consumption_petrol_type']],
             ];
         }
 
         if($this->ad['emission_fuel_consumption_combined_power_consumption'])
         {
             $fuelConsumption[] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined_power_consumption'], 1),
             ];
         }

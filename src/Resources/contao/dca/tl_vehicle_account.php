@@ -21,7 +21,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'panelLayout' => 'sort,search,limit',
         ],
         'label' => [
-            'fields' => [''],
+            'fields' => ['description'],
         ],
         'global_operations' => [],
         'operations' => [
@@ -67,17 +67,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
 
     // Palettes
     'palettes' => [
-        '__selector__' => [],
-        'default' => '{basic_legend},api_type,description;' .
-            '{credentials_legend},api_explanation,api_user_key,api_user_secret,mobilede_customer_number;' .
-            '{sync_legend},enabled;',
+        '__selector__' => ['apiType'],
+        'default' => '{title_legend},description,apiType',
     ],
 
     // Subpalettes
     'subpalettes' => [
-        'api_type_mobilede' => '{credentials_legend},api_explanation,api_user_key,api_user_secret,api_mobilede_customer_number;' .
+        'apiType_man' => '{credentials_legend};',
+        'apiType_mobilede' => '{credentials_legend},api_explanation,api_user_key,api_user_secret,api_mobilede_customer_number;' .
             '{sync_legend},enabled;',
-        'api_type_syscara' => '{credentials_legend},url;{sync_legend},enabled;',
+        'apiType_convertTo' => '{convertTo_legend};',
     ],
 
     // Fields
@@ -89,11 +88,12 @@ $GLOBALS['TL_DCA'][$strTable] = [
         'description' => [
             'exclude' => true,
             'inputType' => 'text',
-            'eval' => ['mandatory' => true, 'maxlength' => 255, 'unique' => true],
+            'eval' => ['mandatory' => true, 'maxlength' => 255, 'unique' => true, 'tl_class' => 'w50'],
         ],
-        'api_type' => [
+        'apiType' => [
             'exclude' => true,
             'inputType' => 'select',
+            'options' => $GLOBALS['TL_LANG'][$strTable]['apiTypeOptions'],
             'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50']
         ],
         'api_explanation' => [

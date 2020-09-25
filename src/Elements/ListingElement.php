@@ -31,6 +31,7 @@ class ListingElement extends \ContentElement
      */
     protected $strTemplate = 'ce_mobilede_list';
     protected $strItemTemplate = 'ce_mobilede_item';
+    protected $strTable = 'tl_vehicle';
 
     /**
      * @var \PageModel
@@ -60,7 +61,7 @@ class ListingElement extends \ContentElement
         }
 
         // load language file
-        $this->lang = System::loadLanguageFile('tl_mobile_ad');
+        $this->lang = System::loadLanguageFile($this->strTable);
 
         // Get reader page model
         $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
@@ -83,10 +84,10 @@ class ListingElement extends \ContentElement
         if($this->pdirVehicleFilterByAccount == 0) {
             if(!$this->pdirVehicleFilterByType){
                 $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad ORDER BY name')->execute('*');
+                    ->prepare('SELECT * FROM ' . $this->strTable . ' ORDER BY name')->execute('*');
             } else {
                 $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad WHERE type=? ORDER BY name')
+                    ->prepare('SELECT * FROM ' . $this->strTable . ' WHERE type=? ORDER BY name')
                     ->execute($this->pdirVehicleFilterByType);
             }
         }
@@ -94,11 +95,11 @@ class ListingElement extends \ContentElement
         if($this->pdirVehicleFilterByAccount > 0) {
             if(!$this->pdirVehicleFilterByType){
                 $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad WHERE account=? ORDER BY name')
+                    ->prepare('SELECT * FROM ' . $this->strTable . ' WHERE account=? ORDER BY name')
                     ->execute($this->pdirVehicleFilterByAccount);
             } else {
                 $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad WHERE account=? AND type=?  ORDER BY name')
+                    ->prepare('SELECT * FROM ' . $this->strTable . ' WHERE account=? AND type=?  ORDER BY name')
                     ->execute($this->pdirVehicleFilterByAccount, $this->pdirVehicleFilterByType);
             }
         }
@@ -259,23 +260,23 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
-            $objFilterTemplate->fuelType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_fuel']['options'][$ad['specifics_fuel']];
-            $objFilterTemplate->transmission = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            $objFilterTemplate->fuelType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']];
+            $objFilterTemplate->transmission = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
             $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'].' KW ('.number_format((float) ($ad['specifics_power'] * 1.35962), 0, ',', '.').' PS)' : 'Keine Angabe';
             $objFilterTemplate->bodyType = $ad['vehicle_class'];
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
             $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
             $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
-            $objFilterTemplate->usageType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] ? $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] : $ad['specifics_usage_type'];
-            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_condition']['options'][$ad['specifics_condition']];
-            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] : $ad['specifics_usage_type'];
+            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']];
+            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
 
             $fuelConsumption = [];
 
             if($ad['emission_fuel_consumption_co2_emission'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'], 1),
                 ];
             }
@@ -283,7 +284,7 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_inner'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_inner'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_inner'], 1),
                 ];
             }
@@ -291,7 +292,7 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_outer'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_outer'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_outer'], 1),
                 ];
             }
@@ -299,7 +300,7 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_combined'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined'], 1),
                 ];
             }
@@ -307,15 +308,15 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_petrol_type'] && $ad['emission_fuel_consumption_petrol_type'] == 'DIESEL')
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'][0],
-                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options'][$ad['emission_fuel_consumption_petrol_type']],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type'][0],
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type_options'][$ad['emission_fuel_consumption_petrol_type']],
                 ];
             }
 
             if($ad['emission_fuel_consumption_combined_power_consumption'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'], 1),
                 ];
             }
@@ -385,7 +386,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_exterior_color']) {
             $this->filters['colors'][$ad['specifics_exterior_color']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
                 'key' => $ad['specifics_exterior_color'],
                 'count' => (isset($this->filters['colors'][$ad['specifics_exterior_color']]['count']) ? $this->filters['usageType'][$ad['specifics_exterior_color']]['count'] + 1 : 1),
             ];
@@ -393,7 +394,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['vehicle_category']) {
             $this->filters['categories'][$ad['vehicle_category']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category']['options'][$ad['vehicle_category']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_category']['options'][$ad['vehicle_category']],
                 'key' => $ad['vehicle_category'],
                 'count' => (isset($this->filters['categories'][$ad['vehicle_category']]['count']) ? $this->filters['usageType'][$ad['vehicle_category']]['count'] + 1 : 1),
             ];
@@ -401,7 +402,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_fuel']) {
             $this->filters['fuelType'][$ad['specifics_fuel']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_fuel']['options'][$ad['specifics_fuel']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']],
                 'key' => $ad['specifics_fuel'],
                 'count' => (isset($this->filters['fuelType'][$ad['specifics_fuel']]['count']) ? $this->filters['usageType'][$ad['specifics_fuel']]['count'] + 1 : 1),
             ];
@@ -409,7 +410,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_gearbox']) {
             $this->filters['gearbox'][$ad['specifics_gearbox']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']],
                 'key' => $ad['specifics_gearbox'],
                 'count' => (isset($this->filters['gearbox'][$ad['specifics_gearbox']]['count']) ? $this->filters['usageType'][$ad['specifics_gearbox']]['count'] + 1 : 1),
             ];
@@ -417,7 +418,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_usage_type']) {
             $this->filters['usageType'][$ad['specifics_usage_type']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']],
                 'key' => $ad['specifics_usage_type'],
                 'count' => (isset($this->filters['usageType'][$ad['specifics_usage_type']]['count']) ? $this->filters['usageType'][$ad['specifics_usage_type']]['count'] + 1 : 1),
             ];
@@ -425,7 +426,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_condition']) {
             $this->filters['specifics_condition'][$ad['specifics_condition']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_condition']['options'][$ad['specifics_condition']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']],
                 'key' => $ad['specifics_condition'],
                 'count' => (isset($this->filters['specifics_condition'][$ad['specifics_condition']]['count']) ? $this->filters['specifics_condition'][$ad['specifics_condition']]['count'] + 1 : 1),
             ];

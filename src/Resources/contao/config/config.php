@@ -66,10 +66,11 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
 array_insert($GLOBALS['BE_MOD']['pdir'], 0, [
 ]);
 
-if (TL_MODE === 'BE') {
-    $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/mobilede_backend.js';
-    $GLOBALS['TL_CSS'][] = $assetsDir.'/css/mobilede_backend.css';
-}
+/*
+ * Models
+ */
+$GLOBALS['TL_MODELS']['tl_vehicle'] = 'Pdir\MobileDeBundle\Model\VehicleModel';
+$GLOBALS['TL_MODELS']['tl_vehicle_account'] = 'Pdir\MobileDeBundle\Model\VehicleAccountModel';
 
 /*
  * Register auto_item
@@ -81,3 +82,12 @@ $GLOBALS['TL_AUTO_ITEM'][] = 'ad';
  */
 $GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['pdir.mobileDe.listener.hooks', 'parseFrontendTemplate'];
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', 'onReplaceInsertTags'];
+
+/*
+ * BAckend styles & css
+ */
+
+if (TL_MODE === 'BE') {
+    $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/mobilede_backend.js';
+    $GLOBALS['TL_CSS'][] = $assetsDir.'/css/mobilede_backend.css';
+}
