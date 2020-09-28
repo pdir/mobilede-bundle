@@ -45,7 +45,7 @@ class VehicleAccount extends DcaDefault
     private $credentials;
 
     /**
-     * @ORM\OneToMany(targetEntity="Pdir\MobileDeBundle\Entity\Vehicle", mappedBy="vehicle_account")
+     * @ORM\OneToMany(targetEntity="Pdir\MobileDeBundle\Entity\Vehicle", mappedBy="accountId")
      *
      * @var Collection|Vehicle[]
      */

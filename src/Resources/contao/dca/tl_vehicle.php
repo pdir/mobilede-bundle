@@ -998,7 +998,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['features']['options'],
-            'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'clr', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
+            'eval' => ['maxlength' => 255, 'tl_class' => 'clr', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
             'options_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'featuresOptionsCallback'],
         ],
     ],

@@ -13,6 +13,7 @@ use Pdir\MobileDeBundle\Annotation\Vehicle as Veh;
 /**
  * @ORM\Entity(repositoryClass="Pdir\MobileDeBundle\Repository\VehicleRepository")
  * @ORM\Table(name="tl_vehicle")
+ * @Annotation
  */
 class Vehicle extends DcaDefault
 {
@@ -51,11 +52,12 @@ class Vehicle extends DcaDefault
     public $alias = '';
 
     /**
-     * @ORM\Column(name="accountId", type="text")
+     * @ORM\ManyToOne(targetEntity="Pdir\MobileDeBundle\Entity\VehicleAccount", inversedBy="vehicles")
+     * @ORM\JoinColumn(name="vehicle_account", referencedColumnName="id", onDelete="CASCADE")
      *
-     * @var string
+     * @var VehicleAccount
      */
-    public $accountId = '';
+    public $account = '';
 
     /**
      * @ORM\Column(name="dealer_price_amount", type="decimal", precision=10, scale=2, nullable=true)
@@ -113,14 +115,6 @@ class Vehicle extends DcaDefault
      * @var string
      */
     public $priceRating = '';
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Pdir\MobileDeBundle\Entity\VehicleAccount", inversedBy="vehicles")
-     * @ORM\JoinColumn(name="vehicle_account", referencedColumnName="id", onDelete="CASCADE")
-     *
-     * @var VehicleAccount
-     */
-    private $vehicleAccount;
 
     /**
      * @ORM\Column(name="creation_date", type="datetime")
