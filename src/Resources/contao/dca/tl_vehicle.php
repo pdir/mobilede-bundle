@@ -7,6 +7,11 @@ $GLOBALS['TL_DCA'][$strTable] = [
         'dataContainer' => 'Table',
         'switchToEdit' => true,
         'enableVersioning' => true,
+        'sql' => [
+            'keys' => [
+                'id' => 'primary',
+            ],
+        ],
     ],
     'list' => [
         'sorting' => [
@@ -65,14 +70,19 @@ $GLOBALS['TL_DCA'][$strTable] = [
     ],
     'subpalettes' => [],
     'fields' => [
-        'id' => [],
-        'tstamp' => [],
+        'id' => [
+            'sql' => 'int(10) unsigned NOT NULL auto_increment',
+        ],
+        'tstamp' => [
+            'sql' => "int(10) unsigned NOT NULL default '0'",
+        ],
         'published' => [
             'label' => &$GLOBALS['TL_LANG']['tl_page']['published'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'checkbox',
             'eval' => ['doNotCopy' => true],
+            'sql' => "char(1) NOT NULL default ''",
         ],
         'name' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['name'],
@@ -82,6 +92,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
         ],
         'vehicle_id' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_id'],
@@ -91,6 +102,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
         ],
         'alias' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['alias'],
@@ -99,18 +111,21 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'text',
             'eval' => ['rgxp' => 'alias', 'unique' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
             'save_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'generateAlias'],
+            'sql' => "varchar(128) COLLATE utf8_bin NOT NULL default ''",
         ],
         'dealer_price_amount' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['dealer_price_amount'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0.00'",
         ],
         'consumer_price_amount' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0.00'",
         ],
         'price_included_delivery_costs' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['price_included_delivery_costs'],
@@ -120,6 +135,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'checkbox',
             'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
+            'sql' => "char(1) NOT NULL default ''",
         ],
         'price_vatable' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['price_vatable'],
@@ -129,6 +145,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'checkbox',
             'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
+            'sql' => "char(1) NOT NULL default ''",
         ],
         'price_vat_rating' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['price_vat_rating'],
@@ -139,12 +156,14 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['price_vat_rating']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'price_currency' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['price_currency'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['tl_class' => 'w50'],
+            'sql' => 'text NULL',
         ],
         'price_rating' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['price_rating'],
@@ -155,6 +174,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['price_rating']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['type'],
@@ -168,6 +188,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'tl_class' => 'w50',
                 'readonly' => true,
             ],
+            'sql' => "varchar(4) NOT NULL default 'man'",
         ],
         'account' => [
             'label' => &$GLOBALS['TL_LANG']['tl_consent_service']['account'],
@@ -178,6 +199,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'eval' => [
                 'tl_class' => 'w50',
             ],
+            'sql' => "int(10) unsigned NOT NULL default '0'",
         ],
         'creation_date' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['creation_date'],
@@ -187,6 +209,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "varchar(30) NOT NULL default ''",
         ],
         'modification_date' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['modification_date'],
@@ -196,6 +219,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "varchar(30) NOT NULL default ''",
         ],
         'vehicle_class' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_class'],
@@ -206,6 +230,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['vehicle_class']['options'],
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50', 'submitOnChange' => true, 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'vehicle_category' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_category'],
@@ -217,6 +242,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'options' => $GLOBALS['TL_LANG'][$strTable]['vehicle_category']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
             'options_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'categoryOptionsCallback'],
+            'sql' => 'text NULL',
         ],
         'vehicle_make' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_make'],
@@ -226,6 +252,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'vehicle_model' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_model'],
@@ -235,6 +262,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'vehicle_model_description' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_model_description'],
@@ -244,6 +272,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
+            'sql' => 'text NULL',
         ],
         'vehicle_free_text' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_free_text'],
@@ -253,6 +282,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'tl_class' => 'clr', 'rte' => 'tinyMCE'],
+            'sql' => 'text NULL',
         ],
         'vehicle_damage' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_damage'],
@@ -263,6 +293,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['vehicle_damage']['options'],
             'eval' => ['mandatory' => false, 'tl_class' => 'w50', 'multiple' => true, 'chosen' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_exterior_color' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color'],
@@ -273,6 +304,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_metallic' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_metallic'],
@@ -282,6 +314,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'checkbox',
             'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
+            'sql' => "char(1) NOT NULL default ''",
         ],
         'specifics_manufacturer_color_name' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_manufacturer_color_name'],
@@ -291,6 +324,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_mileage' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_mileage'],
@@ -300,6 +334,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_exhaust_inspection' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_exhaust_inspection'],
@@ -309,6 +344,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
+            'sql' => "text NULL",
         ],
         'specifics_general_inspection' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_general_inspection'],
@@ -318,6 +354,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
+            'sql' => "text NULL",
         ],
         'specifics_delivery_date' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_delivery_date'],
@@ -327,6 +364,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
+            'sql' => "text NULL",
         ],
         'specifics_delivery_period' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_delivery_period'],
@@ -336,6 +374,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_door_count' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_door_count'],
@@ -346,6 +385,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_door_count']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_first_registration' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_first_registration'],
@@ -355,6 +395,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
+            'sql' => "text NULL",
         ],
         'specifics_emission_class' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_emission_class'],
@@ -365,6 +406,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_emission_class']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_emission_sticker' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker'],
@@ -375,6 +417,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_fuel' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_fuel'],
@@ -385,6 +428,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_fuel']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_power' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_power'],
@@ -394,6 +438,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_hsn' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_hsn'],
@@ -403,6 +448,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 4, 'tl_class' => 'w50'],
+            'sql' => "varchar(4) NOT NULL default ''",
         ],
         'specifics_tsn' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_tsn'],
@@ -412,6 +458,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 8, 'tl_class' => 'w50'],
+            'sql' => "varchar(8) NOT NULL default ''",
         ],
         'specifics_schwacke_code' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_schwacke_code'],
@@ -421,6 +468,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_gearbox' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_gearbox'],
@@ -431,6 +479,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_climatisation' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_climatisation'],
@@ -441,6 +490,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_climatisation']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_licensed_weight' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_licensed_weight'],
@@ -450,6 +500,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_axles' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_axles'],
@@ -459,6 +510,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_load_capacity' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_load_capacity'],
@@ -468,6 +520,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_num_seats' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_num_seats'],
@@ -477,6 +530,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "varchar(2) NOT NULL default ''",
         ],
         'specifics_operating_hours' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_operating_hours'],
@@ -486,6 +540,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_installation_height' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_installation_height'],
@@ -495,6 +550,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_lifting_capacity' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_lifting_capacity'],
@@ -504,6 +560,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_lifting_height' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_lifting_height'],
@@ -513,6 +570,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_construction_year' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_construction_year'],
@@ -522,6 +580,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_construction_date' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_construction_date'],
@@ -531,6 +590,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
+            'sql' => "text NULL",
         ],
         'specifics_cubic_capacity' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_cubic_capacity'],
@@ -540,6 +600,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_driving_mode' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_driving_mode'],
@@ -550,6 +611,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_driving_mode']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_driving_cab' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_driving_cab'],
@@ -560,6 +622,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_driving_cab']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_condition' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_condition'],
@@ -570,6 +633,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_condition']['options'],
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_usage_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_usage_type'],
@@ -580,6 +644,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_usage_type']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_wheel_formula' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_wheel_formula'],
@@ -590,6 +655,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_wheel_formula']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_number_of_bunks' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_number_of_bunks'],
@@ -599,6 +665,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_hydraulic_installation' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_hydraulic_installation'],
@@ -609,6 +676,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_hydraulic_installation']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_europallet_storage_spaces' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_europallet_storage_spaces'],
@@ -618,6 +686,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_dimension_length' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_dimension_length'],
@@ -627,6 +696,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_dimension_width' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_dimension_width'],
@@ -636,6 +706,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_dimension_height' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_dimension_height'],
@@ -645,6 +716,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_shipping_volume' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_shipping_volume'],
@@ -654,6 +726,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_loading_space_length' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_length'],
@@ -663,6 +736,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_loading_space_width' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_width'],
@@ -672,6 +746,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_identification_number' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_identification_number'],
@@ -681,6 +756,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_interior_color' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_interior_color'],
@@ -691,6 +767,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_interior_color']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_interior_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_interior_type'],
@@ -701,6 +778,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_interior_type']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_airbag' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_airbag'],
@@ -711,6 +789,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_airbag']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_number_of_previous_owners' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_number_of_previous_owners'],
@@ -720,6 +799,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "varchar(2) NULL default ''",
         ],
         'specifics_countryVersion' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_countryVersion'],
@@ -730,6 +810,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_countryVersion']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_videoUrl' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_videoUrl'],
@@ -739,6 +820,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
         ],
         'specifics_parking_assistants' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_parking_assistants'],
@@ -749,6 +831,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_parking_assistants']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_speed_control' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_speed_control'],
@@ -759,6 +842,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_speed_control']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_radio' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_radio'],
@@ -769,6 +853,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_daytime_running_lamps' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_daytime_running_lamps'],
@@ -779,6 +864,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_daytime_running_lamps']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_sliding_door_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_sliding_door_type'],
@@ -789,6 +875,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_sliding_door_type']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_headlight_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type'],
@@ -799,6 +886,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_bending_lights_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_bending_lights_type'],
@@ -809,6 +897,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_bending_lights_type']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_breakdown_service' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_breakdown_service'],
@@ -819,6 +908,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_breakdown_service']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_battery' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_battery'],
@@ -829,6 +919,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_battery']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_trailer_coupling_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type'],
@@ -839,6 +930,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'specifics_trim_line' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_trim_line'],
@@ -848,6 +940,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_model_range' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_model_range'],
@@ -857,6 +950,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'specifics_first_models_production_date' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_first_models_production_date'],
@@ -866,6 +960,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 wizard', 'rgxp' => 'date', 'datepicker' => true],
+            'sql' => "text NULL",
         ],
         'specifics_battery_capacity' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_battery_capacity'],
@@ -875,6 +970,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_envkv_compliant' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_envkv_compliant'],
@@ -884,6 +980,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'checkbox',
             'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
+            'sql' => "char(1) NOT NULL default ''",
         ],
         'emission_fuel_consumption_energy_efficiency_class' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_energy_efficiency_class'],
@@ -894,6 +991,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'select',
             'options' => ['A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'],
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_co2_emission' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_co2_emission'],
@@ -903,6 +1001,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_inner' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_inner'],
@@ -912,6 +1011,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_outer' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_outer'],
@@ -921,6 +1021,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_combined' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined'],
@@ -930,6 +1031,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_petrol_type' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type'],
@@ -939,6 +1041,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_combined_power_consumption' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'],
@@ -948,6 +1051,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => "text NULL",
         ],
         'emission_fuel_consumption_unit' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_unit'],
@@ -961,6 +1065,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'maxlength' => 255,
                 'tl_class' => 'w50',
             ],
+            'sql' => "text NULL",
         ],
         'images' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['images'],
@@ -977,6 +1082,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'files' => true,
                 'orderField' => 'orderSRC',
             ],
+            'sql' => 'blob NULL',
         ],
         'api_images' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['api_images'],
@@ -986,6 +1092,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
         ],
         'orderSRC' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['orderSRC'],
@@ -1000,6 +1107,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'options' => $GLOBALS['TL_LANG'][$strTable]['features']['options'],
             'eval' => ['maxlength' => 255, 'tl_class' => 'clr', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
             'options_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'featuresOptionsCallback'],
+            'sql' => 'text NULL',
         ],
     ],
 ];

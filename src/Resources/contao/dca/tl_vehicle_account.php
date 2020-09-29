@@ -10,6 +10,11 @@ $GLOBALS['TL_DCA'][$strTable] = [
         'dataContainer' => 'Table',
         'switchToEdit' => true,
         'enableVersioning' => true,
+        'sql' => [
+            'keys' => [
+                'id' => 'primary',
+            ],
+        ],
     ],
 
     // List
@@ -82,8 +87,10 @@ $GLOBALS['TL_DCA'][$strTable] = [
     // Fields
     'fields' => [
         'id' => [
+            'sql' => 'int(10) unsigned NOT NULL auto_increment',
         ],
         'tstamp' => [
+            'sql' => "int(10) unsigned NOT NULL default '0'",
         ],
         'description' => [
             'exclude' => true,
