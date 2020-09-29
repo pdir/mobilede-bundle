@@ -8,12 +8,12 @@ use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Pdir\MobileDeBundle\Annotation\Vehicle as Veh;
+use Pdir\MobileDeBundle\Annotation\Vehicle as VehicleAnnotation;
 
 /**
+ * @ORM\Entity
  * @ORM\Entity(repositoryClass="Pdir\MobileDeBundle\Repository\VehicleRepository")
  * @ORM\Table(name="tl_vehicle")
- * @Annotation
  */
 class Vehicle extends DcaDefault
 {
@@ -28,7 +28,7 @@ class Vehicle extends DcaDefault
 
     /**
      * @ORM\Column(name="published", type="smallint")
-     * @Veh(name="published", mandatory=true, enum={
+     * @VehicleAnnotation(name="published", mandatory=true, enum={
      *      "INACTIVE" = Vehicle::STATUS_INACTIVE,
      *      "ACTIVE" = Vehicle::STATUS_ACTIVE,
      * })
@@ -36,6 +36,27 @@ class Vehicle extends DcaDefault
      * @var int
      */
     public $published = self::STATUS_INACTIVE;
+
+    /**
+     * @ORM\Column(name="ad_id", type="text")
+     *
+     * @var string
+     */
+    public $adId = '';
+
+    /**
+     * @ORM\Column(name="account", type="text")
+     *
+     * @var int
+     */
+    public $account = '';
+
+    /**
+     * @ORM\Column(name="type", type="text")
+     *
+     * @var string
+     */
+    public $type = '';
 
     /**
      * @ORM\Column(name="name", type="text")
@@ -50,14 +71,6 @@ class Vehicle extends DcaDefault
      * @var string
      */
     public $alias = '';
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Pdir\MobileDeBundle\Entity\VehicleAccount", inversedBy="vehicles")
-     * @ORM\JoinColumn(name="vehicle_account", referencedColumnName="id", onDelete="CASCADE")
-     *
-     * @var VehicleAccount
-     */
-    public $account = '';
 
     /**
      * @ORM\Column(name="dealer_price_amount", type="decimal", precision=10, scale=2, nullable=true)
@@ -75,7 +88,7 @@ class Vehicle extends DcaDefault
 
     /**
      * @ORM\Column(name="price_included_delivery_costs", type="boolean", nullable=true)
-     * @Veh(name="price_included_delivery_costs", enum={
+     * @VehicleAnnotation(name="price_included_delivery_costs", enum={
      *      "INCLUDED" = Vehicle::DELIVERY_COST_INCLUDED,
      *      "NOTINCLUDED" = Vehicle::DELIVERY_COST_NOT_INCLUDED,
      * })
@@ -86,7 +99,7 @@ class Vehicle extends DcaDefault
 
     /**
      * @ORM\Column(name="price_vatable", type="boolean", nullable=true)
-     * @Veh(name="price_vatable", enum={
+     * @VehicleAnnotation(name="price_vatable", enum={
      *      "VATABLE" = Vehicle::PRICE_VATABLE,
      *      "NOTVATABLE" = Vehicle::PRICE_NOT_VATABLE,
      * })

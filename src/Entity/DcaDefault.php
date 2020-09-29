@@ -6,10 +6,7 @@ namespace Pdir\MobileDeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\MappedSuperclass()
- * @ORM\HasLifecycleCallbacks()
- */
+/** */
 abstract class DcaDefault
 {
     /**

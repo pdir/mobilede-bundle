@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @Annotation
  * @ORM\Entity(repositoryClass="Pdir\MobileDeBundle\Repository\VehicleAccountRepository")
  * @ORM\Table(name="tl_vehicle_account")
  */
@@ -45,7 +46,7 @@ class VehicleAccount extends DcaDefault
     private $credentials;
 
     /**
-     * @ORM\OneToMany(targetEntity="Pdir\MobileDeBundle\Entity\Vehicle", mappedBy="accountId")
+     * @ORM\OneToMany(targetEntity="Pdir\MobileDeBundle\Entity\Vehicle", mappedBy="account")
      *
      * @var Collection|Vehicle[]
      */
