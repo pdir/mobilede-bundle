@@ -92,18 +92,20 @@ class ReaderElement extends \ContentElement
 
         // features
         $featuresArr = deserialize($this->ad['features']);
-        $newFeatures = [];
-        foreach ($featuresArr as $feature) {
-            if (!$feature) {
-                continue;
-            }
+        if($featuresArr) {
+            $newFeatures = [];
+            foreach ($featuresArr as $feature) {
+                if (!$feature) {
+                    continue;
+                }
 
-            $newFeatures[] = [
-                'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
-                'key' => $feature,
-            ];
+                $newFeatures[] = [
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
+                    'key' => $feature,
+                ];
+            }
+            $this->ad['features'] = $newFeatures;
         }
-        $this->ad['features'] = $newFeatures;
 
         // specifics
         $specificsArr = preg_filter('/^specifics_(.*)/', '$1', array_keys($this->ad));
