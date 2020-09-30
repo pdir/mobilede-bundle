@@ -43,6 +43,7 @@ if (!is_array($GLOBALS['BE_MOD']['pdir'])) {
 $assetsDir = 'bundles/pdirmobilede';
 
 array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
+/*
     'mobileDeAds' => [
         'tables' => ['tl_mobile_ad'],
         'icon' => $assetsDir.'/img/icon.png',
@@ -52,13 +53,13 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     'mobileDeSetup' => [
         'callback' => 'Pdir\\MobileDeBundle\\Module\\MobileDeSetup',
         'icon' => $assetsDir.'/img/icon.png',
+    ],*/
+    'vehicle_show' => [
+        'tables' => ['tl_vehicle'],
+        'icon' => $assetsDir.'/img/icon.png',
     ],
     'vehicle_accounts' => [
         'tables' => ['tl_vehicle_account'],
-        'icon' => $assetsDir.'/img/icon.png',
-    ],
-    'vehicle_show' => [
-        'tables' => ['tl_vehicle'],
         'icon' => $assetsDir.'/img/icon.png',
     ]
 ]);

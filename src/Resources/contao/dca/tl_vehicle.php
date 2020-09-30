@@ -632,7 +632,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'select',
             'options' => $GLOBALS['TL_LANG'][$strTable]['specifics_condition']['options'],
-            'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'eval' => ['maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
             'sql' => 'text NULL',
         ],
         'specifics_usage_type' => [
