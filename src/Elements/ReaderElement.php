@@ -179,7 +179,7 @@ class ReaderElement extends \ContentElement
             }
         }
 
-        if ('man' === $this->ad['type']) {
+        if (isset($this->ad['images'])) {
             $manImages = unserialize($this->ad['images']);
             foreach ($manImages as $uuid) {
                 $objFile = \FilesModel::findByUuid($uuid);
