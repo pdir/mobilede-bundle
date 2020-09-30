@@ -383,6 +383,7 @@ class ListingElement extends \ContentElement
         $filter[] = $ad['specifics_condition'];
         $filter[] = $ad['consumer_price_amount'];
         $filter[] = $ad['syscara_typ_von'];
+        $filter[] = $ad['specifics_num_seats'];
 
         $filter = array_filter($filter,'strlen'); // remove empty fields
 
@@ -462,6 +463,14 @@ class ListingElement extends \ContentElement
             $this->filters['syscara_typ_von'][$ad['syscara_typ_von']] = [
                 'label' => $ad['syscara_typ_von'],
                 'key' => str_replace(' ', '_', $ad['syscara_typ_von']),
+            ];
+        }
+
+        if ($ad['specifics_num_seats']) {
+            $this->filters['specifics_num_seats'][$ad['specifics_num_seats']] = [
+                'label' => $ad['specifics_num_seats'],
+                'key' => $ad['specifics_num_seats'],
+                'count' => (isset($this->filters['specifics_num_seats'][$ad['specifics_num_seats']]['count']) ? $this->filters['specifics_num_seats'][$ad['specifics_num_seats']]['count'] + 1 : 1),
             ];
         }
 

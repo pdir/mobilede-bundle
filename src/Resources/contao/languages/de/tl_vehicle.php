@@ -424,6 +424,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_door_count']['options']['TWO_OR_THREE'
 $GLOBALS['TL_LANG'][$strTable]['specifics_door_count']['options']['FOUR_OR_FIVE'] = '4/5';
 $GLOBALS['TL_LANG'][$strTable]['specifics_door_count']['options']['SIX_OR_SEVEN'] = '6/7';
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_class'] = ['Schadstoffklasse', 'Wählen Sie hier die Schadstoffklasse aus.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_emission_class']['options']['EURO0'] = 'Euro0';
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_class']['options']['EURO1'] = 'Euro1';
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_class']['options']['EURO2'] = 'Euro2';
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_class']['options']['EURO3'] = 'Euro3';

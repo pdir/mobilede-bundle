@@ -154,8 +154,7 @@ class ReaderElement extends \ContentElement
 
         if($this->ad['specifics_first_models_production_date']) $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
 
-        if($this->ad['specifics_power']) $this->ad['specifics_power'] ? $this->ad['specifics_power'].' kW ('.System::getFormattedNumber(($this->ad['specifics_power'] * 1.35962), 0).' PS)' : 'Keine Angabe';
-
+        if($this->ad['specifics_power']) $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber(($this->ad['specifics_power'] * 1.35962), 0).' PS)'; else 'Keine Angabe';
 
         // images
         $newGallery = [];
@@ -190,6 +189,12 @@ class ReaderElement extends \ContentElement
 
             $this->ad['htmlDescription']['value'] = $this->ad['vehicle_free_text'];
             $this->ad['makeModelDescription']['value'] = $this->ad['name'];
+        }
+
+        if($this->ad['syscara_grundriss']) {
+            $groundPlan = unserialize($this->ad['syscara_grundriss']);
+            $objFile = \FilesModel::findByUuid($groundPlan[0]);
+            $this->ad['groundPlan'] = $objFile->path;
         }
 
         $fuelConsumption = [];
