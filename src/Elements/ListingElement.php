@@ -233,7 +233,7 @@ class ListingElement extends \ContentElement
                 $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
             }
 
-            if ('man' === $ad['type']) {
+            if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
                 $manImages = unserialize($ad['orderSRC']);
 
                 $objFile = \FilesModel::findByUuid($manImages[0]);
@@ -340,6 +340,14 @@ class ListingElement extends \ContentElement
             // add account
             $objFilterTemplate->account = $ad['account'];
 
+            $objFilterTemplate->rawData = $ad;
+
+            if($ad['syscara_grundriss']) {
+                $groundPlan = unserialize($ad['syscara_grundriss']);
+                $objFile = \FilesModel::findByUuid($groundPlan[0]);
+                $objFilterTemplate->groundPlan = $objFile->path;
+            }
+
             $arrReturn[] = $objFilterTemplate->parse();
         }
 
@@ -367,12 +375,14 @@ class ListingElement extends \ContentElement
         $filter = [];
         $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
         $filter[] = $ad['specifics_exterior_color'];
+        $filter[] = $ad['vehicle_class'];
         $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_fuel'];
         $filter[] = $ad['specifics_gearbox'];
         $filter[] = $ad['specifics_usage_type'];
         $filter[] = $ad['specifics_condition'];
         $filter[] = $ad['consumer_price_amount'];
+        $filter[] = $ad['syscara_typ_von'];
 
         $filter = array_filter($filter,'strlen'); // remove empty fields
 
@@ -389,6 +399,14 @@ class ListingElement extends \ContentElement
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
                 'key' => $ad['specifics_exterior_color'],
                 'count' => (isset($this->filters['colors'][$ad['specifics_exterior_color']]['count']) ? $this->filters['usageType'][$ad['specifics_exterior_color']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['vehicle_class']) {
+            $this->filters['class'][$ad['vehicle_class']] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_class']['options'][$ad['vehicle_class']],
+                'key' => $ad['vehicle_class'],
+                'count' => (isset($this->filters['class'][$ad['vehicle_class']]['count']) ? $this->filters['usageType'][$ad['vehicle_class']]['count'] + 1 : 1),
             ];
         }
 
@@ -437,6 +455,13 @@ class ListingElement extends \ContentElement
                 'label' => $ad['consumer_price_amount'],
                 'key' => $ad['consumer_price_amount'],
                 'count' => (isset($this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count']) ? $this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['syscara_typ_von']) {
+            $this->filters['syscara_typ_von'][$ad['syscara_typ_von']] = [
+                'label' => $ad['syscara_typ_von'],
+                'key' => str_replace(' ', '_', $ad['syscara_typ_von']),
             ];
         }
 

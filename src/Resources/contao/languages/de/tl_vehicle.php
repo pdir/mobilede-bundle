@@ -395,6 +395,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_climatisation']['options']['AUTOMATIC_
 $GLOBALS['TL_LANG'][$strTable]['specifics_condition'] = ['Fahrzeugzustand', 'Wählen Sie hier aus ob es sich um ein Gebraucht- oder Neufahrzeug handelt.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_condition']['options']['USED'] = 'Gebrauchtfahrzeug';
 $GLOBALS['TL_LANG'][$strTable]['specifics_condition']['options']['NEW'] = 'Neufahrzeug';
+$GLOBALS['TL_LANG'][$strTable]['specifics_condition']['options']['RENTAL_VEHICLE'] = 'Vermietfahrzeug';
 $GLOBALS['TL_LANG'][$strTable]['specifics_construction_date'] = ['Baudatum', 'Hier können Sie das genaue Baudatum auswählen.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_construction_year'] = ['Baujahr', 'Geben Sie hier das Baujahr ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_countryVersion'] = ['Herkunft', 'Wählen Sie hier die Herkunft des Fahrzeugs aus.'];
