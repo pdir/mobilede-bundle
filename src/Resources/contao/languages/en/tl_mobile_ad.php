@@ -505,7 +505,7 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_color']['options']['BROW
 $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_color']['options']['OTHER'] = 'Other';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type'] = ['Interior Type', 'Here you can choose the interior type.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type']['options']['LEATHER'] = 'Leather';
-$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type']['options']['partialLeather'] = 'Partial leather';
+$GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type']['options']['PARTIAL_LEATHER'] = 'Partial leather';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type']['options']['FABRIC'] = 'Fabric';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type']['options']['VELOUR'] = 'Velour';
 $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_interior_type']['options']['ALCANTARA'] = 'Alcantara';
