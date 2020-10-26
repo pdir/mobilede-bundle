@@ -22,15 +22,21 @@ matrix:
   - php: 7.4
     env: CONTAO_VERSION='4.4.*'
   - php: 7.1
-    env: CONTAO_VERSION='4.8.*'
+    env: CONTAO_VERSION='4.9.*'
   - php: 7.2
-    env: CONTAO_VERSION='4.8.*'
+    env: CONTAO_VERSION='4.9.*'
   - php: 7.3
-    env: CONTAO_VERSION='4.8.*'
+    env: CONTAO_VERSION='4.9.*'
   - php: 7.4
-    env: CONTAO_VERSION='4.8.*'
+    env: CONTAO_VERSION='4.9.*'
+  - php: 7.1
+    env: CONTAO_VERSION='4.10.*'
+  - php: 7.2
+    env: CONTAO_VERSION='4.10.*'
+  - php: 7.3
+    env: CONTAO_VERSION='4.10.*'
   - php: 7.4
-    env: COVERAGE=1 CONTAO_VERSION='4.9.x-dev'
+    env: COVERAGE=1 CONTAO_VERSION='4.10.*'
   allow_failures:
   - env: COVERAGE=1 DEFAULT=0
   fast_finish: true
