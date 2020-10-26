@@ -61,5 +61,9 @@
     "docs": "https://pdir.de/docs/de/contao/extensions/mobilede/",
     "issues": "https://github.com/pdir/mobilede-bundle/issues",
     "source": "https://github.com/pdir/mobilede-bundle"
+  },
+  "suggest": {
+    "pdir/mobilede-sync-bundle": "Mobile.de Import for the vehicle manager / Mobile.de Import für den Fahrzeugmanager",
+    "pdir/vehicle-syscara-import": "SysCara Import for the vehicle manager / SysCara Import für den Fahrzeugmanager"
   }
 }
