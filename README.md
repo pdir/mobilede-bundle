@@ -115,3 +115,22 @@ Generate getter and setter
 Run cypress tests against demo data
 
     npm run cypress:open or yarn run cypress open
+
+
+Bildnachweise für Demodaten
+-------------------------
+
+* Mercedes AMG Sportwagen / amg-1880381_1280.jpg: [PIRO4D](https://pixabay.com/de/users/PIRO4D)@[Pixabay](https://pixabay.com/de/illustrations/amg-mercedes-auto-sls-sportwagen-1880381/)
+* Audi A8 Sportwagen rot / audi-1890494_1280.jpg: [PIRO4D](https://pixabay.com/de/users/PIRO4D)@[Pixabay](https://pixabay.com/de/illustrations/audi-sportwagen-auto-a8-rot-1890494/)
+* Citroen Ente / auto-3091234_1280.jpg: [GuentherDillingen](https://pixabay.com/de/users/GuentherDillingen)@[Pixabay](https://pixabay.com/de/photos/auto-oldtimer-citroen-ente-fenster-3091234/)
+* Mazda weiß / automobile-1840414_1920.jpg: [Pexels](https://pixabay.com/de/users/Pexels)@[Pixabay](https://pixabay.com/de/photos/automobil-auto-mazda-stra%C3%9Fe-1840414/)
+* VW Käfer rot / automotive-1846910_1280.jpg: [Pexels](https://pixabay.com/de/users/Pexels)@[Pixabay](https://pixabay.com/de/photos/automobil-vw-k%C3%A4fer-auto-stadt-1846910/)
+* BMW blau / bmw-768688_1280.jpg: [Free-Photos](https://pixabay.com/de/users/Photos)@[Pixabay](https://pixabay.com/de/photos/bmw-auto-fahrzeug-transport-stra%C3%9Fe-768688/)
+* BMW Sportwagen schwarz / bmw-918408_1280.jpg: [Free-Photos](https://pixabay.com/de/users/Free-Photos)@[Pixabay](https://pixabay.com/de/photos/bmw-auto-front-sportwagen-918408/)
+* BMW Coupe Oldtimer / bmw-3807243_1280.jpg: [emkanicepic](https://pixabay.com/de/users/emkanicepic)@[Pixabay](https://pixabay.com/de/photos/bmw-coupe-oldtimer-auto-sportwagen-3807243/)
+* VW Käfer grau / city-1284508_1280.jpg: [Pexels](https://pixabay.com/de/users/Pexels)@[Pixabay](https://pixabay.com/de/photos/stadt-auto-fahrzeug-jahrgang-1284508/)
+* Jaguar Sportwagen / jaguar-1256572_1280.jpg: [Various-Photography](https://pixabay.com/de/users/Various-Photography)@[Pixabay](https://pixabay.com/de/photos/jaguar-sportwagen-schnell-automobil-1256572/)
+* Trabant mit Wohnwagen / oldtimer-1195112_1280.jpg: [bernswaelz](https://pixabay.com/de/users/bernswaelz)@[Pixabay](https://pixabay.com/de/photos/oldtimer-alte-autos-trabbi-trabant-1195112/)
+* Seat Ibiza / seat-2266976_1280.jpg: [mettmett](https://pixabay.com/de/users/mettmett)@[Pixabay](https://pixabay.com/de/photos/seat-ibiza-sc-de-sport-stadtauto-2266976/)
+* Jaguar XJ8 / car-2182792_1920.jpg: [dgeldart](https://pixabay.com/de/users/dgeldart)@[Pixabay](https://pixabay.com/de/photos/auto-jaguar-xj8-2182792/)
+* Ford Sportwagen / car-3072403_1920.jpg: [Toby_Parsons](https://pixabay.com/de/users/Toby_Parsons)@[Pixabay](https://pixabay.com/de/photos/auto-fahrzeug-antrieb-3072403/)
