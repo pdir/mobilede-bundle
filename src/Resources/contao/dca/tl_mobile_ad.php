@@ -159,6 +159,13 @@ $GLOBALS['TL_DCA']['tl_mobile_ad'] = [
             'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
             'sql' => "char(1) NOT NULL default ''",
         ],
+        'price_vat_rate' => [
+            'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rate'],
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
         'price_vat_rating' => [
             'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rating'],
             'exclude' => true,

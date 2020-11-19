@@ -24,6 +24,7 @@ $GLOBALS['TL_LANG']['tl_mobile_ad']['ad_id'] = ['mobile.de ID', 'The unique mobi
 $GLOBALS['TL_LANG']['tl_mobile_ad']['alias'] = ['Alias', 'Alias'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['consumer_price_amount'] = ['Consumer Price Amount (Euro)', 'Here you can enter the consumer price amout (gross price).'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['price_currency'] = ['Price Currency', 'Here you can enter the consumer price currency.'];
+$GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rate'] = ['Vat rate', 'Here you can enter the price vat rate.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['dealer_price_amount'] = ['Dealer Price Amount (Euro)', 'Here you can enter the dealer price amout (gross price).'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'] = ['CO²-Emission (g/km)', 'Here you can enter the co² emission (g/km). Set it to 0 for fuel type electricity.'];
 $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_legend'] = 'Emission Fuel Consumption';
