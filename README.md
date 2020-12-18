@@ -134,3 +134,5 @@ Bildnachweise für Demodaten
 * Seat Ibiza / seat-2266976_1280.jpg: [mettmett](https://pixabay.com/de/users/mettmett)@[Pixabay](https://pixabay.com/de/photos/seat-ibiza-sc-de-sport-stadtauto-2266976/)
 * Jaguar XJ8 / car-2182792_1920.jpg: [dgeldart](https://pixabay.com/de/users/dgeldart)@[Pixabay](https://pixabay.com/de/photos/auto-jaguar-xj8-2182792/)
 * Ford Sportwagen / car-3072403_1920.jpg: [Toby_Parsons](https://pixabay.com/de/users/Toby_Parsons)@[Pixabay](https://pixabay.com/de/photos/auto-fahrzeug-antrieb-3072403/)
+
+Alle Demo-Inhalte dieses Moduls, insbesondere Texte, Fotografien und Grafiken, sind urheberrechtlich geschützt. Das Urheberrecht liegt bei der pdir Gmbh bzw. den jeweiligen Urhebern der Werke. Bitte fragen Sie uns, falls Sie die Demo-Inhalte dieses Themes verwenden möchten. Ohne schriftliche Genehmigung seitens der Urheber dürfen diese in keiner Form verwendet, vervielfältigt oder verbreitet werden.
