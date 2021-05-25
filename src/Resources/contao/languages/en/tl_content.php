@@ -62,7 +62,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['Activate Power Slid
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Activate Mileage Slider', 'If active you can filter the mileage with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Only Filter','If active the objects are not shown and only the filter form is displayed.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'] = ['Vehicle import account', 'Here you can assign an ID for the import account. Default: 0 (only necessary for several import accounts)'];
-$GLOBALS['TL_LANG']['tl_vehicle']['pdir_md_cronPoorMan'] = ['Activate poor man cron', 'Here you can enable the import via Contao poor man cron. (hourly)'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Activate poor man cron', 'Here you can enable the import via Contao poor man cron. (hourly)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Vehicle account', 'Which account should be pre-filtered for? (Default: 0 = all accounts)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Source of the vehicles', 'According to which source of the vehicles should be prefiltered?'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'manually';

@@ -69,6 +69,6 @@ $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', '
  */
 
 if (TL_MODE === 'BE') {
-    $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/mobilede_backend.js';
-    $GLOBALS['TL_CSS'][] = $assetsDir.'/css/mobilede_backend.css';
+    $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/vehicle_backend.js';
+    $GLOBALS['TL_CSS'][] = $assetsDir.'/css/vehicle_backend.css';
 }

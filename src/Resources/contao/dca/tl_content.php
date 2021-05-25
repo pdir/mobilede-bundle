@@ -311,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_mileageSlider'] = [
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cronPoorMan'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_vehicle']['pdir_md_cronPoorMan'],
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'],
     'exclude' => true,
     'filter' => true,
     'inputType' => 'checkbox',

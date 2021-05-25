@@ -62,7 +62,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['PS-Slider aktiviere
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Kilometerstand-Slider aktivieren', 'Wenn aktiv können Sie den Kilometerstand über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Nur Filter','Wenn Sie diese Option aktivieren, werden die Objekte ausgeblendet und nur die Filter dargestellt, z. B. um ein Filterformular auf der Startseite zu platzieren.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'] = ['Konto für den Fahrzeugimport', 'Hier können Sie eine ID für das Import Konto vergeben. Standard: 0 (nur notwendig für mehrere Import Konten)'];
-$GLOBALS['TL_LANG']['tl_vehicle']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron aktivieren', 'Hier kann der Import per Contao Poor-Man-Cron aktiviert werden. (stündlich)'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron aktivieren', 'Hier kann der Import per Contao Poor-Man-Cron aktiviert werden. (stündlich)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Konto der Fahrzeuge', 'Nach welchem Konto soll vorgefiltert werden? (Default: 0 = Alle Konten)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Quelle der Fahrzeuge', 'Nach welcher Quelle der Fahrzeuge soll vorgefiltert werden?'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'Manuell';

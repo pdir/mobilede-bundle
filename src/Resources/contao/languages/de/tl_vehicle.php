@@ -26,6 +26,7 @@ $GLOBALS['TL_LANG'][$strTable]['ad_id'] = ['Vehicle ID', 'Die eindeutige Vehicle
 $GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];
 $GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'] = ['Endverbraucherpreis (Euro)', 'Geben Sie hier den Endverbraucherpreisbetrag (Bruttopreis) ein.'];
 $GLOBALS['TL_LANG'][$strTable]['price_currency'] = ['Währung', 'Geben sie hier die Währung an.'];
+$GLOBALS['TL_LANG'][$strTable]['price_vat_rate'] = ['Mehrwertsteuer-Satz', 'Geben sie hier den Mehrwertsteuer-Satz an.'];
 $GLOBALS['TL_LANG'][$strTable]['dealer_price_amount'] = ['Händlerpreis (Euro)', 'Geben Sie hier den Händlerpreisbetrag (Bruttopreis) ein.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_co2_emission'] = ['CO²-Ausstoß (g/km)', 'Geben Sie hier den Co²-Ausstoß in g/km ein. Geben Sie 0 ein, wenn die Kraftstoffart Elektro ist.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_legend'] = 'Kraftstoffverbrauch';
