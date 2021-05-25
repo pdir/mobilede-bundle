@@ -40,7 +40,12 @@
     "php-http/guzzle6-adapter": "^2.0"
   },
   "extra": {
-    "contao-manager-plugin": "Pdir\\MobileDeBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "Pdir\\MobileDeBundle\\ContaoManager\\Plugin",
+    "contao": {
+      "runonce": [
+        "Runonce/TableVehicleRunonce.php"
+      ]
+    }
   },
   "autoload": {
     "psr-4": {
