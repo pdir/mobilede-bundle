@@ -21,7 +21,7 @@ class MobileDeSetup extends \BackendModule
     /**
      * mobilede version.
      */
-    const VERSION = '2.6.4';
+    const VERSION = '3.0.0';
 
     /**
      * Extension mode.
@@ -48,7 +48,7 @@ class MobileDeSetup extends \BackendModule
      *
      * @var string
      */
-    protected $strTable = 'tl_mobile_ad';
+    protected $strTable = 'tl_vehicle';
 
     /**
      * Demo data path.
@@ -81,8 +81,6 @@ class MobileDeSetup extends \BackendModule
                 // do something here
         }
 
-        $this->Template->extMode = self::MODE;
-        $this->Template->extModeTxt = self::MODE === 'FULL' ? 'Vollversion' : 'Demo';
         $this->Template->version = self::VERSION;
         $this->Template->hostname = gethostname();
         $this->Template->ip = \Environment::get('server');

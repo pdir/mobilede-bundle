@@ -130,7 +130,7 @@ class Ad
      */
     public function categoryOptionsCallback(DataContainer $dc)
     {
-        return $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_'.$dc->activeRecord->vehicle_class]['options'];
+        return $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_category_'.$dc->activeRecord->vehicle_class]['options'];
     }
 
     /**
@@ -142,6 +142,6 @@ class Ad
      */
     public function featuresOptionsCallback(DataContainer $dc)
     {
-        return $GLOBALS['TL_LANG']['tl_mobile_ad']['features_'.$dc->activeRecord->vehicle_class]['options'];
+        return $GLOBALS['TL_LANG']['tl_vehicle']['features_'.$dc->activeRecord->vehicle_class]['options'];
     }
 }

@@ -17,15 +17,6 @@
 /**
  * Add frontend module.
  */
-/*
-array_insert($GLOBALS['FE_MOD'], 2, array
-(
-    'pdirMobileDe' => array
-    (
-        'PdirMobileDeList'    => '\Pdir\MobileDeBundle\Listing',
-        'PdirMobileDeReader'  => '\Pdir\MobileDeBundle\Reader',
-    )
-));*/
 
 /**
  * Add content element.
@@ -43,17 +34,6 @@ if (!is_array($GLOBALS['BE_MOD']['pdir'])) {
 $assetsDir = 'bundles/pdirmobilede';
 
 array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
-/*
-    'mobileDeAds' => [
-        'tables' => ['tl_mobile_ad'],
-        'icon' => $assetsDir.'/img/icon.png',
-        'table' => ['TableWizard', 'importTable'],
-        'list' => ['ListWizard', 'importList'],
-    ],
-    'mobileDeSetup' => [
-        'callback' => 'Pdir\\MobileDeBundle\\Module\\MobileDeSetup',
-        'icon' => $assetsDir.'/img/icon.png',
-    ],*/
     'vehicle_show' => [
         'tables' => ['tl_vehicle'],
         'icon' => $assetsDir.'/img/icon.png',

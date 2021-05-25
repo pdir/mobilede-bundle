@@ -311,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_mileageSlider'] = [
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cronPoorMan'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['pdir_md_cronPoorMan'],
+    'label' => &$GLOBALS['TL_LANG']['tl_vehicle']['pdir_md_cronPoorMan'],
     'exclude' => true,
     'filter' => true,
     'inputType' => 'checkbox',
@@ -379,8 +379,5 @@ class pdir_md_content extends Backend
     private function getElementsTemplates(DataContainer $dc, $strTmpl = 'list')
     {
         return $this->getTemplateGroup('ce_mobilede_'.$strTmpl);
-        if (version_compare(VERSION.BUILD, '2.9.0', '>=')) {
-            return $this->getTemplateGroup('ce_mobilede_'.$strTmpl, $dc->activeRecord->pid);
-        }
     }
 }
