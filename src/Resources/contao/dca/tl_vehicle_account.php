@@ -96,6 +96,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'unique' => true, 'tl_class' => 'w50'],
+            'sql' => "varchar(255) NOT NULL default ''",
         ],
         'apiType' => [
             'exclude' => true,
