@@ -28,7 +28,7 @@
   ],
   "require": {
     "php": "^7.2",
-    "contao/core-bundle": "^4.8",
+    "contao/core-bundle": "^4.9",
     "doctrine/orm": "^2.6",
     "doctrine/annotations": "^1.6"
   },
@@ -41,11 +41,6 @@
   },
   "extra": {
     "contao-manager-plugin": "Pdir\\MobileDeBundle\\ContaoManager\\Plugin",
-    "contao": {
-      "runonce": [
-        "Runonce/TableVehicleRunonce.php"
-      ]
-    }
   },
   "autoload": {
     "psr-4": {
