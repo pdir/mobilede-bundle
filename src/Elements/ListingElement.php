@@ -125,6 +125,7 @@ class ListingElement extends \ContentElement
             {
                 $strWhere .= " AND type='" . $this->pdirVehicleFilterByType . "'";
             }
+
             if ($strWhere == '')
             {
                 $strWhere .= " WHERE type='" . $this->pdirVehicleFilterByType . "'";
@@ -138,6 +139,7 @@ class ListingElement extends \ContentElement
             {
                 $strWhere .= ' AND account=' . $this->pdirVehicleFilterByAccount;
             }
+
             if ($strWhere == '')
             {
                 $strWhere .= ' WHERE account=' . $this->pdirVehicleFilterByAccount;
@@ -176,12 +178,15 @@ class ListingElement extends \ContentElement
     {
         $assetsDir = 'web/bundles/pdirmobilede';
 
-        if (!$this->pdir_md_removeModuleJs) {
+        if (!$this->pdir_md_removeModuleJs)
+        {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
-        if (!$this->pdir_md_removeModuleCss) {
+
+        if (!$this->pdir_md_removeModuleCss)
+        {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
             $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
@@ -192,11 +197,13 @@ class ListingElement extends \ContentElement
         // Limit
 
         // Promotion
-        if (1 === $this->pdir_md_promotion_corner_shadow) {
+        if (1 === $this->pdir_md_promotion_corner_shadow)
+        {
             $this->pdir_md_promotion_corner_shadow = 'shadow';
         }
 
-        if (1 !== $this->pdir_md_hidePromotionBox and isset($this->ads['prominent'])) {
+        if (1 !== $this->pdir_md_hidePromotionBox and isset($this->ads['prominent']))
+        {
             $arrFeaturedCss = [
                 $this->pdir_md_promotion_corner_color,
                 $this->pdir_md_promotion_corner_position,
@@ -216,7 +223,8 @@ class ListingElement extends \ContentElement
         $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
 
         // Featured corner
-        if (1 === $this->pdir_md_corner_shadow) {
+        if (1 === $this->pdir_md_corner_shadow)
+        {
             $this->pdir_md_corner_shadow = 'shadow';
         }
 
@@ -235,7 +243,8 @@ class ListingElement extends \ContentElement
         // Filters
         $this->Template->filters = $this->filters;
 
-        if ($this->pdir_md_hideFilters) {
+        if ($this->pdir_md_hideFilters)
+        {
             $this->Template->hideFilters = true;
         }
 
@@ -246,7 +255,8 @@ class ListingElement extends \ContentElement
         $this->Template->noResultMessage = $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'];
 
         // Debug mode
-        if ($this->pdir_md_enableDebugMode) {
+        if ($this->pdir_md_enableDebugMode)
+        {
             $this->Template->debug = true;
             $this->Template->version = MobileDeSetup::VERSION;
             $this->Template->customer = $this->pdir_md_customer_id;

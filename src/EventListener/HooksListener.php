@@ -58,7 +58,7 @@ class HooksListener
         try {
             // @todo use model
             $db = \Database::getInstance();
-            $stmt = $db->prepare('SELECT * FROM tl_mobile_ad WHERE id=? OR alias =?');
+            $stmt = $db->prepare('SELECT * FROM tl_vehicle WHERE id=? OR alias =?');
             $res = $stmt->execute($parts[1], $parts[1]);
             $ad = $res->fetchAssoc();
             if ($ad[$parts[2]]) {

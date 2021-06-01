@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "char(1) NOT NULL default ''",
         ],
         'price_vat_rate' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_mobile_ad']['price_vat_rate'],
+            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_vat_rate'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['tl_class' => 'w50'],
