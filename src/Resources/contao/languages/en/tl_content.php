@@ -51,7 +51,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_left'] = 'Bott
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_right'] = 'Bottom Right';
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_position'] = ['Corner Hinge Position (Promotion Box)', 'Please choose the position of the corner hinge (only promotion box).'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_shadow'] = ['Show Corner Hinge Shadow (Promotion Box)', 'If active the corner hinge gets a shadow.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_shadow'] = ['Show COrner Hinge Shadow', 'If active the corner hinge gets a shadow.'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_shadow'] = ['Show Corner Hinge Shadow', 'If active the corner hinge gets a shadow.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = ['Skip JavaScript', 'If active the module javascript is not included.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleCss'] = ['Skip Stylesheets', 'If active the module stylesheets will not included.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_forceRefresh'] = ['Skip Cache', 'Load advertisements directly from the Mobile.de API (not recommended)'];
@@ -67,3 +67,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Vehicle acco
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Source of the vehicles', 'According to which source of the vehicles should be prefiltered?'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'manually';
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['sync'] = 'API';
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterFields'] = ['Fields', 'Please enter a comma separated list of the fields you want to list or use "*".'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterWhere'] = ['Condition', 'Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. &lt;em&gt;specifics_gearbox=MANUAL_GEAR&lt;/em&gt; oder &lt;em&gt;vehicle_class!=&quot;Car&quot;&lt;/em&gt;).'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Searchable fields', 'Here you can enter a comma separated list of fields that you want to be searchable.'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSort'] = ['Order by', 'Here you can enter a comma separated list of fields to sort the results by.'];

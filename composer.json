@@ -56,5 +56,11 @@
     "docs": "https://pdir.de/docs/de/contao/extensions/vehicle-manager/",
     "issues": "https://github.com/pdir/mobilede-bundle/issues",
     "source": "https://github.com/pdir/mobilede-bundle"
+  },
+  "suggest": {
+    "contao-themes-net/mate-theme-bundle": "Show a vehicle feed in the MATE Theme. / Zeige deine Fahrzeuge im MATE Theme an.",
+    "contao-themes-net/odd-theme-bundle": "Show a vehicle feed in the ODD Theme. / Zeige deine Fahrzeuge im ODD Theme an.",
+    "contao-themes-net/nature-theme-bundle": "Show a vehicle feed in the NATURE Theme. / Zeige deine Fahrzeuge im NATURE Theme an.",
+    "contao-themes-net/zero-one-theme-bundle": "Show a vehicle feed in the 0.1 Theme. / Zeige deine Fahrzeuge im 0.1 Theme an."
   }
 }

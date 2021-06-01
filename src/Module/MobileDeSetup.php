@@ -131,7 +131,7 @@ class MobileDeSetup extends \BackendModule
             $this->Template->message = ['Demo Daten wurden erfolgreich heruntergeladen!', 'confirm'];
 
             // set images
-            $adIds = \Database::getInstance()->prepare('SELECT ad_id FROM tl_mobile_ad')->execute();
+            $adIds = \Database::getInstance()->prepare('SELECT vehicle_id FROM tl_mobile_ad')->execute();
             $numbers = range(0, count($images) - 1);
             while ($adIds->next()) {
                 $uuidArr = [];
@@ -143,7 +143,7 @@ class MobileDeSetup extends \BackendModule
                 $uuidArr = serialize($uuidArr);
 
                 // update
-                \Database::getInstance()->prepare('UPDATE tl_mobile_ad SET images=?, orderSRC=? WHERE ad_id=?')->execute($uuidArr, $uuidArr, $adIds->ad_id);
+                \Database::getInstance()->prepare('UPDATE tl_mobile_ad SET images=?, orderSRC=? WHERE vehicle_id=?')->execute($uuidArr, $uuidArr, $adIds->vehicle_id);
             }
         }
     }

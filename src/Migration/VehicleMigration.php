@@ -41,7 +41,7 @@ class VehicleMigration extends AbstractMigration
             return false;
         }
 
-        return;
+        return true;
     }
 
     public function run(): MigrationResult
@@ -50,9 +50,13 @@ class VehicleMigration extends AbstractMigration
 
         $stmt->execute();
 
+        $stmt = $this->connection->prepare("ALTER TABLE tl_vehicle RENAME COLUMN ad_id TO vehicle_id");
+
+        $stmt->execute();
+
         return new MigrationResult(
             true,
-            'Table tl_mobile_ad renamed to tl_vehicle'
+            'Table tl_mobile_ad renamed to tl_vehicle and column ad_id renamed to vehicle_id'
         );
     }
 }

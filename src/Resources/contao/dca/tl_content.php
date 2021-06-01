@@ -14,17 +14,19 @@
  * file that was distributed with this source code.
  */
 
+$strTable = 'tl_content';
+
 /**
  * Add palette to tl_content.
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdirVehicleAccount,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter,pdirVehicleFilterByType,pdirVehicleFilterByAccount;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdirVehicleAccount,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterSearch,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter,pdirVehicleFilterByType,pdirVehicleFilterByAccount;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 
 /*
  * Add fields to tl_content
  */
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_readerPage'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_readerPage'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_readerPage'],
     'exclude' => true,
     'inputType' => 'pageTree',
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
@@ -37,8 +39,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_readerPage'] = [
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_listingPage'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_listingPage'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_listingPage'],
     'exclude' => true,
     'inputType' => 'pageTree',
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
@@ -50,8 +52,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_listingPage'] = [
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_listTemplate'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_listTemplate'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_listTemplate'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_listTemplate'],
     'exclude' => true,
     'inputType' => 'select',
     'options_callback' => ['pdir_md_content', 'getListTemplates'],
@@ -63,8 +65,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_listTemplate'] = [
     'sql' => "varchar(32) NOT NULL default '0'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_itemTemplate'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_itemTemplate'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_itemTemplate'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_itemTemplate'],
     'exclude' => true,
     'inputType' => 'select',
     'options_callback' => ['pdir_md_content', 'getItemTemplates'],
@@ -76,8 +78,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_itemTemplate'] = [
     'sql' => "varchar(32) NOT NULL default '0'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_id'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_id'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_customer_id'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_customer_id'],
     'exclude' => true,
     'inputType' => 'text',
     'eval' => [
@@ -88,8 +90,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_id'] = [
     'sql' => "varchar(64) NOT NULL default 'demo'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_hidePromotionBox'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_hidePromotionBox'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_hidePromotionBox'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_hidePromotionBox'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -99,8 +101,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_hidePromotionBox'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_hideFilters'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_hideFilters'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_hideFilters'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_hideFilters'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -110,8 +112,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_hideFilters'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_list_shuffle'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_list_shuffle'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_list_shuffle'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -121,60 +123,60 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_list_shuffle'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_corner_color'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_color'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color'],
     'exclude' => true,
     'inputType' => 'select',
     'options' => [
-        'white' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_white'],
-        'black' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_black'],
-        'grey' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_grey'],
-        'blue' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_blue'],
-        'green' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_green'],
-        'turquoise' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_turquoise'],
-        'purple' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_purple'],
-        'red' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_red'],
-        'orange' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_orange'],
-        'yellow' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_color_yellow'],
+        'white' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_white'],
+        'black' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_black'],
+        'grey' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_grey'],
+        'blue' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_blue'],
+        'green' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_green'],
+        'turquoise' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_turquoise'],
+        'purple' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_purple'],
+        'red' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_red'],
+        'orange' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_orange'],
+        'yellow' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_yellow'],
     ],
     'eval' => ['tl_class' => 'w50'],
     'sql' => "varchar(64) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_promotion_corner_color'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_color'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_promotion_corner_color'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_promotion_corner_color'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_corner_color']['options'],
+    'options' => $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_color']['options'],
     'eval' => ['tl_class' => 'w50'],
     'sql' => "varchar(64) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_corner_position'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_position'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position'],
     'exclude' => true,
     'inputType' => 'select',
     'options' => [
-        'top-left' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_top_left'],
-        'top-right' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_top_right'],
-        'bottom-left' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_left'],
-        'bottom-right' => $GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_position_bottom_right'],
+        'top-left' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_top_left'],
+        'top-right' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_top_right'],
+        'bottom-left' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_bottom_left'],
+        'bottom-right' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_bottom_right'],
     ],
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => "varchar(64) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_promotion_corner_position'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_position'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_promotion_corner_position'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_promotion_corner_position'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_corner_position']['options'],
+    'options' => $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_position']['options'],
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => "varchar(64) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_promotion_corner_shadow'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_promotion_corner_shadow'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_promotion_corner_shadow'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_promotion_corner_shadow'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -184,8 +186,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_promotion_corner_shadow'] = 
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_corner_shadow'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_corner_shadow'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_shadow'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_shadow'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -195,8 +197,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_corner_shadow'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_removeModuleJs'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_removeModuleJs'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_removeModuleJs'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -206,8 +208,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_removeModuleJs'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_removeModuleCss'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleCss'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_removeModuleCss'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_removeModuleCss'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -217,8 +219,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_removeModuleCss'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_forceRefresh'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_forceRefresh'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_forceRefresh'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_forceRefresh'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -228,8 +230,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_forceRefresh'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cacheTime'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_cacheTime'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_cacheTime'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_cacheTime'],
     'exclude' => true,
     'inputType' => 'text',
     'eval' => [
@@ -239,8 +241,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cacheTime'] = [
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_enableDebugMode'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_enableDebugMode'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_enableDebugMode'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -250,8 +252,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_enableDebugMode'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_username'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_username'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_customer_username'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_customer_username'],
     'exclude' => true,
     'search' => true,
     'sorting' => true,
@@ -266,8 +268,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_username'] = [
     'sql' => "varchar(64) NOT NULL default 'demo'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_password'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_password'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_customer_password'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_customer_password'],
     'exclude' => true,
     'inputType' => 'text',
     'eval' => [
@@ -277,8 +279,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_customer_password'] = [
     'sql' => "varchar(128) NOT NULL default 'demo'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_priceSlider'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_priceSlider'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_priceSlider'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -288,8 +290,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_priceSlider'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_powerSlider'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_powerSlider'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_powerSlider'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -299,8 +301,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_powerSlider'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_mileageSlider'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_mileageSlider'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_mileageSlider'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -310,8 +312,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_mileageSlider'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cronPoorMan'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_cronPoorMan'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_cronPoorMan'],
     'exclude' => true,
     'filter' => true,
     'inputType' => 'checkbox',
@@ -322,8 +324,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_cronPoorMan'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_only_filter'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_only_filter'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_only_filter'],
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
@@ -333,8 +335,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdir_md_only_filter'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdirVehicleAccount'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleAccount'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleAccount'],
     'inputType' => 'text',
     'sorting' => true,
     'flag' => 1,
@@ -344,17 +346,17 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdirVehicleAccount'] = [
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdirVehicleFilterByType'] = [
-    'label'                 => &$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByType'] = [
+    'label'                 => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByType'],
     'exclude'               => true,
     'inputType'             => 'select',
-    'options'               => $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions'],
+    'options'               => $GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByTypeOptions'],
     'eval'                  => ['includeBlankOption'=>true, 'tl_class'=>'w50'],
     'sql'                   => "varchar(255) NOT NULL default ''"
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['pdirVehicleFilterByAccount'] = [
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'],
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByAccount'],
     'inputType' => 'text',
     'sorting' => true,
     'flag' => 1,
@@ -363,6 +365,35 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['pdirVehicleFilterByAccount'] = [
     ],
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
+
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterFields'] = [
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array('mandatory' => true, 'decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'),
+    'sql' => "varchar(255) NOT NULL default ''"
+];
+
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterWhere'] = [
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => ['preserveTags' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+    'sql' => "varchar(255) NOT NULL default ''"
+];
+
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterSearch'] = [
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+    'sql' => "varchar(255) NOT NULL default ''"
+];
+
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterSort'] = [
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+    'sql' => "varchar(255) NOT NULL default '*'"
+];
+
 
 class pdir_md_content extends Backend
 {

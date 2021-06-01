@@ -255,7 +255,7 @@ class ReaderElement extends \ContentElement
             $objRequest->setHeader('Accept-Language', 'de');
             $objRequest->setHeader('Accept', 'application/json');
             $objRequest->setHeader('Authorization', $strAuthorization);
-            $objRequest->send('https://services.mobile.de/search-api/ad/'.$this->ad['ad_id'].'/');
+            $objRequest->send('https://services.mobile.de/search-api/ad/'.$this->ad['vehicle_id'].'/');
 
             $tmpArr = (array) json_decode($objRequest->response, true);
 

@@ -7,3 +7,9 @@ services:
       - "@session"
       - "doctrine.orm.entity_manager"
     public: true
+
+  Pdir\MobileDeBundle\Migration\VehicleMigration:
+    arguments:
+      - '@database_connection'
+    tags:
+      - { name: contao.migration, priority: 0 }

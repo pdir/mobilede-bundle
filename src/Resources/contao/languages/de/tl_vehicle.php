@@ -22,7 +22,7 @@ $GLOBALS['TL_LANG'][$strTable]['cut'] = ['Inserat ausschneiden', 'Scheide Insera
 $GLOBALS['TL_LANG'][$strTable]['delete'] = ['Lösche Inserat', 'Lösche %s Inserat'];
 $GLOBALS['TL_LANG'][$strTable]['show'] = ['Zeige Inserat Information an', 'Zeige Information zu Inserat %s'];
 
-$GLOBALS['TL_LANG'][$strTable]['ad_id'] = ['Vehicle ID', 'Die eindeutige Vehicle ID.'];
+$GLOBALS['TL_LANG'][$strTable]['vehicle_id'] = ['Vehicle ID', 'Die eindeutige Vehicle ID.'];
 $GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];
 $GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'] = ['Endverbraucherpreis (Euro)', 'Geben Sie hier den Endverbraucherpreisbetrag (Bruttopreis) ein.'];
 $GLOBALS['TL_LANG'][$strTable]['price_currency'] = ['Währung', 'Geben sie hier die Währung an.'];
@@ -560,7 +560,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_videoUrl'] = ['Video-URL', 'Hier könn
 $GLOBALS['TL_LANG'][$strTable]['title_legend'] = 'Name und Typ';
 $GLOBALS['TL_LANG'][$strTable]['type'] = ['Typ', ''];
 $GLOBALS['TL_LANG'][$strTable]['type']['options']['man'] = 'Manuell';
-$GLOBALS['TL_LANG'][$strTable]['type']['options']['sync'] = 'Api Sync';
+$GLOBALS['TL_LANG'][$strTable]['type']['options']['sync'] = 'API Sync';
 $GLOBALS['TL_LANG'][$strTable]['account'] = ['Konto', 'Hier können Sie eine ID für das Import Konto vergeben. Standard: 0 (nur notwendig für mehrere Import Konten)'];
 $GLOBALS['TL_LANG'][$strTable]['vehicle_category_AgriculturalVehicle']['options']['CombineHarvester'] = 'Mähdrescher';
 $GLOBALS['TL_LANG'][$strTable]['vehicle_category_AgriculturalVehicle']['options']['FarmyardTractor'] = 'Hofschlepper';

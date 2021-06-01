@@ -16,10 +16,23 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
+use Contao\Database;
 use Contao\System;
+use Contao\StringUtil;
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 
+/**
+ * Provide methods to render content element "vehicle listing".
+ *
+ * @property string $pdirVehicleFilterFields
+ * @property string $pdirVehicleFilterSort
+ * @property string $pdirVehicleFilterWhere
+ * @property string $pdirVehicleFilterSearch
+ * @property string $pdirVehicleFilterByAccount
+ * @property string $pdirVehicleFilterByType
+ *
+ */
 class ListingElement extends \ContentElement
 {
     const PARAMETER_KEY = 'ad';
@@ -49,7 +62,8 @@ class ListingElement extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE === 'BE') {
+        if (TL_MODE === 'BE')
+        {
             $objTemplate = new \BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe LIST ###';
             $objTemplate->title = $this->headline;
@@ -67,50 +81,88 @@ class ListingElement extends \ContentElement
         $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
 
         // Return if there is no customer id
-        if (!$this->pdir_md_customer_id) {
+        if (!$this->pdir_md_customer_id)
+        {
             return '';
         }
 
         // set custom list template
-        if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate) {
+        if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate)
+        {
             $this->strTemplate = $this->pdir_md_listTemplate;
         }
 
         // set custom item template
-        if ($this->pdir_md_itemTemplate && $this->strItemTemplate !== $this->pdir_md_itemTemplate) {
+        if ($this->pdir_md_itemTemplate && $this->strItemTemplate !== $this->pdir_md_itemTemplate)
+        {
             $this->strItemTemplate = $this->pdir_md_itemTemplate;
         }
 
-        if($this->pdirVehicleFilterByAccount == 0) {
-            if(!$this->pdirVehicleFilterByType){
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM ' . $this->strTable . ' ORDER BY name')->execute('*');
-            } else {
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM ' . $this->strTable . ' WHERE type=? ORDER BY name')
-                    ->execute($this->pdirVehicleFilterByType);
-            }
+        $this->pdirVehicleFilterWhere = $this->replaceInsertTags($this->pdirVehicleFilterWhere, false);
+
+        // prepare data for sql
+        $strWhere = '';
+        $arrFields = StringUtil::trimsplit(',', $this->pdirVehicleFilterFields);
+
+        if (!is_array($arrFields) && count($arrFields))
+        {
+            $arrFields[] = '*';
         }
 
-        if($this->pdirVehicleFilterByAccount > 0) {
-            if(!$this->pdirVehicleFilterByType){
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM ' . $this->strTable . ' WHERE account=? ORDER BY name')
-                    ->execute($this->pdirVehicleFilterByAccount);
-            } else {
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM ' . $this->strTable . ' WHERE account=? AND type=?  ORDER BY name')
-                    ->execute($this->pdirVehicleFilterByAccount, $this->pdirVehicleFilterByType);
-            }
+        // Get the selected records
+        $strQuery = "SELECT " . implode(', ', array_map('Database::quoteIdentifier', $arrFields));
+
+        $strQuery .= " FROM " . $this->strTable;
+
+        if ($this->pdirVehicleFilterWhere)
+        {
+            $strWhere .= " WHERE " . $this->pdirVehicleFilterWhere;
         }
 
+        if ($this->pdirVehicleFilterByType)
+        {
+            if ($strWhere != '')
+            {
+                $strWhere .= " AND type='" . $this->pdirVehicleFilterByType . "'";
+            }
+            if ($strWhere == '')
+            {
+                $strWhere .= " WHERE type='" . $this->pdirVehicleFilterByType . "'";
+            }
 
-        while ($objAds->next()) {
+        }
+
+        if ($this->pdirVehicleFilterByAccount != 0)
+        {
+            if ($strWhere != '')
+            {
+                $strWhere .= ' AND account=' . $this->pdirVehicleFilterByAccount;
+            }
+            if ($strWhere == '')
+            {
+                $strWhere .= ' WHERE account=' . $this->pdirVehicleFilterByAccount;
+            }
+
+        }
+
+        $strQuery .= $strWhere;
+
+        // Order by
+        if ($this->pdirVehicleFilterSort)
+        {
+                $strQuery .= " ORDER BY " . Database::quoteIdentifier($this->pdirVehicleFilterSort);
+        }
+
+        $objAds = $this->Database->prepare($strQuery)->execute();
+
+        while ($objAds->next())
+        {
             $this->ads['searchResultItems'][] = $objAds->row();
         }
 
         // Return if there are no ads
-        if (!is_array($this->ads) || count($this->ads) < 1) {
+        if (!is_array($this->ads) || count($this->ads) < 1)
+        {
             throw new PageNotFoundException('Page not found: '.\Environment::get('uri'));
         }
 
@@ -122,11 +174,7 @@ class ListingElement extends \ContentElement
      */
     protected function compile()
     {
-        $assetsDir = 'system/modules/pdirMobileDe/assets';
-
-        if (VERSION >= 4.0) {
-            $assetsDir = 'web/bundles/pdirmobilede';
-        }
+        $assetsDir = 'web/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.min.js|static';
@@ -138,8 +186,6 @@ class ListingElement extends \ContentElement
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
             $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
-
-        // Ordering
 
         // Pagination
 

@@ -67,3 +67,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Konto der Fa
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Quelle der Fahrzeuge', 'Nach welcher Quelle der Fahrzeuge soll vorgefiltert werden?'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'Manuell';
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['sync'] = 'API';
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterFields'] = ['Felder', 'Bitte gib hier eine kommagetrennte Liste der Felder ein, die Sie auflisten möchten oder benutze "*".'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterWhere'] = ['Bedingung', 'Hier kannst du eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. &lt;em&gt;specifics_gearbox=MANUAL_GEAR&lt;/em&gt; oder &lt;em&gt;vehicle_class!=&quot;Car&quot;&lt;/em&gt;).'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Durchsuchbare Felder', 'Hier können Sie eine kommagetrennte Liste der Felder eingeben, die durchsuchbar sein sollen.'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSort'] = ['Sortieren nach', 'Hier kannst du eine kommagetrennte Liste der Felder eingeben, nach denen die Ergebnisse sortiert werden sollen.'];
