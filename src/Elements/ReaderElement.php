@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -63,11 +63,11 @@ class ReaderElement extends \ContentElement
         // get alias from auto item
         $strAlias = \Input::get('ad');
 
-        $objAd = $this->Database->prepare('SELECT * FROM ' . $this->strTable . ' WHERE alias=?')->execute($strAlias);
+        $objAd = $this->Database->prepare('SELECT * FROM '.$this->strTable.' WHERE alias=?')->execute($strAlias);
         $this->ad = $objAd->fetchAssoc();
 
         // Return if there are no ad / do not index or cache
-        if (!is_array($this->ad) || count($this->ad) < 1) {
+        if (!\is_array($this->ad) || \count($this->ad) < 1) {
             throw new PageNotFoundException('Page not found: '.\Environment::get('uri'));
         }
 
@@ -92,7 +92,7 @@ class ReaderElement extends \ContentElement
 
         // features
         $featuresArr = deserialize($this->ad['features']);
-        if($featuresArr) {
+        if ($featuresArr) {
             $newFeatures = [];
             foreach ($featuresArr as $feature) {
                 if (!$feature) {
@@ -115,21 +115,20 @@ class ReaderElement extends \ContentElement
                 continue;
             }
 
-            if($specific != "exhaust_inspection" && $specific != "general_inspection" && $specific != "construction_date" && $specific != "first_registration" && $specific != "delivery_date" && $specific != "first_models_production_date" && $specific != "mileage") {
+            if ('exhaust_inspection' !== $specific && 'general_inspection' !== $specific && 'construction_date' !== $specific && 'first_registration' !== $specific && 'delivery_date' !== $specific && 'first_models_production_date' !== $specific && 'mileage' !== $specific) {
                 $newSpecifics[] = [
                     'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_' . $specific][0],
-                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_' . $specific]['options'][$this->ad['specifics_' . $specific]] ?: $this->ad['specifics_' . $specific],
-                    'plainValue' => $this->ad['specifics_' . $specific],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: $this->ad['specifics_'.$specific],
+                    'plainValue' => $this->ad['specifics_'.$specific],
                 ];
-            } elseif($specific == "mileage") {
+            } elseif ('mileage' === $specific) {
                 $newSpecifics[] = [
                     'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_' . $specific][0],
-                    'value' => $this->ad['specifics_' . $specific] ? System::getFormattedNumber($this->ad['specifics_' . $specific], 0) : 0,
-                    'plainValue' => $this->ad['specifics_' . $specific],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
+                    'value' => $this->ad['specifics_'.$specific] ? System::getFormattedNumber($this->ad['specifics_'.$specific], 0) : 0,
+                    'plainValue' => $this->ad['specifics_'.$specific],
                 ];
-
             } else {
                 $newSpecifics[] = [
                     'key' => $specific,
@@ -138,30 +137,44 @@ class ReaderElement extends \ContentElement
                     'plainValue' => $this->ad['specifics_'.$specific],
                 ];
             }
-
         }
         $this->ad['specifics'] = $newSpecifics;
 
-        if($this->ad['specifics_general_inspection']) $this->ad['specifics_general_inspection'] = ListingElement::formatDate($this->ad['specifics_general_inspection']);
+        if ($this->ad['specifics_general_inspection']) {
+            $this->ad['specifics_general_inspection'] = ListingElement::formatDate($this->ad['specifics_general_inspection']);
+        }
 
-        if($this->ad['specifics_exhaust_inspection']) $this->ad['specifics_exhaust_inspection'] = ListingElement::formatDate($this->ad['specifics_exhaust_inspection']);
+        if ($this->ad['specifics_exhaust_inspection']) {
+            $this->ad['specifics_exhaust_inspection'] = ListingElement::formatDate($this->ad['specifics_exhaust_inspection']);
+        }
 
-        if($this->ad['specifics_delivery_date']) $this->ad['specifics_delivery_date'] = ListingElement::formatDate($this->ad['specifics_delivery_date']);
+        if ($this->ad['specifics_delivery_date']) {
+            $this->ad['specifics_delivery_date'] = ListingElement::formatDate($this->ad['specifics_delivery_date']);
+        }
 
-        if($this->ad['specifics_first_registration']) $this->ad['specifics_first_registration'] = ListingElement::formatDate($this->ad['specifics_first_registration']);
+        if ($this->ad['specifics_first_registration']) {
+            $this->ad['specifics_first_registration'] = ListingElement::formatDate($this->ad['specifics_first_registration']);
+        }
 
-        if($this->ad['specifics_construction_date']) $this->ad['specifics_construction_date'] = ListingElement::formatDate($this->ad['specifics_construction_date']);
+        if ($this->ad['specifics_construction_date']) {
+            $this->ad['specifics_construction_date'] = ListingElement::formatDate($this->ad['specifics_construction_date']);
+        }
 
-        if($this->ad['specifics_first_models_production_date']) $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
+        if ($this->ad['specifics_first_models_production_date']) {
+            $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
+        }
 
-        if($this->ad['specifics_power']) $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber(($this->ad['specifics_power'] * 1.35962), 0).' PS)'; else 'Keine Angabe';
+        if ($this->ad['specifics_power']) {
+            $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber(($this->ad['specifics_power'] * 1.35962), 0).' PS)';
+        } else {
+            'Keine Angabe';
+        }
 
         // images
         $newGallery = [];
         $apiImages = deserialize($this->ad['api_images']);
 
-        if ('demo' !== $this->pdir_md_customer_username)
-        {
+        if ('demo' !== $this->pdir_md_customer_username) {
             $mobileDe = new MobileDe($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id, $this->pdir_md_customer_number);
             $newImages = $mobileDe->getGalleryImages($apiImages['@url']);
 
@@ -191,7 +204,7 @@ class ReaderElement extends \ContentElement
             $this->ad['makeModelDescription']['value'] = $this->ad['name'];
         }
 
-        if($this->ad['syscara_grundriss']) {
+        if ($this->ad['syscara_grundriss']) {
             $groundPlan = unserialize($this->ad['syscara_grundriss']);
             $objFile = \FilesModel::findByUuid($groundPlan[0]);
             $this->ad['groundPlan'] = $objFile->path;
@@ -199,48 +212,42 @@ class ReaderElement extends \ContentElement
 
         $fuelConsumption = [];
 
-        if($this->ad['emission_fuel_consumption_co2_emission'])
-        {
+        if ($this->ad['emission_fuel_consumption_co2_emission']) {
             $fuelConsumption[] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_co2_emission'], 1),
             ];
         }
 
-        if($this->ad['emission_fuel_consumption_inner'])
-        {
+        if ($this->ad['emission_fuel_consumption_inner']) {
             $fuelConsumption[] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_inner'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_inner'], 1),
             ];
         }
 
-        if($this->ad['emission_fuel_consumption_outer'])
-        {
+        if ($this->ad['emission_fuel_consumption_outer']) {
             $fuelConsumption[] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_outer'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_outer'], 1),
             ];
         }
 
-        if($this->ad['emission_fuel_consumption_combined'])
-        {
+        if ($this->ad['emission_fuel_consumption_combined']) {
             $fuelConsumption[] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined'], 1),
             ];
         }
 
-        if($this->ad['emission_fuel_consumption_petrol_type'])
-        {
+        if ($this->ad['emission_fuel_consumption_petrol_type']) {
             $fuelConsumption[] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type'][0],
                 'value' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type_options'][$this->ad['emission_fuel_consumption_petrol_type']],
             ];
         }
 
-        if($this->ad['emission_fuel_consumption_combined_power_consumption'])
-        {
+        if ($this->ad['emission_fuel_consumption_combined_power_consumption']) {
             $fuelConsumption[] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined_power_consumption'], 1),
@@ -260,7 +267,7 @@ class ReaderElement extends \ContentElement
             $tmpArr = (array) json_decode($objRequest->response, true);
 
             if (!$objRequest->hasError()) {
-                if(0 == count($newGallery)) {
+                if (0 === \count($newGallery)) {
                     foreach ($tmpArr['ad']['images']['image'] as $key => $group) {
                         $newGallery[] = $group['representation'];
                     }
@@ -293,8 +300,7 @@ class ReaderElement extends \ContentElement
         }
 
         // use placeholder if no image exists
-        if(is_array($newGallery) && count($newGallery) === 0)
-        {
+        if (\is_array($newGallery) && 0 === \count($newGallery)) {
             $newGallery[] = $this->getImageByPath('web/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
         }
 
@@ -314,13 +320,14 @@ class ReaderElement extends \ContentElement
     protected function getImageByPath($str)
     {
         $imageObj = new \Image(new \File($str));
+
         return [
             ['@size' => 'S', '@url' => $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'XL', '@url' => $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'L', '@url' => $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'M', '@url' => $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'ICON', '@url' => $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'ORIGINAL', '@url' => $str]
+            ['@size' => 'ORIGINAL', '@url' => $str],
         ];
     }
 

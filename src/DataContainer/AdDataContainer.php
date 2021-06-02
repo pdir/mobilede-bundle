@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -34,9 +34,6 @@ class AdDataContainer
 
     /**
      * Constructor.
-     *
-     * @param \Doctrine\ORM\EntityManager            $entityManager
-     * @param \Pdir\MobileDeBundle\Service\AdService $adService
      */
     public function __construct(EntityManager $entityManager, AdService $adService)
     {
@@ -48,7 +45,6 @@ class AdDataContainer
      * Generate alias.
      *
      * @param $varValue
-     * @param \Contao\DataContainer $dc
      *
      * @throws \Exception
      *
@@ -67,12 +63,12 @@ class AdDataContainer
         $ads = $this->adService->findByAlias($varValue);
 
         // Check whether the news alias exists
-        if (count($ads) > 1 && false === $autoAlias) {
+        if (\count($ads) > 1 && false === $autoAlias) {
             throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
         // Add ID to alias
-        if (count($ads) > 0 && true === $autoAlias) {
+        if (\count($ads) > 0 && true === $autoAlias) {
             $varValue .= '-'.$dc->id;
         }
 

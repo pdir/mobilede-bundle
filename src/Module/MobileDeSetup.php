@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -109,7 +109,7 @@ class MobileDeSetup extends \BackendModule
                 // get uuid and push to array
                 $uuid = \FilesModel::findByPath($this->strPath.$objArchive->file_name)->uuid;
                 if (false !== strpos($objArchive->file_name, 'detail/')) {
-                    array_push($images, $uuid);
+                    $images[] = $uuid;
                 }
             }
 
@@ -120,7 +120,7 @@ class MobileDeSetup extends \BackendModule
             // empty table and insert demo data
             \Database::getInstance()->execute("TRUNCATE TABLE $this->strTable");
 
-            foreach($strQueries as $query) {
+            foreach ($strQueries as $query) {
                 \Database::getInstance()->query($query);
             }
 
@@ -128,7 +128,7 @@ class MobileDeSetup extends \BackendModule
 
             // set images
             $adIds = \Database::getInstance()->prepare('SELECT vehicle_id FROM tl_vehicle')->execute();
-            $numbers = range(0, count($images) - 1);
+            $numbers = range(0, \count($images) - 1);
             while ($adIds->next()) {
                 $uuidArr = [];
                 shuffle($numbers);
@@ -151,7 +151,7 @@ class MobileDeSetup extends \BackendModule
         $image_uuid = $images[$numbers[0]];
 
         // set uuid array
-        array_push($uuidArr, $image_uuid);
+        $uuidArr[] = $image_uuid;
 
         return $uuidArr;
     }

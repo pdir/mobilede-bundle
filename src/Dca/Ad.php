@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -84,7 +84,7 @@ class Ad
             ->execute($varValue);
         // Check whether the page alias exists
         if ($objAlias->numRows > 0) {
-            $varValue .= '-'.mt_rand(0,1000000);
+            $varValue .= '-'.mt_rand(0, 1000000);
         }
 
         return $varValue;

@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2018 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-error_reporting(E_ALL);
+error_reporting(\E_ALL);
 
 $include = function ($file) {
     return file_exists($file) ? include $file : false;
@@ -25,9 +25,9 @@ if (
     && false === ($loader = $include(__DIR__.'/../../vendor/autoload.php'))
     && false === ($loader = $include(__DIR__.'/../../../autoload.php'))
 ) {
-    echo 'You must set up the project dependencies, run the following commands:'.PHP_EOL
-        .'curl -sS https://getcomposer.org/installer | php'.PHP_EOL
-        .'php composer.phar install'.PHP_EOL;
+    echo 'You must set up the project dependencies, run the following commands:'.\PHP_EOL
+        .'curl -sS https://getcomposer.org/installer | php'.\PHP_EOL
+        .'php composer.phar install'.\PHP_EOL;
     exit(1);
 }
 

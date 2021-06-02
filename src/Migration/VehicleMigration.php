@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -46,11 +46,11 @@ class VehicleMigration extends AbstractMigration
 
     public function run(): MigrationResult
     {
-        $stmt = $this->connection->prepare("RENAME TABLE tl_mobile_ad TO tl_vehicle");
+        $stmt = $this->connection->prepare('RENAME TABLE tl_mobile_ad TO tl_vehicle');
 
         $stmt->execute();
 
-        $stmt = $this->connection->prepare("ALTER TABLE tl_vehicle RENAME COLUMN ad_id TO vehicle_id");
+        $stmt = $this->connection->prepare('ALTER TABLE tl_vehicle RENAME COLUMN ad_id TO vehicle_id');
 
         $stmt->execute();
 

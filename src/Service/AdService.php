@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -27,8 +27,6 @@ class AdService
 
     /**
      * CarService constructor.
-     *
-     * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
     {
