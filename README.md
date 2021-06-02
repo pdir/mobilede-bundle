@@ -108,10 +108,6 @@ Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bu
     vendor/bin/php-cs-fixer fix -v
     vendor/bin/phpunit
 
-Generate getter and setter
-
-    vendor/app/console doctrine:generate:entities Pdir/MobileDeBundle/Entity/Ad
-
 Run cypress tests against demo data
 
     npm run cypress:open or yarn run cypress open
