@@ -16,6 +16,8 @@
 
 namespace Pdir\MobileDeBundle\Module;
 
+use Contao\Controller;
+
 class MobileDeSetup extends \BackendModule
 {
     /**
@@ -28,7 +30,7 @@ class MobileDeSetup extends \BackendModule
      *
      * @var bool
      */
-    const MODE = 'DEMO';
+    const MODE = 'FREE';
 
     /**
      * API Url.
@@ -81,13 +83,7 @@ class MobileDeSetup extends \BackendModule
                 // do something here
         }
 
-        $this->Template->version = self::VERSION;
-        $this->Template->hostname = gethostname();
-        $this->Template->ip = \Environment::get('server');
-        $this->Template->domain = $this->strDomain;
-
-        // email body
-        $this->Template->emailBody = $this->getEmailBody();
+        Controller::redirect(Controller::getReferer());
     }
 
     protected function downloadDemoData()
@@ -118,11 +114,11 @@ class MobileDeSetup extends \BackendModule
             }
 
             // read local sql file
-            $fileModel = new \File($this->strPath.'tl_mobile_ad-demodata.sql');
+            $fileModel = new \File($this->strPath.'tl_vehicle-demodata.sql');
             $strQueries = $fileModel->getContentAsArray();
 
             // empty table and insert demo data
-            \Database::getInstance()->execute("DELETE FROM $this->strTable WHERE type = 'sync'");
+            \Database::getInstance()->execute("TRUNCATE TABLE $this->strTable");
 
             foreach($strQueries as $query) {
                 \Database::getInstance()->query($query);
@@ -146,14 +142,6 @@ class MobileDeSetup extends \BackendModule
                 \Database::getInstance()->prepare('UPDATE tl_vehicle SET images=?, orderSRC=? WHERE vehicle_id=?')->execute($uuidArr, $uuidArr, $adIds->vehicle_id);
             }
         }
-    }
-
-    protected function getEmailBody()
-    {
-        $arrSearch = [':IP:', ':HOST:', ':DOMAIN:', '<br>'];
-        $arrReplace = [$this->Template->ip, $this->Template->hostname, $this->Template->domain, '%0d%0a'];
-
-        return str_replace($arrSearch, $arrReplace, $GLOBALS['TL_LANG']['MOBILEDE']['emailBody']);
     }
 
     protected function randomImage($uuidArr, $numbers, $images)

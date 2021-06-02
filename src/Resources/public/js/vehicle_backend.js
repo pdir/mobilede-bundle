@@ -1,33 +1,16 @@
 
-var apiUrl = "https://pdir.de/api/mobilede/";
-
 window.addEvent("domready", function() {
+    var pdirVehicleInfo = document.getElementById('pdirVehicleInfo');
 
-	// dev log
-    var devlogUrl = "https://pdir.de/share/mobilede-devlog.xml";
-    var devlog = $("mobileDeDevLog");
+    if(pdirVehicleInfo) {
+        // move vehicle info to bottom
+        var fragment = document.createDocumentFragment();
+        fragment.appendChild(document.getElementById('pdirVehicleInfo'));
+        var cont = document.getElementById('tl_listing') !== null ? document.getElementById('tl_listing') : document.getElementsByClassName('tl_empty')[0];
 
-    if(devlog) {
-        var req = new Request.HTML({
-            method: "get",
-            url: devlogUrl,
-            onSuccess: function(tree, elements, html) {
-                var temp = new Element("div").set("html", html);
-
-                temp.getElements("item").each(function(el) {
-                    var d = new Date(el.getElements("pubdate")[0].innerText);
-                    var currDate = ((d.getDate()<10)? "0"+d.getDate(): d.getDate());
-                    var currMonth = ((d.getMonth()<10)? "0"+(d.getMonth()+1): (d.getMonth()+1));
-                    var currYear = d.getFullYear();
-                    var itemHTML = "<span>"+currDate + "." + currMonth + "." + currYear+"</span>";
-                    itemHTML += "<span>"+el.getElements("title")[0].innerText+"</span>";
-                    // itemHTML += "<a href=""+el.getElements("guid")[0].innerText+"" target="_blank"> [ lesen ] </a>";
-                    itemHTML += "<div>"+el.getElements("description")[0].innerText.replace("]]>", "")+"</div>";
-
-                    var newItem = new Element("div").addClass("item").set("html", itemHTML);
-                    devlog.adopt(newItem);
-                });
-            }
-        }).send();
+        if (typeof cont !== 'null') {
+            cont.appendChild(fragment);
+        }
     }
+
 });

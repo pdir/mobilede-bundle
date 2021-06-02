@@ -1,5 +1,7 @@
 <?php
 
+use Pdir\MobileDeBundle\EventListener\DataContainerListener;
+
 $strTable = 'tl_vehicle';
 
 $GLOBALS['TL_DCA'][$strTable] = [
@@ -32,6 +34,9 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'href' => 'act=select',
                 'class' => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
+            ],
+            'toolbar' => [
+                'button_callback'     => [DataContainerListener::class, 'renderToolbar']
             ],
         ],
         'operations' => [

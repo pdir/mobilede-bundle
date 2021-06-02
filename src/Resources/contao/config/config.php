@@ -33,6 +33,12 @@ if (!is_array($GLOBALS['BE_MOD']['pdir'])) {
 
 $assetsDir = 'bundles/pdirmobilede';
 
+array_insert($GLOBALS['BE_MOD']['pdir'], 0, [
+    'vehicleSetup' => [
+        'callback' => 'Pdir\MobileDeBundle\Module\MobileDeSetup',
+    ],
+]);
+
 array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     'vehicle_show' => [
         'tables' => ['tl_vehicle'],
@@ -44,8 +50,7 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     ]
 ]);
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 0, [
-]);
+array_insert($GLOBALS['BE_MOD']['pdir'], 0, []);
 
 /*
  * Models
@@ -68,7 +73,16 @@ $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', '
  * BAckend styles & css
  */
 
-if (TL_MODE === 'BE') {
-    $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/vehicle_backend.js';
-    $GLOBALS['TL_CSS'][] = $assetsDir.'/css/vehicle_backend.css';
+if (TL_MODE === 'BE')
+{
+    if (!is_array($GLOBALS['TL_JAVASCRIPT']))
+    {
+        $GLOBALS['TL_JAVASCRIPT'] = [];
+    }
+
+    $GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/vehicle_backend.js|static';
+
+    $combiner = new \Combiner();
+    $combiner->add($assetsDir . '/css/vehicle_backend.scss');
+    $GLOBALS['TL_CSS'][] = str_replace("TL_ASSETS_URL","",$combiner->getCombinedFile());
 }
