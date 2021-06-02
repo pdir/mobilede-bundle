@@ -139,7 +139,7 @@ class MobileDeSetup extends \BackendModule
                 $uuidArr = serialize($uuidArr);
 
                 // update
-                \Database::getInstance()->prepare("UPDATE  $this->strTable SET images=?, orderSRC=? WHERE vehicle_id=?")->execute($uuidArr, $uuidArr, $adIds->ad_id);
+                \Database::getInstance()->prepare("UPDATE  $this->strTable SET images=?, orderSRC=? WHERE vehicle_id=?")->execute($uuidArr, $uuidArr, $adIds->vehicle_id);
             }
         }
     }
