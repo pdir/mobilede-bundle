@@ -62,8 +62,12 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['PS-Slider aktiviere
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Kilometerstand-Slider aktivieren', 'Wenn aktiv können Sie den Kilometerstand über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Nur Filter','Wenn Sie diese Option aktivieren, werden die Objekte ausgeblendet und nur die Filter dargestellt, z. B. um ein Filterformular auf der Startseite zu platzieren.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'] = ['Konto für den Fahrzeugimport', 'Hier können Sie eine ID für das Import Konto vergeben. Standard: 0 (nur notwendig für mehrere Import Konten)'];
-$GLOBALS['TL_LANG']['tl_mobile_ad']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron aktivieren', 'Hier kann der Import per Contao Poor-Man-Cron aktiviert werden. (stündlich)'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron aktivieren', 'Hier kann der Import per Contao Poor-Man-Cron aktiviert werden. (stündlich)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Konto der Fahrzeuge', 'Nach welchem Konto soll vorgefiltert werden? (Default: 0 = Alle Konten)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Quelle der Fahrzeuge', 'Nach welcher Quelle der Fahrzeuge soll vorgefiltert werden?'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'Manuell';
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['sync'] = 'API';
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterFields'] = ['Felder', 'Bitte gib hier eine kommagetrennte Liste der Felder ein, die Sie auflisten möchten oder benutze "*".'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterWhere'] = ['Bedingung', 'Hier kannst du eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. &lt;em&gt;specifics_gearbox=MANUAL_GEAR&lt;/em&gt; oder &lt;em&gt;vehicle_class!=&quot;Car&quot;&lt;/em&gt;).'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Durchsuchbare Felder', 'Hier können Sie eine kommagetrennte Liste der Felder eingeben, die durchsuchbar sein sollen.'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSort'] = ['Sortieren nach', 'Hier kannst du eine kommagetrennte Liste der Felder eingeben, nach denen die Ergebnisse sortiert werden sollen.'];

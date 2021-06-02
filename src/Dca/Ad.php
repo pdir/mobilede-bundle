@@ -52,7 +52,7 @@ class Ad
             $autoAlias = true;
             $varValue = standardize(StringUtil::restoreBasicEntities($dc->activeRecord->name));
         }
-        $objAlias = $this->Database->prepare('SELECT id FROM tl_mobile_ad WHERE (id=? OR alias=?)')
+        $objAlias = $this->Database->prepare('SELECT id FROM tl_vehicle WHERE (id=? OR alias=?)')
             ->execute($dc->id, $varValue);
         // Check whether the page alias exists
         if ($objAlias->numRows > 1) {
@@ -80,7 +80,7 @@ class Ad
     {
         $varValue = standardize(StringUtil::restoreBasicEntities($varValue));
 
-        $objAlias = $this->Database->prepare('SELECT id FROM tl_mobile_ad WHERE alias=?')
+        $objAlias = $this->Database->prepare('SELECT id FROM tl_vehicle WHERE alias=?')
             ->execute($varValue);
         // Check whether the page alias exists
         if ($objAlias->numRows > 0) {
@@ -110,7 +110,7 @@ class Ad
             $this->redirect($this->getReferer());
         }
         // Check permissions AFTER checking the tid, so hacking attempts are logged
-        //if (!$this->User->hasAccess('tl_mobile_ad::published', 'alexf')) {
+        //if (!$this->User->hasAccess('tl_vehicle::published', 'alexf')) {
         //    return '';
         //}
         $href .= '&amp;tid=' . $row['id'] . '&amp;state=' . ($row['published'] ? '' : 1);
@@ -130,7 +130,7 @@ class Ad
      */
     public function categoryOptionsCallback(DataContainer $dc)
     {
-        return $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category_'.$dc->activeRecord->vehicle_class]['options'];
+        return $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_category_'.$dc->activeRecord->vehicle_class]['options'];
     }
 
     /**
@@ -142,6 +142,6 @@ class Ad
      */
     public function featuresOptionsCallback(DataContainer $dc)
     {
-        return $GLOBALS['TL_LANG']['tl_mobile_ad']['features_'.$dc->activeRecord->vehicle_class]['options'];
+        return $GLOBALS['TL_LANG']['tl_vehicle']['features_'.$dc->activeRecord->vehicle_class]['options'];
     }
 }

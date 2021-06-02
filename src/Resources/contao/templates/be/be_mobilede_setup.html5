@@ -31,7 +31,7 @@
           integriert werden. Fragen Sie uns an.</p>
 
         <p><strong>Preis</strong><br>
-          Domainlizenz, einmalig 189€ zzgl. MwSt.<br>
+          Domainlizenz, einmalig 199€ zzgl. MwSt.<br>
           Update/Support Abonnement 49€/Jahr zzgl. MwSt.*&sup2;
         </p>
         <p>Ihr Team der pdir / digital agentur</p>
@@ -80,24 +80,9 @@
           </a>
         </div>
       </div>
-      <div class="right">
-        Debug Infos<br>
-        <h2 class="api-status">API Status <span id="pdirApiStatus" class="blink"></span></h2>
-        <div class="debug-info">
-          Modus: <?= $this->extModeTxt ?><br>
-          IP: <?= $this->ip ?><br>
-          Hostname: <?= $this->hostname ?><br>
-          Domain: <?= $this->domain ?><br>
-        </div>
-      </div>
       <div class="clr"></div>
     </div>
     <hr>
-    <div class="feed">
-      <h2>DevLog</h2>
-      <div id="mobileDeDevLog" class="devlog"></div>
-      <p><a href="https://pdir.de/devlog.html" target="_blank"> [ Alle lesen ] </a></div></p>
-    </div>
     <div class="tools">
       <p><small>*&sup1;mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner
         Verbindung zur pdir GmbH oder der mobile.de*&sup1; Erweiterung für Contao. Die Erweiterung verwendet die mobile.de*&sup1; API

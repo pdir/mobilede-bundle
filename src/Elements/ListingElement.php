@@ -16,10 +16,23 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
+use Contao\Database;
 use Contao\System;
+use Contao\StringUtil;
 use Contao\CoreBundle\Exception\PageNotFoundException;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 
+/**
+ * Provide methods to render content element "vehicle listing".
+ *
+ * @property string $pdirVehicleFilterFields
+ * @property string $pdirVehicleFilterSort
+ * @property string $pdirVehicleFilterWhere
+ * @property string $pdirVehicleFilterSearch
+ * @property string $pdirVehicleFilterByAccount
+ * @property string $pdirVehicleFilterByType
+ *
+ */
 class ListingElement extends \ContentElement
 {
     const PARAMETER_KEY = 'ad';
@@ -31,6 +44,7 @@ class ListingElement extends \ContentElement
      */
     protected $strTemplate = 'ce_mobilede_list';
     protected $strItemTemplate = 'ce_mobilede_item';
+    protected $strTable = 'tl_vehicle';
 
     /**
      * @var \PageModel
@@ -48,7 +62,8 @@ class ListingElement extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE === 'BE') {
+        if (TL_MODE === 'BE')
+        {
             $objTemplate = new \BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe LIST ###';
             $objTemplate->title = $this->headline;
@@ -60,56 +75,96 @@ class ListingElement extends \ContentElement
         }
 
         // load language file
-        $this->lang = System::loadLanguageFile('tl_mobile_ad');
+        $this->lang = System::loadLanguageFile($this->strTable);
 
         // Get reader page model
         $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
 
         // Return if there is no customer id
-        if (!$this->pdir_md_customer_id) {
+        if (!$this->pdir_md_customer_id)
+        {
             return '';
         }
 
         // set custom list template
-        if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate) {
+        if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate)
+        {
             $this->strTemplate = $this->pdir_md_listTemplate;
         }
 
         // set custom item template
-        if ($this->pdir_md_itemTemplate && $this->strItemTemplate !== $this->pdir_md_itemTemplate) {
+        if ($this->pdir_md_itemTemplate && $this->strItemTemplate !== $this->pdir_md_itemTemplate)
+        {
             $this->strItemTemplate = $this->pdir_md_itemTemplate;
         }
 
-        if($this->pdirVehicleFilterByAccount == 0) {
-            if(!$this->pdirVehicleFilterByType){
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad ORDER BY name')->execute('*');
-            } else {
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad WHERE type=? ORDER BY name')
-                    ->execute($this->pdirVehicleFilterByType);
-            }
+        $this->pdirVehicleFilterWhere = $this->replaceInsertTags($this->pdirVehicleFilterWhere, false);
+
+        // prepare data for sql
+        $strWhere = '';
+        $arrFields = StringUtil::trimsplit(',', $this->pdirVehicleFilterFields);
+
+        if (!is_array($arrFields) && count($arrFields))
+        {
+            $arrFields[] = '*';
         }
 
-        if($this->pdirVehicleFilterByAccount > 0) {
-            if(!$this->pdirVehicleFilterByType){
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad WHERE account=? ORDER BY name')
-                    ->execute($this->pdirVehicleFilterByAccount);
-            } else {
-                $objAds = $this->Database
-                    ->prepare('SELECT * FROM tl_mobile_ad WHERE account=? AND type=?  ORDER BY name')
-                    ->execute($this->pdirVehicleFilterByAccount, $this->pdirVehicleFilterByType);
-            }
+        // Get the selected records
+        $strQuery = "SELECT " . implode(', ', array_map('Database::quoteIdentifier', $arrFields));
+
+        $strQuery .= " FROM " . $this->strTable;
+
+        if ($this->pdirVehicleFilterWhere)
+        {
+            $strWhere .= " WHERE " . $this->pdirVehicleFilterWhere;
         }
 
+        if ($this->pdirVehicleFilterByType)
+        {
+            if ($strWhere != '')
+            {
+                $strWhere .= " AND type='" . $this->pdirVehicleFilterByType . "'";
+            }
 
-        while ($objAds->next()) {
+            if ($strWhere == '')
+            {
+                $strWhere .= " WHERE type='" . $this->pdirVehicleFilterByType . "'";
+            }
+
+        }
+
+        if ($this->pdirVehicleFilterByAccount != 0)
+        {
+            if ($strWhere != '')
+            {
+                $strWhere .= ' AND account=' . $this->pdirVehicleFilterByAccount;
+            }
+
+            if ($strWhere == '')
+            {
+                $strWhere .= ' WHERE account=' . $this->pdirVehicleFilterByAccount;
+            }
+
+        }
+
+        $strQuery .= $strWhere;
+
+        // Order by
+        if ($this->pdirVehicleFilterSort)
+        {
+                $strQuery .= " ORDER BY " . Database::quoteIdentifier($this->pdirVehicleFilterSort);
+        }
+
+        $objAds = $this->Database->prepare($strQuery)->execute();
+
+        while ($objAds->next())
+        {
             $this->ads['searchResultItems'][] = $objAds->row();
         }
 
         // Return if there are no ads
-        if (!is_array($this->ads) || count($this->ads) < 1) {
+        if (!is_array($this->ads) || count($this->ads) < 1)
+        {
             throw new PageNotFoundException('Page not found: '.\Environment::get('uri'));
         }
 
@@ -121,35 +176,34 @@ class ListingElement extends \ContentElement
      */
     protected function compile()
     {
-        $assetsDir = 'system/modules/pdirMobileDe/assets';
+        $assetsDir = 'web/bundles/pdirmobilede';
 
-        if (VERSION >= 4.0) {
-            $assetsDir = 'web/bundles/pdirmobilede';
-        }
-
-        if (!$this->pdir_md_removeModuleJs) {
+        if (!$this->pdir_md_removeModuleJs)
+        {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.min.js|static';
-            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = 'https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
-        if (!$this->pdir_md_removeModuleCss) {
+
+        if (!$this->pdir_md_removeModuleCss)
+        {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
             $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
-
-        // Ordering
 
         // Pagination
 
         // Limit
 
         // Promotion
-        if (1 === $this->pdir_md_promotion_corner_shadow) {
+        if (1 === $this->pdir_md_promotion_corner_shadow)
+        {
             $this->pdir_md_promotion_corner_shadow = 'shadow';
         }
 
-        if (1 !== $this->pdir_md_hidePromotionBox and isset($this->ads['prominent'])) {
+        if (1 !== $this->pdir_md_hidePromotionBox and isset($this->ads['prominent']))
+        {
             $arrFeaturedCss = [
                 $this->pdir_md_promotion_corner_color,
                 $this->pdir_md_promotion_corner_position,
@@ -169,7 +223,8 @@ class ListingElement extends \ContentElement
         $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
 
         // Featured corner
-        if (1 === $this->pdir_md_corner_shadow) {
+        if (1 === $this->pdir_md_corner_shadow)
+        {
             $this->pdir_md_corner_shadow = 'shadow';
         }
 
@@ -188,7 +243,8 @@ class ListingElement extends \ContentElement
         // Filters
         $this->Template->filters = $this->filters;
 
-        if ($this->pdir_md_hideFilters) {
+        if ($this->pdir_md_hideFilters)
+        {
             $this->Template->hideFilters = true;
         }
 
@@ -199,7 +255,8 @@ class ListingElement extends \ContentElement
         $this->Template->noResultMessage = $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'];
 
         // Debug mode
-        if ($this->pdir_md_enableDebugMode) {
+        if ($this->pdir_md_enableDebugMode)
+        {
             $this->Template->debug = true;
             $this->Template->version = MobileDeSetup::VERSION;
             $this->Template->customer = $this->pdir_md_customer_id;
@@ -223,13 +280,7 @@ class ListingElement extends \ContentElement
             $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
-
-            $images = deserialize($ad['api_images']);
-
-            if (is_array($images) && $images['image'] !== '' ){
-                $images = $images['image']['representation'];
-            }
-
+            $images = deserialize($ad['api_images'])['image']['representation'];
             if (is_array($images) && count($images) > 0) {
                 $objFilterTemplate->imageSrc_S = $images[0]['@url'];
                 $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
@@ -238,7 +289,7 @@ class ListingElement extends \ContentElement
                 $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
             }
 
-            if ('man' === $ad['type']) {
+            if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
                 $manImages = unserialize($ad['orderSRC']);
 
                 $objFile = \FilesModel::findByUuid($manImages[0]);
@@ -265,23 +316,23 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
-            $objFilterTemplate->fuelType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_fuel']['options'][$ad['specifics_fuel']];
-            $objFilterTemplate->transmission = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            $objFilterTemplate->fuelType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']];
+            $objFilterTemplate->transmission = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
             $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'].' KW ('.number_format((float) ($ad['specifics_power'] * 1.35962), 0, ',', '.').' PS)' : 'Keine Angabe';
             $objFilterTemplate->bodyType = $ad['vehicle_class'];
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
             $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
             $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
-            $objFilterTemplate->usageType = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] ? $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']] : $ad['specifics_usage_type'];
-            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_condition']['options'][$ad['specifics_condition']];
-            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] : $ad['specifics_usage_type'];
+            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']];
+            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
 
             $fuelConsumption = [];
 
             if($ad['emission_fuel_consumption_co2_emission'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_co2_emission'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'], 1),
                 ];
             }
@@ -289,7 +340,7 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_inner'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_inner'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_inner'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_inner'], 1),
                 ];
             }
@@ -297,7 +348,7 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_outer'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_outer'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_outer'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_outer'], 1),
                 ];
             }
@@ -305,7 +356,7 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_combined'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined'], 1),
                 ];
             }
@@ -313,15 +364,15 @@ class ListingElement extends \ContentElement
             if($ad['emission_fuel_consumption_petrol_type'] && $ad['emission_fuel_consumption_petrol_type'] == 'DIESEL')
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type'][0],
-                    'value' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_petrol_type_options'][$ad['emission_fuel_consumption_petrol_type']],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type'][0],
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type_options'][$ad['emission_fuel_consumption_petrol_type']],
                 ];
             }
 
             if($ad['emission_fuel_consumption_combined_power_consumption'])
             {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['emission_fuel_consumption_combined_power_consumption'][0],
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'], 1),
                 ];
             }
@@ -344,6 +395,14 @@ class ListingElement extends \ContentElement
 
             // add account
             $objFilterTemplate->account = $ad['account'];
+
+            $objFilterTemplate->rawData = $ad;
+
+            if($ad['syscara_grundriss']) {
+                $groundPlan = unserialize($ad['syscara_grundriss']);
+                $objFile = \FilesModel::findByUuid($groundPlan[0]);
+                $objFilterTemplate->groundPlan = $objFile->path;
+            }
 
             $arrReturn[] = $objFilterTemplate->parse();
         }
@@ -372,12 +431,14 @@ class ListingElement extends \ContentElement
         $filter = [];
         $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
         $filter[] = $ad['specifics_exterior_color'];
+        $filter[] = $ad['vehicle_class'];
         $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_fuel'];
         $filter[] = $ad['specifics_gearbox'];
         $filter[] = $ad['specifics_usage_type'];
         $filter[] = $ad['specifics_condition'];
         $filter[] = $ad['consumer_price_amount'];
+        $filter[] = $ad['syscara_typ_von'];
         $filter[] = $ad['specifics_num_seats'];
 
         $filter = array_filter($filter,'strlen'); // remove empty fields
@@ -392,15 +453,23 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_exterior_color']) {
             $this->filters['colors'][$ad['specifics_exterior_color']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
                 'key' => $ad['specifics_exterior_color'],
                 'count' => (isset($this->filters['colors'][$ad['specifics_exterior_color']]['count']) ? $this->filters['usageType'][$ad['specifics_exterior_color']]['count'] + 1 : 1),
             ];
         }
 
+        if ($ad['vehicle_class']) {
+            $this->filters['class'][$ad['vehicle_class']] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_class']['options'][$ad['vehicle_class']],
+                'key' => $ad['vehicle_class'],
+                'count' => (isset($this->filters['class'][$ad['vehicle_class']]['count']) ? $this->filters['usageType'][$ad['vehicle_class']]['count'] + 1 : 1),
+            ];
+        }
+
         if ($ad['vehicle_category']) {
             $this->filters['categories'][$ad['vehicle_category']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['vehicle_category']['options'][$ad['vehicle_category']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_category']['options'][$ad['vehicle_category']],
                 'key' => $ad['vehicle_category'],
                 'count' => (isset($this->filters['categories'][$ad['vehicle_category']]['count']) ? $this->filters['usageType'][$ad['vehicle_category']]['count'] + 1 : 1),
             ];
@@ -408,7 +477,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_fuel']) {
             $this->filters['fuelType'][$ad['specifics_fuel']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_fuel']['options'][$ad['specifics_fuel']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']],
                 'key' => $ad['specifics_fuel'],
                 'count' => (isset($this->filters['fuelType'][$ad['specifics_fuel']]['count']) ? $this->filters['usageType'][$ad['specifics_fuel']]['count'] + 1 : 1),
             ];
@@ -416,7 +485,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_gearbox']) {
             $this->filters['gearbox'][$ad['specifics_gearbox']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_gearbox']['options'][$ad['specifics_gearbox']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']],
                 'key' => $ad['specifics_gearbox'],
                 'count' => (isset($this->filters['gearbox'][$ad['specifics_gearbox']]['count']) ? $this->filters['usageType'][$ad['specifics_gearbox']]['count'] + 1 : 1),
             ];
@@ -424,7 +493,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_usage_type']) {
             $this->filters['usageType'][$ad['specifics_usage_type']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_usage_type']['options'][$ad['specifics_usage_type']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']],
                 'key' => $ad['specifics_usage_type'],
                 'count' => (isset($this->filters['usageType'][$ad['specifics_usage_type']]['count']) ? $this->filters['usageType'][$ad['specifics_usage_type']]['count'] + 1 : 1),
             ];
@@ -432,7 +501,7 @@ class ListingElement extends \ContentElement
 
         if ($ad['specifics_condition']) {
             $this->filters['specifics_condition'][$ad['specifics_condition']] = [
-                'label' => $GLOBALS['TL_LANG']['tl_mobile_ad']['specifics_condition']['options'][$ad['specifics_condition']],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']],
                 'key' => $ad['specifics_condition'],
                 'count' => (isset($this->filters['specifics_condition'][$ad['specifics_condition']]['count']) ? $this->filters['specifics_condition'][$ad['specifics_condition']]['count'] + 1 : 1),
             ];
@@ -443,6 +512,13 @@ class ListingElement extends \ContentElement
                 'label' => $ad['consumer_price_amount'],
                 'key' => $ad['consumer_price_amount'],
                 'count' => (isset($this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count']) ? $this->filters['consumer_price_amount'][$ad['consumer_price_amount']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['syscara_typ_von']) {
+            $this->filters['syscara_typ_von'][$ad['syscara_typ_von']] = [
+                'label' => $ad['syscara_typ_von'],
+                'key' => str_replace(' ', '_', $ad['syscara_typ_von']),
             ];
         }
 

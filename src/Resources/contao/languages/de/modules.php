@@ -18,12 +18,68 @@
  * Module translation.
  */
 $GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
-$GLOBALS['TL_LANG']['MOD']['mobileDeSetup'][0] = 'Mobile.de Setup';
-$GLOBALS['TL_LANG']['MOD']['mobileDeSetup'][1] = 'Verwalten Sie hier Mobile.de App';
-$GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Mobile.de Listansicht';
-$GLOBALS['TL_LANG']['CTE']['mobileDeList'][1] = 'Inhaltelement um die Mobile.de Listansicht auf der gewünschten Seite zu platzieren.';
-$GLOBALS['TL_LANG']['CTE']['mobileDeReader'][0] = 'Mobile.de Detailansicht';
-$GLOBALS['TL_LANG']['CTE']['mobileDeReader'][1] = 'Inhaltselement um die Mobile.de Detailansicht auf der gewünschten Seite zu platzieren.';
-$GLOBALS['TL_LANG']['MOD']['mobileDeAds'] = ['Mobile.de Inserate', 'Verwalten der Inserate'];
 
-$GLOBALS['TL_LANG']['MOBILEDE']['emailBody'] = '<br>Hallo pdir Team,<br><br>wir haben die mobile.de Schnittstelle für Contao 4 installiert, getestet und würden diese gerne erwerben und für unseren Kunden einsetzten.<br><br>Die Domain lautet: [HIER DOMAIN ANGEBEN] <br><br>Die Rechnung soll auf folgende Adresse ausgestellt werden:<br><br>[HIER RECHNUNGSANSCHRIFT ANGEBEN]<br><br>Die Serverdaten aus dem Backend lauten wie folgt:<br>IP: :IP:<br>Hostname: :HOST: <br>Domain: :DOMAIN: <br><br>Mit freundlichen Grüßen<br>';
+$GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Fahrzeug Manager Listansicht';
+$GLOBALS['TL_LANG']['CTE']['mobileDeList'][1] = 'Inhaltelement um die Mobile.de Listansicht auf der gewünschten Seite zu platzieren.';
+$GLOBALS['TL_LANG']['CTE']['mobileDeReader'][0] = 'Fahrzeug Manager Detailansicht';
+$GLOBALS['TL_LANG']['CTE']['mobileDeReader'][1] = 'Inhaltselement um die Mobile.de Detailansicht auf der gewünschten Seite zu platzieren.';
+
+$GLOBALS['TL_LANG']['MOD']['vehicle_show'] = ['Fahrzeug Manager', 'Fahrzeuge verwalten'];
+$GLOBALS['TL_LANG']['MOD']['vehicle_accounts'] = ['Konten', 'Verwalten der Fahrzeug Manager Konten'];
+
+$GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] = 'Import starten';
+$GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'] = 'Demo Daten importieren';
+
+$GLOBALS['TL_LANG']['MOD']['vehicle'] = $GLOBALS['TL_LANG']['MOD']['vehicle_show'];
+$GLOBALS['TL_LANG']['MOD']['vehicle']['greeting'] = 'Willkommen beim %s Bundle für Contao';
+$GLOBALS['TL_LANG']['MOD']['vehicle']['text'] = 'Eine Erweiterung mit Filtern und Funktionen um deinen Fahrzeugbestand auf der eigenen Website anzuzeigen. <br> Die Daten können manuell gepflegt oder aus mobile.de oder SysCara&reg; automatisch importiert werden.';
+$GLOBALS['TL_LANG']['MOD']['vehicle']['tools'] = 'Tools';
+$GLOBALS['TL_LANG']['MOD']['vehicle']['help_h2'] = 'Hilfe & Links';
+$GLOBALS['TL_LANG']['MOD']['vehicle']['optionalBundles'] = 'Optionale Erweiterungen';
+
+$GLOBALS['TL_LANG']['MOD']['vehicle']['buttons'] = [
+    ['href' => "contao/main.php?do=vehicleSetup&act=import&ref=" . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
+    ['href' => "contao/main.php?do=vehicleSetup&act=download&ref=" . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'onclick' => "if(!confirm('Should the table really be emptied?'))return false;Backend.getScrollOffset()", 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
+];
+
+$GLOBALS['TL_LANG']['MOD']['vehicle']['setupLinks'] = [
+    ['href' => 'https://pdir.de/docs/de/contao/extensions/mobilede/', 'target' => '_blank', 'html' => 'Dokumentation'],
+    ['href' => 'https://github.com/pdir/mobilede-bundle/issues', 'target' => '_blank', 'html' => 'Probleme melden'],
+    ['href' => 'https://github.com/pdir/mobilede-bundle/', 'target' => '_blank', 'html' => 'Github'],
+    ['href' => 'https://pdir.de/mobilede.html', 'target' => '_blank', 'html' => 'Demo'],
+];
+
+$GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['free'] = [
+    'payment' => 'kostenlos',
+    'product' => 'Kostenlos',
+    'teaser' => 'Alle Fahrzeuge können im Backend direkt verwaltet werden.',
+    //'button_text' => 'jetzt herunterladen',
+    'features' => [
+        '+Listenansicht',
+        '+Detailansicht',
+        '+Bildslider',
+        '+Filter- und Sortierungsfunktionen'
+    ],
+];
+$GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['mobileDeSync'] = [
+    'payment' => 'einmalig, plus MwSt.',
+    'product' => 'mobile.de Sync',
+    'teaser' => 'Automatischer Abgleich der Fahrzeuge über mobile.de Plattform via API.',
+    'button_text' => 'Kaufen',
+    'features' => [
+        '+Alle funktionen der kostenlosen Version',
+        '-',
+        '*Automatischer Import'
+    ],
+];
+$GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['sysCaraSync'] = [
+    'payment' => 'einmalig, plus MwSt.',
+    'product' => 'SysCara&reg; Sync',
+    'teaser' => "Automatischer Abgleich der Fahrzeuge aus SysCara&reg; Plattform per XML Import'.",
+    'button_text' => 'Kaufen',
+    'features' => [
+        '+Alle funktionen der kostenlosen Version',
+        '-',
+        '*Automatischer Import'
+    ],
+];

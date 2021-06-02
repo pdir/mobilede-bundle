@@ -16,19 +16,21 @@
 
 namespace Pdir\MobileDeBundle\Module;
 
+use Contao\Controller;
+
 class MobileDeSetup extends \BackendModule
 {
     /**
      * mobilede version.
      */
-    const VERSION = '2.7.0';
+    const VERSION = '3.0.0';
 
     /**
      * Extension mode.
      *
      * @var bool
      */
-    const MODE = 'DEMO';
+    const MODE = 'FREE';
 
     /**
      * API Url.
@@ -48,7 +50,7 @@ class MobileDeSetup extends \BackendModule
      *
      * @var string
      */
-    protected $strTable = 'tl_mobile_ad';
+    protected $strTable = 'tl_vehicle';
 
     /**
      * Demo data path.
@@ -81,15 +83,7 @@ class MobileDeSetup extends \BackendModule
                 // do something here
         }
 
-        $this->Template->extMode = self::MODE;
-        $this->Template->extModeTxt = self::MODE === 'FULL' ? 'Vollversion' : 'Demo';
-        $this->Template->version = self::VERSION;
-        $this->Template->hostname = gethostname();
-        $this->Template->ip = \Environment::get('server');
-        $this->Template->domain = $this->strDomain;
-
-        // email body
-        $this->Template->emailBody = $this->getEmailBody();
+        Controller::redirect(Controller::getReferer());
     }
 
     protected function downloadDemoData()
@@ -120,11 +114,11 @@ class MobileDeSetup extends \BackendModule
             }
 
             // read local sql file
-            $fileModel = new \File($this->strPath.'tl_mobile_ad-demodata.sql');
+            $fileModel = new \File($this->strPath.'tl_vehicle-demodata.sql');
             $strQueries = $fileModel->getContentAsArray();
 
             // empty table and insert demo data
-            \Database::getInstance()->execute("DELETE FROM $this->strTable WHERE type = 'sync'");
+            \Database::getInstance()->execute("TRUNCATE TABLE $this->strTable");
 
             foreach($strQueries as $query) {
                 \Database::getInstance()->query($query);
@@ -133,7 +127,7 @@ class MobileDeSetup extends \BackendModule
             $this->Template->message = ['Demo Daten wurden erfolgreich heruntergeladen!', 'confirm'];
 
             // set images
-            $adIds = \Database::getInstance()->prepare('SELECT ad_id FROM tl_mobile_ad')->execute();
+            $adIds = \Database::getInstance()->prepare('SELECT vehicle_id FROM tl_vehicle')->execute();
             $numbers = range(0, count($images) - 1);
             while ($adIds->next()) {
                 $uuidArr = [];
@@ -148,14 +142,6 @@ class MobileDeSetup extends \BackendModule
                 \Database::getInstance()->prepare('UPDATE tl_mobile_ad SET images=?, orderSRC=? WHERE ad_id=?')->execute($uuidArr, $uuidArr, $adIds->ad_id);
             }
         }
-    }
-
-    protected function getEmailBody()
-    {
-        $arrSearch = [':IP:', ':HOST:', ':DOMAIN:', '<br>'];
-        $arrReplace = [$this->Template->ip, $this->Template->hostname, $this->Template->domain, '%0d%0a'];
-
-        return str_replace($arrSearch, $arrReplace, $GLOBALS['TL_LANG']['MOBILEDE']['emailBody']);
     }
 
     protected function randomImage($uuidArr, $numbers, $images)
