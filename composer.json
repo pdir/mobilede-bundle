@@ -59,7 +59,7 @@
   },
   "suggest": {
     "pdir/mobilede-sync-bundle": "Mobile.de Import for the vehicle manager / Mobile.de Import für den Fahrzeugmanager",
-    "pdir/vehicle-syscara-import": "SysCara Import for the vehicle manager / SysCara Import für den Fahrzeugmanager"
+    "pdir/vehicle-syscara-import": "SysCara Import for the vehicle manager / SysCara Import für den Fahrzeugmanager",
     "contao-themes-net/mate-theme-bundle": "Show a vehicle feed in the MATE Theme. / Zeige deine Fahrzeuge im MATE Theme an.",
     "contao-themes-net/odd-theme-bundle": "Show a vehicle feed in the ODD Theme. / Zeige deine Fahrzeuge im ODD Theme an.",
     "contao-themes-net/nature-theme-bundle": "Show a vehicle feed in the NATURE Theme. / Zeige deine Fahrzeuge im NATURE Theme an.",
