@@ -71,3 +71,4 @@ $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterFields'] = ['Fields', 'Pleas
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterWhere'] = ['Condition', 'Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. &lt;em&gt;specifics_gearbox=MANUAL_GEAR&lt;/em&gt; oder &lt;em&gt;vehicle_class!=&quot;Car&quot;&lt;/em&gt;).'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Searchable fields', 'Here you can enter a comma separated list of fields that you want to be searchable.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSort'] = ['Order by', 'Here you can enter a comma separated list of fields to sort the results by.'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterMaxItems'] = ['Maximum number', 'Here you can enter a maximum number, only so many vehicles will be displayed. [Use "10" for the first 10 vehicles or "10, 10" for vehicle 11-20.]'];

@@ -31,6 +31,7 @@ use Pdir\MobileDeBundle\Module\MobileDeSetup;
  * @property string $pdirVehicleFilterSearch
  * @property string $pdirVehicleFilterByAccount
  * @property string $pdirVehicleFilterByType
+ * @property string $pdirVehicleFilterMaxItems
  */
 class ListingElement extends \ContentElement
 {
@@ -139,6 +140,11 @@ class ListingElement extends \ContentElement
             $strQuery .= ' ORDER BY '.Database::quoteIdentifier($this->pdirVehicleFilterSort);
         }
 
+        // Limit
+        if ($this->pdirVehicleFilterMaxItems) {
+            $strQuery .= ' LIMIT '.$this->pdirVehicleFilterMaxItems;
+        }
+
         $objAds = $this->Database->prepare($strQuery)->execute();
 
         while ($objAds->next()) {
@@ -183,8 +189,8 @@ class ListingElement extends \ContentElement
         $assetsDir = 'web/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
-            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/mobilede_module.min.js|static';
-            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = '//unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/vehicle_module.min.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = $assetsDir.'/vendor/isotope/dist/isotope.pkgd.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
         }
 
@@ -277,7 +283,7 @@ class ListingElement extends \ContentElement
             $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
-            $images = deserialize($ad['api_images'])['image']['representation'];
+            $images = StringUtil::deserialize($ad['api_images'])['image']['representation'];
             if (\is_array($images) && \count($images) > 0) {
                 $objFilterTemplate->imageSrc_S = $images[0]['@url'];
                 $objFilterTemplate->imageSrc_XL = $images[1]['@url'];

@@ -17,6 +17,7 @@
 namespace Pdir\MobileDeBundle\Elements;
 
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Pdir\MobileDeSyncBundle\Api\MobileDe;
@@ -91,7 +92,7 @@ class ReaderElement extends \ContentElement
         }
 
         // features
-        $featuresArr = deserialize($this->ad['features']);
+        $featuresArr = StringUtil::deserialize($this->ad['features']);
         if ($featuresArr) {
             $newFeatures = [];
             foreach ($featuresArr as $feature) {
@@ -172,10 +173,10 @@ class ReaderElement extends \ContentElement
 
         // images
         $newGallery = [];
-        $apiImages = deserialize($this->ad['api_images']);
+        $apiImages = StringUtil::deserialize($this->ad['api_images']);
 
         if ('demo' !== $this->pdir_md_customer_username) {
-            $mobileDe = new MobileDe($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id, $this->pdir_md_customer_number);
+            $mobileDe = new MobileDe($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id);
             $newImages = $mobileDe->getGalleryImages($apiImages['@url']);
 
             foreach ($newImages['images']['image'] as $item) {

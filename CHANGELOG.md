@@ -2,6 +2,7 @@
 
 ## [3.0.0](https://github.com/pdir/mobilede-bundle/tree/3.0.0) – 2021-06-02
 
+- [feature] add new filters
 - [feature] use free version for vehicle management
 - [feature] add php 8 support
 - [info] set contao 4.9 as minimum requirement
