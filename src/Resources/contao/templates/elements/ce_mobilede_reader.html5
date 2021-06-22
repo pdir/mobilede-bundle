@@ -1,3 +1,14 @@
+<?php
+global $objPage;
+// Meta Angaben
+$objPage->title = $this->ad['makeModelDescription']['value'];
+$description = strip_tags(str_replace('</p>',' ',$this->ad['htmlDescription']['value']));
+$objPage->description = \Contao\StringUtil::substrHtml($description, 320);
+$text = $objPage->title.' '.$objPage->description;
+preg_match_all("/[a-z0-9\-]{4,}/i", $text, $matches);
+$GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
+?>
+
 <!--[if IE 7]>
 <link rel="stylesheet" href=/vendor/fontello/css/fontello-ie7.css"><![endif]-->
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?>
