@@ -943,6 +943,11 @@
 	content: "G";
 }
 
+.pseudo-price {
+	text-decoration: line-through;
+	font-size: .8em;
+	margin-left: 10px;
+}
 
 @media (min-width: 768px) {
     .md-ad-box {

@@ -318,6 +318,11 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
+
+            if($ad['pseudo_price'] != '' && $ad['pseudo_price'] != 0) {
+                $objFilterTemplate->pseudoPrice = \System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
+            }
+
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
             $objFilterTemplate->fuelType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']];
             $objFilterTemplate->transmission = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
