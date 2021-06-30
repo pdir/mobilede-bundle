@@ -1,3 +1,14 @@
+<?php
+global $objPage;
+// Meta Angaben
+$objPage->title = $this->ad['makeModelDescription']['value'];
+$description = strip_tags(str_replace('</p>',' ',$this->ad['htmlDescription']['value']));
+$objPage->description = \Contao\StringUtil::substrHtml($description, 320);
+$text = $objPage->title.' '.$objPage->description;
+preg_match_all("/[a-z0-9\-]{4,}/i", $text, $matches);
+$GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
+?>
+
 <!--[if IE 7]>
 <link rel="stylesheet" href=/vendor/fontello/css/fontello-ie7.css"><![endif]-->
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?>
@@ -44,10 +55,12 @@
         <div class="md-detail-box additional-attributes">
           <ul class="detail-list">
             <?php if($this->ad['fuelConsumption']): ?>
-            <?php foreach($this->ad['fuelConsumption'] as $key=>$feature): ?>
-            <li class="feature-<?= $key ?>"><span class="label"><?= $feature['label'] ?></span><span class="value"><?= $feature['value'] ?></span>
-            </li>
-            <?php endforeach; ?>
+              <?php foreach($this->ad['fuelConsumption'] as $key=>$feature): ?>
+                <?php if($feature['value'] != ''): ?>
+                  <li class="feature-<?= $key ?>"><span class="label"><?= $feature['label'] ?></span><span class="value"><?= $feature['value'] ?></span>
+                </li>
+                <?php endif; ?>
+              <?php endforeach; ?>
             <?php endif; ?>
 
             <?php if($this->ad['fuelConsumptionSE']): ?>
@@ -67,6 +80,29 @@
             <?php endif; ?>
           </ul>
         </div>
+
+        <?php $class = $this->ad['emission_fuel_consumption_energy_efficiency_class']; ?>
+        <?php if($class != ''): ?>
+          <div class="energy-class-label">
+            <div class="left-col">
+              <div class="label">CO-2-Effizienz</div>
+              <div class="description">*Auf der Grundlage der gemessenen CO-2 Emissionen unter Berücksichtigung der Masse des Fahrzeugs ermittelt.</div>
+            </div>
+            <div class="right-col">
+              <div class="energy-class class-a-plus-3<?php if($class == 'A+++'): ?> active<?php endif; ?>"><span>A+++</span></div>
+              <div class="energy-class class-a-plus-2<?php if($class == 'A++'): ?> active<?php endif; ?>"><span>A++</span></div>
+              <div class="energy-class class-a-plus<?php if($class == 'A+'): ?> active<?php endif; ?>"><span>A+</span></div>
+              <div class="energy-class class-a<?php if($class == 'A'): ?> active<?php endif; ?>"><span>A</span></div>
+              <div class="energy-class class-b<?php if($class == 'B'): ?> active<?php endif; ?>"><span>B</span></div>
+              <div class="energy-class class-c<?php if($class == 'C'): ?> active<?php endif; ?>"><span>C</span></div>
+              <div class="energy-class class-d<?php if($class == 'D'): ?> active<?php endif; ?>"><span>D</span></div>
+              <div class="energy-class class-e<?php if($class == 'E'): ?> active<?php endif; ?>"><span>E</span></div>
+              <div class="energy-class class-f<?php if($class == 'F'): ?> active<?php endif; ?>"><span>F</span></div>
+              <div class="energy-class class-g<?php if($class == 'G'): ?> active<?php endif; ?>"><span>G</span></div>
+            </div>
+          </div>
+        <?php endif; ?>
+
         <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-features'] ?></h2>
         <div class="md-detail-box additional-attributes features">
           <ul class="detail-list">

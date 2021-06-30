@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.1.0](https://github.com/pdir/mobilede-bundle/tree/3.1.0) – 2021-06-30
+
+- [feature] add energy class label and meta data in reader template
+
 ## [3.0.0](https://github.com/pdir/mobilede-bundle/tree/3.0.0) – 2021-06-02
 
 - [feature] add new filters
