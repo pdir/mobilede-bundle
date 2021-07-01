@@ -161,24 +161,18 @@ class ListingElement extends \ContentElement
 
     public function formatDate($str)
     {
-        // return no value info
-        if ('' === $str) {
+        // validate date
+        if($str) {
+            if (strpos($str, '-') !== false) {
+                // if date is string
+                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
+            } else {
+                // if date is timestamp
+                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
+            }
+        } else {
             return $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
         }
-
-        // validate date
-        if (date('Y-m-d', $timestamp = strtotime($str)) === $str) {
-            return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $timestamp);
-        }
-
-        // fix date with month only | 2020-02
-        if (7 === \strlen($str)) {
-            $date = explode('-', $str);
-
-            return $date[1].'.'.$date[0];
-        }
-
-        return $str;
     }
 
     /**
