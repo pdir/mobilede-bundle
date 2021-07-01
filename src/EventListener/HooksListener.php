@@ -16,8 +16,12 @@
 
 namespace Pdir\MobileDeBundle\EventListener;
 
+use Pdir\MobileDeBundle\Model\VehicleModel;
+
 class HooksListener
 {
+    const PARAMETER_KEY = 'ad';
+
     public function parseFrontendTemplate($strContent, $strTemplate)
     {
         if ('ce_mobilede_list' === $strTemplate || 'ce_mobilede_reader' === $strTemplate) {
@@ -68,5 +72,46 @@ class HooksListener
             // property of ad item not found
             return '';
         }
+    }
+
+    /**
+     * @param array $arrPages
+     * @param array $intRoot
+     *
+     * @return array
+     */
+    public function addVehiclesToSearchIndex($arrPages) {
+        $vehicles = VehicleModel::findAll();
+        $newVehiclePage = [];
+
+        $db = \Database::getInstance();
+        $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ?')->execute(0);
+        $readerPageId = $result->pdir_md_readerPage;
+
+        foreach($vehicles as $vehicle) {
+            $newVehiclePage[] = \Environment::get('url') . '/' . $this->getReaderPageLink($vehicle->alias, $readerPageId);
+        }
+
+        $newVehiclePage = array_unique($newVehiclePage);
+
+        return array_merge($arrPages, $newVehiclePage);
+    }
+
+    protected function getReaderPageLink($pageId, $readerPageId)
+    {
+        $paramString = sprintf('/%s/%s',
+            self::PARAMETER_KEY,
+            $pageId
+        );
+
+        if (\Config::get('useAutoItem')) {
+            $paramString = sprintf('/%s',
+                $pageId
+            );
+        }
+
+        $readerPage = \PageModel::findPublishedByIdOrAlias($readerPageId)->current()->row();
+
+        return \Controller::generateFrontendUrl($readerPage, $paramString);
     }
 }
