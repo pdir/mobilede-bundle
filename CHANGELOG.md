@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.2.0](https://github.com/pdir/mobilede-bundle/tree/3.2.0) – 2021-08-05
+
+- [feature] add pseudo price
+- [feature] add vehicles to sitemap.xml
+- [fix] fix date format
+
 ## [3.1.0](https://github.com/pdir/mobilede-bundle/tree/3.1.0) – 2021-06-30
 
 - [feature] add energy class label and meta data in reader template
