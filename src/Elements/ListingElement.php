@@ -163,12 +163,15 @@ class ListingElement extends \ContentElement
     {
         // validate date
         if($str) {
+            echo is_numeric($str);
             if (strpos($str, '-') !== false) {
                 // if date is string
                 return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
-            } else {
+            } else if(is_numeric($str)) {
                 // if date is timestamp
                 return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
+            } else {
+                return $str;
             }
         } else {
             return $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
