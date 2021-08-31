@@ -163,7 +163,6 @@ class ListingElement extends \ContentElement
     {
         // validate date
         if($str) {
-            echo is_numeric($str);
             if (strpos($str, '-') !== false) {
                 // if date is string
                 return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
