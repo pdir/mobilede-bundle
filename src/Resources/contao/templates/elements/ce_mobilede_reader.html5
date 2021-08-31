@@ -92,8 +92,6 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               <div class="description">*Auf der Grundlage der gemessenen CO-2 Emissionen unter Berücksichtigung der Masse des Fahrzeugs ermittelt.</div>
             </div>
             <div class="right-col">
-              <div class="energy-class class-a-plus-3<?php if($class == 'A+++'): ?> active<?php endif; ?>"><span>A+++</span></div>
-              <div class="energy-class class-a-plus-2<?php if($class == 'A++'): ?> active<?php endif; ?>"><span>A++</span></div>
               <div class="energy-class class-a-plus<?php if($class == 'A+'): ?> active<?php endif; ?>"><span>A+</span></div>
               <div class="energy-class class-a<?php if($class == 'A'): ?> active<?php endif; ?>"><span>A</span></div>
               <div class="energy-class class-b<?php if($class == 'B'): ?> active<?php endif; ?>"><span>B</span></div>

@@ -812,39 +812,13 @@
 	border-color: transparent transparent transparent #fff;
 }
 
-.energy-class.class-a-plus-3 span {
-	background: #1d9453;
-	width: 30%;
-}
-
-.energy-class.class-a-plus-3 span:after {
-	border-left-color: #1d9453;
-}
-
-.energy-class.class-a-plus-3.active:after {
-	content: "A+++";
-}
-
-.energy-class.class-a-plus-2 span {
-	background: #24a728;
-	width: 35%;
-}
-
-.energy-class.class-a-plus-2 span:after {
-	border-left-color: #24a728;
-}
-
-.energy-class.class-a-plus-2.active:after {
-	content: "A++";
-}
-
 .energy-class.class-a-plus span {
-	background: #acc535;
+	background: #068e42;
 	width: 40%;
 }
 
 .energy-class.class-a-plus span:after {
-	border-left-color: #acc535;
+	border-left-color: #068e42;
 }
 
 .energy-class.class-a-plus.active:after {
@@ -852,8 +826,7 @@
 }
 
 .energy-class.class-a span {
-	background: #fffb67;
-	color: #000;
+	background: #049d2b;
 	width: 45%;
 }
 
@@ -862,16 +835,16 @@
 }
 
 .energy-class.class-a span:after {
-	border-left-color: #fffb67;
+	border-left-color: #049d2b;
 }
 
 .energy-class.class-b span {
-	background: #feca59;
+	background: #b1c903;
 	width: 50%;
 }
 
 .energy-class.class-b span:after {
-	border-left-color: #feca59;
+	border-left-color: #b1c903;
 }
 
 .energy-class.class-b.active:after {
@@ -879,12 +852,13 @@
 }
 
 .energy-class.class-c span {
-	background: #fd7d2c;
+	background: #faea01;
 	width: 55%;
+	color: #000;
 }
 
 .energy-class.class-c span:after {
-	border-left-color: #fd7d2c;
+	border-left-color: #faea01;
 }
 
 .energy-class.class-c.active:after {
@@ -892,12 +866,12 @@
 }
 
 .energy-class.class-d span {
-	background: #fb1520;
+	background: #fda506;
 	width: 60%;
 }
 
 .energy-class.class-d span:after {
-	border-left-color: #fb1520;
+	border-left-color: #fda506;
 }
 
 .energy-class.class-d.active:after {
@@ -905,12 +879,12 @@
 }
 
 .energy-class.class-e span {
-	background: #de111b;
+	background: #e7640a;
 	width: 65%;
 }
 
 .energy-class.class-e span:after {
-	border-left-color: #de111b;
+	border-left-color: #e7640a;
 }
 
 .energy-class.class-e.active:after {
@@ -918,12 +892,12 @@
 }
 
 .energy-class.class-f span {
-	background: #c60e16;
+	background: #e23a13;
 	width: 70%;
 }
 
 .energy-class.class-f span:after {
-	border-left-color: #c60e16;
+	border-left-color: #e23a13;
 }
 
 .energy-class.class-f.active:after {
@@ -931,12 +905,12 @@
 }
 
 .energy-class.class-g span {
-	background: #ac0a13;
+	background: #e63c19;
 	width: 75%;
 }
 
 .energy-class.class-g span:after {
-	border-left-color: #ac0a13;
+	border-left-color: #e63c19;
 }
 
 .energy-class.class-g.active:after {
