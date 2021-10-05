@@ -205,8 +205,8 @@ class ReaderElement extends \ContentElement
             $this->ad['makeModelDescription']['value'] = $this->ad['name'];
         }
 
-        if ($this->ad['syscara_grundriss']) {
-            $groundPlan = unserialize($this->ad['syscara_grundriss']);
+        if ($this->ad['syscara_images_layout']) {
+            $groundPlan = unserialize($this->ad['syscara_images_layout']);
             $objFile = \FilesModel::findByUuid($groundPlan[0]);
             $this->ad['groundPlan'] = $objFile->path;
         }

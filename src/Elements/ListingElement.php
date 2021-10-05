@@ -396,8 +396,9 @@ class ListingElement extends \ContentElement
 
             $objFilterTemplate->rawData = $ad;
 
-            if ($ad['syscara_grundriss']) {
-                $groundPlan = unserialize($ad['syscara_grundriss']);
+            echo "<pre>"; print_r($ad['syscara_images_layout']); echo "</pre>";
+            if ($ad['syscara_images_layout']) {
+                $groundPlan = unserialize($ad['syscara_images_layout']);
                 $objFile = \FilesModel::findByUuid($groundPlan[0]);
                 $objFilterTemplate->groundPlan = $objFile->path;
             }
@@ -436,7 +437,7 @@ class ListingElement extends \ContentElement
         $filter[] = $ad['specifics_usage_type'];
         $filter[] = $ad['specifics_condition'];
         $filter[] = $ad['consumer_price_amount'];
-        $filter[] = $ad['syscara_typ_von'];
+        $filter[] = $ad['syscara_typeof'];
         $filter[] = $ad['specifics_num_seats'];
 
         $filter = array_filter($filter, 'strlen'); // remove empty fields
@@ -513,10 +514,10 @@ class ListingElement extends \ContentElement
             ];
         }
 
-        if ($ad['syscara_typ_von']) {
-            $this->filters['syscara_typ_von'][$ad['syscara_typ_von']] = [
-                'label' => $ad['syscara_typ_von'],
-                'key' => str_replace(' ', '_', $ad['syscara_typ_von']),
+        if ($ad['syscara_typeof']) {
+            $this->filters['syscara_typeof'][$ad['syscara_typeof']] = [
+                'label' => $ad['syscara_typeof'],
+                'key' => str_replace(' ', '_', $ad['syscara_typeof']),
             ];
         }
 
