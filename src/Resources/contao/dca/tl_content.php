@@ -329,7 +329,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_only_filter'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -340,7 +339,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_open_filter'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
