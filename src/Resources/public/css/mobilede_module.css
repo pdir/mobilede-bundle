@@ -923,6 +923,27 @@
 	margin-left: 10px;
 }
 
+.md-filters.open-filters .md-filters-body {
+	display: block;
+}
+
+.md-filters.open-filters #showFilters {
+	display: none;
+}
+
+.md-filters.open-filters .md-filters-header .md-filter-sort {
+	float: none;
+	text-align: right;
+}
+
+.md-filters.open-filters .md-filters-header .md-filter-sort i {
+	float: none;
+}
+
+.md-filters.open-filters .md-filters-header .md-filter-sort select {
+	width: auto;
+}
+
 @media (min-width: 768px) {
     .md-ad-box {
         width: 49%;

@@ -72,3 +72,4 @@ $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterWhere'] = ['Bedingung', 'Hie
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Durchsuchbare Felder', 'Hier können Sie eine kommagetrennte Liste der Felder eingeben, die durchsuchbar sein sollen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSort'] = ['Sortieren nach', 'Hier kannst du eine kommagetrennte Liste der Felder eingeben, nach denen die Ergebnisse sortiert werden sollen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterMaxItems'] = ['Maximale Anzahl', 'Hier kannst du eine maximale Anzahl eingeben, nur so viele Fahrzeuge werden angezeigt. [Verwende "10" für die ersten 10 Fahrzeuge oder "10, 10" für die Fahrzeuge 11-20].'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_open_filter'] = ['Filter ausgeklappt anzeigen', 'Aktiviere die Checkbox um alle Filter standardmäßig ausgeklappt anzuzeigen.'];
