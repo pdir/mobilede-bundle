@@ -7,7 +7,10 @@
     </picture>
   </div>
   <div class="price">
-    <span><?= $this->price ?></span>
+    <span>
+      <?= $this->price ?>
+      <?php if($this->pseudoPrice): ?><span class="pseudo-price"><?= $this->pseudoPrice ?></span><?php endif; ?>
+    </span>
   </div>
   <div class="detail">
     <!-- Header -->

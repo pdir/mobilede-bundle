@@ -161,24 +161,20 @@ class ListingElement extends \ContentElement
 
     public function formatDate($str)
     {
-        // return no value info
-        if ('' === $str) {
+        // validate date
+        if($str) {
+            if (strpos($str, '-') !== false) {
+                // if date is string
+                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
+            } else if(is_numeric($str)) {
+                // if date is timestamp
+                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
+            } else {
+                return $str;
+            }
+        } else {
             return $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
         }
-
-        // validate date
-        if (date('Y-m-d', $timestamp = strtotime($str)) === $str) {
-            return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $timestamp);
-        }
-
-        // fix date with month only | 2020-02
-        if (7 === \strlen($str)) {
-            $date = explode('-', $str);
-
-            return $date[1].'.'.$date[0];
-        }
-
-        return $str;
     }
 
     /**
@@ -248,9 +244,8 @@ class ListingElement extends \ContentElement
         // Filters
         $this->Template->filters = $this->filters;
 
-        if ($this->pdir_md_hideFilters) {
-            $this->Template->hideFilters = true;
-        }
+        if ($this->pdir_md_hideFilters) $this->Template->hideFilters = true;
+        if ($this->pdir_open_filter) $this->Template->openFilters = true;
 
         // Price Slider
         $this->Template->priceSlider = $this->pdir_md_priceSlider;
@@ -318,6 +313,11 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
+
+            if($ad['pseudo_price'] != '' && $ad['pseudo_price'] != 0) {
+                $objFilterTemplate->pseudoPrice = \System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
+            }
+
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
             $objFilterTemplate->fuelType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']];
             $objFilterTemplate->transmission = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
@@ -395,8 +395,8 @@ class ListingElement extends \ContentElement
 
             $objFilterTemplate->rawData = $ad;
 
-            if ($ad['syscara_grundriss']) {
-                $groundPlan = unserialize($ad['syscara_grundriss']);
+            if ($ad['syscara_images_layout']) {
+                $groundPlan = unserialize($ad['syscara_images_layout']);
                 $objFile = \FilesModel::findByUuid($groundPlan[0]);
                 $objFilterTemplate->groundPlan = $objFile->path;
             }
@@ -429,13 +429,14 @@ class ListingElement extends \ContentElement
         $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
         $filter[] = $ad['specifics_exterior_color'];
         $filter[] = $ad['vehicle_class'];
+        $filter[] = str_replace(' ', '_', $ad['vehicle_model']);
         $filter[] = $ad['vehicle_category'];
         $filter[] = $ad['specifics_fuel'];
         $filter[] = $ad['specifics_gearbox'];
         $filter[] = $ad['specifics_usage_type'];
         $filter[] = $ad['specifics_condition'];
         $filter[] = $ad['consumer_price_amount'];
-        $filter[] = $ad['syscara_typ_von'];
+        $filter[] = $ad['syscara_typeof'];
         $filter[] = $ad['specifics_num_seats'];
 
         $filter = array_filter($filter, 'strlen'); // remove empty fields
@@ -444,7 +445,7 @@ class ListingElement extends \ContentElement
             $this->filters['make'][$ad['vehicle_make']] = [
                 'label' => $ad['vehicle_make'],
                 'key' => str_replace(' ', '_', $ad['vehicle_make']),
-                'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? ($this->filters['usageType'][$ad['vehicle_make']]['count'] + 1) : 2),
+                'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? ($this->filters['make'][$ad['vehicle_make']]['count'] + 1) : 2),
             ];
         }
 
@@ -452,7 +453,7 @@ class ListingElement extends \ContentElement
             $this->filters['colors'][$ad['specifics_exterior_color']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
                 'key' => $ad['specifics_exterior_color'],
-                'count' => (isset($this->filters['colors'][$ad['specifics_exterior_color']]['count']) ? $this->filters['usageType'][$ad['specifics_exterior_color']]['count'] + 1 : 1),
+                'count' => (isset($this->filters['colors'][$ad['specifics_exterior_color']]['count']) ? $this->filters['colors'][$ad['specifics_exterior_color']]['count'] + 1 : 1),
             ];
         }
 
@@ -460,7 +461,15 @@ class ListingElement extends \ContentElement
             $this->filters['class'][$ad['vehicle_class']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_class']['options'][$ad['vehicle_class']],
                 'key' => $ad['vehicle_class'],
-                'count' => (isset($this->filters['class'][$ad['vehicle_class']]['count']) ? $this->filters['usageType'][$ad['vehicle_class']]['count'] + 1 : 1),
+                'count' => (isset($this->filters['class'][$ad['vehicle_class']]['count']) ? $this->filters['class'][$ad['vehicle_class']]['count'] + 1 : 1),
+            ];
+        }
+
+        if ($ad['vehicle_model']) {
+            $this->filters['vehicle_model'][$ad['vehicle_model']] = [
+                'label' => $ad['vehicle_model'],
+                'key' => str_replace(' ', '_', $ad['vehicle_model']),
+                'count' => (isset($this->filters['vehicle_model'][$ad['vehicle_model']]['count']) ? $this->filters['vehicle_model'][$ad['vehicle_model']]['count'] + 1 : 1),
             ];
         }
 
@@ -468,7 +477,7 @@ class ListingElement extends \ContentElement
             $this->filters['categories'][$ad['vehicle_category']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_category']['options'][$ad['vehicle_category']],
                 'key' => $ad['vehicle_category'],
-                'count' => (isset($this->filters['categories'][$ad['vehicle_category']]['count']) ? $this->filters['usageType'][$ad['vehicle_category']]['count'] + 1 : 1),
+                'count' => (isset($this->filters['categories'][$ad['vehicle_category']]['count']) ? $this->filters['categories'][$ad['vehicle_category']]['count'] + 1 : 1),
             ];
         }
 
@@ -476,7 +485,7 @@ class ListingElement extends \ContentElement
             $this->filters['fuelType'][$ad['specifics_fuel']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']],
                 'key' => $ad['specifics_fuel'],
-                'count' => (isset($this->filters['fuelType'][$ad['specifics_fuel']]['count']) ? $this->filters['usageType'][$ad['specifics_fuel']]['count'] + 1 : 1),
+                'count' => (isset($this->filters['fuelType'][$ad['specifics_fuel']]['count']) ? $this->filters['fuelType'][$ad['specifics_fuel']]['count'] + 1 : 1),
             ];
         }
 
@@ -484,7 +493,7 @@ class ListingElement extends \ContentElement
             $this->filters['gearbox'][$ad['specifics_gearbox']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']],
                 'key' => $ad['specifics_gearbox'],
-                'count' => (isset($this->filters['gearbox'][$ad['specifics_gearbox']]['count']) ? $this->filters['usageType'][$ad['specifics_gearbox']]['count'] + 1 : 1),
+                'count' => (isset($this->filters['gearbox'][$ad['specifics_gearbox']]['count']) ? $this->filters['gearbox'][$ad['specifics_gearbox']]['count'] + 1 : 1),
             ];
         }
 
@@ -512,10 +521,10 @@ class ListingElement extends \ContentElement
             ];
         }
 
-        if ($ad['syscara_typ_von']) {
-            $this->filters['syscara_typ_von'][$ad['syscara_typ_von']] = [
-                'label' => $ad['syscara_typ_von'],
-                'key' => str_replace(' ', '_', $ad['syscara_typ_von']),
+        if ($ad['syscara_typeof']) {
+            $this->filters['syscara_typeof'][$ad['syscara_typeof']] = [
+                'label' => $ad['syscara_typeof'],
+                'key' => str_replace(' ', '_', $ad['syscara_typeof']),
             ];
         }
 

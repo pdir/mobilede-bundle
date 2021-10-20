@@ -19,7 +19,7 @@ $strTable = 'tl_content';
 /**
  * Add palette to tl_content.
  */
-$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdirVehicleAccount,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter,pdirVehicleFilterByType,pdirVehicleFilterByAccount;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdirVehicleAccount,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_open_filter,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter,pdirVehicleFilterByType,pdirVehicleFilterByAccount;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 $GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 
 /*
@@ -329,7 +329,16 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_only_filter'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
+        'tl_class' => 'w50',
+    ],
+    'sql' => "char(1) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_open_filter'] = [
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_open_filter'],
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => [
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",

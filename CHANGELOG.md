@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.0](https://github.com/pdir/mobilede-bundle/tree/3.2.0) – 2021-xx-xx
+
+- [feature] add pseudo price
+- [feature] add vehicles to sitemap.xml
+- [feature] add vehicle_model as filter
+- [feature] add checkbox to show all filters expanded by default
+- [fix] fix date format
+- [fix] rename syscara fields
+
 ## [3.1.0](https://github.com/pdir/mobilede-bundle/tree/3.1.0) – 2021-06-30
 
 - [feature] add energy class label and meta data in reader template

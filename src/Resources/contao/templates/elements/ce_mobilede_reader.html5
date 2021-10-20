@@ -23,7 +23,10 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
     <div class="md-detail-header">
       <i class="icon-cab"></i>
       <h1><?= $this->ad['makeModelDescription']['value'] ?></h1>
-      <span class="price"><?= \System::getFormattedNumber($this->ad['consumer_price_amount'], 2).' '.$this->ad['price_currency']; ?></span>
+      <span class="price">
+        <?= \System::getFormattedNumber($this->ad['consumer_price_amount'], 2).' '.$this->ad['price_currency']; ?>
+        <?php if($this->ad['pseudo_price'] != '' && $this->ad['pseudo_price'] != 0): ?><span class="pseudo-price"><?= \System::getFormattedNumber($this->ad['pseudo_price'], 2).' '.$this->ad['price_currency']; ?></span><?php endif; ?>
+      </span>
     </div>
     <div class="md-detail-content">
       <div class="md-detail-left">
@@ -89,8 +92,6 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               <div class="description">*Auf der Grundlage der gemessenen CO-2 Emissionen unter Berücksichtigung der Masse des Fahrzeugs ermittelt.</div>
             </div>
             <div class="right-col">
-              <div class="energy-class class-a-plus-3<?php if($class == 'A+++'): ?> active<?php endif; ?>"><span>A+++</span></div>
-              <div class="energy-class class-a-plus-2<?php if($class == 'A++'): ?> active<?php endif; ?>"><span>A++</span></div>
               <div class="energy-class class-a-plus<?php if($class == 'A+'): ?> active<?php endif; ?>"><span>A+</span></div>
               <div class="energy-class class-a<?php if($class == 'A'): ?> active<?php endif; ?>"><span>A</span></div>
               <div class="energy-class class-b<?php if($class == 'B'): ?> active<?php endif; ?>"><span>B</span></div>

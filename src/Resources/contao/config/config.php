@@ -68,6 +68,7 @@ $GLOBALS['TL_AUTO_ITEM'][] = 'ad';
  */
 $GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['pdir.mobileDe.listener.hooks', 'parseFrontendTemplate'];
 $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', 'onReplaceInsertTags'];
+$GLOBALS['TL_HOOKS']['getSearchablePages'][] = ['pdir.mobileDe.listener.hooks', 'addVehiclesToSearchIndex'];
 
 /*
  * BAckend styles & css
