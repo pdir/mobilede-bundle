@@ -162,19 +162,20 @@ class ListingElement extends \ContentElement
     public function formatDate($str)
     {
         // validate date
-        if($str) {
-            if (strpos($str, '-') !== false) {
+        if ($str) {
+            if (false !== strpos($str, '-')) {
                 // if date is string
                 return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
-            } else if(is_numeric($str)) {
+            }
+            if (is_numeric($str)) {
                 // if date is timestamp
                 return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
-            } else {
-                return $str;
             }
-        } else {
-            return $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
+
+            return $str;
         }
+
+        return $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'];
     }
 
     /**
@@ -244,8 +245,12 @@ class ListingElement extends \ContentElement
         // Filters
         $this->Template->filters = $this->filters;
 
-        if ($this->pdir_md_hideFilters) $this->Template->hideFilters = true;
-        if ($this->pdir_open_filter) $this->Template->openFilters = true;
+        if ($this->pdir_md_hideFilters) {
+            $this->Template->hideFilters = true;
+        }
+        if ($this->pdir_open_filter) {
+            $this->Template->openFilters = true;
+        }
 
         // Price Slider
         $this->Template->priceSlider = $this->pdir_md_priceSlider;
@@ -314,7 +319,7 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
 
-            if($ad['pseudo_price'] != '' && $ad['pseudo_price'] != 0) {
+            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price']) {
                 $objFilterTemplate->pseudoPrice = \System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 

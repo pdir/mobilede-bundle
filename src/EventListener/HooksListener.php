@@ -49,38 +49,13 @@ class HooksListener
     }
 
     /**
-     * Replace the mobilede insert tag.
-     *
-     * @param string $tag the given tag
-     *
-     * @return string
-     */
-    private function replaceMobileDeInsertTag($tag)
-    {
-        $parts = explode('::', $tag);
-
-        try {
-            // @todo use model
-            $db = \Database::getInstance();
-            $stmt = $db->prepare('SELECT * FROM tl_vehicle WHERE id=? OR alias =?');
-            $res = $stmt->execute($parts[1], $parts[1]);
-            $ad = $res->fetchAssoc();
-            if ($ad[$parts[2]]) {
-                return $ad[$parts[2]];
-            }
-        } catch (\RuntimeException $e) {
-            // property of ad item not found
-            return '';
-        }
-    }
-
-    /**
      * @param array $arrPages
      * @param array $intRoot
      *
      * @return array
      */
-    public function addVehiclesToSearchIndex($arrPages) {
+    public function addVehiclesToSearchIndex($arrPages)
+    {
         $vehicles = VehicleModel::findAll();
         $newVehiclePage = [];
 
@@ -88,8 +63,8 @@ class HooksListener
         $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ?')->execute(0);
         $readerPageId = $result->pdir_md_readerPage;
 
-        foreach($vehicles as $vehicle) {
-            $newVehiclePage[] = \Environment::get('url') . '/' . $this->getReaderPageLink($vehicle->alias, $readerPageId);
+        foreach ($vehicles as $vehicle) {
+            $newVehiclePage[] = \Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
         }
 
         $newVehiclePage = array_unique($newVehiclePage);
@@ -113,5 +88,31 @@ class HooksListener
         $readerPage = \PageModel::findPublishedByIdOrAlias($readerPageId)->current()->row();
 
         return \Controller::generateFrontendUrl($readerPage, $paramString);
+    }
+
+    /**
+     * Replace the mobilede insert tag.
+     *
+     * @param string $tag the given tag
+     *
+     * @return string
+     */
+    private function replaceMobileDeInsertTag($tag)
+    {
+        $parts = explode('::', $tag);
+
+        try {
+            // @todo use model
+            $db = \Database::getInstance();
+            $stmt = $db->prepare('SELECT * FROM tl_vehicle WHERE id=? OR alias =?');
+            $res = $stmt->execute($parts[1], $parts[1]);
+            $ad = $res->fetchAssoc();
+            if ($ad[$parts[2]]) {
+                return $ad[$parts[2]];
+            }
+        } catch (\RuntimeException $e) {
+            // property of ad item not found
+            return '';
+        }
     }
 }

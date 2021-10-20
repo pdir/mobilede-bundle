@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-/**
+/*
  * Module translation.
  */
 $GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
@@ -37,8 +37,8 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['help_h2'] = 'Hilfe & Links';
 $GLOBALS['TL_LANG']['MOD']['vehicle']['optionalBundles'] = 'Optionale Erweiterungen';
 
 $GLOBALS['TL_LANG']['MOD']['vehicle']['buttons'] = [
-    ['href' => "contao/main.php?do=vehicleSetup&act=import&ref=" . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
-    ['href' => "contao/main.php?do=vehicleSetup&act=download&ref=" . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
+    ['href' => 'contao/main.php?do=vehicleSetup&act=import&ref='.System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
+    ['href' => 'contao/main.php?do=vehicleSetup&act=download&ref='.System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
 ];
 
 $GLOBALS['TL_LANG']['MOD']['vehicle']['setupLinks'] = [
@@ -68,17 +68,17 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['mobileDeSync'] = [
     'features' => [
         '+All functions of the free version',
         '-',
-        '*Automatic import'
+        '*Automatic import',
     ],
 ];
 $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['sysCaraSync'] = [
     'payment' => 'once, plus VAT',
     'product' => 'SysCara&reg; Sync',
-    'teaser' => "Automate! Import your vehicles from SysCara&reg; API fully automatically.",
+    'teaser' => 'Automate! Import your vehicles from SysCara&reg; API fully automatically.',
     'button_text' => 'buy',
     'features' => [
         '+All functions of the free version',
         '-',
-        '*Automatic import'
+        '*Automatic import',
     ],
 ];

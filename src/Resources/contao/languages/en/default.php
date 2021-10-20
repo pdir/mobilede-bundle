@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-/**
+/*
  * Label translation.
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['airbag'] = 'Airbag';

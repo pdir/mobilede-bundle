@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-/**
+/*
  * Module translation.
  */
 $GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
@@ -38,8 +38,8 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['help_h2'] = 'Hilfe & Links';
 $GLOBALS['TL_LANG']['MOD']['vehicle']['optionalBundles'] = 'Optionale Erweiterungen';
 
 $GLOBALS['TL_LANG']['MOD']['vehicle']['buttons'] = [
-    ['href' => "contao/main.php?do=vehicleSetup&act=import&ref=" . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
-    ['href' => "contao/main.php?do=vehicleSetup&act=download&ref=" . System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'onclick' => "if(!confirm('Should the table really be emptied?'))return false;Backend.getScrollOffset()", 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
+    ['href' => 'contao/main.php?do=vehicleSetup&act=import&ref='.System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
+    ['href' => 'contao/main.php?do=vehicleSetup&act=download&ref='.System::getContainer()->get('request_stack')->getCurrentRequest()->get('_contao_referer_id'), 'onclick' => "if(!confirm('Should the table really be emptied?'))return false;Backend.getScrollOffset()", 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
 ];
 
 $GLOBALS['TL_LANG']['MOD']['vehicle']['setupLinks'] = [
@@ -58,7 +58,7 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['free'] = [
         '+Listenansicht',
         '+Detailansicht',
         '+Bildslider',
-        '+Filter- und Sortierungsfunktionen'
+        '+Filter- und Sortierungsfunktionen',
     ],
 ];
 $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['mobileDeSync'] = [
@@ -69,7 +69,7 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['mobileDeSync'] = [
     'features' => [
         '+Alle funktionen der kostenlosen Version',
         '-',
-        '*Automatischer Import'
+        '*Automatischer Import',
     ],
 ];
 $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['sysCaraSync'] = [
@@ -80,6 +80,6 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['editions']['sysCaraSync'] = [
     'features' => [
         '+Alle funktionen der kostenlosen Version',
         '-',
-        '*Automatischer Import'
+        '*Automatischer Import',
     ],
 ];

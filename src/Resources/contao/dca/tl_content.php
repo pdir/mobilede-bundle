@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -16,7 +16,7 @@
 
 $strTable = 'tl_content';
 
-/**
+/*
  * Add palette to tl_content.
  */
 $GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdirVehicleAccount,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_open_filter,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter,pdirVehicleFilterByType,pdirVehicleFilterByAccount;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
@@ -356,12 +356,12 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleAccount'] = [
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByType'] = [
-    'label'                 => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByType'],
-    'exclude'               => true,
-    'inputType'             => 'select',
-    'options'               => $GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByTypeOptions'],
-    'eval'                  => ['includeBlankOption'=>true, 'tl_class'=>'w50'],
-    'sql'                   => "varchar(255) NOT NULL default ''"
+    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByType'],
+    'exclude' => true,
+    'inputType' => 'select',
+    'options' => $GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByTypeOptions'],
+    'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(255) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
@@ -378,39 +378,39 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterFields'] = [
     'exclude' => true,
     'inputType' => 'text',
-    'eval' => array('mandatory' => true, 'decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'),
-    'sql' => "varchar(255) NOT NULL default ''"
+    'eval' => ['mandatory' => true, 'decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
+    'sql' => "varchar(255) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterWhere'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['preserveTags' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''"
+    'sql' => "varchar(255) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterSearch'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''"
+    'sql' => "varchar(255) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterSort'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default '*'"
+    'sql' => "varchar(255) NOT NULL default '*'",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterMaxItems'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''"
+    'sql' => "varchar(255) NOT NULL default ''",
 ];
 
-class pdir_md_content extends Backend
+class tl_content extends Backend
 {
     public function getListTemplates(DataContainer $dc)
     {

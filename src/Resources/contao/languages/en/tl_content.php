@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -14,7 +14,7 @@
  * file that was distributed with this source code.
  */
 
-/**
+/*
  * Module translation.
  */
 $GLOBALS['TL_LANG']['tl_content']['md_settings_legend'] = 'Settings';
@@ -60,7 +60,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = ['Debug', 'If act
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Activate Price Slider', 'If active you can filter the price with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['Activate Power Slider', 'If active you can filter the power with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Activate Mileage Slider', 'If active you can filter the mileage with a range slider.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Only Filter','If active the objects are not shown and only the filter form is displayed.'];
+$GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Only Filter', 'If active the objects are not shown and only the filter form is displayed.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'] = ['Vehicle import account', 'Here you can assign an ID for the import account. Default: 0 (only necessary for several import accounts)'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Activate poor man cron', 'Here you can enable the import via Contao poor man cron. (hourly)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Vehicle account', 'Which account should be pre-filtered for? (Default: 0 = all accounts)'];

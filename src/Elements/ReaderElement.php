@@ -167,8 +167,6 @@ class ReaderElement extends \ContentElement
 
         if ($this->ad['specifics_power']) {
             $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber(($this->ad['specifics_power'] * 1.35962), 0).' PS)';
-        } else {
-            'Keine Angabe';
         }
 
         // images

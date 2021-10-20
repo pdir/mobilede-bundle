@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2019 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -14,11 +14,11 @@
  * file that was distributed with this source code.
  */
 
-/**
+/*
  * Add frontend module.
  */
 
-/**
+/*
  * Add content element.
  */
 $GLOBALS['TL_CTE']['includes']['mobileDeList'] = 'Pdir\\MobileDeBundle\\Elements\\ListingElement';
@@ -47,7 +47,7 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     'vehicle_accounts' => [
         'tables' => ['tl_vehicle_account'],
         'icon' => $assetsDir.'/img/icon.png',
-    ]
+    ],
 ]);
 
 array_insert($GLOBALS['BE_MOD']['pdir'], 0, []);
@@ -74,16 +74,14 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = ['pdir.mobileDe.listener.hooks', 
  * BAckend styles & css
  */
 
-if (TL_MODE === 'BE')
-{
-    if (!is_array($GLOBALS['TL_JAVASCRIPT']))
-    {
+if (TL_MODE === 'BE') {
+    if (!is_array($GLOBALS['TL_JAVASCRIPT'])) {
         $GLOBALS['TL_JAVASCRIPT'] = [];
     }
 
-    $GLOBALS['TL_JAVASCRIPT'][] =  $assetsDir . '/js/vehicle_backend.js|static';
+    $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/vehicle_backend.js|static';
 
     $combiner = new \Combiner();
-    $combiner->add($assetsDir . '/css/vehicle_backend.scss');
-    $GLOBALS['TL_CSS'][] = str_replace("TL_ASSETS_URL","",$combiner->getCombinedFile());
+    $combiner->add($assetsDir.'/css/vehicle_backend.scss');
+    $GLOBALS['TL_CSS'][] = str_replace('TL_ASSETS_URL', '', $combiner->getCombinedFile());
 }
