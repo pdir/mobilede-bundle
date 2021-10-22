@@ -19,8 +19,8 @@
  */
 $GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
 
-$GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Fahrzeug Manager Listansicht';
-$GLOBALS['TL_LANG']['CTE']['mobileDeList'][1] = 'Inhaltelement um die Mobile.de Listansicht auf der gewünschten Seite zu platzieren.';
+$GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Fahrzeug Manager Listenansicht';
+$GLOBALS['TL_LANG']['CTE']['mobileDeList'][1] = 'Inhaltelement um die Mobile.de Listenansicht auf der gewünschten Seite zu platzieren.';
 $GLOBALS['TL_LANG']['CTE']['mobileDeReader'][0] = 'Fahrzeug Manager Detailansicht';
 $GLOBALS['TL_LANG']['CTE']['mobileDeReader'][1] = 'Inhaltselement um die Mobile.de Detailansicht auf der gewünschten Seite zu platzieren.';
 

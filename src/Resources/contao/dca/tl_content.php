@@ -56,7 +56,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_listTemplate'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_listTemplate'],
     'exclude' => true,
     'inputType' => 'select',
-    'options_callback' => ['pdir_md_content', 'getListTemplates'],
+    'options_callback' => ['tl_content_vehicle', 'getListTemplates'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => [
         'includeBlankOption' => true,
@@ -69,7 +69,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_itemTemplate'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_itemTemplate'],
     'exclude' => true,
     'inputType' => 'select',
-    'options_callback' => ['pdir_md_content', 'getItemTemplates'],
+    'options_callback' => ['tl_content_vehicle', 'getItemTemplates'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => [
         'includeBlankOption' => true,
@@ -400,7 +400,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterSort'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default '*'",
+    'sql' => "varchar(255) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterMaxItems'] = [
@@ -410,7 +410,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterMaxItems'] = [
     'sql' => "varchar(255) NOT NULL default ''",
 ];
 
-class tl_content extends Backend
+class tl_content_vehicle extends Backend
 {
     public function getListTemplates(DataContainer $dc)
     {
