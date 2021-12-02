@@ -42,6 +42,7 @@ class DataContainerListener
 
         if (class_exists('Pdir\MobileDeSyncBundle\Module\Sync')) {
             $template->extMode = Sync::MODE;
+            $template->syncVersion = Sync::VERSION;
         }
 
         $template->arrEditions = [

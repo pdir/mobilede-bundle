@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'panelLayout' => 'sort,search,limit',
         ],
         'label' => [
-            'fields' => ['description'],
+            'fields' => ['description', 'id'],
         ],
         'global_operations' => [],
         'operations' => [
@@ -121,7 +121,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'api_explanation' => [
             'exclude' => true,
-            'input_field_callback' => static function (Contao\DataContainer $dc) {
+            'input_field_callback' => static function (Contao\DataContainer $dc, $strTable) {
                 return sprintf(
                     '<div class="widget"><p class="tl_info">%s</p></div>',
                     $GLOBALS['TL_LANG'][$strTable]['api_explanation']
@@ -140,7 +140,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50', 'preserveTags' => true],
             'sql' => "varchar(64) NOT NULL default ''",
         ],
-        'mobilede_customer_number' => [
+        'api_mobilede_customer_number' => [
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50', 'preserveTags' => true],
