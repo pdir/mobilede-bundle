@@ -84,6 +84,7 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value']
  * List View
  */
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'] = 'Es konnten keine passenden Fahrzeuge gefunden werden.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['vehicleAccountDefault'] = 'Alle Konten anzeigen';
 
 /*
  * Detail View

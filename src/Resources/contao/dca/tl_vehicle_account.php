@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
 
     // Subpalettes
     'subpalettes' => [
-        'apiType_man' => '{credentials_legend};',
+        'apiType_man' => 'man_explanation',
         'apiType_mobilede' => '{credentials_legend},api_explanation,api_user_key,api_user_secret,api_mobilede_customer_number;'.
             '{sync_legend},enabled;',
         'apiType_convertTo' => '{convertTo_legend};',
@@ -121,10 +121,19 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'api_explanation' => [
             'exclude' => true,
-            'input_field_callback' => static function (Contao\DataContainer $dc, $strTable) {
+            'input_field_callback' => static function (Contao\DataContainer $dc) {
                 return sprintf(
-                    '<div class="widget"><p class="tl_info">%s</p></div>',
-                    $GLOBALS['TL_LANG'][$strTable]['api_explanation']
+                    '<div class="widget" style="margin-top:15px;"><p class="tl_info">%s</p></div>',
+                    $GLOBALS['TL_LANG']['tl_vehicle_account']['api_explanation']
+                );
+            },
+        ],
+        'man_explanation' => [
+            'exclude' => true,
+            'input_field_callback' => static function (Contao\DataContainer $dce) {
+                return sprintf(
+                    '<div class="widget" style="margin-top:15px;"><p class="tl_info">%s</p></div>',
+                    $GLOBALS['TL_LANG']['tl_vehicle_account']['man_explanation']
                 );
             },
         ],

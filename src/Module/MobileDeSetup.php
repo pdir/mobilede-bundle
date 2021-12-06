@@ -17,13 +17,14 @@
 namespace Pdir\MobileDeBundle\Module;
 
 use Contao\Controller;
+use Contao\Message;
 
 class MobileDeSetup extends \BackendModule
 {
     /**
      * mobilede version.
      */
-    const VERSION = '3.2.1';
+    const VERSION = '3.4.0';
 
     /**
      * Extension mode.
@@ -73,6 +74,9 @@ class MobileDeSetup extends \BackendModule
      */
     protected function compile()
     {
+        // load language file
+        self::loadLanguageFile('tl_vehicle');
+
         $this->strDomain = \Environment::get('httpHost');
 
         switch (\Input::get('act')) {
@@ -81,6 +85,7 @@ class MobileDeSetup extends \BackendModule
                 // no break
             default:
                 // do something here
+                Message::addInfo($GLOBALS['TL_LANG']['tl_vehicle']['importMessage']);
         }
 
         Controller::redirect(Controller::getReferer());
@@ -95,7 +100,7 @@ class MobileDeSetup extends \BackendModule
         }
 
         $strHelperData = file_get_contents(self::$apiUrl.'demodata/'.self::VERSION.'/'.$this->strDomain);
-        $this->Template->message = ['Beim herunterladen der Demo Daten ist ein Fehler aufgetreten. (support@pdir.de)', 'error'];
+        $this->Template->message = [$GLOBALS['TL_LANG']['tl_vehicle']['downloadError'], 'error'];
 
         if ('error' !== $strHelperData) {
             \File::putContent($strFile, $strHelperData);
@@ -124,7 +129,7 @@ class MobileDeSetup extends \BackendModule
                 \Database::getInstance()->query($query);
             }
 
-            $this->Template->message = ['Demo Daten wurden erfolgreich heruntergeladen!', 'confirm'];
+            $this->Template->message = [$GLOBALS['TL_LANG']['tl_vehicle']['downloadSuccess'], 'confirm'];
 
             // set images
             $adIds = \Database::getInstance()->prepare("SELECT vehicle_id FROM  $this->strTable")->execute();

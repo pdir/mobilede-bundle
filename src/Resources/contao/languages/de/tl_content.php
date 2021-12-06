@@ -26,9 +26,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detailansicht', 'Bit
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listenansicht', 'Wählen Sie hier die Seite für die Listenansicht aus, wenn Sie die Option <strong>Nur Filter</strong> aktiviert haben.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listTemplate'] = ['Listenansicht Template', 'Bitte wählen Sie hier ein Template für die Listenansicht aus.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_itemTemplate'] = ['Inserat Template', 'Bitte wählen Sie hier das Template für die Darstellung der Inserate.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_id'] = ['Mobile.de Kundennummer', 'Bitte geben Sie hier Ihre Mobile.de Kundenummer an.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_username'] = ['Mobile.de API Benutzer', 'Bitte geben Sie hier Ihre Mobile.de API Benutzer an.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_password'] = ['Mobile.de API Passwort', 'Bitte geben Sie hier Ihre Mobile.de API Passwort an.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_hidePromotionBox'] = ['Promotionbox ausblenden', 'Wenn aktiv wird die Promotionbox nicht angezeigt.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_hideFilters'] = ['Filter ausblenden', 'Wenn aktiv werden die Filter nicht angezeigt.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'] = ['Zufällig anordnen', 'Wenn aktiv werden die Inserate in zufälliger Reihenfolge ausgegeben.'];
@@ -61,12 +58,7 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Preis-Slider aktivi
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['PS-Slider aktivieren', 'Wenn aktiv können Sie den PS-Wert über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_mileageSlider'] = ['Kilometerstand-Slider aktivieren', 'Wenn aktiv können Sie den Kilometerstand über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Nur Filter', 'Wenn Sie diese Option aktivieren, werden die Objekte ausgeblendet und nur die Filter dargestellt, z. B. um ein Filterformular auf der Startseite zu platzieren.'];
-$GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'] = ['Konto für den Fahrzeugimport', 'Hier können Sie eine ID für das Import Konto vergeben. Standard: 0 (nur notwendig für mehrere Import Konten)'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Poor-Man-Cron aktivieren', 'Hier kann der Import per Contao Poor-Man-Cron aktiviert werden. (stündlich)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Konto der Fahrzeuge', 'Nach welchem Konto soll vorgefiltert werden? (Default: 0 = Alle Konten)'];
-$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Quelle der Fahrzeuge', 'Nach welcher Quelle der Fahrzeuge soll vorgefiltert werden?'];
-$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'Manuell';
-$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['sync'] = 'API';
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterFields'] = ['Felder', 'Bitte gib hier eine kommagetrennte Liste der Felder ein, die Sie auflisten möchten oder benutze "*".'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterWhere'] = ['Bedingung', 'Hier kannst du eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. &lt;em&gt;specifics_gearbox=MANUAL_GEAR&lt;/em&gt; oder &lt;em&gt;vehicle_class!=&quot;Car&quot;&lt;/em&gt;).'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Durchsuchbare Felder', 'Hier können Sie eine kommagetrennte Liste der Felder eingeben, die durchsuchbar sein sollen.'];

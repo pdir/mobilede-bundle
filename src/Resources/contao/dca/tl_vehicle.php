@@ -224,11 +224,10 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "varchar(4) NOT NULL default 'man'",
         ],
         'account' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_consent_service']['account'],
-            'inputType' => 'text',
+            'inputType' => 'select',
             'sorting' => true,
+            'foreignKey' => 'tl_vehicle_account.description',
             'search' => true,
-            'flag' => 1,
             'eval' => [
                 'tl_class' => 'w50',
             ],

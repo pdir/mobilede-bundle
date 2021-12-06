@@ -21,6 +21,14 @@ $GLOBALS['TL_LANG'][$strTable]['copy'] = ['Inserat kopieren', 'Kopiere Inserat %
 $GLOBALS['TL_LANG'][$strTable]['cut'] = ['Inserat ausschneiden', 'Scheide Inserat %s aus'];
 $GLOBALS['TL_LANG'][$strTable]['delete'] = ['Lösche Inserat', 'Lösche %s Inserat'];
 $GLOBALS['TL_LANG'][$strTable]['show'] = ['Zeige Inserat Information an', 'Zeige Information zu Inserat %s'];
+$GLOBALS['TL_LANG'][$strTable]['importMessage'] = 'Für einen Import von mobile.de, SysCara oder autoscout24.de benötigst du die Vollversion des Fahrzeugmanagers.';
+$GLOBALS['TL_LANG'][$strTable]['downloadError'] = 'Beim herunterladen der Demo Daten ist ein Fehler aufgetreten. (support@pdir.de)';
+$GLOBALS['TL_LANG'][$strTable]['downloadSuccess'] = 'Demo Daten wurden erfolgreich heruntergeladen!';
+$GLOBALS['TL_LANG'][$strTable]['apiTypeError'] = 'Für den API Typ %s ist keine Vollversion installiert.';
+$GLOBALS['TL_LANG'][$strTable]['messages']['x-objects-were-imported'] = 'Es wurden %s Fahrzeuge importiert.';
+$GLOBALS['TL_LANG'][$strTable]['messages']['credentials'] = 'Bitte überprüfe deine Zugangsdaten.';
+$GLOBALS['TL_LANG'][$strTable]['noAccounts'] = 'Es wurden keine Konten für die Synchronisation gefunden.';
+$GLOBALS['TL_LANG'][$strTable]['accountError'] = 'Importfehler: %s (ID: %s) - %s';
 
 $GLOBALS['TL_LANG'][$strTable]['vehicle_id'] = ['Vehicle ID', 'Die eindeutige Vehicle ID.'];
 $GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];
