@@ -27,7 +27,7 @@ $GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\Elemen
 /*
 * Backend modules
 */
-if (array_key_exists('pdir', $GLOBALS['BE_MOD']) !== true) {
+if (true !=== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
     array_insert($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
 }
 
