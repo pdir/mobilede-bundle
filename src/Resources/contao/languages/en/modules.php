@@ -26,6 +26,9 @@ $GLOBALS['TL_LANG']['CTE']['mobileDeReader'][0] = 'Mobile.de Detail View';
 $GLOBALS['TL_LANG']['CTE']['mobileDeReader'][1] = 'Content element to place the Mobile.de detail view on the desired page.';
 $GLOBALS['TL_LANG']['MOD']['mobileDeAds'] = ['Mobile.de Ads', 'Manage Mobile.de Ads'];
 
+$GLOBALS['TL_LANG']['MOD']['vehicle_show'] = ['Vehicle Manager', 'Manage vehicles'];
+$GLOBALS['TL_LANG']['MOD']['vehicle_accounts'] = ['Accounts', 'Manage the Vehicle Manager accounts'];
+
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] = 'Run import';
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'] = 'Import demo data';
 
