@@ -290,6 +290,8 @@ class ListingElement extends \ContentElement
                 $objFilterTemplate->imageSrc_L = $images[3]['@url'];
                 $objFilterTemplate->imageSrc_M = $images[4]['@url'];
                 $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+                // fix for xxl image which is not included in xml response
+                $objFilterTemplate->imageSrc_XXL = str_replace('$_27.JPG', '$_57.JPG', $images[1]['@url']);
             }
 
             if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
@@ -305,6 +307,7 @@ class ListingElement extends \ContentElement
                     $objFilterTemplate->imageSrc_M = $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_ICON = $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_ORIGINAL = $objFile->path;
+                    $objFilterTemplate->imageSrc_XXL = $imageObj->setTargetWidth(1600)->setTargetHeight(800)->setResizeMode('center_center')->executeResize()->getResizedPath();
                 }
             }
 
