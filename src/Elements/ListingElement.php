@@ -283,13 +283,16 @@ class ListingElement extends \ContentElement
             $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
-            $images = StringUtil::deserialize($ad['api_images'])['image']['representation'];
-            if (\is_array($images) && \count($images) > 0) {
-                $objFilterTemplate->imageSrc_S = $images[0]['@url'];
-                $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
-                $objFilterTemplate->imageSrc_L = $images[3]['@url'];
-                $objFilterTemplate->imageSrc_M = $images[4]['@url'];
-                $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+
+            if($ad['api_images'] !== null) {
+                $images = StringUtil::deserialize($ad['api_images'])['image']['representation'];
+                if (\is_array($images) && \count($images) > 0) {
+                    $objFilterTemplate->imageSrc_S = $images[0]['@url'];
+                    $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
+                    $objFilterTemplate->imageSrc_L = $images[3]['@url'];
+                    $objFilterTemplate->imageSrc_M = $images[4]['@url'];
+                    $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+                }
             }
 
             if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
@@ -331,9 +334,18 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
             $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
             $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
-            $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ?: $ad['specifics_usage_type'];
-            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']];
-            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+
+            if($ad['specifics_usage_type'] != '') {
+                $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ?: $ad['specifics_usage_type'];
+            }
+
+            if($ad['specifics_condition'] != '') {
+                $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][strtoupper($ad['specifics_condition'])];
+            }
+
+            if($ad['specifics_gearbox'] != '') {
+                $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            }
 
             $fuelConsumption = [];
 
