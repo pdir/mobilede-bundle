@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.3.0](https://github.com/pdir/mobilede-bundle/tree/3.2.1) – 2021-12-06
+
+- [feature] add xxl image in detail view
+
 ## [3.2.1](https://github.com/pdir/mobilede-bundle/tree/3.2.1) – 2021-12-02
 
 - [fix] set php version higher than 8.0
