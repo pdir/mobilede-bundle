@@ -27,19 +27,20 @@ $GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\Elemen
 /*
 * Backend modules
 */
-if (true !=== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
-    array_insert($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
+if (true !== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
+    array_insert ($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
 }
 
 $assetsDir = 'bundles/pdirmobilede';
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 0, [
+array_insert ($GLOBALS['BE_MOD']['pdir'], 0, [
     'vehicleSetup' => [
         'callback' => 'Pdir\MobileDeBundle\Module\MobileDeSetup',
     ],
 ]);
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
+
+array_insert ($GLOBALS['BE_MOD']['pdir'], 1, [
     'vehicle_show' => [
         'tables' => ['tl_vehicle'],
         'icon' => $assetsDir.'/img/icon.png',
@@ -50,7 +51,7 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     ],
 ]);
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 0, []);
+array_insert ($GLOBALS['BE_MOD']['pdir'], 0, []);
 
 /*
  * Models
@@ -71,10 +72,10 @@ $GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', '
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = ['pdir.mobileDe.listener.hooks', 'addVehiclesToSearchIndex'];
 
 /*
- * BAckend styles & css
+ * Back end styles & css
  */
 
-if (TL_MODE === 'BE') {
+if ('BE' === TL_MODE) {
     if (!is_array($GLOBALS['TL_JAVASCRIPT'])) {
         $GLOBALS['TL_JAVASCRIPT'] = [];
     }

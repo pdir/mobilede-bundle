@@ -1,8 +1,8 @@
 <?php
 global $objPage;
 // Meta Angaben
-$objPage->title = $this->ad['makeModelDescription']['value'];
-$description = strip_tags(str_replace('</p>',' ',$this->ad['htmlDescription']['value']));
+$objPage->title = $this->ad['makeModelDescription'];
+$description = strip_tags(str_replace('</p>',' ',$this->ad['htmlDescription']));
 $objPage->description = \Contao\StringUtil::substrHtml($description, 320);
 $text = $objPage->title.' '.$objPage->description;
 preg_match_all("/[a-z0-9\-]{4,}/i", $text, $matches);
@@ -22,7 +22,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
     <a href="javascript:history.back();" class="back top"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['back'] ?></a>
     <div class="md-detail-header">
       <i class="icon-cab"></i>
-      <h1><?= $this->ad['makeModelDescription']['value'] ?></h1>
+      <h1><?= $this->ad['makeModelDescription'] ?></h1>
       <span class="price">
         <?= \System::getFormattedNumber($this->ad['consumer_price_amount'], 2).' '.$this->ad['price_currency']; ?>
         <?php if($this->ad['pseudo_price'] != '' && $this->ad['pseudo_price'] != 0): ?><span class="pseudo-price"><?= \System::getFormattedNumber($this->ad['pseudo_price'], 2).' '.$this->ad['price_currency']; ?></span><?php endif; ?>
@@ -34,12 +34,8 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
           <div class="content-slider" data-config="4000,300,0,1">
             <div class="slider-wrapper">
               <?php if($this->ad['images']): ?>
-              <?php foreach($this->ad['images'] as $imageGroup): ?>
-                <?php foreach($imageGroup as $key=>$img): ?>
-                  <?php if($img['@size'] == "XL"): ?>
-                    <div class="slide"><img src="<?= $img['@url'] ?>"/></div>
-                  <?php endif; ?>
-                <?php endforeach; ?>
+              <?php foreach($this->ad['images']['XXL'] as $key => $img): ?>
+                <div class="slide"><img src="<?= $img ?>"/></div>
               <?php endforeach; ?>
               <?php endif; ?>
             </div>
@@ -52,7 +48,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
         <div class="md-detail-description">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-description'] ?></h2>
-          <?= $this->ad['htmlDescription']['value'] ?>
+          <?= $this->ad['htmlDescription'] ?>
         </div>
         <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-specifics'] ?></h2>
         <div class="md-detail-box additional-attributes">
@@ -149,7 +145,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
             <li class="attr-usage_type"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['usage-type'] ?></span><span class="value"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_usage_type']['options'][$this->ad['specifics_usage_type']] ?></span></li>
             <?php endif; ?>
             <?php if($this->ad['bodyType']): ?>
-            <li class="attr-bodyType"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['body-type'] ?></span><span class="value"><?= $this->ad['bodyType']['value'] ?></span></li>
+            <li class="attr-bodyType"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['body-type'] ?></span><span class="value"><?= $this->ad['bodyType'] ?></span></li>
             <?php endif; ?>
           </ul>
         </div>

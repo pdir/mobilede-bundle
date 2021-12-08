@@ -16,11 +16,14 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
-use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
+use Psr\Log\LogLevel;
+
+
 
 /**
  * Provide methods to render content element "vehicle listing".
@@ -30,7 +33,6 @@ use Pdir\MobileDeBundle\Module\MobileDeSetup;
  * @property string $pdirVehicleFilterWhere
  * @property string $pdirVehicleFilterSearch
  * @property string $pdirVehicleFilterByAccount
- * @property string $pdirVehicleFilterByType
  * @property string $pdirVehicleFilterMaxItems
  */
 class ListingElement extends \ContentElement
@@ -78,11 +80,6 @@ class ListingElement extends \ContentElement
 
         // Get reader page model
         $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
-
-        // Return if there is no customer id
-        if (!$this->pdir_md_customer_id) {
-            return '';
-        }
 
         // set custom list template
         if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate) {
@@ -153,7 +150,11 @@ class ListingElement extends \ContentElement
 
         // Return if there are no ads
         if (!\is_array($this->ads) || \count($this->ads) < 1) {
-            throw new PageNotFoundException('Page not found: '.\Environment::get('uri'));
+            System::getContainer()
+                ->get('monolog.logger.contao')
+                ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], array(
+                    'contao' => new ContaoContext(__CLASS__.'::'.__FUNCTION__, TL_GENERAL
+                    )));
         }
 
         return parent::generate();
@@ -285,7 +286,7 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->desc = $ad['name'];
 
             if(null !== $ad['api_images']) {
-                $images = StringUtil::deserialize($ad['api_images'])['image']['representation'];
+                $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
                 if (\is_array($images) && 0 < \count($images)) {
                     $objFilterTemplate->imageSrc_S = $images[0]['@url'];
                     $objFilterTemplate->imageSrc_XL = $images[1]['@url'];

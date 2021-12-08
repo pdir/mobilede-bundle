@@ -171,22 +171,21 @@ class ReaderElement extends \ContentElement
 
         // images
         $newGallery = [];
-        $apiImages = StringUtil::deserialize($this->ad['api_images']);
 
-        if ('demo' !== $this->pdir_md_customer_username) {
-            $mobileDe = new MobileDe($this->pdir_md_customer_username, $this->pdir_md_customer_password, $this->pdir_md_customer_id);
-            $newImages = $mobileDe->getGalleryImages($apiImages['@url']);
+        if(null !== $this->ad['api_images']) {
+            $images = StringUtil::deserialize($this->ad['api_images'])['images']['image'];
 
-            foreach ($newImages['images']['image'] as $item) {
-                $image = $item['representation'];
+            if (\is_array($images) && 0 < \count($images)) {
+                foreach ($images as $row) {
+                    foreach($row['representation'] as $image) {
+                        $newGallery[$image['@size']][] = $image['@url'];
 
-                $newGallery[] = [
-                    ['@size' => 'S', '@url' => $image[0]['@url']],
-                    ['@size' => 'XL', '@url' => $image[1]['@url']],
-                    ['@size' => 'L', '@url' => $image[3]['@url']],
-                    ['@size' => 'M', '@url' => $image[4]['@url']],
-                    ['@size' => 'ICON', '@url' => $image[2]['@url']],
-                ];
+                        // fix for xxl image which is not included in xml response
+                        if ('XL' === $image['@size']) {
+                            $newGallery['XXL'][] = str_replace('$_27.JPG', '$_57.JPG', $image['@url']);
+                        }
+                    }
+                }
             }
         }
 
@@ -255,48 +254,11 @@ class ReaderElement extends \ContentElement
 
         $this->ad['fuelConsumption'] = $fuelConsumption;
 
-        if ('demo' !== $this->pdir_md_customer_username && 'man' !== $this->ad['type']) {
-            $objRequest = new \Request();
-            $strAuthorization = 'Basic '.base64_encode("{$this->pdir_md_customer_username}:{$this->pdir_md_customer_password}");
-            $objRequest->setHeader('Accept-Language', 'de');
-            $objRequest->setHeader('Accept', 'application/json');
-            $objRequest->setHeader('Authorization', $strAuthorization);
-            $objRequest->send('https://services.mobile.de/search-api/ad/'.$this->ad['vehicle_id'].'/');
-
-            $tmpArr = (array) json_decode($objRequest->response, true);
-
-            if (!$objRequest->hasError()) {
-                if (0 === \count($newGallery)) {
-                    foreach ($tmpArr['ad']['images']['image'] as $key => $group) {
-                        $newGallery[] = $group['representation'];
-                    }
-                }
-
-                $this->ad['description'] = $tmpArr['ad']['description'];
-                $this->ad['enrichedDescription'] = $tmpArr['ad']['enrichedDescription'];
-                $this->ad['htmlDescription']['value'] = $this->htmlString($tmpArr['ad']['enrichedDescription']);
-                $this->ad['highlights'] = $tmpArr['ad']['highlights'];
-                $this->ad['makeModelDescription']['value'] = $tmpArr['ad']['vehicle']['make']['@key'].' '.$tmpArr['ad']['vehicle']['model-description']['@value'];
-                $this->ad['makeModelDescription']['value'] = $tmpArr['ad']['vehicle']['make']['@key'].' '.$tmpArr['ad']['vehicle']['model-description']['@value'];
-                $this->ad['seller']['company-name']['value'] = $tmpArr['ad']['seller']['company-name']['@value'];
-                if ($tmpArr['ad']['seller']['logo-image']) {
-                    $this->ad['seller']['logo-image'][0]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][0]['@url'];
-                    $this->ad['seller']['logo-image'][1]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][1]['@url'];
-                    $this->ad['seller']['logo-image'][2]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][2]['@url'];
-                    $this->ad['seller']['logo-image'][3]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][3]['@url'];
-                    $this->ad['seller']['logo-image'][4]['url'] = $tmpArr['ad']['seller']['logo-image']['representation'][4]['@url'];
-                }
-                $this->ad['seller']['address']['street']['value'] = $tmpArr['ad']['seller']['address']['street']['@value'];
-                $this->ad['seller']['address']['zipcode']['value'] = $tmpArr['ad']['seller']['address']['zipcode']['@value'];
-                $this->ad['seller']['address']['city']['value'] = $tmpArr['ad']['seller']['address']['city']['@value'];
-                if ($tmpArr['ad']['seller']['phone']) {
-                    $this->ad['seller']['phone']['value'] = '+'.$tmpArr['ad']['seller']['phone'][0]['@country-calling-code'].' '.$tmpArr['ad']['seller']['phone'][0]['@area-code'].' '.$tmpArr['ad']['seller']['phone'][0]['@number'];
-                }
-                $this->ad['seller']['email']['value'] = $tmpArr['ad']['seller']['email']['@value'];
-                $this->ad['seller']['homepage']['value'] = $tmpArr['ad']['seller']['homepage']['@value'];
-                $this->ad['seller']['mobile-seller-since']['value'] = $tmpArr['ad']['seller']['mobile-seller-since']['@value'];
-            }
+        if ($this->ad['sellerInfo']) {
+            $this->ad['seller'] = json_decode($this->ad['sellerInfo'], true);
         }
+
+        $this->ad['bodyType'] = $this->ad['vehicle_class'];
 
         // use placeholder if no image exists
         if (\is_array($newGallery) && 0 === \count($newGallery)) {
@@ -323,39 +285,11 @@ class ReaderElement extends \ContentElement
         return [
             ['@size' => 'S', '@url' => $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'XL', '@url' => $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath()],
+            ['@size' => 'XXL', '@url' => $imageObj->setTargetWidth(1200)->setTargetHeight(800)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'L', '@url' => $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'M', '@url' => $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'ICON', '@url' => $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath()],
             ['@size' => 'ORIGINAL', '@url' => $str],
         ];
-    }
-
-    protected function htmlString($str)
-    {
-        $str = trim($str);
-
-        $str = str_replace('**Sicherheitsausstattung:**', '<h3>Sicherheitsausstattung</h3>', $str);
-        $str = str_replace('**Technologie:**', '<h3>Technologie</h3>', $str);
-        $str = str_replace('Sicherheit &amp; Umwelt:', '<h3>Sicherheit & Umwelt</h3>', $str);
-        $str = str_replace('**Sonstiges:**', '<h3>Sonstiges</h3>', $str);
-        $str = str_replace('**Außenausstattung:**', '<h3>Außenausstattung</h3>', $str);
-        $str = str_replace('**Innenausstattung:**', '<h3>Innenausstattung</h3>', $str);
-        $str = str_replace('**Ausstattungspakete (optional)**', '<h3>Ausstattungspakete (optional)</h3>', $str);
-        $str = str_replace('**Touring-Paket enthalten**', '<h3>Touring-Paket enthalten</h3>', $str);
-        $str = str_replace('**I-ACTIVESENSE-PAKET enthalten**', '<h3>I-ACTIVESENSE-PAKET enthalten</h3>', $str);
-
-        $str = str_replace('\\\\* ', '<br> - ', $str);
-        $str = str_replace('\\\\\\\\**', '<br> - ', $str);
-
-        $str = str_replace('\\\\&nbsp;\\\\', '<p>&nbsp;</p>', $str);
-        $str = str_replace('\\\\**&nbsp;**', '<p>&nbsp;</p>', $str);
-        $str = str_replace('**\\\\**', '<br />', $str);
-
-        $str = str_replace('\\\\\\\\\\', '<br />', $str);
-        $str = str_replace('\\\\', '', $str);
-        $str = str_replace('&nbsp;**', '', $str);
-        $str = str_replace('**', '', $str);
-
-        return $str;
     }
 }
