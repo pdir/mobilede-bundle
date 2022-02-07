@@ -818,3 +818,4 @@ $GLOBALS['TL_LANG'][$strTable]['vehicle_model_description'] = ['Model Descriptio
 $GLOBALS['TL_LANG'][$strTable]['vehicle_legend'] = 'Vehicle';
 $GLOBALS['TL_LANG'][$strTable]['vehicle_free_text'] = ['Vehicle description', 'Here you can enter a detailed vehicle description. (No mobile.de Field, added for manual maintenance.)'];
 $GLOBALS['TL_LANG'][$strTable]['published'] = ['Published', ''];
+$GLOBALS['TL_LANG'][$strTable]['sellerInfo'] = ['Seller information', 'JSON string of seller information from the mobile.de API.'];

@@ -815,3 +815,4 @@ $GLOBALS['TL_LANG'][$strTable]['vehicle_model_description'] = ['Beschreibung des
 $GLOBALS['TL_LANG'][$strTable]['vehicle_legend'] = 'Fahrzeug';
 $GLOBALS['TL_LANG'][$strTable]['vehicle_free_text'] = ['Fahrzeugbeschreibung', 'Geben Sie hier eine ausführliche Fahrzeugbeschreibung ein. (Kein mobile.de Feld, für manuelle Pflege hinzugefügt.)'];
 $GLOBALS['TL_LANG'][$strTable]['published'] = ['Veröffentlicht', ''];
+$GLOBALS['TL_LANG'][$strTable]['sellerInfo'] = ['Verkäufer Informationen', 'JSON Zeichenfolge der Verkäufer Informationen aus der mobile.de API.'];
