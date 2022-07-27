@@ -64,5 +64,12 @@
     "contao-themes-net/odd-theme-bundle": "Show a vehicle feed in the ODD Theme. / Zeige deine Fahrzeuge im ODD Theme an.",
     "contao-themes-net/nature-theme-bundle": "Show a vehicle feed in the NATURE Theme. / Zeige deine Fahrzeuge im NATURE Theme an.",
     "contao-themes-net/zero-one-theme-bundle": "Show a vehicle feed in the 0.1 Theme. / Zeige deine Fahrzeuge im 0.1 Theme an."
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "contao-components/installer": true,
+      "contao/manager-plugin": true
+    }
   }
 }
