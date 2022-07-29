@@ -10,3 +10,4 @@
 
 #cypress Tests
 /node_modules
+package-lock.json
