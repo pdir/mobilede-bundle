@@ -281,7 +281,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_only_filter'] = [
     'eval' => [
         'tl_class' => 'w50',
     ],
-    'sql' => "char(1) NOT NULL default ''",
+    'sql' => "char(1) NOT NULL default '0'",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_open_filter'] = [

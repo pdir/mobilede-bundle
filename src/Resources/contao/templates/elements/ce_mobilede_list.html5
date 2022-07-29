@@ -3,8 +3,7 @@
 <?php $GLOBALS['TL_JAVASCRIPT']['9999'] = 'https://code.jquery.com/ui/1.12.1/jquery-ui.js'; ?>
 <?php $GLOBALS['TL_CSS'][] = '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'; ?>
 
-<div
-  class="<?php echo $this->class; ?> block<?php if($this->onlyFilter == 1): ?> only-filter<?php endif; ?>"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div class="<?php echo $this->class; ?> block<?php if($this->onlyFilter): ?> only-filter<?php endif; ?>"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 
   <?php if ($this->headline): ?>
     <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
@@ -12,7 +11,7 @@
 
   <?php if(!$this->hideFilters): ?>
   <div class="md-filters<?php if($this->openFilters): ?> open-filters<?php endif; ?>">
-    <?php if($this->onlyFilter == 0): ?>
+    <?php if($this->onlyFilter): ?>
     <div class="md-filters-header">
       <button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button>
       <div class="md-filter-sort button-group">
@@ -32,8 +31,8 @@
       </div>
     </div>
     <?php endif; ?>
-    <div class="md-filters-body"<?php if($this->onlyFilter == 1): ?> style='display:block;'<?php endif; ?>>
-      <?php if($this->filters['make']): ?>
+    <div class="md-filters-body"<?php if($this->onlyFilter): ?> style='display:block;'<?php endif; ?>>
+      <?php if(isset($this->filters['make'])): ?>
       <div class="brands select-container">
         <label>Marke</label>
         <select class="md-select">
@@ -57,7 +56,7 @@
       </div>
       <?php endif; ?>
 
-      <?php if($this->filters['categories']): ?>
+      <?php if(isset($this->filters['categories'])): ?>
       <div class="categories select-container">
         <label>Fahrzeugtyp</label>
         <select class="md-select">
@@ -69,7 +68,7 @@
       </div>
       <?php endif; ?>
 
-      <?php if($this->filters['fuelType']): ?>
+      <?php if(isset($this->filters['fuelType'])): ?>
       <div class="fuel select-container">
         <label>Kraftstoffart</label>
         <select class="md-select">
@@ -81,7 +80,7 @@
       </div>
       <?php endif; ?>
 
-      <?php if($this->filters['gearbox']): ?>
+      <?php if(isset($this->filters['gearbox'])): ?>
       <div class="gearbox select-container">
         <label>Getriebe</label>
         <select class="md-select">
@@ -105,7 +104,7 @@
       </div>
       <?php endif; ?>
 
-      <?php if($this->filters['colors']): ?>
+      <?php if(isset($this->filters['colors'])): ?>
       <div class="md-filter-attr checkbox-group">
         <label>Farbe</label>
         <ul>
@@ -142,7 +141,7 @@
 
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
 
-      <?php if($this->onlyFilter == 1): ?>
+      <?php if($this->onlyFilter): ?>
         <span><a href="{{link_url::<?= $this->listingPage ?>}}" class="submit">Absenden</a></span>
       <?php endif; ?>
       <!-- <span><button class="btn-shuffle" id="shuffle">Mischen</button></span> -->
@@ -156,10 +155,10 @@
   </div>
   <?php endif; ?>
 
-  <?php //if($this->onlyFilter == 0): ?>
+  <?php //if($this->onlyFilter): ?>
   <div class="md-ads">
     <?php foreach($this->ads as $ad): ?>
-    <?= $ad; ?>
+      <?= $ad; ?>
     <?php endforeach; ?>
     <div class="md-no-result"><?= $this->noResultMessage ?></div>
   </div> <!-- MobileDe list end -->

@@ -245,8 +245,8 @@ class ListingElement extends ContentElement
         $this->featureCss = implode(' ', $arrFeaturedCss);
 
         // Add ads to template
-        $this->Template->ads = $this->renderAdItem($this->ads['searchResultItems']);
-        $this->Template->onlyFilter = $this->pdir_md_only_filter;
+        $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
+        $this->Template->onlyFilter = $this->pdir_md_only_filter === 1 ? true : false;
         $this->Template->listingPage = $this->pdir_md_listingPage;
 
         // Filters
@@ -345,15 +345,15 @@ class ListingElement extends ContentElement
             $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
             $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
 
-            if('' !== $ad['specifics_usage_type']) {
+            if(isset($ad['specifics_usage_type']) && '' !== $ad['specifics_usage_type']) {
                 $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ?: $ad['specifics_usage_type'];
             }
 
-            if('' !== $ad['specifics_condition']) {
+            if(isset($ad['specifics_condition']) && '' !== $ad['specifics_condition']) {
                 $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][strtoupper($ad['specifics_condition'])];
             }
 
-            if('' !== $ad['specifics_gearbox']) {
+            if(isset($ad['specifics_gearbox']) && '' !== $ad['specifics_gearbox']) {
                 $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
             }
 
@@ -361,7 +361,7 @@ class ListingElement extends ContentElement
 
             if ($ad['emission_fuel_consumption_co2_emission']) {
                 $fuelConsumption[] = [
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0],
+                    'label' => &$GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'], 1),
                 ];
             }
@@ -403,8 +403,8 @@ class ListingElement extends ContentElement
 
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
 
-            $objFilterTemplate->featured = ('NONE' === $ad['newnessMarker']) ? false : true;
-            $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter;
+            $objFilterTemplate->featured = isset($ad['newnessMarker'])?? false;
+            $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter === 1 ? true : false;
             $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
@@ -422,7 +422,7 @@ class ListingElement extends ContentElement
 
             $objFilterTemplate->rawData = $ad;
 
-            if ($ad['syscara_images_layout']) {
+            if (isset($ad['syscara_images_layout'])) {
                 $groundPlan = unserialize($ad['syscara_images_layout']);
                 $objFile = FilesModel::findByUuid($groundPlan[0]);
                 $objFilterTemplate->groundPlan = $objFile->path;
@@ -453,22 +453,58 @@ class ListingElement extends ContentElement
     protected function getFilterClasses($ad)
     {
         $filter = [];
-        $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
-        $filter[] = $ad['specifics_exterior_color'];
-        $filter[] = $ad['vehicle_class'];
-        $filter[] = str_replace(' ', '_', $ad['vehicle_model']);
-        $filter[] = $ad['vehicle_category'];
-        $filter[] = $ad['specifics_fuel'];
-        $filter[] = $ad['specifics_gearbox'];
-        $filter[] = $ad['specifics_usage_type'];
-        $filter[] = $ad['specifics_condition'];
-        $filter[] = $ad['consumer_price_amount'];
-        $filter[] = $ad['syscara_typeof'];
-        $filter[] = $ad['specifics_num_seats'];
+
+        if (isset($ad['vehicle_make'])) {
+            $filter[] = str_replace(' ', '_', $ad['vehicle_make']);
+        }
+
+        if (isset($ad['specifics_exterior_color'])) {
+            $filter[] = $ad['specifics_exterior_color'];
+        }
+
+        if (isset($ad['vehicle_class'])) {
+            $filter[] = $ad['vehicle_class'];
+        }
+
+        if (isset($ad['vehicle_model'])) {
+            $filter[] = str_replace(' ', '_', $ad['vehicle_model']);
+        }
+
+        if (isset($ad['vehicle_category'])) {
+            $filter[] = $ad['vehicle_category'];
+        }
+
+        if (isset($ad['specifics_fuel'])) {
+            $filter[] = $ad['specifics_fuel'];
+        }
+
+        if (isset($ad['specifics_gearbox'])) {
+            $filter[] = $ad['specifics_gearbox'];
+        }
+
+        if (isset($ad['specifics_usage_type'])) {
+            $filter[] = $ad['specifics_usage_type'];
+        }
+
+        if (isset($ad['specifics_condition'])) {
+            $filter[] = $ad['specifics_condition'];
+        }
+
+        if (isset($ad['consumer_price_amount'])) {
+            $filter[] = $ad['consumer_price_amount'];
+        }
+
+        if (isset($ad['syscara_typeof'])) {
+            $filter[] = $ad['syscara_typeof'];
+        }
+
+        if (isset($ad['specifics_num_seats'])) {
+            $filter[] = $ad['specifics_num_seats'];
+        }
 
         $filter = array_filter($filter, 'strlen'); // remove empty fields
 
-        if ($ad['vehicle_make']) {
+        if (isset($ad['vehicle_make'])) {
             $this->filters['make'][$ad['vehicle_make']] = [
                 'label' => $ad['vehicle_make'],
                 'key' => str_replace(' ', '_', $ad['vehicle_make']),
@@ -476,7 +512,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['specifics_exterior_color']) {
+        if (isset($ad['specifics_exterior_color'])) {
             $this->filters['colors'][$ad['specifics_exterior_color']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_exterior_color']['options'][$ad['specifics_exterior_color']],
                 'key' => $ad['specifics_exterior_color'],
@@ -484,7 +520,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['vehicle_class']) {
+        if (isset($ad['vehicle_class'])) {
             $this->filters['class'][$ad['vehicle_class']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_class']['options'][$ad['vehicle_class']],
                 'key' => $ad['vehicle_class'],
@@ -492,7 +528,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['vehicle_model']) {
+        if (isset($ad['vehicle_model'])) {
             $this->filters['vehicle_model'][$ad['vehicle_model']] = [
                 'label' => $ad['vehicle_model'],
                 'key' => str_replace(' ', '_', $ad['vehicle_model']),
@@ -500,7 +536,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['vehicle_category']) {
+        if (isset($ad['vehicle_category'])) {
             $this->filters['categories'][$ad['vehicle_category']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['vehicle_category']['options'][$ad['vehicle_category']],
                 'key' => $ad['vehicle_category'],
@@ -508,7 +544,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['specifics_fuel']) {
+        if (isset($ad['specifics_fuel'])) {
             $this->filters['fuelType'][$ad['specifics_fuel']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']],
                 'key' => $ad['specifics_fuel'],
@@ -516,7 +552,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['specifics_gearbox']) {
+        if (isset($ad['specifics_gearbox'])) {
             $this->filters['gearbox'][$ad['specifics_gearbox']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']],
                 'key' => $ad['specifics_gearbox'],
@@ -524,7 +560,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['specifics_usage_type']) {
+        if (isset($ad['specifics_usage_type'])) {
             $this->filters['usageType'][$ad['specifics_usage_type']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']],
                 'key' => $ad['specifics_usage_type'],
@@ -532,7 +568,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['specifics_condition']) {
+        if (isset($ad['specifics_condition'])) {
             $this->filters['specifics_condition'][$ad['specifics_condition']] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']],
                 'key' => $ad['specifics_condition'],
@@ -540,7 +576,7 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['consumer_price_amount']) {
+        if (isset($ad['consumer_price_amount'])) {
             $this->filters['consumer_price_amount'][$ad['consumer_price_amount']] = [
                 'label' => $ad['consumer_price_amount'],
                 'key' => $ad['consumer_price_amount'],
@@ -548,14 +584,14 @@ class ListingElement extends ContentElement
             ];
         }
 
-        if ($ad['syscara_typeof']) {
+        if (isset($ad['syscara_typeof'])) {
             $this->filters['syscara_typeof'][$ad['syscara_typeof']] = [
                 'label' => $ad['syscara_typeof'],
                 'key' => str_replace(' ', '_', $ad['syscara_typeof']),
             ];
         }
 
-        if ($ad['specifics_num_seats']) {
+        if (isset($ad['specifics_num_seats'])) {
             $this->filters['specifics_num_seats'][$ad['specifics_num_seats']] = [
                 'label' => $ad['specifics_num_seats'],
                 'key' => $ad['specifics_num_seats'],
