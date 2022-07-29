@@ -85,7 +85,33 @@ $GLOBALS['TL_DCA'][$strTable] = [
     ],
     'palettes' => [
         '__selector__' => ['vehicle_class'],
-        'default' => '{title_legend},name,alias,type,account,vehicle_id,published;{vehicle_legend},vehicle_class,vehicle_category,vehicle_make,vehicle_model,vehicle_model_description,vehicle_free_text,features,vehicle_damage,images;{price_legend},dealer_price_amount,consumer_price_amount,pseudo_price,price_vat_rate,price_currency,price_vat_rating,price_rating,price_included_delivery_costs;{specifics_legend},specifics_exterior_color,specifics_manufacturer_color_name,specifics_metallic,specifics_mileage,specifics_exhaust_inspection,specifics_general_inspection,specifics_delivery_date,specifics_delivery_period,specifics_door_count,specifics_first_registration,specifics_emission_class,specifics_emission_sticker,specifics_fuel,specifics_power,specifics_hsn,specifics_tsn,specifics_schwacke_code,specifics_gearbox,specifics_climatisation,specifics_licensed_weight,specifics_axles,specifics_load_capacity,specifics_num_seats,specifics_operating_hours,specifics_installation_height,specifics_lifting_capacity,specifics_lifting_height,specifics_construction_year,specifics_construction_date,specifics_cubic_capacity,specifics_driving_mode,specifics_driving_cab,specifics_condition,specifics_usage_type,specifics_wheel_formula,specifics_number_of_bunks,specifics_hydraulic_installation,specifics_europallet_storage_spaces,specifics_dimension_length,specifics_dimension_width,specifics_dimension_height,specifics_shipping_volume,specifics_loading_space_length,specifics_loading_space_width,specifics_identification_number,specifics_interior_color,specifics_interior_type,specifics_airbag,specifics_number_of_previous_owners,specifics_countryVersion,specifics_videoUrl,specifics_parking_assistants,specifics_speed_control,specifics_radio,specifics_daytime_running_lamps,specifics_sliding_door_type,specifics_headlight_type,specifics_bending_lights_type,specifics_breakdown_service,specifics_battery,specifics_trailer_coupling_type,specifics_trim_line,specifics_model_range,specifics_first_models_production_date,specifics_battery_capacity;{emission_fuel_consumption_legend},emission_fuel_consumption_envkv_compliant,emission_fuel_consumption_energy_efficiency_class,emission_fuel_consumption_co2_emission,emission_fuel_consumption_inner,emission_fuel_consumption_outer,emission_fuel_consumption_combined,emission_fuel_consumption_petrol_type,emission_fuel_consumption_combined_power_consumption;',
+        'default' => '{title_legend},name,alias,type,account,vehicle_id,published;'.
+            '{vehicle_legend},vehicle_class,vehicle_category,vehicle_make,vehicle_model,vehicle_model_description,vehicle_free_text,'.
+                'features,vehicle_damage,images;'.
+            '{price_legend},dealer_price_amount,consumer_price_amount,pseudo_price,price_vat_rate,price_currency,price_vat_rating,'.
+                'price_rating,price_included_delivery_costs;'.
+            '{specifics_legend},specifics_exterior_color,specifics_manufacturer_color_name,specifics_metallic,specifics_mileage,'.
+                'specifics_exhaust_inspection,specifics_general_inspection,specifics_delivery_date,specifics_delivery_period,'.
+                'specifics_door_count,specifics_first_registration,specifics_emission_class,specifics_emission_sticker,'.
+                'specifics_fuel,specifics_power,specifics_hsn,specifics_tsn,specifics_schwacke_code,specifics_gearbox,'.
+                'specifics_climatisation,specifics_licensed_weight,specifics_axles,specifics_load_capacity,specifics_num_seats,'.
+                'specifics_operating_hours,specifics_installation_height,specifics_lifting_capacity,specifics_lifting_height,'.
+                'specifics_construction_year,specifics_construction_date,specifics_cubic_capacity,specifics_driving_mode,'.
+                'specifics_driving_cab,specifics_condition,specifics_usage_type,specifics_wheel_formula,specifics_number_of_bunks,'.
+                'specifics_hydraulic_installation,specifics_europallet_storage_spaces,specifics_dimension_length,specifics_dimension_width,'.
+                'specifics_dimension_height,specifics_shipping_volume,specifics_loading_space_length,specifics_loading_space_width,'.
+                'specifics_identification_number,specifics_interior_color,specifics_interior_type,specifics_airbag,'.
+                'specifics_number_of_previous_owners,specifics_countryVersion,specifics_videoUrl,specifics_parking_assistants,'.
+                'specifics_speed_control,specifics_radio,specifics_daytime_running_lamps,specifics_sliding_door_type,'.
+                'specifics_headlight_type,specifics_bending_lights_type,specifics_breakdown_service,specifics_battery,'.
+                'specifics_trailer_coupling_type,specifics_trim_line,specifics_model_range,specifics_first_models_production_date,'.
+                'specifics_battery_capacity;'.
+            '{emission_fuel_consumption_legend},emission_fuel_consumption_envkv_compliant,emission_fuel_consumption_energy_efficiency_class,'.
+                'emission_fuel_consumption_co2_emission,emission_fuel_consumption_inner,emission_fuel_consumption_outer,'.
+                'emission_fuel_consumption_combined,emission_fuel_consumption_petrol_type,emission_fuel_consumption_combined_power_consumption;'.
+            '{wltp_values_legend},wltp_consumption_fuel_combined,wltp_co2_emission_combined,wltp_consumption_power_combined,'.
+                'wltp_electric_range,wltp_consumption_fuel_combined_weighted,wltp_consumption_power_combined_weighted,'.
+                'wltp_co2_emission_combined_weighted;',
     ],
     'subpalettes' => [],
     'fields' => [
@@ -137,14 +163,14 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
-            'sql' => "float(10,2) NOT NULL default '0.00'",
+            'sql' => "float(10,2) NULL",
         ],
         'consumer_price_amount' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
-            'sql' => "float(10,2) NOT NULL default '0.00'",
+            'sql' => "float(10,2) NULL",
         ],
         'pseudo_price' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['pseudo_price'],
@@ -224,11 +250,10 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "varchar(4) NOT NULL default 'man'",
         ],
         'account' => [
-            'label' => &$GLOBALS['TL_LANG']['tl_consent_service']['account'],
-            'inputType' => 'text',
+            'inputType' => 'select',
             'sorting' => true,
+            'foreignKey' => 'tl_vehicle_account.description',
             'search' => true,
-            'flag' => 1,
             'eval' => [
                 'tl_class' => 'w50',
             ],
@@ -1142,6 +1167,49 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'eval' => ['maxlength' => 255, 'tl_class' => 'clr', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
             'options_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'featuresOptionsCallback'],
             'sql' => 'text NULL',
+        ],
+        // wltp-values
+        'wltp_consumption_fuel_combined' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0'",
+        ],
+        'wltp_co2_emission_combined' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0'",
+        ],
+        'wltp_consumption_power_combined' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NULL",
+        ],
+        'wltp_electric_range' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "int(10) unsigned NOT NULL default '0'",
+        ],
+        'wltp_consumption_fuel_combined_weighted' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0'",
+        ],
+        'wltp_consumption_power_combined_weighted' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0'",
+        ],
+        'wltp_co2_emission_combined_weighted' => [
+            'exclude' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => "float(10,2) NOT NULL default '0'",
         ],
     ],
 ];

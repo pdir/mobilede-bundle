@@ -16,11 +16,20 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
-use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\BackendTemplate;
+use Contao\Config;
+use Contao\ContentElement;
+use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
+use Contao\Date;
+use Contao\File;
+use Contao\FilesModel;
+use Contao\Image;
+use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
+use Psr\Log\LogLevel;
 
 /**
  * Provide methods to render content element "vehicle listing".
@@ -30,10 +39,9 @@ use Pdir\MobileDeBundle\Module\MobileDeSetup;
  * @property string $pdirVehicleFilterWhere
  * @property string $pdirVehicleFilterSearch
  * @property string $pdirVehicleFilterByAccount
- * @property string $pdirVehicleFilterByType
  * @property string $pdirVehicleFilterMaxItems
  */
-class ListingElement extends \ContentElement
+class ListingElement extends ContentElement
 {
     const PARAMETER_KEY = 'ad';
 
@@ -62,8 +70,8 @@ class ListingElement extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE === 'BE') {
-            $objTemplate = new \BackendTemplate('be_wildcard');
+        if ('BE' === TL_MODE) {
+            $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe LIST ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
@@ -77,12 +85,7 @@ class ListingElement extends \ContentElement
         $this->lang = System::loadLanguageFile($this->strTable);
 
         // Get reader page model
-        $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
-
-        // Return if there is no customer id
-        if (!$this->pdir_md_customer_id) {
-            return '';
-        }
+        $this->readerPage = PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
 
         // set custom list template
         if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate) {
@@ -153,23 +156,27 @@ class ListingElement extends \ContentElement
 
         // Return if there are no ads
         if (!\is_array($this->ads) || \count($this->ads) < 1) {
-            throw new PageNotFoundException('Page not found: '.\Environment::get('uri'));
+            System::getContainer()
+                ->get('monolog.logger.contao')
+                ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], array(
+                    'contao' => new ContaoContext(__CLASS__.'::'.__FUNCTION__, TL_GENERAL
+                    )));
         }
 
         return parent::generate();
     }
 
-    public function formatDate($str)
+    public static function formatDate($str)
     {
         // validate date
         if ($str) {
             if (false !== strpos($str, '-')) {
                 // if date is string
-                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
+                return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
             }
             if (is_numeric($str)) {
                 // if date is timestamp
-                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
+                return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
             }
 
             return $str;
@@ -283,28 +290,34 @@ class ListingElement extends \ContentElement
             $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
-            $images = StringUtil::deserialize($ad['api_images'])['image']['representation'];
-            if (\is_array($images) && \count($images) > 0) {
-                $objFilterTemplate->imageSrc_S = $images[0]['@url'];
-                $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
-                $objFilterTemplate->imageSrc_L = $images[3]['@url'];
-                $objFilterTemplate->imageSrc_M = $images[4]['@url'];
-                $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+
+            if(null !== $ad['api_images']) {
+                $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
+                if (\is_array($images) && 0 < \count($images)) {
+                    $objFilterTemplate->imageSrc_S = $images[0]['@url'];
+                    $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
+                    $objFilterTemplate->imageSrc_L = $images[3]['@url'];
+                    $objFilterTemplate->imageSrc_M = $images[4]['@url'];
+                    $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+                    // fix for xxl image which is not included in xml response
+                    $objFilterTemplate->imageSrc_XXL = str_replace('$_27.JPG', '$_57.JPG', $images[1]['@url']);
+                }
             }
 
             if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
                 $manImages = unserialize($ad['orderSRC']);
 
-                $objFile = \FilesModel::findByUuid($manImages[0]);
+                $objFile = FilesModel::findByUuid($manImages[0]);
 
                 if ($objFile) {
-                    $imageObj = new \Image(new \File($objFile->path));
+                    $imageObj = new Image(new File($objFile->path));
                     $objFilterTemplate->imageSrc_S = $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_XL = $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_L = $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_M = $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_ICON = $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_ORIGINAL = $objFile->path;
+                    $objFilterTemplate->imageSrc_XXL = $imageObj->setTargetWidth(1600)->setTargetHeight(800)->setResizeMode('center_center')->executeResize()->getResizedPath();
                 }
             }
 
@@ -317,10 +330,10 @@ class ListingElement extends \ContentElement
 
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
-            $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
+            $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
 
             if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price']) {
-                $objFilterTemplate->pseudoPrice = \System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
+                $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
@@ -331,9 +344,18 @@ class ListingElement extends \ContentElement
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
             $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
             $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
-            $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ?: $ad['specifics_usage_type'];
-            $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][$ad['specifics_condition']];
-            $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+
+            if('' !== $ad['specifics_usage_type']) {
+                $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ?: $ad['specifics_usage_type'];
+            }
+
+            if('' !== $ad['specifics_condition']) {
+                $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][strtoupper($ad['specifics_condition'])];
+            }
+
+            if('' !== $ad['specifics_gearbox']) {
+                $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            }
 
             $fuelConsumption = [];
 
@@ -402,7 +424,7 @@ class ListingElement extends \ContentElement
 
             if ($ad['syscara_images_layout']) {
                 $groundPlan = unserialize($ad['syscara_images_layout']);
-                $objFile = \FilesModel::findByUuid($groundPlan[0]);
+                $objFile = FilesModel::findByUuid($groundPlan[0]);
                 $objFilterTemplate->groundPlan = $objFile->path;
             }
 
@@ -419,7 +441,7 @@ class ListingElement extends \ContentElement
             $pageId
         );
 
-        if (\Config::get('useAutoItem')) {
+        if (Config::get('useAutoItem')) {
             $paramString = sprintf('/%s',
                 $pageId
             );

@@ -19,8 +19,9 @@ $strTable = 'tl_content';
 /*
  * Add palette to tl_content.
  */
-$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdirVehicleAccount,pdir_md_cronPoorMan,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_open_filter,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter,pdirVehicleFilterByType,pdirVehicleFilterByAccount;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_forceRefresh,pdir_md_cacheTime,pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
-$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdir_md_customer_username,pdir_md_customer_password,pdir_md_customer_id,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
+
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdirVehicleFilterByAccount,pdir_md_hidePromotionBox,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_open_filter,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter;{md_template_legend},pdir_md_promotion_corner_position,pdir_md_promotion_corner_color,pdir_md_promotion_corner_shadow,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode,pdir_md_forceRefresh,pdir_md_cacheTime;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdirVehicleFilterByAccount,pdir_md_hidePromotionBox,pdir_md_corner_position,pdir_md_corner_color,pdir_md_corner_shadow,pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID,space';
 
 /*
  * Add fields to tl_content
@@ -76,18 +77,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_itemTemplate'] = [
         'tl_class' => 'w50',
     ],
     'sql' => "varchar(32) NOT NULL default '0'",
-];
-
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_customer_id'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_customer_id'],
-    'exclude' => true,
-    'inputType' => 'text',
-    'eval' => [
-        'mandatory' => true,
-        'tl_class' => 'w50',
-        'decodeEntities' => true,
-    ],
-    'sql' => "varchar(64) NOT NULL default 'demo'",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_hidePromotionBox'] = [
@@ -252,33 +241,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_enableDebugMode'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_customer_username'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_customer_username'],
-    'exclude' => true,
-    'search' => true,
-    'sorting' => true,
-    'flag' => 1,
-    'inputType' => 'text',
-    'eval' => [
-        'mandatory' => true,
-        'rgxp' => 'extnd',
-        'nospace' => true,
-        'maxlength' => 64,
-        'tl_class' => 'w50 m12', ],
-    'sql' => "varchar(64) NOT NULL default 'demo'",
-];
-
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_customer_password'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_customer_password'],
-    'exclude' => true,
-    'inputType' => 'text',
-    'eval' => [
-        'mandatory' => true,
-        'tl_class' => 'w50 m12',
-    ],
-    'sql' => "varchar(128) NOT NULL default 'demo'",
-];
-
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_priceSlider'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_priceSlider'],
     'exclude' => true,
@@ -312,18 +274,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_mileageSlider'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_cronPoorMan'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_cronPoorMan'],
-    'exclude' => true,
-    'filter' => true,
-    'inputType' => 'checkbox',
-    'eval' => [
-        'doNotCopy' => true,
-        'tl_class' => 'w50 m12',
-    ],
-    'sql' => "char(1) NOT NULL default ''",
-];
-
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_only_filter'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_only_filter'],
     'exclude' => true,
@@ -344,31 +294,10 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_open_filter'] = [
     'sql' => "char(1) NOT NULL default ''",
 ];
 
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleAccount'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleAccount'],
-    'inputType' => 'text',
-    'sorting' => true,
-    'flag' => 1,
-    'eval' => [
-        'tl_class' => 'w50',
-    ],
-    'sql' => "int(10) unsigned NOT NULL default '0'",
-];
-
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByType'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByType'],
-    'exclude' => true,
-    'inputType' => 'select',
-    'options' => $GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByTypeOptions'],
-    'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50'],
-    'sql' => "varchar(255) NOT NULL default ''",
-];
-
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdirVehicleFilterByAccount'],
-    'inputType' => 'text',
+    'inputType' => 'select',
     'sorting' => true,
-    'flag' => 1,
+    'foreignKey' => 'tl_vehicle_account.description',
     'eval' => [
         'tl_class' => 'w50',
     ],

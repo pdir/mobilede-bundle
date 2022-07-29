@@ -18,12 +18,15 @@ namespace Pdir\MobileDeBundle\EventListener;
 
 use Contao\BackendTemplate;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
+use Contao\DataContainer;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Pdir\MobileDeSyncBundle\Module\Sync;
 
 class DataContainerListener
 {
+    use ListenerHelperTrait;
+
     /**
      * @Callback(table="tl_vehicle", target="list.global_operations.toolbar.button", priority=1)
      */
@@ -42,7 +45,7 @@ class DataContainerListener
 
         if (class_exists('Pdir\MobileDeSyncBundle\Module\Sync')) {
             $template->extMode = Sync::MODE;
-            $template->syncVersion = Sync::VERSION;
+            $template->syncVersion = Sync::SYNC_VERSION;
         }
 
         $template->arrEditions = [
@@ -62,5 +65,33 @@ class DataContainerListener
         $template->arrLANG = $GLOBALS['TL_LANG']['MOD']['vehicle'];
 
         return $template->parse();
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_content",
+     *     target="fields.pdirVehicleFilterByAccount.options"
+     * )
+     * builds the gzOwner options
+     *
+     * @return array
+     */
+    public function getContentVehicleAccountOptions(DataContainer $dc)
+    {
+        return $this->getVehicleAccountOptions();
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_vehicle",
+     *     target="fields.account.options"
+     * )
+     * builds the gzOwner options
+     *
+     * @return array
+     */
+    public function getVehicleVehicleAccountOptions(DataContainer $dc)
+    {
+        return $this->getVehicleAccountOptions();
     }
 }

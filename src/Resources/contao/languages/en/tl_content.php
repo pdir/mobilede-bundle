@@ -26,9 +26,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detail View', 'Pleas
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listing View', 'Please choose here the page for the listing view, if the <strong>Only Filter</strong> option is active.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listTemplate'] = ['List View Template', 'Please choose here the template for the list view.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_itemTemplate'] = ['Advertisement Template', 'Please choose here the template for the presentation of the advertisements.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_id'] = ['Mobile.de Customer Number', 'Please enter here your Mobile.de customer number.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_username'] = ['Mobile.de API User', 'Please enter here your Mobile.de API User.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_customer_password'] = ['Mobile.de API Password', 'Please enter here your Mobile.de API Password.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_hidePromotionBox'] = ['Hide Promotion Box', 'If active the promotion box will not be shown.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_hideFilters'] = ['Hide Filters', 'If active the filters will not be shown.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'] = ['Randomly Order', 'If active the advertisements will be shown in an randomly order.'];
@@ -64,7 +61,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_only_filter'] = ['Only Filter', 'If a
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleAccount'] = ['Vehicle import account', 'Here you can assign an ID for the import account. Default: 0 (only necessary for several import accounts)'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_cronPoorMan'] = ['Activate poor man cron', 'Here you can enable the import via Contao poor man cron. (hourly)'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByAccount'] = ['Vehicle account', 'Which account should be pre-filtered for? (Default: 0 = all accounts)'];
-$GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByType'] = ['Source of the vehicles', 'According to which source of the vehicles should be prefiltered?'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['man'] = 'manually';
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterByTypeOptions']['sync'] = 'API';
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterFields'] = ['Fields', 'Please enter a comma separated list of the fields you want to list or use "*".'];

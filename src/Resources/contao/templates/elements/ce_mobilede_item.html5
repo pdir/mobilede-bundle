@@ -3,7 +3,7 @@
   <?php if($this->onlyFilter == 0): ?>
   <div class="image">
     <picture>
-        <img src="<?= $this->imageSrc_M ?>" srcset="<?= $this->imageSrc_M ?> 1x, <?= $this->imageSrc_L ?> 1.5x, <?= $this->imageSrc_XL ?> 2x"  alt="<?= $this->desc ?>">
+        <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>">
     </picture>
   </div>
   <div class="price">
