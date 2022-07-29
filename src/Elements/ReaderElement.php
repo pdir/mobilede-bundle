@@ -16,13 +16,21 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
+use Contao\BackendTemplate;
+use Contao\Config;
+use Contao\ContentElement;
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\Environment;
+use Contao\File;
+use Contao\FilesModel;
+use Contao\Image;
+use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Pdir\MobileDeSyncBundle\Api\MobileDe;
 
-class ReaderElement extends \ContentElement
+class ReaderElement extends ContentElement
 {
     /**
      * Template.
@@ -43,7 +51,7 @@ class ReaderElement extends \ContentElement
     public function generate()
     {
         if (TL_MODE === 'BE') {
-            $objTemplate = new \BackendTemplate('be_wildcard');
+            $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe READER ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
@@ -54,22 +62,22 @@ class ReaderElement extends \ContentElement
         }
 
         // load language file
-        \System::loadLanguageFile($this->strTable);
+        System::loadLanguageFile($this->strTable);
 
         // Set auto item
-        if (!isset($_GET['ad']) && \Config::get('useAutoItem') && isset($_GET['auto_item'])) {
-            \Input::setGet('ad', \Input::get('auto_item'));
+        if (!isset($_GET['ad']) && Config::get('useAutoItem') && isset($_GET['auto_item'])) {
+            Input::setGet('ad', Input::get('auto_item'));
         }
 
         // get alias from auto item
-        $strAlias = \Input::get('ad');
+        $strAlias = Input::get('ad');
 
         $objAd = $this->Database->prepare('SELECT * FROM '.$this->strTable.' WHERE alias=?')->execute($strAlias);
         $this->ad = $objAd->fetchAssoc();
 
         // Return if there are no ad / do not index or cache
         if (!\is_array($this->ad) || \count($this->ad) < 1) {
-            throw new PageNotFoundException('Page not found: '.\Environment::get('uri'));
+            throw new PageNotFoundException('Page not found: '.Environment::get('uri'));
         }
 
         return parent::generate();
@@ -109,7 +117,7 @@ class ReaderElement extends \ContentElement
         }
 
         // specifics
-        $specificsArr = preg_filter('/^specifics_(.*)/', '$1', array_keys($this->ad));
+        $specificsArr = \preg_filter('/^specifics_(.*)/', '$1', \array_keys($this->ad));
         $newSpecifics = [];
         foreach ($specificsArr as $specific) {
             if (!$this->ad['specifics_'.$specific]) {
@@ -120,7 +128,7 @@ class ReaderElement extends \ContentElement
                 $newSpecifics[] = [
                     'key' => $specific,
                     'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
-                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: $this->ad['specifics_'.$specific],
+                    'value' => isset($GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options']) ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] : $this->ad['specifics_'.$specific],
                     'plainValue' => $this->ad['specifics_'.$specific],
                 ];
             } elseif ('mileage' === $specific) {
@@ -134,7 +142,7 @@ class ReaderElement extends \ContentElement
                 $newSpecifics[] = [
                     'key' => $specific,
                     'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
-                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] ?: ListingElement::formatDate($this->ad['specifics_'.$specific]),
+                    'value' => isset($GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options']) ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] : ListingElement::formatDate($this->ad['specifics_'.$specific]),
                     'plainValue' => $this->ad['specifics_'.$specific],
                 ];
             }
@@ -162,7 +170,7 @@ class ReaderElement extends \ContentElement
         }
 
         if ($this->ad['specifics_first_models_production_date']) {
-            $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
+            $this->ad['specifics_first_models_production_date'] = \date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
         }
 
         if ($this->ad['specifics_power']) {
@@ -182,7 +190,7 @@ class ReaderElement extends \ContentElement
 
                         // fix for xxl image which is not included in xml response
                         if ('XL' === $image['@size']) {
-                            $newGallery['XXL'][] = str_replace('$_27.JPG', '$_57.JPG', $image['@url']);
+                            $newGallery['XXL'][] = \str_replace('$_27.JPG', '$_57.JPG', $image['@url']);
                         }
                     }
                 }
@@ -190,9 +198,9 @@ class ReaderElement extends \ContentElement
         }
 
         if (isset($this->ad['images'])) {
-            $manImages = unserialize($this->ad['images']);
+            $manImages = \unserialize($this->ad['images']);
             foreach ($manImages as $uuid) {
-                $objFile = \FilesModel::findByUuid($uuid);
+                $objFile = FilesModel::findByUuid($uuid);
                 if ($objFile) {
                     $newGallery[] = $this->getImageByPath($objFile->path);
                 }
@@ -202,9 +210,9 @@ class ReaderElement extends \ContentElement
             $this->ad['makeModelDescription']['value'] = $this->ad['name'];
         }
 
-        if ($this->ad['syscara_images_layout']) {
+        if (isset($this->ad['syscara_images_layout'])) {
             $groundPlan = unserialize($this->ad['syscara_images_layout']);
-            $objFile = \FilesModel::findByUuid($groundPlan[0]);
+            $objFile = FilesModel::findByUuid($groundPlan[0]);
             $this->ad['groundPlan'] = $objFile->path;
         }
 
@@ -255,7 +263,7 @@ class ReaderElement extends \ContentElement
         $this->ad['fuelConsumption'] = $fuelConsumption;
 
         if ($this->ad['sellerInfo']) {
-            $this->ad['seller'] = json_decode($this->ad['sellerInfo'], true);
+            $this->ad['seller'] = \json_decode($this->ad['sellerInfo'], true);
         }
 
         $this->ad['bodyType'] = $this->ad['vehicle_class'];
@@ -280,7 +288,7 @@ class ReaderElement extends \ContentElement
 
     protected function getImageByPath($str)
     {
-        $imageObj = new \Image(new \File($str));
+        $imageObj = new Image(new File($str));
 
         return [
             ['@size' => 'S', '@url' => $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath()],

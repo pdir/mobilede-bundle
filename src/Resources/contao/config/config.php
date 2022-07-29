@@ -76,7 +76,7 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = ['pdir.mobileDe.listener.hooks', 
  */
 
 if ('BE' === TL_MODE) {
-    if (!is_array($GLOBALS['TL_JAVASCRIPT'])) {
+    if (!isset($GLOBALS['TL_JAVASCRIPT'])) {
         $GLOBALS['TL_JAVASCRIPT'] = [];
     }
 

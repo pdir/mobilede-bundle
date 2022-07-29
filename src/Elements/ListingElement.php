@@ -16,14 +16,20 @@
 
 namespace Pdir\MobileDeBundle\Elements;
 
+use Contao\BackendTemplate;
+use Contao\Config;
+use Contao\ContentElement;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
+use Contao\Date;
+use Contao\File;
+use Contao\FilesModel;
+use Contao\Image;
+use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Psr\Log\LogLevel;
-
-
 
 /**
  * Provide methods to render content element "vehicle listing".
@@ -35,7 +41,7 @@ use Psr\Log\LogLevel;
  * @property string $pdirVehicleFilterByAccount
  * @property string $pdirVehicleFilterMaxItems
  */
-class ListingElement extends \ContentElement
+class ListingElement extends ContentElement
 {
     const PARAMETER_KEY = 'ad';
 
@@ -65,7 +71,7 @@ class ListingElement extends \ContentElement
     public function generate()
     {
         if ('BE' === TL_MODE) {
-            $objTemplate = new \BackendTemplate('be_wildcard');
+            $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe LIST ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
@@ -79,7 +85,7 @@ class ListingElement extends \ContentElement
         $this->lang = System::loadLanguageFile($this->strTable);
 
         // Get reader page model
-        $this->readerPage = \PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
+        $this->readerPage = PageModel::findPublishedByIdOrAlias($this->pdir_md_readerPage)->current()->row();
 
         // set custom list template
         if ($this->pdir_md_listTemplate && $this->strTemplate !== $this->pdir_md_listTemplate) {
@@ -160,17 +166,17 @@ class ListingElement extends \ContentElement
         return parent::generate();
     }
 
-    public function formatDate($str)
+    public static function formatDate($str)
     {
         // validate date
         if ($str) {
             if (false !== strpos($str, '-')) {
                 // if date is string
-                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
+                return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
             }
             if (is_numeric($str)) {
                 // if date is timestamp
-                return \Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
+                return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
             }
 
             return $str;
@@ -301,10 +307,10 @@ class ListingElement extends \ContentElement
             if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
                 $manImages = unserialize($ad['orderSRC']);
 
-                $objFile = \FilesModel::findByUuid($manImages[0]);
+                $objFile = FilesModel::findByUuid($manImages[0]);
 
                 if ($objFile) {
-                    $imageObj = new \Image(new \File($objFile->path));
+                    $imageObj = new Image(new File($objFile->path));
                     $objFilterTemplate->imageSrc_S = $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_XL = $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath();
                     $objFilterTemplate->imageSrc_L = $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath();
@@ -324,10 +330,10 @@ class ListingElement extends \ContentElement
 
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
-            $objFilterTemplate->price = \System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
+            $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
 
             if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price']) {
-                $objFilterTemplate->pseudoPrice = \System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
+                $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
@@ -418,7 +424,7 @@ class ListingElement extends \ContentElement
 
             if ($ad['syscara_images_layout']) {
                 $groundPlan = unserialize($ad['syscara_images_layout']);
-                $objFile = \FilesModel::findByUuid($groundPlan[0]);
+                $objFile = FilesModel::findByUuid($groundPlan[0]);
                 $objFilterTemplate->groundPlan = $objFile->path;
             }
 
@@ -435,7 +441,7 @@ class ListingElement extends \ContentElement
             $pageId
         );
 
-        if (\Config::get('useAutoItem')) {
+        if (Config::get('useAutoItem')) {
             $paramString = sprintf('/%s',
                 $pageId
             );
