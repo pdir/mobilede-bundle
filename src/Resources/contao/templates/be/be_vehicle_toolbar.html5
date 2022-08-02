@@ -34,7 +34,7 @@
       <div class="flex">
         <?php foreach($this->arrButtons as $button): ?>
           <div class="button">
-            <a href="<?= $button['href'] ?>" onclick="<?= $button['onclick'] ?>">
+            <a href="<?= $button['href'] ?>"<?php if (isset($button['onclick'])): ?>onclick="<?= $button['onclick'] ?>"<?php endif; ?>>
               <img src="<?= $button['image'] ?>" alt="<?= $button['alt'] ?>" width="40" height="40" />
                 <?= $button['alt'] ?>
             </a>
@@ -74,7 +74,7 @@
                 <div class="teaser"><?= $ref['teaser']; ?></div>
               </div>
 
-              <?php if($data['product_link'] && $ref['button_text']): ?>
+              <?php if (isset($data['product_link']) && $ref['button_text']): ?>
                 <div>
                   <a href="<?= $data['product_link'] ?>" target="_blank"><?= $ref['button_text'] ?></a>
                 </div>

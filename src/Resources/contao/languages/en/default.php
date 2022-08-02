@@ -78,6 +78,10 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Wheel Form
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Delivery Period';
 
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'] = 'No information';
+
+$GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Only admins are allowed to change this setting.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manual accounts cannot be synchronized.';
+
 /*
  * List View
  */

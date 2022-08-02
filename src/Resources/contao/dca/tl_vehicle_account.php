@@ -16,6 +16,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Pdir\MobileDeBundle\EventListener\DataContainerListener;
+
 $strTable = 'tl_vehicle_account';
 
 $GLOBALS['TL_DCA'][$strTable] = [
@@ -49,27 +51,17 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'href' => 'act=edit',
                 'icon' => 'edit.svg',
             ],
-            'enable' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['enable'],
-                'attributes' => 'onclick="Backend.getScrollOffset();"',
-                'haste_ajax_operation' => [
-                    'field' => 'enabled',
-                    'options' => [
-                        [
-                            'value' => '0',
-                            'icon' => 'invisible.svg',
-                        ],
-                        [
-                            'value' => '1',
-                            'icon' => 'visible.svg',
-                        ],
-                    ],
-                ],
-            ],
             'delete' => [
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['delete'],
                 'href' => 'act=delete',
                 'icon' => 'delete.svg',
+            ],
+            'toggle' => [
+                'label' => &$GLOBALS['TL_LANG'][$strTable]['enable'],
+                'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'icon' => 'visible.svg',
+                'showInHeader' => true,
+                'button_callback' => [DataContainerListener::class, 'visibleButtonCallback'],
             ],
         ],
     ],
@@ -115,7 +107,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
         'apiType' => [
             'exclude' => true,
             'inputType' => 'select',
-            'options' => $GLOBALS['TL_LANG'][$strTable]['apiTypeOptions'],
+            'options' => &$GLOBALS['TL_LANG'][$strTable]['apiTypeOptions'],
             'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50'],
             'sql' => "varchar(64) NOT NULL default ''",
         ],
@@ -159,13 +151,8 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'default' => false,
             'inputType' => 'checkbox',
-            'eval' => ['isBoolean' => true],
-            'save_callback' => [
-                static function ($value) {
-                    return '1' === $value;
-                },
-            ],
-            'sql' => "char(1) NOT NULL default ''",
+            'eval' => ['doNotCopy'=>true],
+            'sql' => ['type' => 'boolean', 'default' => false],
         ],
     ],
 ];

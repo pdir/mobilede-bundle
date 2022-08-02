@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -42,6 +42,7 @@ class ReaderElement extends ContentElement
 
     protected $ad = [];
     private $lang = [];
+    private $image;
 
     /**
      * Display a wildcard in the back end.
@@ -180,12 +181,12 @@ class ReaderElement extends ContentElement
         // images
         $newGallery = [];
 
-        if(null !== $this->ad['api_images']) {
+        if (null !== $this->ad['api_images']) {
             $images = StringUtil::deserialize($this->ad['api_images'])['images']['image'];
 
             if (\is_array($images) && 0 < \count($images)) {
                 foreach ($images as $row) {
-                    foreach($row['representation'] as $image) {
+                    foreach ($row['representation'] as $image) {
                         $newGallery[$image['@size']][] = $image['@url'];
 
                         // fix for xxl image which is not included in xml response
@@ -195,23 +196,37 @@ class ReaderElement extends ContentElement
                     }
                 }
             }
+
+            $this->ad['htmlDescription'] = $this->ad['vehicle_free_text'];
+            $this->ad['makeModelDescription'] = $this->ad['name'];
         }
 
         if (isset($this->ad['images'])) {
             $manImages = \unserialize($this->ad['images']);
+
             foreach ($manImages as $uuid) {
                 $objFile = FilesModel::findByUuid($uuid);
                 if ($objFile) {
-                    $newGallery[] = $this->getImageByPath($objFile->path);
+                    if (!isset($newGallery['XXL'])) {
+                        $newGallery['XXL'] = [];
+                    }
+
+                    $newGallery['XXL'][] = $this->getImageByPath($objFile->path, 'XXL');
+
+                    if (!isset($newGallery['original'])) {
+                        $newGallery['original'] = [];
+                    }
+
+                    $newGallery['original'][] = [
+                        'path' => $objFile->path,
+                        'uuid' => $uuid,
+                    ];
                 }
             }
-
-            $this->ad['htmlDescription']['value'] = $this->ad['vehicle_free_text'];
-            $this->ad['makeModelDescription']['value'] = $this->ad['name'];
         }
 
         if (isset($this->ad['syscara_images_layout'])) {
-            $groundPlan = unserialize($this->ad['syscara_images_layout']);
+            $groundPlan = \unserialize($this->ad['syscara_images_layout']);
             $objFile = FilesModel::findByUuid($groundPlan[0]);
             $this->ad['groundPlan'] = $objFile->path;
         }
@@ -286,18 +301,41 @@ class ReaderElement extends ContentElement
         }
     }
 
-    protected function getImageByPath($str)
+    protected function getImageByPath($str, $type = 'allSizes')
     {
-        $imageObj = new Image(new File($str));
+        $this->image = new Image(new File($str));
 
-        return [
-            ['@size' => 'S', '@url' => $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'XL', '@url' => $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'XXL', '@url' => $imageObj->setTargetWidth(1200)->setTargetHeight(800)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'L', '@url' => $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'M', '@url' => $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'ICON', '@url' => $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath()],
-            ['@size' => 'ORIGINAL', '@url' => $str],
-        ];
+        switch ($type) {
+            case 'S':
+                $this->getImagePath(200, 150);
+                break;
+            case 'M':
+                return $this->getImagePath(298, 224);
+            case 'L':
+                return $this->getImagePath(400, 300);
+            case 'XL':
+                return $this->getImagePath(640, 480);
+            case 'XXL':
+                return $this->getImagePath(1200, 800);
+            case 'ICON':
+                return $this->getImagePath(80, 60);
+            case 'ORIGINAL':
+                return $str;
+            default:
+                return [
+                    ['@size' => 'S', '@url' => $this->getImagePath(200, 150)],
+                    ['@size' => 'XL', '@url' => $this->getImagePath(640, 480)],
+                    ['@size' => 'XXL', '@url' => $this->getImagePath(1200, 800)],
+                    ['@size' => 'L', '@url' => $this->getImagePath(400, 300)],
+                    ['@size' => 'M', '@url' => $this->getImagePath(298, 224)],
+                    ['@size' => 'ICON', '@url' => $this->getImagePath(80, 60)],
+                    ['@size' => 'ORIGINAL', '@url' => $str],
+                ];
+        }
+    }
+
+    protected function getImagePath($width, $height, $mode = 'center_center')
+    {
+        return $this->image->setTargetWidth($width)->setTargetHeight($height)->setResizeMode($mode)->executeResize()->getResizedPath();
     }
 }

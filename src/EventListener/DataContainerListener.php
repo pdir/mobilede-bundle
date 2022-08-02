@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -17,8 +17,12 @@
 namespace Pdir\MobileDeBundle\EventListener;
 
 use Contao\BackendTemplate;
+use Contao\BackendUser;
+use Contao\Controller;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
+use Contao\Image;
+use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Pdir\MobileDeSyncBundle\Module\Sync;
@@ -28,7 +32,18 @@ class DataContainerListener
     use ListenerHelperTrait;
 
     /**
-     * @Callback(table="tl_vehicle", target="list.global_operations.toolbar.button", priority=1)
+     * AssociationContactListener constructor.
+     */
+    public function __construct()
+    {
+        $this->user = BackendUser::getInstance();
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_vehicle",
+     *     target="list.global_operations.toolbar.button",
+     *     priority=1)
      */
     public function renderToolbar(): string
     {
@@ -72,13 +87,13 @@ class DataContainerListener
      *     table="tl_content",
      *     target="fields.pdirVehicleFilterByAccount.options"
      * )
-     * builds the gzOwner options
+     * builds the account options
      *
      * @return array
      */
     public function getContentVehicleAccountOptions(DataContainer $dc)
     {
-        return $this->getVehicleAccountOptions();
+        return $this->buildVehicleAccountOptions(true);
     }
 
     /**
@@ -92,6 +107,34 @@ class DataContainerListener
      */
     public function getVehicleVehicleAccountOptions(DataContainer $dc)
     {
-        return $this->getVehicleAccountOptions();
+        return $this->buildVehicleAccountOptions();
+    }
+
+    /**
+     * @Callback(
+     *  table="tl_vehicle_account",
+     *  target="list.operations.toggle.button",
+     *  priority=-11
+     * )
+     * button_callback: generates a button for the enabled operation
+     */
+    public function visibleButtonCallback(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
+    {
+        // disable the button if the user is not admin or apiType = man
+        if (!$this->user->isAdmin || 'man' === $row['apiType']) {
+            $title = !$this->user->isAdmin ? $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] : $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'];
+
+            return '<span title="'.$title.'">'.Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).'</span>';
+        }
+
+        // build variables
+        $published = $row['enabled'] ? 1 : 0;
+        $unpublished = $row['enabled'] ? 0 : 1;
+        $url = Controller::addToUrl("&amp;tid={$row['id']}&amp;state=$published");
+        $icon = 0 === $row['enabled'] ? 'invisible.svg' : $icon;
+        $_title = StringUtil::specialchars($title);
+        $image = Image::getHtml($icon, $label, "data-state='$unpublished'");
+
+        return "<a href='$url' title='$_title' $attributes>$image</a>";
     }
 }

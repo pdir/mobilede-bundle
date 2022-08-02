@@ -3,17 +3,14 @@
 declare(strict_types=1);
 
 /*
- * gzm bundle for Contao Open Source CMS
+ * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 Markenzoo UG
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
- * @package    gzm-bundle
- * @link       https://markenzoo.de
- * @license    proprietary
- * @author     Mathias Arzberger <mathias@markenzoo.de>
- * @author     Christian Mette <christian@markenzoo.de>
- * @author     Markenzoo UG <https://markenzoo.de>
+ * @package    mobilede-bundle
+ * @link       https://pdir.de/mobilede.html
+ * @license    proprietary / pdir license - All-rights-reserved - commercial extension
+ * @author     Mathias Arzberger <develop@pdir.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,16 +18,17 @@ declare(strict_types=1);
 
 namespace Pdir\MobileDeBundle\EventListener;
 
-use Markenzoo\GzmBundle\MarkenzooGzmUtils;
-use Markenzoo\GzmBundle\Model\AssociationContactModel;
 use Pdir\MobileDeBundle\Model\VehicleAccountModel;
 
 trait ListenerHelperTrait
 {
-    private function buildVehicleAccountOptions():array
+    private function buildVehicleAccountOptions($default = false): array
     {
         $options = [];
-        $options[0] = $GLOBALS['TL_LANG']['pdirMobileDe']['vehicleAccountDefault'];
+
+        if ($default) {
+            $options[0] = $GLOBALS['TL_LANG']['pdirMobileDe']['vehicleAccountDefault'];
+        }
 
         $accounts = VehicleAccountModel::findAll();
 

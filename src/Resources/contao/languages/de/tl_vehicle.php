@@ -48,6 +48,7 @@ $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type'] = ['Benz
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['SUPER'] = 'Super';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['SUPER_PLUS'] = 'Super Plus';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['NORMAL'] = 'Normal';
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['DIESEL'] = 'Diesel';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'] = ['Kombinierter elektrischer Energieverbrauch', 'Geben Sie hier den kombinierten elektrischen Energieverbrauch für Plugin-Hybrid ein.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_unit'] = ['Einheit des Energieverbbrauch', 'Geben Sie hier die Einheit des Energieverbrauch ein.'];
 $GLOBALS['TL_LANG'][$strTable]['features'] = ['Features', 'Wählen Sie hier die Features aus welche sich entsprechend der gewählten Fahrzeugklasse unterscheiden können.'];

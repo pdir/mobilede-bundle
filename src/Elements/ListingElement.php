@@ -3,7 +3,7 @@
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -158,9 +158,9 @@ class ListingElement extends ContentElement
         if (!\is_array($this->ads) || \count($this->ads) < 1) {
             System::getContainer()
                 ->get('monolog.logger.contao')
-                ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], array(
+                ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], [
                     'contao' => new ContaoContext(__CLASS__.'::'.__FUNCTION__, TL_GENERAL
-                    )));
+                    ), ]);
         }
 
         return parent::generate();
@@ -246,7 +246,7 @@ class ListingElement extends ContentElement
 
         // Add ads to template
         $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
-        $this->Template->onlyFilter = $this->pdir_md_only_filter === 1 ? true : false;
+        $this->Template->onlyFilter = 1 === $this->pdir_md_only_filter ? true : false;
         $this->Template->listingPage = $this->pdir_md_listingPage;
 
         // Filters
@@ -291,7 +291,7 @@ class ListingElement extends ContentElement
 
             $objFilterTemplate->desc = $ad['name'];
 
-            if(null !== $ad['api_images']) {
+            if (null !== $ad['api_images']) {
                 $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
                 if (\is_array($images) && 0 < \count($images)) {
                     $objFilterTemplate->imageSrc_S = $images[0]['@url'];
@@ -345,15 +345,15 @@ class ListingElement extends ContentElement
             $objFilterTemplate->vehicle_model = $ad['vehicle_model'];
             $objFilterTemplate->specifics_licensed_weight = $ad['specifics_licensed_weight'];
 
-            if(isset($ad['specifics_usage_type']) && '' !== $ad['specifics_usage_type']) {
+            if (isset($ad['specifics_usage_type']) && '' !== $ad['specifics_usage_type']) {
                 $objFilterTemplate->usageType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_usage_type']['options'][$ad['specifics_usage_type']] ?: $ad['specifics_usage_type'];
             }
 
-            if(isset($ad['specifics_condition']) && '' !== $ad['specifics_condition']) {
+            if (isset($ad['specifics_condition']) && '' !== $ad['specifics_condition']) {
                 $objFilterTemplate->specifics_condition = $GLOBALS['TL_LANG'][$this->strTable]['specifics_condition']['options'][strtoupper($ad['specifics_condition'])];
             }
 
-            if(isset($ad['specifics_gearbox']) && '' !== $ad['specifics_gearbox']) {
+            if (isset($ad['specifics_gearbox']) && '' !== $ad['specifics_gearbox']) {
                 $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
             }
 
@@ -403,8 +403,8 @@ class ListingElement extends ContentElement
 
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
 
-            $objFilterTemplate->featured = isset($ad['newnessMarker'])?? false;
-            $objFilterTemplate->onlyFilter = $this->pdir_md_only_filter === 1 ? true : false;
+            $objFilterTemplate->featured = isset($ad['newnessMarker']) ?? false;
+            $objFilterTemplate->onlyFilter = 1 === $this->pdir_md_only_filter ? true : false;
             $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);

@@ -82,20 +82,8 @@ License
 -------
 This is a commercial extension for Contao Open Source CMS<br>
 You can buy a license at https://pdir.de/mobilede<br>
-2017-2018 pdir GmbH - All-rights-reserved<br>
+2017-2022 pdir GmbH - All-rights-reserved<br>
 
-
-ToDo
----------------
-
-
-History
--------
-- Version 1.0.12 // Behebt Probleme bei der Auswahl von individuellen Templates und beim ausblenden der Filter
-- Version 1.0.5 // Unterstützung von Contao 4 und des Contao Manager
-- Version 1.0.2 // Ausgabe der mobile.de API Fehlermeldungen direkt auf der Seite
-- Version 1.0.1 // Diese Version behebt kleinere Fehler in der Listenansicht
-- Version 1.0.0 // Erste Version für Contao 3.5 veröffentlicht
 
 *mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner Verbindung zur pdir GmbH oder der mobile.de* Erweiterung für Contao. Die Erweiterung verwendet die mobile.de* API zum Import der Fahrzeugdaten.
 DIES IST EINE DEMO VERSION, DIE DURCH DEN KAUF EINER LIZENZ ZUR VOLLVERSION UMGEWANDELT WERDEN KANN.

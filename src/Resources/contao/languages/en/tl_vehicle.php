@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type'] = ['Petr
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['SUPER'] = 'Super';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['SUPER_PLUS'] = 'Super Plus';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['NORMAL'] = 'Normal';
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['DIESEL'] = 'Diesel';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'] = ['Combined electric energy consumption', 'Combined electric energy consumption for plugin hybrid.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_unit'] = ['Energy consumption unit', 'Enter the unit of energy consumption here.'];
 $GLOBALS['TL_LANG'][$strTable]['features'] = ['Features', 'Select here the features which can differ according to the chosen vehicle class.'];

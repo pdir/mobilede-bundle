@@ -80,6 +80,9 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Lieferfr
 
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'] = 'Keine Angabe';
 
+$GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Nur Admins dürfen diese Einstellung ändern.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manuelle Konten können nicht synchronisiert werden.';
+
 /*
  * List View
  */

@@ -29,6 +29,7 @@ $GLOBALS['TL_LANG']['MOD']['mobileDeAds'] = ['Mobile.de Ads', 'Manage Mobile.de 
 $GLOBALS['TL_LANG']['MOD']['vehicle_show'] = ['Vehicle Manager', 'Manage vehicles'];
 $GLOBALS['TL_LANG']['MOD']['vehicle_accounts'] = ['Accounts', 'Manage the Vehicle Manager accounts'];
 
+$GLOBALS['TL_LANG']['MOD']['vehicleSetup'] = ['Vehicle Manager Setup', 'Vehicle Manager information'];
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] = 'Run import';
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'] = 'Import demo data';
 

@@ -19,14 +19,16 @@
  */
 $GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
 
-$GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Fahrzeug Manager Listenansicht';
+$GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Fahrzeugmanager Listenansicht';
 $GLOBALS['TL_LANG']['CTE']['mobileDeList'][1] = 'Inhaltelement um die Mobile.de Listenansicht auf der gewünschten Seite zu platzieren.';
-$GLOBALS['TL_LANG']['CTE']['mobileDeReader'][0] = 'Fahrzeug Manager Detailansicht';
+$GLOBALS['TL_LANG']['CTE']['mobileDeReader'][0] = 'Fahrzeugmanager Detailansicht';
 $GLOBALS['TL_LANG']['CTE']['mobileDeReader'][1] = 'Inhaltselement um die Mobile.de Detailansicht auf der gewünschten Seite zu platzieren.';
 
-$GLOBALS['TL_LANG']['MOD']['vehicle_show'] = ['Fahrzeug Manager', 'Fahrzeuge verwalten'];
-$GLOBALS['TL_LANG']['MOD']['vehicle_accounts'] = ['Konten', 'Verwalten der Fahrzeug Manager Konten'];
+$GLOBALS['TL_LANG']['MOD']['vehicle_show'] = ['Fahrzeugmanager', 'Fahrzeuge verwalten'];
+$GLOBALS['TL_LANG']['MOD']['vehicle_accounts'] = ['Konten', 'Verwalten der Fahrzeugmanager Konten'];
 
+
+$GLOBALS['TL_LANG']['MOD']['vehicleSetup'] = ['Fahrzeugmanager Setup', 'Informationen zum Fahrzeugmanager'];
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] = 'Import starten';
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'] = 'Demo Daten importieren';
 

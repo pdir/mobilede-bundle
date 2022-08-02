@@ -1,4 +1,17 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  _instanceof:
+    Contao\CoreBundle\Framework\FrameworkAwareInterface:
+      calls:
+        - [setFramework, ['@contao.framework']]
+
+    Symfony\Component\DependencyInjection\ContainerAwareInterface:
+     calls:
+       - [setContainer, ['@service_container']]
+
   pdir.mobile_de.dca.ad:
     class: Pdir\MobileDeBundle\Dca\Ad
     arguments:

@@ -33,7 +33,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         <div class="ce_sliderStart block">
           <div class="content-slider" data-config="4000,300,0,1">
             <div class="slider-wrapper">
-              <?php if($this->ad['images']): ?>
+              <?php if($this->ad['images'] && isset($this->ad['images']['XXL'])): ?>
               <?php foreach($this->ad['images']['XXL'] as $key => $img): ?>
                 <div class="slide"><img src="<?= $img ?>"/></div>
               <?php endforeach; ?>
@@ -62,7 +62,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               <?php endforeach; ?>
             <?php endif; ?>
 
-            <?php if($this->ad['fuelConsumptionSE']): ?>
+            <?php if (isset($this->ad['fuelConsumptionSE'])): ?>
             <li class="feature-fuel"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['consumption'] ?></span><span class="value">
               <?php if($this->ad['fuelConsumptionSE']['combined']): ?>≈ <?= $this->ad['fuelConsumptionSE']['combined'] ?> l/100 km (kombiniert) <?php endif; ?>
               <?php if($this->ad['fuelConsumptionSE']['outer']): ?>≈ <?= $this->ad['fuelConsumptionSE']['outer'] ?> l/100 km (außerorts) <?php endif; ?>
@@ -70,7 +70,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               </span></li>
             <?php endif; ?>
 
-            <?php if($this->ad['specifics']): ?>
+            <?php if(isset($this->ad['specifics'])): ?>
             <?php foreach($this->ad['specifics'] as $key=>$feature): ?>
             <li class="specifics-<?= $feature['key'] ?>">
                 <span class="label"><?= $feature['label'] ?></span><span class="value"><?= $feature['value'] ?></span>
@@ -150,7 +150,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
           </ul>
         </div>
 
-        <?php if($this->ad['seller']): ?>
+        <?php if (isset($this->ad['seller'])): ?>
         <div class="md-detail-box additional-contact">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-seller'] ?></h2>
           <?php if($this->ad['seller']['company-name']['value'] != ""): ?>

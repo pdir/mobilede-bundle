@@ -14,6 +14,8 @@
  * file that was distributed with this source code.
  */
 
+use Pdir\MobileDeBundle\EventListener\DataContainerListener;
+
 $strTable = 'tl_content';
 
 /*
@@ -117,16 +119,16 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_color'] = [
     'exclude' => true,
     'inputType' => 'select',
     'options' => [
-        'white' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_white'],
-        'black' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_black'],
-        'grey' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_grey'],
-        'blue' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_blue'],
-        'green' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_green'],
-        'turquoise' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_turquoise'],
-        'purple' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_purple'],
-        'red' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_red'],
-        'orange' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_orange'],
-        'yellow' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_yellow'],
+        'white' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_white'],
+        'black' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_black'],
+        'grey' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_grey'],
+        'blue' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_blue'],
+        'green' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_green'],
+        'turquoise' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_turquoise'],
+        'purple' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_purple'],
+        'red' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_red'],
+        'orange' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_orange'],
+        'yellow' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_color_yellow'],
     ],
     'eval' => ['tl_class' => 'w50'],
     'sql' => "varchar(64) NOT NULL default ''",
@@ -136,7 +138,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_promotion_corner_color'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_promotion_corner_color'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_color']['options'],
+    'options' => &$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_color']['options'],
     'eval' => ['tl_class' => 'w50'],
     'sql' => "varchar(64) NOT NULL default ''",
 ];
@@ -146,10 +148,10 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_position'] = [
     'exclude' => true,
     'inputType' => 'select',
     'options' => [
-        'top-left' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_top_left'],
-        'top-right' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_top_right'],
-        'bottom-left' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_bottom_left'],
-        'bottom-right' => $GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_bottom_right'],
+        'top-left' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_top_left'],
+        'top-right' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_top_right'],
+        'bottom-left' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_bottom_left'],
+        'bottom-right' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_corner_position_bottom_right'],
     ],
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => "varchar(64) NOT NULL default ''",
@@ -159,7 +161,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_promotion_corner_position'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_promotion_corner_position'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_position']['options'],
+    'options' => &$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_corner_position']['options'],
     'eval' => ['tl_class' => 'w50 clr'],
     'sql' => "varchar(64) NOT NULL default ''",
 ];
@@ -301,6 +303,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
     'eval' => [
         'tl_class' => 'w50',
     ],
+    'options_callback' => [DataContainerListener::class, 'getContentVehicleAccountOptions'],
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
