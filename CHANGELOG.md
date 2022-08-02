@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.1](https://github.com/pdir/mobilede-bundle/tree/3.3.1) – 2022-08-02
+
+- [Fixed] fix demo data for Contao 4.13
+
 ## [3.3.0](https://github.com/pdir/mobilede-bundle/tree/3.3.0) – 2022-07-27
 
 - [Changed] add seller info as json
