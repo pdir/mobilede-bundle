@@ -19,9 +19,12 @@ namespace Pdir\MobileDeBundle\EventListener;
 use Contao\BackendTemplate;
 use Contao\BackendUser;
 use Contao\Controller;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
+use Contao\Database;
 use Contao\DataContainer;
 use Contao\Image;
+use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
@@ -120,21 +123,47 @@ class DataContainerListener
      */
     public function visibleButtonCallback(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
     {
-        // disable the button if the user is not admin or apiType = man
-        if (!$this->user->isAdmin || 'man' === $row['apiType']) {
-            $title = !$this->user->isAdmin ? $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] : $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'];
+        $security = System::getContainer()->get('security.helper');
+
+        // disable the button if the user has no access or apiType = man
+        if (!$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled') ||
+            'man' === $row['apiType']
+        ) {
+            $title = 'man' === $row['apiType'] ? $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused']: $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'];
 
             return '<span title="'.$title.'">'.Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).'</span>';
         }
 
-        // build variables
-        $published = $row['enabled'] ? 1 : 0;
-        $unpublished = $row['enabled'] ? 0 : 1;
-        $url = Controller::addToUrl("&amp;tid={$row['id']}&amp;state=$published");
-        $icon = 0 === $row['enabled'] ? 'invisible.svg' : $icon;
-        $_title = StringUtil::specialchars($title);
-        $image = Image::getHtml($icon, $label, "data-state='$unpublished'");
+        // toggle visibility
+        if (strlen(Input::get('state'))) {
+            $this->toggleVisibility($row['id'], (Input::get('state')));
+            Controller::redirect(Controller::getReferer());
+        }
 
-        return "<a href='$url' title='$_title' $attributes>$image</a>";
+        $href .= '&amp;state=' . ($row['enabled'] ? 1 : 0) . '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;
+
+        if (!$row['enabled'])
+        {
+            $icon = 'invisible.svg';
+        }
+
+        return '<a href="' . Controller::addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">' . Image::getHtml($icon, $label, 'data-icon="' . Image::getPath('visible.svg') . '" data-icon-disabled="' . Image::getPath('invisible.svg') . '" data-state="' . ($row['enabled'] ? 1 : 0) . '"') . '</a> ';
+    }
+
+    /**
+     * Disable/enable a vehicle account
+     *
+     * @param integer $intId
+     * @param boolean $blnVisible
+     * @param DataContainer $dc
+     */
+    public function toggleVisibility(int $intId, bool $blnVisible)
+    {
+        Input::setGet('id', $intId);
+        Input::setGet('act', 'toggle');
+
+        // Update the database
+        Database::getInstance()->prepare("UPDATE tl_vehicle_account SET tstamp=". time() .", enabled='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+            ->execute($intId);
     }
 }
