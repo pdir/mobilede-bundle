@@ -57,6 +57,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'icon' => 'delete.svg',
             ],
             'toggle' => [
+                'href' => 'act=toggle&amp;field=enabled',
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['enable'],
                 'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'icon' => 'visible.svg',
@@ -148,11 +149,11 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "varchar(64) NOT NULL default ''",
         ],
         'enabled' => [
-            'exclude' => true,
-            'default' => false,
+            'toggle' => true,
+            'filter' => true,
             'inputType' => 'checkbox',
-            'eval' => ['doNotCopy'=>true],
-            'sql' => ['type' => 'boolean', 'default' => false],
+            'eval' => ['doNotCopy' => true],
+            'sql' => ['type' => 'boolean', 'default' => false]
         ],
     ],
 ];
