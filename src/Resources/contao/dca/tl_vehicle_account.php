@@ -109,7 +109,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'inputType' => 'select',
             'options' => &$GLOBALS['TL_LANG'][$strTable]['apiTypeOptions'],
-            'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50'],
+            'eval' => ['includeBlankOption' => true, 'tl_class' => 'w50', 'submitOnChange' => true],
             'sql' => "varchar(64) NOT NULL default ''",
         ],
         'api_explanation' => [
