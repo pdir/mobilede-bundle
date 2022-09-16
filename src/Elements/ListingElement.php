@@ -126,7 +126,7 @@ class ListingElement extends ContentElement
             }
         }
 
-        if (0 !== $this->pdirVehicleFilterByAccount) {
+        if (0 != $this->pdirVehicleFilterByAccount) {
             if ('' !== $strWhere) {
                 $strWhere .= ' AND account='.$this->pdirVehicleFilterByAccount;
             }
