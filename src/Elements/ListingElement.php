@@ -250,7 +250,7 @@ class ListingElement extends ContentElement
 
         // Add ads to template
         $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
-        $this->Template->onlyFilter = 1 === $this->pdir_md_only_filter ? true : false;
+        $this->Template->onlyFilter = 1 === (int)$this->pdir_md_only_filter;
         $this->Template->listingPage = $this->pdir_md_listingPage;
 
         // Filters
@@ -412,7 +412,7 @@ class ListingElement extends ContentElement
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
 
             $objFilterTemplate->featured = isset($ad['newnessMarker']) ?? false;
-            $objFilterTemplate->onlyFilter = 1 === $this->pdir_md_only_filter ? true : false;
+            $objFilterTemplate->onlyFilter = 1 === (int)$this->pdir_md_only_filter;
             $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);

@@ -11,9 +11,9 @@
 
   <?php if(!$this->hideFilters): ?>
   <div class="md-filters<?php if($this->openFilters): ?> open-filters<?php endif; ?>">
+    <?php if(!$this->openFilters): ?><button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button><?php endif; ?>
     <?php if($this->onlyFilter): ?>
     <div class="md-filters-header">
-      <button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button>
       <div class="md-filter-sort button-group">
         <i class="icon-sort"></i>
         <select class="md-select sorting">
@@ -45,7 +45,7 @@
       <?php endif; ?>
 
       <?php if(isset($this->filters['vehicle_model'])): ?>
-      <div class="type select-container">
+      <div class="model select-container">
         <label>Fahrzeugmodell</label>
         <select class="md-select">
           <option value="*">Alle anzeigen</option>
@@ -142,7 +142,7 @@
       <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
 
       <?php if($this->onlyFilter): ?>
-        <span><a href="{{link_url::<?= $this->listingPage ?>}}" class="submit">Absenden</a></span>
+        <span><a href="{{link_url::<?= $this->listingPage ?>}}" id="vehicleOnlyFilter" class="submit">Suchen</a></span>
       <?php endif; ?>
       <!-- <span><button class="btn-shuffle" id="shuffle">Mischen</button></span> -->
     </div>
