@@ -152,7 +152,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'default' => false,
             'inputType' => 'checkbox',
             'eval' => ['doNotCopy'=>true],
-            'sql' => ['type' => 'boolean', 'default' => false],
+            'sql' => ['type' => 'boolean', 'default' => 0],
         ],
     ],
 ];
