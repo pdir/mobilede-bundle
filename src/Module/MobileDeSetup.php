@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -72,7 +74,7 @@ class MobileDeSetup extends \BackendModule
      *
      * @throws \Exception
      */
-    protected function compile()
+    protected function compile(): void
     {
         // load language file
         self::loadLanguageFile('tl_vehicle');
@@ -91,7 +93,7 @@ class MobileDeSetup extends \BackendModule
         Controller::redirect(Controller::getReferer());
     }
 
-    protected function downloadDemoData()
+    protected function downloadDemoData(): void
     {
         $strFile = $this->strPath.'demo.zip';
 
@@ -108,11 +110,13 @@ class MobileDeSetup extends \BackendModule
             // unzip files
             $objArchive = new \ZipReader($strFile);
             $images = [];
+
             while ($objArchive->next()) {
                 \File::putContent($this->strPath.$objArchive->file_name, $objArchive->unzip());
 
                 // get uuid and push to array
                 $uuid = \FilesModel::findByPath($this->strPath.$objArchive->file_name)->uuid;
+
                 if (false !== strpos($objArchive->file_name, 'detail/')) {
                     $images[] = $uuid;
                 }
@@ -134,10 +138,12 @@ class MobileDeSetup extends \BackendModule
             // set images
             $adIds = \Database::getInstance()->prepare("SELECT vehicle_id FROM  $this->strTable")->execute();
             $numbers = range(0, \count($images) - 1);
+
             while ($adIds->next()) {
                 $uuidArr = [];
                 shuffle($numbers);
                 $randomNumber = $numbers[0];
+
                 for ($i = 0; $i <= $randomNumber; ++$i) {
                     $uuidArr = $this->randomImage($uuidArr, $numbers, $images);
                 }

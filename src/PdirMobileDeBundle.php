@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *

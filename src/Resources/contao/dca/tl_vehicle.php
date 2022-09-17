@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -52,11 +54,11 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'toggleNodes' => [
                 'href' => '&amp;ptg=all',
                 'class' => 'header_toggle',
-                'showOnSelect' => true
+                'showOnSelect' => true,
             ],
             'toolbar' => [
                 'button_callback' => [DataContainerListener::class, 'renderToolbar'],
-                'class' => 'header_toolbar'
+                'class' => 'header_toolbar',
             ],
         ],
         'operations' => [
@@ -74,7 +76,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['delete'],
                 'href' => 'act=delete',
                 'icon' => 'delete.gif',
-                'attributes' => 'onclick="if(!confirm(\''.isset($GLOBALS['TL_LANG']['MSC']['deleteConfirm'])?? null.'\'))return false;Backend.getScrollOffset()"',
+                'attributes' => 'onclick="if(!confirm(\''.isset($GLOBALS['TL_LANG']['MSC']['deleteConfirm']) ?? null.'\'))return false;Backend.getScrollOffset()"',
             ],
             'toggle' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['toggle'],
@@ -169,14 +171,14 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
-            'sql' => "float(10,2) NULL",
+            'sql' => 'float(10,2) NULL',
         ],
         'consumer_price_amount' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
-            'sql' => "float(10,2) NULL",
+            'sql' => 'float(10,2) NULL',
         ],
         'pseudo_price' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['pseudo_price'],
@@ -262,7 +264,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'search' => true,
             'eval' => [
                 'tl_class' => 'w50',
-                'includeBlankOption' => true
+                'includeBlankOption' => true,
             ],
             'options_callback' => [DataContainerListener::class, 'getVehicleVehicleAccountOptions'],
             'sql' => "int(10) unsigned NOT NULL default '0'",
@@ -1193,7 +1195,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
-            'sql' => "float(10,2) NULL",
+            'sql' => 'float(10,2) NULL',
         ],
         'wltp_electric_range' => [
             'exclude' => true,

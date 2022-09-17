@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -17,6 +19,7 @@
 namespace Pdir\MobileDeBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Pdir\MobileDeBundle\Entity\Ad;
 
 class AdService
 {
@@ -38,24 +41,20 @@ class AdService
      *
      * @param $alias
      *
-     * @return array|\Pdir\MobileDeBundle\Entity\Ad[]
+     * @return array<Ad>
      */
     public function findByAlias($alias)
     {
-        $ads = $this->entityManager->getRepository('PdirMobileDeBundle:Ad')->findBy(['alias' => $alias]);
-
-        return $ads;
+        return $this->entityManager->getRepository('PdirMobileDeBundle:Ad')->findBy(['alias' => $alias]);
     }
 
     /**
      * Find all ads.
      *
-     * @return array|\Pdir\MobileDeBundle\Entity\Ad[]
+     * @return array<Ad>
      */
     public function findAll()
     {
-        $ads = $this->entityManager->getRepository('PdirMobileDeBundle:Ad')->findAll();
-
-        return $ads;
+        return $this->entityManager->getRepository('PdirMobileDeBundle:Ad')->findAll();
     }
 }

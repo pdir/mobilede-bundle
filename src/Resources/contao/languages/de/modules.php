@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -26,7 +28,6 @@ $GLOBALS['TL_LANG']['CTE']['mobileDeReader'][1] = 'Inhaltselement um die Mobile.
 
 $GLOBALS['TL_LANG']['MOD']['vehicle_show'] = ['Fahrzeugmanager', 'Fahrzeuge verwalten'];
 $GLOBALS['TL_LANG']['MOD']['vehicle_accounts'] = ['Konten', 'Verwalten der Fahrzeugmanager Konten'];
-
 
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup'] = ['Fahrzeugmanager Setup', 'Informationen zum Fahrzeugmanager'];
 $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] = 'Import starten';

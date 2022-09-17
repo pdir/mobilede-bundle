@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -18,6 +20,8 @@
  * Add frontend module.
  */
 
+use Contao\Combiner;
+
 /*
  * Add content element.
  */
@@ -28,19 +32,18 @@ $GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\Elemen
 * Backend modules
 */
 if (true !== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
-    array_insert ($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
+    array_insert($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
 }
 
 $assetsDir = 'bundles/pdirmobilede';
 
-array_insert ($GLOBALS['BE_MOD']['pdir'], 0, [
+array_insert($GLOBALS['BE_MOD']['pdir'], 0, [
     'vehicleSetup' => [
         'callback' => 'Pdir\MobileDeBundle\Module\MobileDeSetup',
     ],
 ]);
 
-
-array_insert ($GLOBALS['BE_MOD']['pdir'], 1, [
+array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     'vehicle_show' => [
         'tables' => ['tl_vehicle'],
         'icon' => $assetsDir.'/img/icon.png',
@@ -51,7 +54,7 @@ array_insert ($GLOBALS['BE_MOD']['pdir'], 1, [
     ],
 ]);
 
-array_insert ($GLOBALS['BE_MOD']['pdir'], 0, []);
+array_insert($GLOBALS['BE_MOD']['pdir'], 0, []);
 
 /*
  * Models
@@ -82,7 +85,7 @@ if ('BE' === TL_MODE) {
 
     $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir.'/js/vehicle_backend.js|static';
 
-    $combiner = new \Combiner();
+    $combiner = new Combiner();
     $combiner->add($assetsDir.'/css/vehicle_backend.scss');
     $GLOBALS['TL_CSS'][] = str_replace('TL_ASSETS_URL', '', $combiner->getCombinedFile());
 }

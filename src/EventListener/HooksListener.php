@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -107,6 +109,7 @@ class HooksListener
             $stmt = $db->prepare('SELECT * FROM tl_vehicle WHERE id=? OR alias =?');
             $res = $stmt->execute($parts[1], $parts[1]);
             $ad = $res->fetchAssoc();
+
             if ($ad[$parts[2]]) {
                 return $ad[$parts[2]];
             }

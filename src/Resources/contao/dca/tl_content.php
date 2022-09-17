@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -342,7 +344,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterMaxItems'] = [
     'sql' => "varchar(255) NOT NULL default ''",
 ];
 
-class tl_content_vehicle extends Backend
+class tl_content extends Backend
 {
     public function getListTemplates(DataContainer $dc)
     {
