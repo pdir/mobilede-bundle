@@ -26,6 +26,7 @@ use Contao\Database;
 use Contao\Date;
 use Contao\File;
 use Contao\FilesModel;
+use Contao\FrontendTemplate;
 use Contao\Image;
 use Contao\PageModel;
 use Contao\StringUtil;
@@ -292,7 +293,7 @@ class ListingElement extends ContentElement
         $arrReturn = [];
 
         foreach ($arrAds as $ad) {
-            $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
+            $objFilterTemplate = new FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
 

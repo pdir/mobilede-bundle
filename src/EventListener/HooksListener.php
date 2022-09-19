@@ -18,6 +18,11 @@ declare(strict_types=1);
 
 namespace Pdir\MobileDeBundle\EventListener;
 
+use Contao\Config;
+use Contao\Controller;
+use Contao\Database;
+use Contao\Environment;
+use Contao\PageModel;
 use Pdir\MobileDeBundle\Model\VehicleModel;
 
 class HooksListener
@@ -61,12 +66,12 @@ class HooksListener
         $vehicles = VehicleModel::findAll();
         $newVehiclePage = [];
 
-        $db = \Database::getInstance();
+        $db = Database::getInstance();
         $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ?')->execute(0);
         $readerPageId = $result->pdir_md_readerPage;
 
         foreach ($vehicles as $vehicle) {
-            $newVehiclePage[] = \Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
+            $newVehiclePage[] = Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
         }
 
         $newVehiclePage = array_unique($newVehiclePage);
@@ -81,15 +86,15 @@ class HooksListener
             $pageId
         );
 
-        if (\Config::get('useAutoItem')) {
+        if (Config::get('useAutoItem')) {
             $paramString = sprintf('/%s',
                 $pageId
             );
         }
 
-        $readerPage = \PageModel::findPublishedByIdOrAlias($readerPageId)->current()->row();
+        $readerPage = PageModel::findPublishedByIdOrAlias($readerPageId)->current()->row();
 
-        return \Controller::generateFrontendUrl($readerPage, $paramString);
+        return Controller::generateFrontendUrl($readerPage, $paramString);
     }
 
     /**
@@ -105,7 +110,7 @@ class HooksListener
 
         try {
             // @todo use model
-            $db = \Database::getInstance();
+            $db = Database::getInstance();
             $stmt = $db->prepare('SELECT * FROM tl_vehicle WHERE id=? OR alias =?');
             $res = $stmt->execute($parts[1], $parts[1]);
             $ad = $res->fetchAssoc();

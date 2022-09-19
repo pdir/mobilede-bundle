@@ -16,6 +16,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Contao\DataContainer;
 use Pdir\MobileDeBundle\EventListener\DataContainerListener;
 
 $strTable = 'tl_vehicle_account';
@@ -113,7 +114,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'api_explanation' => [
             'exclude' => true,
-            'input_field_callback' => static function (Contao\DataContainer $dc) {
+            'input_field_callback' => static function (DataContainer $dc) {
                 return sprintf(
                     '<div class="widget" style="margin-top:15px;"><p class="tl_info">%s</p></div>',
                     $GLOBALS['TL_LANG']['tl_vehicle_account']['api_explanation']
@@ -122,7 +123,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'man_explanation' => [
             'exclude' => true,
-            'input_field_callback' => static function (Contao\DataContainer $dce) {
+            'input_field_callback' => static function (DataContainer $dce) {
                 return sprintf(
                     '<div class="widget" style="margin-top:15px;"><p class="tl_info">%s</p></div>',
                     $GLOBALS['TL_LANG']['tl_vehicle_account']['man_explanation']

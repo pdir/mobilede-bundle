@@ -18,10 +18,18 @@ declare(strict_types=1);
 
 namespace Pdir\MobileDeBundle\Module;
 
+use Contao\BackendModule;
 use Contao\Controller;
+use Contao\Database;
+use Contao\Environment;
+use Contao\File;
+use Contao\FilesModel;
+use Contao\Folder;
+use Contao\Input;
 use Contao\Message;
+use Contao\ZipReader;
 
-class MobileDeSetup extends \BackendModule
+class MobileDeSetup extends BackendModule
 {
     /**
      * mobilede version.
@@ -79,9 +87,9 @@ class MobileDeSetup extends \BackendModule
         // load language file
         self::loadLanguageFile('tl_vehicle');
 
-        $this->strDomain = \Environment::get('httpHost');
+        $this->strDomain = Environment::get('httpHost');
 
-        switch (\Input::get('act')) {
+        switch (Input::get('act')) {
             case 'download':
                 $this->downloadDemoData();
                 // no break
@@ -93,29 +101,32 @@ class MobileDeSetup extends \BackendModule
         Controller::redirect(Controller::getReferer());
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function downloadDemoData(): void
     {
         $strFile = $this->strPath.'demo.zip';
 
         if (!is_dir($this->strPath)) {
-            new \Folder($this->strPath);
+            new Folder($this->strPath);
         }
 
         $strHelperData = file_get_contents(self::$apiUrl.'demodata/'.self::VERSION.'/'.$this->strDomain);
         $this->Template->message = [$GLOBALS['TL_LANG']['tl_vehicle']['downloadError'], 'error'];
 
         if ('error' !== $strHelperData) {
-            \File::putContent($strFile, $strHelperData);
+            File::putContent($strFile, $strHelperData);
 
             // unzip files
-            $objArchive = new \ZipReader($strFile);
+            $objArchive = new ZipReader($strFile);
             $images = [];
 
             while ($objArchive->next()) {
-                \File::putContent($this->strPath.$objArchive->file_name, $objArchive->unzip());
+                File::putContent($this->strPath.$objArchive->file_name, $objArchive->unzip());
 
                 // get uuid and push to array
-                $uuid = \FilesModel::findByPath($this->strPath.$objArchive->file_name)->uuid;
+                $uuid = FilesModel::findByPath($this->strPath.$objArchive->file_name)->uuid;
 
                 if (false !== strpos($objArchive->file_name, 'detail/')) {
                     $images[] = $uuid;
@@ -123,20 +134,20 @@ class MobileDeSetup extends \BackendModule
             }
 
             // read local sql file
-            $fileModel = new \File($this->strPath.'tl_vehicle-demodata.sql');
+            $fileModel = new File($this->strPath.'tl_vehicle-demodata.sql');
             $strQueries = $fileModel->getContentAsArray();
 
             // empty table and insert demo data
-            \Database::getInstance()->execute("TRUNCATE TABLE $this->strTable");
+            Database::getInstance()->execute("TRUNCATE TABLE $this->strTable");
 
             foreach ($strQueries as $query) {
-                \Database::getInstance()->query($query);
+                Database::getInstance()->query($query);
             }
 
             $this->Template->message = [$GLOBALS['TL_LANG']['tl_vehicle']['downloadSuccess'], 'confirm'];
 
             // set images
-            $adIds = \Database::getInstance()->prepare("SELECT vehicle_id FROM  $this->strTable")->execute();
+            $adIds = Database::getInstance()->prepare("SELECT vehicle_id FROM  $this->strTable")->execute();
             $numbers = range(0, \count($images) - 1);
 
             while ($adIds->next()) {
@@ -150,7 +161,7 @@ class MobileDeSetup extends \BackendModule
                 $uuidArr = serialize($uuidArr);
 
                 // update
-                \Database::getInstance()->prepare("UPDATE  $this->strTable SET images=?, orderSRC=? WHERE vehicle_id=?")->execute($uuidArr, $uuidArr, $adIds->vehicle_id);
+                Database::getInstance()->prepare("UPDATE  $this->strTable SET images=?, orderSRC=? WHERE vehicle_id=?")->execute($uuidArr, $uuidArr, $adIds->vehicle_id);
             }
         }
     }
