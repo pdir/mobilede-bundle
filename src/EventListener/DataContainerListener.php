@@ -171,7 +171,7 @@ class DataContainerListener
      *
      * @param string $strTmpl
      */
-    private function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
+    public function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
     {
         return $this->getTemplateGroup('ce_mobilede_'.$strTmpl);
     }
