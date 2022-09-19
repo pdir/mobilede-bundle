@@ -344,7 +344,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterMaxItems'] = [
     'sql' => "varchar(255) NOT NULL default ''",
 ];
 
-class tl_content extends Backend
+class tl_content_vehicle extends Backend
 {
     public function getListTemplates(DataContainer $dc)
     {
