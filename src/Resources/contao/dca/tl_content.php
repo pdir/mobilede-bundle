@@ -301,7 +301,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
     'eval' => [
         'tl_class' => 'w50',
     ],
-    'options_callback' => [DataContainerListener::class, 'getContentVehicleAccountOptions'],
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 

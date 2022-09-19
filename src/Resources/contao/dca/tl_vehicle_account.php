@@ -62,7 +62,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'icon' => 'visible.svg',
                 'showInHeader' => true,
-                'button_callback' => [DataContainerListener::class, 'visibleButtonCallback'],
             ],
         ],
     ],

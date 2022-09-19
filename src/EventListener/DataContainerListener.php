@@ -21,6 +21,7 @@ namespace Pdir\MobileDeBundle\EventListener;
 use Contao\BackendTemplate;
 use Contao\BackendUser;
 use Contao\Controller;
+use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
 use Contao\Image;
 use Contao\StringUtil;
@@ -128,7 +129,7 @@ class DataContainerListener
      *
      * @return array
      */
-    public function getVehicleVehicleAccountOptions(DataContainer $dc)
+    public function getVehicleVehicleAccountOptions(DataContainer $dc): array
     {
         return $this->buildVehicleAccountOptions();
     }

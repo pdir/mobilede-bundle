@@ -57,7 +57,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'showOnSelect' => true,
             ],
             'toolbar' => [
-                'button_callback' => [DataContainerListener::class, 'renderToolbar'],
                 'class' => 'header_toolbar',
             ],
         ],
