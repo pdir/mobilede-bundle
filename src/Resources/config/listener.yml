@@ -14,4 +14,4 @@ services:
     class: Pdir\MobileDeBundle\EventListener\HooksListener
 
   pdir.mobileDe.listener.dataContainer:
-      class: Pdir\MobileDeBundle\EventListener\DataContainerListener
+    class: Pdir\MobileDeBundle\EventListener\DataContainerListener
