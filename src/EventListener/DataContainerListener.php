@@ -173,6 +173,6 @@ class DataContainerListener
      */
     public function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
     {
-        return $this->getTemplateGroup('ce_mobilede_'.$strTmpl);
+        return Controller::getTemplateGroup('ce_mobilede_'.$strTmpl);
     }
 }
