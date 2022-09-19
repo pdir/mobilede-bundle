@@ -1,7 +1,7 @@
 <?php
 global $objPage;
 // Meta Angaben
-$objPage->title = $this->ad['makeModelDescription'];
+$objPage->title = $this->ad['name'];
 $description = strip_tags(str_replace('</p>',' ',$this->ad['htmlDescription']));
 $objPage->description = \Contao\StringUtil::substrHtml($description, 320);
 $text = $objPage->title.' '.$objPage->description;
@@ -22,7 +22,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
     <a href="javascript:history.back();" class="back top"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['back'] ?></a>
     <div class="md-detail-header">
       <i class="icon-cab"></i>
-      <h1><?= $this->ad['makeModelDescription'] ?></h1>
+      <h1><?= $this->ad['name'] ?></h1>
       <span class="price">
         <?= \System::getFormattedNumber($this->ad['consumer_price_amount'], 2).' '.$this->ad['price_currency']; ?>
         <?php if($this->ad['pseudo_price'] != '' && $this->ad['pseudo_price'] != 0): ?><span class="pseudo-price"><?= \System::getFormattedNumber($this->ad['pseudo_price'], 2).' '.$this->ad['price_currency']; ?></span><?php endif; ?>
@@ -48,7 +48,11 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
         <div class="md-detail-description">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-description'] ?></h2>
-          <?= $this->ad['htmlDescription'] ?>
+          <?php if (isset($this->ad['vehicle_free_text'])): ?>
+            <?= $this->ad['vehicle_free_text'] ?>
+          <?php else: ?>
+            <?= $this->ad['htmlDescription'] ?>
+          <?php endif; ?>
         </div>
         <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-specifics'] ?></h2>
         <div class="md-detail-box additional-attributes">

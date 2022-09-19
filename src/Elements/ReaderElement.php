@@ -203,8 +203,8 @@ class ReaderElement extends ContentElement
                 }
             }
 
-            $this->ad['htmlDescription'] = $this->ad['vehicle_free_text'];
-            $this->ad['makeModelDescription'] = $this->ad['name'];
+            $this->ad['vehicle_free_text'] = (isset($this->ad['vehicle_free_text']) && '' === $this->ad['vehicle_free_text'])? $this->ad['vehicle_free_text'] : null;
+            $this->ad['htmlDescription'] = (isset($this->ad['htmlDescription']) && '' === $this->ad['htmlDescription'])? $this->ad['htmlDescription'] : null;
         }
 
         if (isset($this->ad['images'])) {
