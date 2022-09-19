@@ -21,7 +21,6 @@ namespace Pdir\MobileDeBundle\EventListener;
 use Contao\BackendTemplate;
 use Contao\BackendUser;
 use Contao\Controller;
-use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
 use Contao\Image;
 use Contao\StringUtil;
@@ -39,6 +38,42 @@ class DataContainerListener
     public function __construct()
     {
         $this->user = BackendUser::getInstance();
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_content",
+     *     target="fields.pdirVehicleFilterByAccount.options"
+     * )
+     * builds the account options
+     */
+    public function getContentVehicleAccountOptions(DataContainer $dc): array
+    {
+        return $this->buildVehicleAccountOptions(true);
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_content",
+     *     target="fields.pdir_md_listTemplate.options"
+     * )
+     * builds the list template options
+     */
+    public function getListTemplates(DataContainer $dc): array
+    {
+        return $this->getElementsTemplates($dc);
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_content",
+     *     target="fields.pdir_md_itemTemplate.options"
+     * )
+     * builds the item template options
+     */
+    public function getItemTemplates(DataContainer $dc): array
+    {
+        return $this->getElementsTemplates($dc, 'item');
     }
 
     /**
@@ -86,20 +121,6 @@ class DataContainerListener
 
     /**
      * @Callback(
-     *     table="tl_content",
-     *     target="fields.pdirVehicleFilterByAccount.options"
-     * )
-     * builds the account options
-     *
-     * @return array
-     */
-    public function getContentVehicleAccountOptions(DataContainer $dc)
-    {
-        return $this->buildVehicleAccountOptions(true);
-    }
-
-    /**
-     * @Callback(
      *     table="tl_vehicle",
      *     target="fields.account.options"
      * )
@@ -138,5 +159,19 @@ class DataContainerListener
         $image = Image::getHtml($icon, $label, "data-state='$unpublished'");
 
         return "<a href='$url' title='$_title' $attributes>$image</a>";
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_content",
+     *     target="fields.pdirVehicleFilterByAccount.options"
+     * )
+     * builds the account options
+     *
+     * @param string $strTmpl
+     */
+    private function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
+    {
+        return $this->getTemplateGroup('ce_mobilede_'.$strTmpl);
     }
 }

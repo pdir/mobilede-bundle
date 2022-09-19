@@ -16,8 +16,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Pdir\MobileDeBundle\EventListener\DataContainerListener;
-
 $strTable = 'tl_content';
 
 /*
@@ -61,7 +59,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_listTemplate'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_listTemplate'],
     'exclude' => true,
     'inputType' => 'select',
-    'options_callback' => ['tl_content_vehicle', 'getListTemplates'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => [
         'includeBlankOption' => true,
@@ -74,7 +71,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_itemTemplate'] = [
     'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_itemTemplate'],
     'exclude' => true,
     'inputType' => 'select',
-    'options_callback' => ['tl_content_vehicle', 'getItemTemplates'],
     'reference' => &$GLOBALS['TL_LANG']['tl_module'],
     'eval' => [
         'includeBlankOption' => true,
@@ -305,7 +301,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
     'eval' => [
         'tl_class' => 'w50',
     ],
-    'options_callback' => [DataContainerListener::class, 'getContentVehicleAccountOptions'],
     'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
@@ -343,21 +338,3 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterMaxItems'] = [
     'eval' => ['decodeEntities' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
     'sql' => "varchar(255) NOT NULL default ''",
 ];
-
-class tl_content extends Backend
-{
-    public function getListTemplates(DataContainer $dc)
-    {
-        return $this->getElementsTemplates($dc);
-    }
-
-    public function getItemTemplates(DataContainer $dc)
-    {
-        return $this->getElementsTemplates($dc, 'item');
-    }
-
-    private function getElementsTemplates(DataContainer $dc, $strTmpl = 'list')
-    {
-        return $this->getTemplateGroup('ce_mobilede_'.$strTmpl);
-    }
-}
