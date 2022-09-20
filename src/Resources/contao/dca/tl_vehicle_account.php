@@ -44,23 +44,34 @@ $GLOBALS['TL_DCA'][$strTable] = [
         'label' => [
             'fields' => ['description', 'id'],
         ],
-        'global_operations' => [],
+        'global_operations' => [
+            'all' => [
+                'href' => 'act=select',
+                'class' => 'header_edit_all',
+                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
+            ],
+        ],
         'operations' => [
             'edit' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['edit'],
                 'href' => 'act=edit',
                 'icon' => 'edit.svg',
             ],
+            'copy' => [
+                'href' => 'act=copy',
+                'icon' => 'copy.svg',
+            ],
             'delete' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['delete'],
                 'href' => 'act=delete',
                 'icon' => 'delete.svg',
+                'attributes' => 'onclick="if(!confirm(\''.($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null).'\'))return false;Backend.getScrollOffset()"',
             ],
             'toggle' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['enable'],
-                'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'href' => 'act=toggle&amp;field=enabled',
                 'icon' => 'visible.svg',
-                'showInHeader' => true,
+            ],
+            'show' => [
+                'href' => 'act=show',
+                'icon' => 'show.svg',
             ],
         ],
     ],

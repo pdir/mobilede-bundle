@@ -80,8 +80,7 @@ class DataContainerListener
     /**
      * @Callback(
      *     table="tl_vehicle",
-     *     target="list.global_operations.toolbar.button",
-     *     priority=1)
+     *     target="list.global_operations.toolbar.button")
      */
     public function renderToolbar(): string
     {

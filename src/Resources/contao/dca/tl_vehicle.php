@@ -46,47 +46,37 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'global_operations' => [
             'all' => [
-                'label' => &$GLOBALS['TL_LANG']['MSC']['all'],
                 'href' => 'act=select',
                 'class' => 'header_edit_all',
                 'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
             ],
-            'toggleNodes' => [
-                'href' => '&amp;ptg=all',
-                'class' => 'header_toggle',
-                'showOnSelect' => true,
-            ],
             'toolbar' => [
                 'class' => 'header_toolbar',
+                'button_callback' => [DataContainerListener::class, 'renderToolbar'],
             ],
         ],
         'operations' => [
             'edit' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['edit'],
                 'href' => 'act=edit',
-                'icon' => 'edit.gif',
+                'icon' => 'edit.svg',
             ],
             'copy' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['copy'],
                 'href' => 'act=copy',
-                'icon' => 'copy.gif',
+                'icon' => 'copy.svg',
             ],
             'delete' => [
-                'label' => &$GLOBALS['TL_LANG'][$strTable]['delete'],
                 'href' => 'act=delete',
-                'icon' => 'delete.gif',
-                'attributes' => 'onclick="if(!confirm(\''.isset($GLOBALS['TL_LANG']['MSC']['deleteConfirm']) ?? null.'\'))return false;Backend.getScrollOffset()"',
+                'icon' => 'delete.svg',
+                'attributes' => 'onclick="if(!confirm(\''.($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null).'\'))return false;Backend.getScrollOffset()"',
             ],
             'toggle' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['toggle'],
                 'icon' => 'visible.svg',
                 'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-                'button_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'toggleIcon'],
             ],
             'show' => [
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['show'],
                 'href' => 'act=show',
-                'icon' => 'show.gif',
+                'icon' => 'show.svg',
             ],
         ],
     ],
