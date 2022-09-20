@@ -129,7 +129,7 @@ class ListingElement extends ContentElement
             }
         }
 
-        if (0 !== (int) $this->pdirVehicleFilterByAccount) {
+        if (NULL !== $this->pdirVehicleFilterByAccount) {
             if ('' !== $strWhere) {
                 $strWhere .= ' AND account='.$this->pdirVehicleFilterByAccount;
             }
@@ -195,7 +195,8 @@ class ListingElement extends ContentElement
      */
     protected function compile(): void
     {
-        $assetsDir = 'web/bundles/pdirmobilede';
+        $webDir = StringUtil::stripRootDir(System::getContainer()->getParameter('contao.web_dir'));
+        $assetsDir = $webDir.'/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/vehicle_module.min.js|static';
@@ -209,26 +210,6 @@ class ListingElement extends ContentElement
             $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
 
-        // Pagination
-
-        // Limit
-
-        // Promotion
-        if (1 === $this->pdir_md_promotion_corner_shadow) {
-            $this->pdir_md_promotion_corner_shadow = 'shadow';
-        }
-
-        if (1 !== $this->pdir_md_hidePromotionBox && isset($this->ads['prominent'])) {
-            $arrFeaturedCss = [
-                $this->pdir_md_promotion_corner_color,
-                $this->pdir_md_promotion_corner_position,
-                $this->pdir_md_promotion_corner_sticky,
-                $this->pdir_md_promotion_corner_shadow,
-            ];
-            $this->featureCss = implode(' ', $arrFeaturedCss);
-            $this->Template->promotion = $this->renderAdItem([$this->ads['prominent']])[0];
-        }
-
         // Shuffle
         $this->Template->listShuffle = $this->pdir_md_list_shuffle ? true : false;
 
@@ -236,18 +217,6 @@ class ListingElement extends ContentElement
         $this->Template->priceSlider = $this->pdir_md_priceSlider ? true : false;
         $this->Template->powerSlider = $this->pdir_md_powerSlider ? true : false;
         $this->Template->mileageSlider = $this->pdir_md_mileageSlider ? true : false;
-
-        // Featured corner
-        if (1 === $this->pdir_md_corner_shadow) {
-            $this->pdir_md_corner_shadow = 'shadow';
-        }
-
-        $arrFeaturedCss = [
-            $this->pdir_md_corner_color,
-            $this->pdir_md_corner_position,
-            $this->pdir_md_corner_shadow,
-        ];
-        $this->featureCss = implode(' ', $arrFeaturedCss);
 
         // Add ads to template
         $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
@@ -411,16 +380,10 @@ class ListingElement extends ContentElement
             }
 
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
-
-            $objFilterTemplate->featured = isset($ad['newnessMarker']) ?? false;
             $objFilterTemplate->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
             $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
-
-            if (!$this->pdir_md_hidePromotionBox) {
-                $objFilterTemplate->promotion = true;
-            }
 
             if ($this->featureCss) {
                 $objFilterTemplate->featureCss = $this->featureCss;

@@ -149,12 +149,6 @@
   </div> <!-- end md-filter -->
   <?php endif; ?>
 
-  <?php if($this->promotion): ?>
-  <div class="md-promotion-box list">
-    <?= $this->promotion ?>
-  </div>
-  <?php endif; ?>
-
   <?php //if($this->onlyFilter): ?>
   <div class="md-ads">
     <?php foreach($this->ads as $ad): ?>

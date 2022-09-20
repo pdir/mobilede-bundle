@@ -10,6 +10,18 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-09-20
+- [Added] add support for PHP 8
+- [Changed] change default value of field pdirVehicleFilterByAccount
+- [Changed] use new vehicle fields in template
+- [Changed] refactor dca callbacks
+- [Fixed] fix assets dir (use web or public)
+- [Fixed] fix sql error on create account
+- [Fixed] fix filter only view
+- [Fixed] fix import with multiple accounts
+- [Removed] remove all corner fields in dca
+- [Removed] remove unused feature tag
+
 ## [3.3.1](https://github.com/pdir/mobilede-bundle/tree/3.3.1) – 2022-08-02
 
 - [Fixed] fix demo data for Contao 4.13

@@ -91,7 +91,8 @@ class ReaderElement extends ContentElement
      */
     protected function compile(): void
     {
-        $assetsDir = 'web/bundles/pdirmobilede';
+        $webDir = StringUtil::stripRootDir(System::getContainer()->getParameter('contao.web_dir'));
+        $assetsDir = $webDir.'/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
             // not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/mobilede_module.js|static';
@@ -292,7 +293,7 @@ class ReaderElement extends ContentElement
 
         // use placeholder if no image exists
         if (\is_array($newGallery) && 0 === \count($newGallery)) {
-            $newGallery[] = $this->getImageByPath('web/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
+            $newGallery[] = $this->getImageByPath($webDir.'/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
         }
 
         $this->ad['images'] = $newGallery;
