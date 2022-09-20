@@ -18,6 +18,7 @@ Types of changes
 - [Changed] use new vehicle fields in template
 - [Changed] refactor dca callbacks
 - [Fixed] fix import with multiple accounts
+- [Removed] remove all corner fields in dca
 
 ## [3.3.1](https://github.com/pdir/mobilede-bundle/tree/3.3.1) – 2022-08-02
 

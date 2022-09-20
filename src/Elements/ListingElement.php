@@ -210,26 +210,6 @@ class ListingElement extends ContentElement
             $GLOBALS['TL_CSS']['md_css_3'] = $assetsDir.'/css/mobilede_module.css||static';
         }
 
-        // Pagination
-
-        // Limit
-
-        // Promotion
-        if (1 === $this->pdir_md_promotion_corner_shadow) {
-            $this->pdir_md_promotion_corner_shadow = 'shadow';
-        }
-
-        if (1 !== $this->pdir_md_hidePromotionBox && isset($this->ads['prominent'])) {
-            $arrFeaturedCss = [
-                $this->pdir_md_promotion_corner_color,
-                $this->pdir_md_promotion_corner_position,
-                $this->pdir_md_promotion_corner_sticky,
-                $this->pdir_md_promotion_corner_shadow,
-            ];
-            $this->featureCss = implode(' ', $arrFeaturedCss);
-            $this->Template->promotion = $this->renderAdItem([$this->ads['prominent']])[0];
-        }
-
         // Shuffle
         $this->Template->listShuffle = $this->pdir_md_list_shuffle ? true : false;
 
@@ -237,18 +217,6 @@ class ListingElement extends ContentElement
         $this->Template->priceSlider = $this->pdir_md_priceSlider ? true : false;
         $this->Template->powerSlider = $this->pdir_md_powerSlider ? true : false;
         $this->Template->mileageSlider = $this->pdir_md_mileageSlider ? true : false;
-
-        // Featured corner
-        if (1 === $this->pdir_md_corner_shadow) {
-            $this->pdir_md_corner_shadow = 'shadow';
-        }
-
-        $arrFeaturedCss = [
-            $this->pdir_md_corner_color,
-            $this->pdir_md_corner_position,
-            $this->pdir_md_corner_shadow,
-        ];
-        $this->featureCss = implode(' ', $arrFeaturedCss);
 
         // Add ads to template
         $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
