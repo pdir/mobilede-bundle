@@ -13,6 +13,11 @@ Types of changes
 ## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-09-20
 - [Changed] change default value of field pdirVehicleFilterByAccount
 - [Fixed] fix assets dir (use web or public)
+- [Fixed] fix sql error on create account
+- [Fixed] fix filter only view
+- [Changed] use new vehicle fields in template
+- [Changed] refactor dca callbacks
+- [Fixed] fix import with multiple accounts
 
 ## [3.3.1](https://github.com/pdir/mobilede-bundle/tree/3.3.1) – 2022-08-02
 
