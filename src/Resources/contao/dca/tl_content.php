@@ -84,7 +84,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_hidePromotionBox'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50 m12',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -95,7 +94,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_hideFilters'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -106,7 +104,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_list_shuffle'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -117,7 +114,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_removeModuleJs'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50 m12',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -128,7 +124,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_removeModuleCss'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50 m12',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -139,7 +134,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_forceRefresh'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50 m12',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -150,7 +144,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_cacheTime'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50 m12',
     ],
     'sql' => "int(10) unsigned NOT NULL default '0'",
@@ -161,7 +154,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_enableDebugMode'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50 m12',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -172,7 +164,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_priceSlider'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -183,7 +174,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_powerSlider'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
@@ -194,7 +184,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_mileageSlider'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
     'eval' => [
-        'submitOnChange' => true,
         'tl_class' => 'w50',
     ],
     'sql' => "char(1) NOT NULL default ''",
