@@ -42,7 +42,7 @@ class VehicleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Vehicle[]
+     * @return array<Vehicle>
      */
     public function findByAccount(VehicleAccount $vehicleAccount, int $maxResults = 0): array
     {

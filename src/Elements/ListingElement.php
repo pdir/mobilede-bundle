@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -24,6 +26,7 @@ use Contao\Database;
 use Contao\Date;
 use Contao\File;
 use Contao\FilesModel;
+use Contao\FrontendTemplate;
 use Contao\Image;
 use Contao\PageModel;
 use Contao\StringUtil;
@@ -126,7 +129,7 @@ class ListingElement extends ContentElement
             }
         }
 
-        if (0 !== $this->pdirVehicleFilterByAccount) {
+        if (0 !== (int) $this->pdirVehicleFilterByAccount) {
             if ('' !== $strWhere) {
                 $strWhere .= ' AND account='.$this->pdirVehicleFilterByAccount;
             }
@@ -159,8 +162,9 @@ class ListingElement extends ContentElement
             System::getContainer()
                 ->get('monolog.logger.contao')
                 ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], [
-                    'contao' => new ContaoContext(__CLASS__.'::'.__FUNCTION__, TL_GENERAL
-                    ), ]);
+                    'contao' => new ContaoContext(self::class.'::'.__FUNCTION__, TL_GENERAL
+                    ), ])
+            ;
         }
 
         return parent::generate();
@@ -174,6 +178,7 @@ class ListingElement extends ContentElement
                 // if date is string
                 return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
             }
+
             if (is_numeric($str)) {
                 // if date is timestamp
                 return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
@@ -188,7 +193,7 @@ class ListingElement extends ContentElement
     /**
      * Generate module.
      */
-    protected function compile()
+    protected function compile(): void
     {
         $assetsDir = 'web/bundles/pdirmobilede';
 
@@ -225,12 +230,12 @@ class ListingElement extends ContentElement
         }
 
         // Shuffle
-        $this->Template->listShuffle = ($this->pdir_md_list_shuffle) ? true : false;
+        $this->Template->listShuffle = $this->pdir_md_list_shuffle ? true : false;
 
         // Price Slider
-        $this->Template->priceSlider = ($this->pdir_md_priceSlider) ? true : false;
-        $this->Template->powerSlider = ($this->pdir_md_powerSlider) ? true : false;
-        $this->Template->mileageSlider = ($this->pdir_md_mileageSlider) ? true : false;
+        $this->Template->priceSlider = $this->pdir_md_priceSlider ? true : false;
+        $this->Template->powerSlider = $this->pdir_md_powerSlider ? true : false;
+        $this->Template->mileageSlider = $this->pdir_md_mileageSlider ? true : false;
 
         // Featured corner
         if (1 === $this->pdir_md_corner_shadow) {
@@ -246,7 +251,7 @@ class ListingElement extends ContentElement
 
         // Add ads to template
         $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
-        $this->Template->onlyFilter = 1 === $this->pdir_md_only_filter ? true : false;
+        $this->Template->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
         $this->Template->listingPage = $this->pdir_md_listingPage;
 
         // Filters
@@ -255,6 +260,7 @@ class ListingElement extends ContentElement
         if ($this->pdir_md_hideFilters) {
             $this->Template->hideFilters = true;
         }
+
         if ($this->pdir_open_filter) {
             $this->Template->openFilters = true;
         }
@@ -287,12 +293,13 @@ class ListingElement extends ContentElement
         $arrReturn = [];
 
         foreach ($arrAds as $ad) {
-            $objFilterTemplate = new \FrontendTemplate($this->strItemTemplate);
+            $objFilterTemplate = new FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
 
             if (null !== $ad['api_images']) {
                 $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
+
                 if (\is_array($images) && 0 < \count($images)) {
                     $objFilterTemplate->imageSrc_S = $images[0]['@url'];
                     $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
@@ -322,8 +329,10 @@ class ListingElement extends ContentElement
             }
 
             // image fallback
-            if (!$objFilterTemplate->imageSrc_S && !$objFilterTemplate->imageSrc_XL && !$objFilterTemplate->imageSrc_L &&
-                !$objFilterTemplate->imageSrc_M) {
+            if (
+                !$objFilterTemplate->imageSrc_S && !$objFilterTemplate->imageSrc_XL && !$objFilterTemplate->imageSrc_L &&
+                !$objFilterTemplate->imageSrc_M
+            ) {
                 $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
                 $objFilterTemplate->imageSrc_M = str_replace('http://', 'https://', $ad['image']['src']);
             }
@@ -404,7 +413,7 @@ class ListingElement extends ContentElement
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
 
             $objFilterTemplate->featured = isset($ad['newnessMarker']) ?? false;
-            $objFilterTemplate->onlyFilter = 1 === $this->pdir_md_only_filter ? true : false;
+            $objFilterTemplate->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
             $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
@@ -508,7 +517,7 @@ class ListingElement extends ContentElement
             $this->filters['make'][$ad['vehicle_make']] = [
                 'label' => $ad['vehicle_make'],
                 'key' => str_replace(' ', '_', $ad['vehicle_make']),
-                'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? ($this->filters['make'][$ad['vehicle_make']]['count'] + 1) : 2),
+                'count' => (isset($this->filters['make'][$ad['vehicle_make']]['count']) ? $this->filters['make'][$ad['vehicle_make']]['count'] + 1 : 2),
             ];
         }
 

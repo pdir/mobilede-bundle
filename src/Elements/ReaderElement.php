@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -87,13 +89,14 @@ class ReaderElement extends ContentElement
     /**
      * Generate module.
      */
-    protected function compile()
+    protected function compile(): void
     {
         $assetsDir = 'web/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
             // not used yet $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = '/bundles/pdirmobilede/js/mobilede_module.js|static';
         }
+
         if (!$this->pdir_md_removeModuleCss) {
             $GLOBALS['TL_CSS']['md_css_1'] = $assetsDir.'/vendor/fontello/css/fontello.css||static';
             $GLOBALS['TL_CSS']['md_css_2'] = $assetsDir.'/vendor/fontello/css/animation.css||static';
@@ -102,8 +105,10 @@ class ReaderElement extends ContentElement
 
         // features
         $featuresArr = StringUtil::deserialize($this->ad['features']);
+
         if ($featuresArr) {
             $newFeatures = [];
+
             foreach ($featuresArr as $feature) {
                 if (!$feature) {
                     continue;
@@ -118,8 +123,9 @@ class ReaderElement extends ContentElement
         }
 
         // specifics
-        $specificsArr = \preg_filter('/^specifics_(.*)/', '$1', \array_keys($this->ad));
+        $specificsArr = preg_filter('/^specifics_(.*)/', '$1', array_keys($this->ad));
         $newSpecifics = [];
+
         foreach ($specificsArr as $specific) {
             if (!$this->ad['specifics_'.$specific]) {
                 continue;
@@ -171,11 +177,11 @@ class ReaderElement extends ContentElement
         }
 
         if ($this->ad['specifics_first_models_production_date']) {
-            $this->ad['specifics_first_models_production_date'] = \date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
+            $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
         }
 
         if ($this->ad['specifics_power']) {
-            $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber(($this->ad['specifics_power'] * 1.35962), 0).' PS)';
+            $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber($this->ad['specifics_power'] * 1.35962, 0).' PS)';
         }
 
         // images
@@ -191,21 +197,22 @@ class ReaderElement extends ContentElement
 
                         // fix for xxl image which is not included in xml response
                         if ('XL' === $image['@size']) {
-                            $newGallery['XXL'][] = \str_replace('$_27.JPG', '$_57.JPG', $image['@url']);
+                            $newGallery['XXL'][] = str_replace('$_27.JPG', '$_57.JPG', $image['@url']);
                         }
                     }
                 }
             }
 
-            $this->ad['htmlDescription'] = $this->ad['vehicle_free_text'];
-            $this->ad['makeModelDescription'] = $this->ad['name'];
+            $this->ad['vehicle_free_text'] = isset($this->ad['vehicle_free_text']) && '' === $this->ad['vehicle_free_text'] ? $this->ad['vehicle_free_text'] : null;
+            $this->ad['htmlDescription'] = isset($this->ad['htmlDescription']) && '' === $this->ad['htmlDescription'] ? $this->ad['htmlDescription'] : null;
         }
 
         if (isset($this->ad['images'])) {
-            $manImages = \unserialize($this->ad['images']);
+            $manImages = unserialize($this->ad['images']);
 
             foreach ($manImages as $uuid) {
                 $objFile = FilesModel::findByUuid($uuid);
+
                 if ($objFile) {
                     if (!isset($newGallery['XXL'])) {
                         $newGallery['XXL'] = [];
@@ -226,7 +233,7 @@ class ReaderElement extends ContentElement
         }
 
         if (isset($this->ad['syscara_images_layout'])) {
-            $groundPlan = \unserialize($this->ad['syscara_images_layout']);
+            $groundPlan = unserialize($this->ad['syscara_images_layout']);
             $objFile = FilesModel::findByUuid($groundPlan[0]);
             $this->ad['groundPlan'] = $objFile->path;
         }
@@ -278,7 +285,7 @@ class ReaderElement extends ContentElement
         $this->ad['fuelConsumption'] = $fuelConsumption;
 
         if ($this->ad['sellerInfo']) {
-            $this->ad['seller'] = \json_decode($this->ad['sellerInfo'], true);
+            $this->ad['seller'] = json_decode($this->ad['sellerInfo'], true);
         }
 
         $this->ad['bodyType'] = $this->ad['vehicle_class'];
@@ -309,18 +316,25 @@ class ReaderElement extends ContentElement
             case 'S':
                 $this->getImagePath(200, 150);
                 break;
+
             case 'M':
                 return $this->getImagePath(298, 224);
+
             case 'L':
                 return $this->getImagePath(400, 300);
+
             case 'XL':
                 return $this->getImagePath(640, 480);
+
             case 'XXL':
                 return $this->getImagePath(1200, 800);
+
             case 'ICON':
                 return $this->getImagePath(80, 60);
+
             case 'ORIGINAL':
                 return $str;
+
             default:
                 return [
                     ['@size' => 'S', '@url' => $this->getImagePath(200, 150)],

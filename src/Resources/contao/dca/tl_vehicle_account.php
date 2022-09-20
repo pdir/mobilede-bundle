@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2021 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -16,6 +16,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Contao\DataContainer;
 use Pdir\MobileDeBundle\EventListener\DataContainerListener;
 
 $strTable = 'tl_vehicle_account';
@@ -61,7 +62,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
                 'icon' => 'visible.svg',
                 'showInHeader' => true,
-                'button_callback' => [DataContainerListener::class, 'visibleButtonCallback'],
             ],
         ],
     ],
@@ -113,7 +113,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'api_explanation' => [
             'exclude' => true,
-            'input_field_callback' => static function (Contao\DataContainer $dc) {
+            'input_field_callback' => static function (DataContainer $dc) {
                 return sprintf(
                     '<div class="widget" style="margin-top:15px;"><p class="tl_info">%s</p></div>',
                     $GLOBALS['TL_LANG']['tl_vehicle_account']['api_explanation']
@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'man_explanation' => [
             'exclude' => true,
-            'input_field_callback' => static function (Contao\DataContainer $dce) {
+            'input_field_callback' => static function (DataContainer $dce) {
                 return sprintf(
                     '<div class="widget" style="margin-top:15px;"><p class="tl_info">%s</p></div>',
                     $GLOBALS['TL_LANG']['tl_vehicle_account']['man_explanation']
@@ -149,10 +149,11 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'enabled' => [
             'exclude' => true,
-            'default' => false,
+            'toggle' => true,
+            'filter' => true,
             'inputType' => 'checkbox',
-            'eval' => ['doNotCopy'=>true],
-            'sql' => ['type' => 'boolean', 'default' => false],
+            'eval' => ['doNotCopy' => true],
+            'sql' => "char(1) NOT NULL default ''"
         ],
     ],
 ];

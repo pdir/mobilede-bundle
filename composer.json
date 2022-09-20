@@ -34,10 +34,9 @@
   },
   "require-dev": {
     "contao/manager-plugin": "^2.0",
-    "friendsofphp/php-cs-fixer": "^2.2",
-    "phpunit/phpunit": "^7.5",
-    "symfony/phpunit-bridge": "^4.3",
-    "php-http/guzzle6-adapter": "^2.0"
+    "contao/easy-coding-standard": "^3.0",
+    "phpunit/phpunit": "^8.5 || ^9.5",
+    "symfony/phpunit-bridge": "^5.3 || ^6.0"
   },
   "extra": {
     "contao-manager-plugin": "Pdir\\MobileDeBundle\\ContaoManager\\Plugin"
@@ -69,7 +68,8 @@
     "allow-plugins": {
       "composer/package-versions-deprecated": true,
       "contao-components/installer": true,
-      "contao/manager-plugin": true
+      "contao/manager-plugin": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

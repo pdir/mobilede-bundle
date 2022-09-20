@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -36,7 +38,7 @@ class Ad
     /**
      * Auto-generate an article alias if it has not been set yet.
      *
-     * @param mixed
+     * @param mixed $dc
      * @param DataContainer
      * @param mixed $varValue
      *
@@ -53,7 +55,8 @@ class Ad
             $varValue = standardize(StringUtil::restoreBasicEntities($dc->activeRecord->name));
         }
         $objAlias = $this->Database->prepare('SELECT id FROM tl_vehicle WHERE (id=? OR alias=?)')
-            ->execute($dc->id, $varValue);
+            ->execute($dc->id, $varValue)
+        ;
         // Check whether the page alias exists
         if ($objAlias->numRows > 1) {
             if (!$autoAlias) {
@@ -81,10 +84,11 @@ class Ad
         $varValue = standardize(StringUtil::restoreBasicEntities($varValue));
 
         $objAlias = $this->Database->prepare('SELECT id FROM tl_vehicle WHERE alias=?')
-            ->execute($varValue);
+            ->execute($varValue)
+        ;
         // Check whether the page alias exists
         if ($objAlias->numRows > 0) {
-            $varValue .= '-'.mt_rand(0, 1000000);
+            $varValue .= '-'.random_int(0, 1000000);
         }
 
         return $varValue;

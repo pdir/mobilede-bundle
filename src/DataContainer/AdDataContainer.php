@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
@@ -17,6 +19,7 @@
 namespace Pdir\MobileDeBundle\DataContainer;
 
 use Contao\DataContainer;
+use Contao\StringUtil;
 use Doctrine\ORM\EntityManager;
 use Pdir\MobileDeBundle\Service\AdService;
 
@@ -57,7 +60,7 @@ class AdDataContainer
         if ('' === $varValue) {
             $autoAlias = true;
 
-            $varValue = \StringUtil::generateAlias($dc->activeRecord->brand.'-'.$dc->activeRecord->name);
+            $varValue = StringUtil::generateAlias($dc->activeRecord->brand.'-'.$dc->activeRecord->name);
         }
 
         $ads = $this->adService->findByAlias($varValue);
