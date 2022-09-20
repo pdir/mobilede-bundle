@@ -380,8 +380,6 @@ class ListingElement extends ContentElement
             }
 
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
-
-            $objFilterTemplate->featured = isset($ad['newnessMarker']) ?? false;
             $objFilterTemplate->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
             $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
