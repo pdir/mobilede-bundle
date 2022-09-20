@@ -387,10 +387,6 @@ class ListingElement extends ContentElement
             $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
 
-            if (!$this->pdir_md_hidePromotionBox) {
-                $objFilterTemplate->promotion = true;
-            }
-
             if ($this->featureCss) {
                 $objFilterTemplate->featureCss = $this->featureCss;
             }

@@ -28,7 +28,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detailansicht', 'Bit
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listenansicht', 'Wählen Sie hier die Seite für die Listenansicht aus, wenn Sie die Option <strong>Nur Filter</strong> aktiviert haben.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listTemplate'] = ['Listenansicht Template', 'Bitte wählen Sie hier ein Template für die Listenansicht aus.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_itemTemplate'] = ['Inserat Template', 'Bitte wählen Sie hier das Template für die Darstellung der Inserate.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_hidePromotionBox'] = ['Promotionbox ausblenden', 'Wenn aktiv wird die Promotionbox nicht angezeigt.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_hideFilters'] = ['Filter ausblenden', 'Wenn aktiv werden die Filter nicht angezeigt.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'] = ['Zufällig anordnen', 'Wenn aktiv werden die Inserate in zufälliger Reihenfolge ausgegeben.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = ['Javascript auslassen', 'Wenn aktiv wird das moduleigene Javascript ausgelassen.'];

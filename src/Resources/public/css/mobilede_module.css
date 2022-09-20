@@ -353,37 +353,6 @@
     padding: 0;
 }
 
-.md-promotion-box a {
-    display: block;
-    padding-bottom: 33px;
-}
-
-.md-promotion-box .md-ad-box .price {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-}
-
-.md-promotion-box .md-ad-box .detail .features-list li {
-    width: 33%;
-    margin-bottom: 0;
-}
-
-.md-promotion-box .md-ad-box .detail p {
-    margin-bottom: 0;
-}
-
-.md-promotion-box .md-ad-box .detail {
-    padding: 15px 30px 0;
-    height: 200px;
-    min-height: inherit;
-}
-
-.md-promotion-box .md-ad-box .detail .features-list {
-    margin-bottom: 0;
-}
-
 .win.chrome .md-ad-box-overlap-wrapper {
     width: 101%;
 }
@@ -1010,19 +979,6 @@
 
     .md-ad-box .detail {
         min-height: inherit;
-    }
-
-    .md-promotion-box .md-ad-box .price {
-        position: relative;
-        overflow: hidden;
-    }
-
-    .md-promotion-box a {
-        padding-bottom: 0;
-    }
-
-    .md-promotion-box .md-ad-box .detail {
-        padding: 20px 30px;
     }
 }
 
