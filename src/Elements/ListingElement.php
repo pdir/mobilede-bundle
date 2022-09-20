@@ -129,7 +129,7 @@ class ListingElement extends ContentElement
             }
         }
 
-        if (0 !== (int) $this->pdirVehicleFilterByAccount) {
+        if ('' !== (int) $this->pdirVehicleFilterByAccount) {
             if ('' !== $strWhere) {
                 $strWhere .= ' AND account='.$this->pdirVehicleFilterByAccount;
             }
@@ -195,7 +195,8 @@ class ListingElement extends ContentElement
      */
     protected function compile(): void
     {
-        $assetsDir = 'web/bundles/pdirmobilede';
+        $webDir = StringUtil::stripRootDir(System::getContainer()->getParameter('contao.web_dir'));
+        $assetsDir = $webDir.'/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/vehicle_module.min.js|static';

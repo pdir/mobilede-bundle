@@ -10,6 +10,9 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-09-20
+- 
+
 ## [3.3.1](https://github.com/pdir/mobilede-bundle/tree/3.3.1) – 2022-08-02
 
 - [Fixed] fix demo data for Contao 4.13

@@ -27,7 +27,7 @@ trait ListenerHelperTrait
         $options = [];
 
         if ($default) {
-            $options[0] = $GLOBALS['TL_LANG']['pdirMobileDe']['vehicleAccountDefault'];
+            $options[''] = $GLOBALS['TL_LANG']['pdirMobileDe']['vehicleAccountDefault'];
         }
 
         $accounts = VehicleAccountModel::findAll();
