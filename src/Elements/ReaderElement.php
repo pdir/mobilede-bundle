@@ -293,7 +293,7 @@ class ReaderElement extends ContentElement
 
         // use placeholder if no image exists
         if (\is_array($newGallery) && 0 === \count($newGallery)) {
-            $newGallery[] = $this->getImageByPath('web/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
+            $newGallery[] = $this->getImageByPath($webDir.'/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
         }
 
         $this->ad['images'] = $newGallery;
