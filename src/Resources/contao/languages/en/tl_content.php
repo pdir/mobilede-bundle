@@ -28,7 +28,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detail View', 'Pleas
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listing View', 'Please choose here the page for the listing view, if the <strong>Only Filter</strong> option is active.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listTemplate'] = ['List View Template', 'Please choose here the template for the list view.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_itemTemplate'] = ['Advertisement Template', 'Please choose here the template for the presentation of the advertisements.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_hidePromotionBox'] = ['Hide Promotion Box', 'If active the promotion box will not be shown.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_hideFilters'] = ['Hide Filters', 'If active the filters will not be shown.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'] = ['Randomly Order', 'If active the advertisements will be shown in an randomly order.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = ['Skip JavaScript', 'If active the module javascript is not included.'];
