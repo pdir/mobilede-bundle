@@ -17,7 +17,6 @@ declare(strict_types=1);
  */
 
 use Contao\DataContainer;
-use Pdir\MobileDeBundle\EventListener\DataContainerListener;
 
 $strTable = 'tl_vehicle_account';
 
@@ -153,7 +152,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'filter' => true,
             'inputType' => 'checkbox',
             'eval' => ['doNotCopy' => true],
-            'sql' => "char(1) NOT NULL default ''"
+            'sql' => "char(1) NOT NULL default ''",
         ],
     ],
 ];

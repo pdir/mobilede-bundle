@@ -206,7 +206,7 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterByAccount'] = [
     'eval' => [
         'tl_class' => 'w50',
     ],
-    'sql' => "int(10) unsigned",
+    'sql' => 'int(10) unsigned',
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdirVehicleFilterFields'] = [

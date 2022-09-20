@@ -126,8 +126,6 @@ class DataContainerListener
      *     target="fields.account.options"
      * )
      * builds the gzOwner options
-     *
-     * @return array
      */
     public function getVehicleVehicleAccountOptions(DataContainer $dc): array
     {
