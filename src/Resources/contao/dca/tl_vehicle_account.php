@@ -16,8 +16,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Pdir\MobileDeBundle\EventListener\DataContainerListener;
-
 $strTable = 'tl_vehicle_account';
 
 $GLOBALS['TL_DCA'][$strTable] = [
