@@ -70,8 +70,8 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'attributes' => 'onclick="if(!confirm(\''.($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null).'\'))return false;Backend.getScrollOffset()"',
             ],
             'toggle' => [
-                'icon' => 'visible.svg',
-                'attributes' => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+                'href' => 'act=toggle&amp;field=published',
+                'icon' => 'visible.svg'
             ],
             'show' => [
                 'label' => &$GLOBALS['TL_LANG'][$strTable]['show'],

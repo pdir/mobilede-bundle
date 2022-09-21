@@ -21,6 +21,7 @@ namespace Pdir\MobileDeBundle\EventListener;
 use Contao\BackendTemplate;
 use Contao\BackendUser;
 use Contao\Controller;
+use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
 use Contao\Image;
@@ -134,29 +135,55 @@ class DataContainerListener
     /**
      * @Callback(
      *  table="tl_vehicle_account",
-     *  target="list.operations.toggle.button",
-     *  priority=-11
+     *  target="list.operations.toggle.button"
      * )
      * button_callback: generates a button for the enabled operation
      */
     public function visibleButtonCallback(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
     {
-        // disable the button if the user is not admin or apiType = man
-        if (!$this->user->isAdmin || 'man' === $row['apiType']) {
-            $title = !$this->user->isAdmin ? $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] : $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'];
+        $security = System::getContainer()->get('security.helper');
 
-            return '<span title="'.$title.'">'.Image::getHtml(preg_replace('/\.svg$/i', '_.svg', $icon)).'</span>';
+        // Check permissions AFTER checking the tid, so hacking attempts are logged
+        if (!$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled'))
+        {
+            return '';
         }
 
-        // build variables
-        $published = $row['enabled'] ? 1 : 0;
-        $unpublished = $row['enabled'] ? 0 : 1;
-        $url = Controller::addToUrl("&amp;tid={$row['id']}&amp;state=$published");
-        $icon = 0 === $row['enabled'] ? 'invisible.svg' : $icon;
-        $_title = StringUtil::specialchars($title);
-        $image = Image::getHtml($icon, $label, "data-state='$unpublished'");
+        $href .= '&amp;id=' . $row['id'];
 
-        return "<a href='$url' title='$_title' $attributes>$image</a>";
+        if (!$row['enabled'])
+        {
+            $icon = 'invisible.svg';
+        }
+
+        return '<a href="' . Controller::addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">' . Image::getHtml($icon, $label, 'data-icon="' . Image::getPath('visible.svg') . '" data-icon-disabled="' . Image::getPath('invisible.svg') . '" data-state="' . ($row['enabled'] ? 1 : 0) . '"') . '</a> ';
+    }
+
+    /**
+     * @Callback(
+     *  table="tl_vehicle",
+     *  target="list.operations.toggle.button"
+     * )
+     * button_callback: generates a button for the enabled operation
+     */
+    public function visibleButtonCallbackVehicles(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
+    {
+        $security = System::getContainer()->get('security.helper');
+
+        // Check permissions AFTER checking the tid, so hacking attempts are logged
+        if (!$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle::published'))
+        {
+            return '';
+        }
+
+        $href .= '&amp;id=' . $row['id'];
+
+        if (!$row['published'])
+        {
+            $icon = 'invisible.svg';
+        }
+
+        return '<a href="' . Controller::addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">' . Image::getHtml($icon, $label, 'data-icon="' . Image::getPath('visible.svg') . '" data-icon-disabled="' . Image::getPath('invisible.svg') . '" data-state="' . ($row['published'] ? 1 : 0) . '"') . '</a> ';
     }
 
     /**
