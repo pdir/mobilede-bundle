@@ -10,7 +10,7 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-09-20
+## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-09-23
 - [Added] add support for PHP 8
 - [Changed] change default value of field pdirVehicleFilterByAccount
 - [Changed] use new vehicle fields in template
