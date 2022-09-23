@@ -16,8 +16,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Contao\DataContainer;
-
 $strTable = 'tl_vehicle_account';
 
 $GLOBALS['TL_DCA'][$strTable] = [
@@ -67,7 +65,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             ],
             'toggle' => [
                 'href' => 'act=toggle&amp;field=enabled',
-                'icon' => 'visible.svg',
+                'icon' => 'visible.svg'
             ],
             'show' => [
                 'href' => 'act=show',
