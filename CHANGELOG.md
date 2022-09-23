@@ -35,7 +35,7 @@ Types of changes
 ## [3.3.0](https://github.com/pdir/mobilede-bundle/tree/3.3.0) – 2022-07-27
 
 - [Changed] add seller info as json
-- [Added] add new WLTP data (Information on Worldwide harmonized Light Duty Test Procedure)[https://de.wikipedia.org/wiki/Worldwide_harmonized_Light_vehicles_Test_Procedure]
+- [Added] add new WLTP data [Information on Worldwide harmonized Light Duty Test Procedure](https://de.wikipedia.org/wiki/Worldwide_harmonized_Light_vehicles_Test_Procedure)
 - [Added] add xxl image in detail view
 - [Fixed] fix prices in dca for database schema update
 - [Fixed] formatDate error in reader element
