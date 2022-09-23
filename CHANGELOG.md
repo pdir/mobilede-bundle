@@ -10,7 +10,7 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-09-23
+## [3.3.3](https://github.com/pdir/mobilede-bundle/tree/3.3.3) – 2022-09-23
 - [Added] add support for PHP 8
 - [Changed] change default value of field pdirVehicleFilterByAccount
 - [Changed] use new vehicle fields in template
@@ -21,6 +21,11 @@ Types of changes
 - [Fixed] fix import with multiple accounts
 - [Removed] remove all corner fields in dca
 - [Removed] remove unused feature tag
+
+## [3.3.2](https://github.com/pdir/mobilede-bundle/tree/3.3.2) – 2022-08-09
+
+- [Fixed] account creation
+- [Fixed] fix enabled button
 
 ## [3.3.1](https://github.com/pdir/mobilede-bundle/tree/3.3.1) – 2022-08-02
 
