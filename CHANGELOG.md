@@ -11,6 +11,7 @@ Types of changes
 )
 
 ## [3.3.3](https://github.com/pdir/mobilede-bundle/tree/3.3.3) – 2022-09-23
+
 - [Added] add support for PHP 8
 - [Changed] change default value of field pdirVehicleFilterByAccount
 - [Changed] use new vehicle fields in template
