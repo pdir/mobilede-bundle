@@ -16,6 +16,7 @@ Types of changes
 - [Added] Add permission check in button callback
 - [Changed] Sort accounts
 - [Changed] published callback for accounts and vehicles
+- [Changed] Change reader template to show seller data (replace `['value']` with `['@value']` and replace `$this->ad['seller']['logo-image']` with `$this->ad['seller']['logo-image']['representation']`)
 
 ## [3.3.3](https://github.com/pdir/mobilede-bundle/tree/3.3.3) – 2022-09-23
 
