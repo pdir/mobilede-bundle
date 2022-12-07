@@ -25,14 +25,21 @@ use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
 use Contao\Image;
+use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
+use Pdir\MobileDeBundle\Model\VehicleAccountModel;
 use Pdir\MobileDeSyncBundle\Module\Sync;
 
 class DataContainerListener
 {
     use ListenerHelperTrait;
+
+    /**
+     * @var BackendUser|\Contao\User
+     */
+    private $user;
 
     /**
      * AssociationContactListener constructor.
@@ -79,6 +86,16 @@ class DataContainerListener
     }
 
     /**
+     * Get elements templates
+     * @param string $strTmpl
+     */
+    public function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
+    {
+        return Controller::getTemplateGroup('ce_mobilede_'.$strTmpl);
+    }
+
+
+    /**
      * @Callback(
      *     table="tl_vehicle",
      *     target="list.global_operations.toolbar.button")
@@ -123,9 +140,26 @@ class DataContainerListener
     /**
      * @Callback(
      *     table="tl_vehicle",
+     *     target="list.label.label"
+     * )
+     */
+    public function listLabel(array $row, string $label, DataContainer $dc, array $arrLabels): array
+    {
+        $account = VehicleAccountModel::findByPk($row['account']);
+
+        if (null !== $account) {
+            $arrLabels[5] = $account->description;
+        }
+
+        return $arrLabels;
+    }
+
+    /**
+     * @Callback(
+     *     table="tl_vehicle",
      *     target="fields.account.options"
      * )
-     * builds the gzOwner options
+     * builds the account options
      */
     public function getVehicleVehicleAccountOptions(DataContainer $dc): array
     {
@@ -141,15 +175,22 @@ class DataContainerListener
      */
     public function visibleButtonCallback(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
     {
+
         $security = System::getContainer()->get('security.helper');
 
-        // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (!$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled'))
+        // Contao 5.13 and 5 / Check permissions AFTER checking the tid, so hacking attempts are logged
+        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled'))
         {
             return '';
         }
 
-        $href .= '&amp;id=' . $row['id'];
+        // Contao 4.9 / Check the permissions (see #5835)
+        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('enabled', 'tl_vehicle_account'))
+        {
+            throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to import themes.');
+        }
+
+        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;
 
         if (!$row['enabled'])
         {
@@ -176,7 +217,7 @@ class DataContainerListener
             return '';
         }
 
-        $href .= '&amp;id=' . $row['id'];
+        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;;
 
         if (!$row['published'])
         {
@@ -192,11 +233,9 @@ class DataContainerListener
      *     target="fields.pdirVehicleFilterByAccount.options"
      * )
      * builds the account options
-     *
-     * @param string $strTmpl
      */
-    public function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
+    public function getVehicleFilterByAccountOptions(DataContainer $dc): array
     {
-        return Controller::getTemplateGroup('ce_mobilede_'.$strTmpl);
+        return $this->buildVehicleAccountOptions();
     }
 }

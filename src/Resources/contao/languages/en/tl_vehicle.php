@@ -23,6 +23,15 @@ $GLOBALS['TL_LANG'][$strTable]['copy'] = ['Copy ad', 'Copy %s ad'];
 $GLOBALS['TL_LANG'][$strTable]['cut'] = ['Cut ad', 'Cut %s ad'];
 $GLOBALS['TL_LANG'][$strTable]['delete'] = ['Delete ad', 'delete %s ad'];
 $GLOBALS['TL_LANG'][$strTable]['show'] = ['Show ad info', 'Show ad info %s'];
+$GLOBALS['TL_LANG'][$strTable]['importMessage'] = 'For an import from mobile.de, SysCara or autoscout24.de you need the full version of the vehicle manager.';
+$GLOBALS['TL_LANG'][$strTable]['downloadError'] = 'An error occurred while downloading the demo data. (support@pdir.de)';
+$GLOBALS['TL_LANG'][$strTable]['downloadSuccess'] = 'Demo data was downloaded successfully!';
+$GLOBALS['TL_LANG'][$strTable]['apiTypeError'] = 'There is no full version installed for API type %s.';
+$GLOBALS['TL_LANG'][$strTable]['messages']['x-objects-were-imported'] = 'There were %s vehicles imported.';
+$GLOBALS['TL_LANG'][$strTable]['messages']['credentials'] = 'Please verify your credentials.';
+$GLOBALS['TL_LANG'][$strTable]['noAccounts'] = 'No accounts were found for synchronization.';
+$GLOBALS['TL_LANG'][$strTable]['accountError'] = 'Import error: %s (ID: %s) - %s';
+$GLOBALS['TL_LANG'][$strTable]['customerIdError'] = 'Please specify a customer ID for account %s.';
 
 $GLOBALS['TL_LANG'][$strTable]['vehicle_id'] = ['mobile.de ID', 'The unique mobile.de ID.'];
 $GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];

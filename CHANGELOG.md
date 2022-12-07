@@ -10,6 +10,13 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.4](https://github.com/pdir/mobilede-bundle/tree/3.3.4) – 2022-12-07
+
+- [Added] Add fallback for images
+- [Added] Add permission check in button callback
+- [Changed] Sort accounts
+- [Changed] published callback for accounts and vehicles
+
 ## [3.3.3](https://github.com/pdir/mobilede-bundle/tree/3.3.3) – 2022-09-23
 
 - [Added] add support for PHP 8

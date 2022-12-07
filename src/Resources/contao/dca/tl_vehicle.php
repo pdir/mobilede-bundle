@@ -247,16 +247,20 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "varchar(4) NOT NULL default 'man'",
         ],
         'account' => [
-            'inputType' => 'select',
-            'sorting' => true,
             'foreignKey' => 'tl_vehicle_account.description',
+            'exclude' => true,
+            'inputType' => 'select',
             'search' => true,
+            'sorting' => true,
+            'relation' => ['type' => 'hasOne', 'load' => 'lazy'],
+            'flag' => 1, // 1 Sort by initial letter ascending
             'eval' => [
                 'tl_class' => 'w50',
-                'includeBlankOption' => true,
+                'chosen' => true,
+                'includeBlankOption' => true
             ],
             'options_callback' => [DataContainerListener::class, 'getVehicleVehicleAccountOptions'],
-            'sql' => "int(10) unsigned NOT NULL default '0'",
+            'sql' => "int(10) NOT NULL default '0'",
         ],
         'creation_date' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['creation_date'],

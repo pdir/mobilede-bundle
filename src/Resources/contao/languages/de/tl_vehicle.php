@@ -31,6 +31,7 @@ $GLOBALS['TL_LANG'][$strTable]['messages']['x-objects-were-imported'] = 'Es wurd
 $GLOBALS['TL_LANG'][$strTable]['messages']['credentials'] = 'Bitte überprüfe deine Zugangsdaten.';
 $GLOBALS['TL_LANG'][$strTable]['noAccounts'] = 'Es wurden keine Konten für die Synchronisation gefunden.';
 $GLOBALS['TL_LANG'][$strTable]['accountError'] = 'Importfehler: %s (ID: %s) - %s';
+$GLOBALS['TL_LANG'][$strTable]['customerIdError'] = 'Bitte gib eine Kunden ID für das Konto %s an.';
 
 $GLOBALS['TL_LANG'][$strTable]['vehicle_id'] = ['Vehicle ID', 'Die eindeutige Vehicle ID.'];
 $GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];

@@ -34,7 +34,7 @@ class MobileDeSetup extends BackendModule
     /**
      * mobilede version.
      */
-    const VERSION = '3.3.2';
+    const VERSION = '3.3.4';
 
     /**
      * Extension mode.

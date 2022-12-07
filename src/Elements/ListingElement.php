@@ -257,7 +257,7 @@ class ListingElement extends ContentElement
      *
      * @return array
      */
-    protected function renderAdItem($arrAds)
+    protected function renderAdItem($arrAds): array
     {
         $arrReturn = [];
 
@@ -267,7 +267,15 @@ class ListingElement extends ContentElement
             $objFilterTemplate->desc = $ad['name'];
 
             if (null !== $ad['api_images']) {
-                $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
+                $apiImages = StringUtil::deserialize($ad['api_images']);
+                if (isset($apiImages['images']['image'][0]['representation'])) {
+                    $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
+                }
+
+                // add fallback for images
+                if (!isset($apiImages['images']['image'][0]['representation']) && isset($apiImages['images']['image']['representation'])) {
+                    $images = $apiImages['images']['image']['representation'];
+                }
 
                 if (\is_array($images) && 0 < \count($images)) {
                     $objFilterTemplate->imageSrc_S = $images[0]['@url'];
