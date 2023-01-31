@@ -24,8 +24,8 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
       <i class="icon-cab"></i>
       <h1><?= $this->ad['name'] ?></h1>
       <span class="price">
-        <?= \System::getFormattedNumber($this->ad['consumer_price_amount'], 2).' '.$this->ad['price_currency']; ?>
-        <?php if($this->ad['pseudo_price'] != '' && $this->ad['pseudo_price'] != 0): ?><span class="pseudo-price"><?= \System::getFormattedNumber($this->ad['pseudo_price'], 2).' '.$this->ad['price_currency']; ?></span><?php endif; ?>
+        <?= Contao\System::getFormattedNumber($this->ad['consumer_price_amount'], 2).' '.$this->ad['price_currency']; ?>
+        <?php if($this->ad['pseudo_price'] != '' && $this->ad['pseudo_price'] != 0): ?><span class="pseudo-price"><?= Contao\System::getFormattedNumber($this->ad['pseudo_price'], 2).' '.$this->ad['price_currency']; ?></span><?php endif; ?>
       </span>
     </div>
     <div class="md-detail-content">
@@ -131,7 +131,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               ad['specifics_first_registration'] ?></span></li>
             <?php endif; ?>
             <?php if($this->ad['specifics_mileage']): ?>
-            <li class="attr-mileage"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['mileage'] ?></span><span class="value"><?= \System::getFormattedNumber($this->ad['specifics_mileage'],0) ?></span>
+            <li class="attr-mileage"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['mileage'] ?></span><span class="value"><?= Contao\System::getFormattedNumber($this->ad['specifics_mileage'],0) ?></span>
             </li>
             <?php endif; ?>
             <?php if($this->ad['specifics_fuel']): ?>

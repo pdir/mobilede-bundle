@@ -311,7 +311,7 @@ class ListingElement extends ContentElement
                 !$objFilterTemplate->imageSrc_M
             ) {
                 $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
-                $objFilterTemplate->imageSrc_M = str_replace('http://', 'https://', $ad['image']['src']);
+                $objFilterTemplate->imageSrc_M = isset($ad['image'])? str_replace('http://', 'https://', $ad['image']['src']): null;
             }
 
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //

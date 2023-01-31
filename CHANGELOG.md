@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.5](https://github.com/pdir/mobilede-bundle/tree/3.3.5) – 2023-01-31
+
+- [Fixed] ads with no images return false on api request
+
 ## [3.3.4](https://github.com/pdir/mobilede-bundle/tree/3.3.4) – 2022-12-07
 
 - [Added] Add fallback for images
