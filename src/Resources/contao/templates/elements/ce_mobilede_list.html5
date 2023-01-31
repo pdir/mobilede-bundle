@@ -1,7 +1,7 @@
 <!-- indexer::stop -->
-<?php $GLOBALS['TL_JAVASCRIPT']['9998'] = 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'; ?>
-<?php $GLOBALS['TL_JAVASCRIPT']['9999'] = 'https://code.jquery.com/ui/1.12.1/jquery-ui.js'; ?>
-<?php $GLOBALS['TL_CSS'][] = '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'; ?>
+<?php $GLOBALS['TL_JAVASCRIPT']['9998'] = 'bundles/pdirmobilede/js/jquery.ui.touch-punch.min.js|static'; ?>
+<?php $GLOBALS['TL_JAVASCRIPT']['9999'] = 'bundles/pdirmobilede/js/jquery-ui.js|static'; ?>
+<?php $GLOBALS['TL_CSS'][] = 'bundles/pdirmobilede/css/jquery-ui.css|static'; ?>
 
 <div class="<?php echo $this->class; ?> block<?php if($this->onlyFilter): ?> only-filter<?php endif; ?>"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 
