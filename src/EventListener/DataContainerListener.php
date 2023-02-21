@@ -212,7 +212,13 @@ class DataContainerListener
         $security = System::getContainer()->get('security.helper');
 
         // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (!$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle::published'))
+        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle::published'))
+        {
+            return '';
+        }
+
+        // Contao 4.9 / Check the permissions (see #5835)
+        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('published', 'tl_vehicle'))
         {
             return '';
         }
