@@ -217,6 +217,12 @@ class DataContainerListener
             return '';
         }
 
+        // Contao 4.9 / Check the permissions (see #5835)
+        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('published', 'tl_vehicle'))
+        {
+            return '';
+        }
+
         $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;;
 
         if (!$row['published'])
