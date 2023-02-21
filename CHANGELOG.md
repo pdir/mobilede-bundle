@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.6](https://github.com/pdir/mobilede-bundle/tree/3.3.5) – 2023-01-31
+
+- [Fixed] Check permissions return error in backend vehicle list (contao 4.9)
+
 ## [3.3.5](https://github.com/pdir/mobilede-bundle/tree/3.3.5) – 2023-01-31
 
 - [Fixed] ads with no images return false on api request
