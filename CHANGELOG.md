@@ -14,6 +14,7 @@ Types of changes
 
 - [Fixed] Fix vehicle class value and label
 - [Fixed] Fix vehicle model filter for models which contain ' (e.g. Kia cee'd)
+- [Fixed] Remove duplicate images
 
 ## [3.3.6](https://github.com/pdir/mobilede-bundle/tree/3.3.6) – 2023-02-21
 
