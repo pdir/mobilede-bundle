@@ -511,7 +511,7 @@ class ListingElement extends ContentElement
         if (isset($ad['vehicle_model'])) {
             $this->filters['vehicle_model'][$ad['vehicle_model']] = [
                 'label' => $ad['vehicle_model'],
-                'key' => str_replace([' ', '\''], ['_', ''], $ad['vehicle_model']),
+                'key' => str_replace([' ', '\'', '.'], ['_', '', ''], $ad['vehicle_model']),
                 'count' => (isset($this->filters['vehicle_model'][$ad['vehicle_model']]['count']) ? $this->filters['vehicle_model'][$ad['vehicle_model']]['count'] + 1 : 1),
             ];
         }
@@ -579,6 +579,6 @@ class ListingElement extends ContentElement
             ];
         }
 
-        return str_replace('\'', '', implode(' ', $filter));
+        return str_replace(['\'', '.'], '', implode(' ', $filter));
     }
 }
