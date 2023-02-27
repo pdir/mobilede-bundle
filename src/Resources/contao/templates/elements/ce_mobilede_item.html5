@@ -46,7 +46,7 @@
         <?= $fuelItem['label'] ?>: <?= $fuelItem['value'] ?><br>
         <?php endforeach; ?>
       <?php endif; ?>
-      <?php if($this->usageType): ?><?= $this->bodyType ?>, <?= $this->usageType ?><?php endif; ?>
+      <?php if($this->usageType): ?><?= $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_class']['options'][$this->bodyType] ?>, <?= $this->usageType ?><?php endif; ?>
     </p>
     <!-- Features List -->
     <div class="features-area">
