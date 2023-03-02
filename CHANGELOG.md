@@ -17,6 +17,7 @@ Types of changes
 - [Fixed] Remove duplicate images
 - [Fixed] Fix error when vehicle has no images
 - [Fixed] Fix showing unpublished vehicles
+- [Fixed] Remove warnings
 
 ## [3.3.6](https://github.com/pdir/mobilede-bundle/tree/3.3.6) – 2023-02-21
 
