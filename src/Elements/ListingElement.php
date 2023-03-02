@@ -288,7 +288,7 @@ class ListingElement extends ContentElement
                 }
             }
 
-            if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
+            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && !is_null($ad['orderSRC'])) {
                 $manImages = unserialize($ad['orderSRC']);
 
                 $objFile = FilesModel::findByUuid($manImages[0]);
