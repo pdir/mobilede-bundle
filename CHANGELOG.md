@@ -16,6 +16,7 @@ Types of changes
 - [Fixed] Fix vehicle model filter for models which contain `'` or `.` (e.g. Kia cee'd or VW ID.Buzz)
 - [Fixed] Remove duplicate images
 - [Fixed] Fix error when vehicle has no images
+- [Fixed] Fix showing unpublished vehicles
 
 ## [3.3.6](https://github.com/pdir/mobilede-bundle/tree/3.3.6) – 2023-02-21
 

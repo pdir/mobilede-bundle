@@ -262,6 +262,10 @@ class ListingElement extends ContentElement
         $arrReturn = [];
 
         foreach ($arrAds as $ad) {
+            if('' === $ad['published']) {
+                continue;
+            }
+
             $objFilterTemplate = new FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
