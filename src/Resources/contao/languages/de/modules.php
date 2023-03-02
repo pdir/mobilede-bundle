@@ -19,7 +19,10 @@ declare(strict_types=1);
 /*
  * Module translation.
  */
-$GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
+if (!isset($GLOBALS['TL_LANG']['MOD']['pdir'])) {
+    $GLOBALS['TL_LANG']['MOD']['pdir'] = [];
+}
+$GLOBALS['TL_LANG']['MOD']['pdir'] = ['pdir Apps', 'Enthält alle Apps von PDIR'];
 
 $GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Fahrzeugmanager Listenansicht';
 $GLOBALS['TL_LANG']['CTE']['mobileDeList'][1] = 'Inhaltselement um die Mobile.de Listenansicht auf der gewünschten Seite zu platzieren.';

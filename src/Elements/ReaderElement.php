@@ -195,11 +195,6 @@ class ReaderElement extends ContentElement
                 foreach ($images as $row) {
                     foreach ($row['representation'] as $image) {
                         $newGallery[$image['@size']][] = $image['@url'];
-
-                        // fix for xxl image which is not included in xml response
-                        if ('XL' === $image['@size']) {
-                            $newGallery['XXL'][] = str_replace('$_27.JPG', '$_57.JPG', $image['@url']);
-                        }
                     }
                 }
             }

@@ -262,6 +262,10 @@ class ListingElement extends ContentElement
         $arrReturn = [];
 
         foreach ($arrAds as $ad) {
+            if('' === $ad['published']) {
+                continue;
+            }
+
             $objFilterTemplate = new FrontendTemplate($this->strItemTemplate);
 
             $objFilterTemplate->desc = $ad['name'];
@@ -288,7 +292,7 @@ class ListingElement extends ContentElement
                 }
             }
 
-            if ('man' === $ad['type'] || 'sysc' === $ad['type']) {
+            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && !is_null($ad['orderSRC'])) {
                 $manImages = unserialize($ad['orderSRC']);
 
                 $objFile = FilesModel::findByUuid($manImages[0]);
@@ -323,8 +327,8 @@ class ListingElement extends ContentElement
             }
 
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
-            $objFilterTemplate->fuelType = $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']];
-            $objFilterTemplate->transmission = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
+            $objFilterTemplate->fuelType = $ad['specifics_fuel'] ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']] : '';
+            $objFilterTemplate->transmission = $ad['specifics_gearbox'] ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']] : '';
             $objFilterTemplate->power = $ad['specifics_power'] ? $ad['specifics_power'].' KW ('.number_format((float) ($ad['specifics_power'] * 1.35962), 0, ',', '.').' PS)' : 'Keine Angabe';
             $objFilterTemplate->bodyType = $ad['vehicle_class'];
             $objFilterTemplate->vehicleCategory = $ad['vehicle_category'];
@@ -511,7 +515,7 @@ class ListingElement extends ContentElement
         if (isset($ad['vehicle_model'])) {
             $this->filters['vehicle_model'][$ad['vehicle_model']] = [
                 'label' => $ad['vehicle_model'],
-                'key' => str_replace(' ', '_', $ad['vehicle_model']),
+                'key' => str_replace([' ', '\'', '.'], ['_', '', ''], $ad['vehicle_model']),
                 'count' => (isset($this->filters['vehicle_model'][$ad['vehicle_model']]['count']) ? $this->filters['vehicle_model'][$ad['vehicle_model']]['count'] + 1 : 1),
             ];
         }
@@ -579,6 +583,6 @@ class ListingElement extends ContentElement
             ];
         }
 
-        return implode(' ', $filter);
+        return str_replace(['\'', '.'], '', implode(' ', $filter));
     }
 }

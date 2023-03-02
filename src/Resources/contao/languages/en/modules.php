@@ -19,7 +19,11 @@ declare(strict_types=1);
 /*
  * Module translation.
  */
-$GLOBALS['TL_LANG']['MOD']['pdir'][0] = 'pdir Apps';
+if (!isset($GLOBALS['TL_LANG']['MOD']['pdir'])) {
+    $GLOBALS['TL_LANG']['MOD']['pdir'] = [];
+}
+$GLOBALS['TL_LANG']['MOD']['pdir'] = ['pdir Apps', 'Contains all apps from pdir'];
+
 $GLOBALS['TL_LANG']['MOD']['mobileDeSetup'][0] = 'Mobile.de Setup';
 $GLOBALS['TL_LANG']['MOD']['mobileDeSetup'][1] = 'Here you can manage the Mobile.de App';
 $GLOBALS['TL_LANG']['CTE']['mobileDeList'][0] = 'Mobile.de List View';

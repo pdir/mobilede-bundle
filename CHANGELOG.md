@@ -10,6 +10,16 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.7](https://github.com/pdir/mobilede-bundle/tree/3.3.7) – 2023-02-28
+
+- [Added] Add placeholder image
+- [Fixed] Fix vehicle class value and label
+- [Fixed] Fix vehicle model filter for models which contain `'` or `.` (e.g. Kia cee'd or VW ID.Buzz)
+- [Fixed] Remove duplicate images
+- [Fixed] Fix error when vehicle has no images
+- [Fixed] Fix showing unpublished vehicles
+- [Fixed] Remove warnings
+
 ## [3.3.6](https://github.com/pdir/mobilede-bundle/tree/3.3.6) – 2023-02-21
 
 - [Fixed] Check permissions return error in backend vehicle list (contao 4.9)

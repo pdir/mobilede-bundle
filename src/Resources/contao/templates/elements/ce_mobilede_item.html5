@@ -1,13 +1,17 @@
 <?php if($this->desc == ''): return ''; endif; ?>
 <a href="<?= $this->link ?>" class="item md-ad-box <?= $this->filterClasses ?><?php if($this->onlyFilter): ?> hidden<?php endif; ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>" data-acc="<?= $this->account ?>">
   <?php if(!$this->onlyFilter): ?>
-  <?php if($this->imageSrc_L): ?>
   <div class="image">
-    <picture>
+    <?php if($this->imageSrc_L): ?>
+      <picture>
         <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>">
-    </picture>
+      </picture>
+    <?php else: ?>
+      <picture>
+        <img src="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg" srcset="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1.5x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 2x"  alt="Fahrzeug Platzhalter">
+      </picture>
+    <?php endif; ?>
   </div>
-  <?php endif; ?>
   <div class="price">
     <span>
       <?= $this->price ?>
@@ -46,7 +50,7 @@
         <?= $fuelItem['label'] ?>: <?= $fuelItem['value'] ?><br>
         <?php endforeach; ?>
       <?php endif; ?>
-      <?php if($this->usageType): ?><?= $this->bodyType ?>, <?= $this->usageType ?><?php endif; ?>
+      <?php if($this->usageType): ?><?= $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_class']['options'][$this->bodyType] ?>, <?= $this->usageType ?><?php endif; ?>
     </p>
     <!-- Features List -->
     <div class="features-area">
