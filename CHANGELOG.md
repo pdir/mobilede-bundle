@@ -12,6 +12,7 @@ Types of changes
 
 ## [3.3.7](https://github.com/pdir/mobilede-bundle/tree/3.3.7) – 2023-02-28
 
+- [Added] Add placeholder image
 - [Fixed] Fix vehicle class value and label
 - [Fixed] Fix vehicle model filter for models which contain `'` or `.` (e.g. Kia cee'd or VW ID.Buzz)
 - [Fixed] Remove duplicate images

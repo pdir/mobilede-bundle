@@ -4,9 +4,13 @@
   <?php if($this->imageSrc_L): ?>
   <div class="image">
     <picture>
-        <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>">
+      <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>">
     </picture>
   </div>
+  <?php else: ?>
+    <picture>
+      <img src="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg" srcset="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1.5x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 2x"  alt="Fahrzeug Platzhalter">
+    </picture>
   <?php endif; ?>
   <div class="price">
     <span>
