@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.8](https://github.com/pdir/mobilede-bundle/tree/3.3.8) – 2023-03-06
+
+- [Fixed] display problem of the gallery in the backend
+
 ## [3.3.7](https://github.com/pdir/mobilede-bundle/tree/3.3.7) – 2023-02-28
 
 - [Added] Add placeholder image
