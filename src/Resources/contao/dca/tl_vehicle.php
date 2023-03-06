@@ -1136,12 +1136,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => 1,
             'inputType' => 'fileTree',
             'eval' => [
-                'mandatory' => false,
-                'tl_class' => 'clr',
                 'multiple' => true,
                 'fieldType' => 'checkbox',
+                'isSortable' => true,
                 'files' => true,
+                'mandatory' => false,
+                'tl_class' => 'clr m12',
                 'orderField' => 'orderSRC',
+                'isGallery' => true,
+                # @ToDo: change for 5.0 'extensions' => '%contao.image.valid_extensions%'
+                'extensions' => Contao\Config::get('validImageTypes')
             ],
             'sql' => 'blob NULL',
         ],
