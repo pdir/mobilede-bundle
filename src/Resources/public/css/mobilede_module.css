@@ -694,13 +694,39 @@
     border-color: transparent transparent transparent #fff;
 }
 
+.energy-class.class-a-plus-plus-plus span {
+  background: #009848;
+  width: 30%;
+}
+
+.energy-class.class-a-plus-plus-plus span:after {
+  border-left-color: #009848;
+}
+
+.energy-class.class-a-plus-plus-plus.active:after {
+  content: "A+++";
+}
+
+.energy-class.class-a-plus-plus span {
+  background: #009849;
+  width: 35%;
+}
+
+.energy-class.class-a-plus-plus span:after {
+  border-left-color: #009849;
+}
+
+.energy-class.class-a-plus-plus.active:after {
+  content: "A++";
+}
+
 .energy-class.class-a-plus span {
-    background: #068e42;
+    background: #4eae46;
     width: 40%;
 }
 
 .energy-class.class-a-plus span:after {
-    border-left-color: #068e42;
+    border-left-color: #4eae46;
 }
 
 .energy-class.class-a-plus.active:after {
@@ -708,7 +734,7 @@
 }
 
 .energy-class.class-a span {
-    background: #049d2b;
+    background: #b9d237;
     width: 45%;
 }
 
@@ -717,16 +743,16 @@
 }
 
 .energy-class.class-a span:after {
-    border-left-color: #049d2b;
+    border-left-color: #b9d237;
 }
 
 .energy-class.class-b span {
-    background: #b1c903;
+    background: #b9d237;
     width: 50%;
 }
 
 .energy-class.class-b span:after {
-    border-left-color: #b1c903;
+    border-left-color: #b9d237;
 }
 
 .energy-class.class-b.active:after {
@@ -734,13 +760,13 @@
 }
 
 .energy-class.class-c span {
-    background: #faea01;
+    background: #fff104;
     width: 55%;
     color: #000;
 }
 
 .energy-class.class-c span:after {
-    border-left-color: #faea01;
+    border-left-color: #fff104;
 }
 
 .energy-class.class-c.active:after {
@@ -748,12 +774,12 @@
 }
 
 .energy-class.class-d span {
-    background: #fda506;
+    background: #e3672a;
     width: 60%;
 }
 
 .energy-class.class-d span:after {
-    border-left-color: #fda506;
+    border-left-color: #e3672a;
 }
 
 .energy-class.class-d.active:after {
@@ -761,12 +787,12 @@
 }
 
 .energy-class.class-e span {
-    background: #e7640a;
+    background: #d7222b;
     width: 65%;
 }
 
 .energy-class.class-e span:after {
-    border-left-color: #e7640a;
+    border-left-color: #d7222b;
 }
 
 .energy-class.class-e.active:after {
@@ -774,12 +800,12 @@
 }
 
 .energy-class.class-f span {
-    background: #e23a13;
+    background: #d7222b;
     width: 70%;
 }
 
 .energy-class.class-f span:after {
-    border-left-color: #e23a13;
+    border-left-color: #d7222b;
 }
 
 .energy-class.class-f.active:after {
@@ -787,12 +813,12 @@
 }
 
 .energy-class.class-g span {
-    background: #e63c19;
+    background: #d7222b;
     width: 75%;
 }
 
 .energy-class.class-g span:after {
-    border-left-color: #e63c19;
+    border-left-color: #d7222b;
 }
 
 .energy-class.class-g.active:after {
