@@ -10,10 +10,14 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.3.8](https://github.com/pdir/mobilede-bundle/tree/3.3.8) – 2023-04-18
+## [3.3.9](https://github.com/pdir/mobilede-bundle/tree/3.3.9) – 2023-04-18
 
 - [Added] Add seller inventory key in template
 - [Added] Add energy class A++ and A+++
+
+## [3.3.8](https://github.com/pdir/mobilede-bundle/tree/3.3.8) – 2023-03-06
+
+- [Fixed] display problem of the gallery in the backend
 
 ## [3.3.7](https://github.com/pdir/mobilede-bundle/tree/3.3.7) – 2023-02-28
 
