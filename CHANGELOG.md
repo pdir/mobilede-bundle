@@ -10,7 +10,6 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-<<<<<<< CHANGELOG.md
 ## [3.3.8](https://github.com/pdir/mobilede-bundle/tree/3.3.8) – 2023-04-18
 
 - [Added] Add seller inventory key in template
