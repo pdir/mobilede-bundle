@@ -278,6 +278,55 @@ class ReaderElement extends ContentElement
             ];
         }
 
+        if ($this->ad['wltp_co2_emission_combined']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_co2_emission_combined'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_co2_emission_combined'], 1),
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_fuel_combined']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_fuel_combined'], 1),
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_power_combined']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_power_combined'], 1),
+            ];
+        }
+
+        if ($this->ad['wltp_electric_range']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_electric_range'], 1),
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_fuel_combined_weighted']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_fuel_combined_weighted'], 1),
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_power_combined_weighted']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_power_combined_weighted'], 1),
+            ];
+        }
+
+        if ($this->ad['wltp_co2_emission_combined_weighted']) {
+            $fuelConsumption[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_co2_emission_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_co2_emission_combined_weighted'], 1),
+            ];
+        }
+
         $this->ad['fuelConsumption'] = $fuelConsumption;
 
         if ($this->ad['sellerInfo']) {
