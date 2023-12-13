@@ -15,6 +15,7 @@ Types of changes
 - [Added] Add missing emission and consumption fields
 - [Fixed] Fix warning when creating a vehicle
 - [Fixed] Fix warnings in reader template
+- [Fixed] Hide pseudo price if price is null
 
 ## [3.3.9](https://github.com/pdir/mobilede-bundle/tree/3.3.9) – 2023-04-18
 

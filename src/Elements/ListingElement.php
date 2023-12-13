@@ -322,7 +322,7 @@ class ListingElement extends ContentElement
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
 
-            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price']) {
+            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && !is_null($ad['pseudo_price'])) {
                 $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 
