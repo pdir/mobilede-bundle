@@ -78,6 +78,8 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['used-car-seal'] = 'Used Car S
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['videoUrl'] = 'Video';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['wheel-formula'] = 'Wheel Formula';
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['delivery-period'] = 'Delivery Period';
+$GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'] = 'incl. %s VAT';
+$GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'] = 'plus %s VAT';
 
 $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value'] = 'No information';
 

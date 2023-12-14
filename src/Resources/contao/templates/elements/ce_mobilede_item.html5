@@ -13,10 +13,16 @@
     <?php endif; ?>
   </div>
   <div class="price">
-    <span>
-      <?= $this->price ?>
-      <?php if(isset($this->pseudoPrice)): ?><span class="pseudo-price"><?= $this->pseudoPrice ?></span><?php endif; ?>
-    </span>
+    <?php if($this->showGrossPrice): ?>
+      <span class="gross-price">
+        <?= $this->price ?>
+        <?php if(isset($this->pseudoPrice)): ?><span class="pseudo-price"><?= $this->pseudoPrice ?></span><?php endif; ?>
+        <span class="price-label"> <?= $this->priceLabel ?></span></span>
+    <?php endif; ?>
+
+    <?php if($this->showNetPrice): ?>
+      <span class="net-price"><?= $this->netPrice ?><span class="price-label"> <?= $this->netPriceLabel ?></span></span>
+    <?php endif; ?>
   </div>
   <div class="detail">
     <!-- Header -->

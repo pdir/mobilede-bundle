@@ -10,8 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.3.10](https://github.com/pdir/mobilede-bundle/tree/3.3.10) – 2023-12-12
+## [3.4.0](https://github.com/pdir/mobilede-bundle/tree/3.4.0) – 2023-12-14
 
+- [Added] Add option to combine filters
+- [Added] Add option to show gross and net price
 - [Added] Add missing emission and consumption fields
 - [Fixed] Fix warning when creating a vehicle
 - [Fixed] Fix warnings in reader template
