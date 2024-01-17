@@ -10,12 +10,9 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.3.11](https://github.com/pdir/mobilede-bundle/tree/3.3.11) – 2024-01-17
+## [3.3.10](https://github.com/pdir/mobilede-bundle/tree/3.3.10) – 2024-01-17
 
 - [Added] Add new field for loading space height
-
-## [3.3.10](https://github.com/pdir/mobilede-bundle/tree/3.3.10) – 2023-12-12
-
 - [Added] Add missing emission and consumption fields
 - [Fixed] Fix warning when creating a vehicle
 
