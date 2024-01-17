@@ -96,7 +96,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'specifics_construction_year,specifics_construction_date,specifics_cubic_capacity,specifics_driving_mode,'.
                 'specifics_driving_cab,specifics_condition,specifics_usage_type,specifics_wheel_formula,specifics_number_of_bunks,'.
                 'specifics_hydraulic_installation,specifics_europallet_storage_spaces,specifics_dimension_length,specifics_dimension_width,'.
-                'specifics_dimension_height,specifics_shipping_volume,specifics_loading_space_length,specifics_loading_space_width,'.
+                'specifics_dimension_height,specifics_shipping_volume,specifics_loading_space_length,specifics_loading_space_width,specifics_loading_space_height,'.
                 'specifics_identification_number,specifics_interior_color,specifics_interior_type,specifics_airbag,'.
                 'specifics_number_of_previous_owners,specifics_countryVersion,specifics_videoUrl,specifics_parking_assistants,'.
                 'specifics_speed_control,specifics_radio,specifics_daytime_running_lamps,specifics_sliding_door_type,'.
@@ -801,6 +801,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'specifics_loading_space_width' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_width'],
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'flag' => 1,
+            'inputType' => 'text',
+            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
+        'specifics_loading_space_height' => [
+            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_height'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
