@@ -10,6 +10,12 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.3.10](https://github.com/pdir/mobilede-bundle/tree/3.3.10) – 2024-01-17
+
+- [Added] Add new field for loading space height
+- [Added] Add missing emission and consumption fields
+- [Fixed] Fix warning when creating a vehicle
+
 ## [3.3.9](https://github.com/pdir/mobilede-bundle/tree/3.3.9) – 2023-04-18
 
 - [Added] Add seller inventory key in template

@@ -134,6 +134,10 @@ class Ad
      */
     public function categoryOptionsCallback(DataContainer $dc)
     {
+        if(!isset($dc->activeRecord->vehicle_class)) {
+            return '';
+        }
+
         return $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_category_'.$dc->activeRecord->vehicle_class]['options'];
     }
 
@@ -146,6 +150,10 @@ class Ad
      */
     public function featuresOptionsCallback(DataContainer $dc)
     {
+        if(!isset($dc->activeRecord->vehicle_class)) {
+            return '';
+        }
+
         return $GLOBALS['TL_LANG']['tl_vehicle']['features_'.$dc->activeRecord->vehicle_class]['options'];
     }
 }

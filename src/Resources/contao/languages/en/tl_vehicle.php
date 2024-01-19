@@ -533,6 +533,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_lifting_height'] = ['Lifting Height (m
 $GLOBALS['TL_LANG'][$strTable]['specifics_load_capacity'] = ['Loading Capacity (kg)', 'Here you can enter the loading capacity in kg.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_length'] = ['Loading Space Length (mm)', 'Here you can enter the loading space length in mm.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_width'] = ['Loading Space Width (mm)', 'Here you can enter the loading space width in mm.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_height'] = ['Loading Space Height (mm)', 'Here you can enter the loading space height in mm.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_manufacturer_color_name'] = ['Manufacturer Color Name', 'Here you can enter the manufacturer color name.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_metallic'] = ['Metallic', 'Choose this option if the exterior color is a metallic color.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_model_range'] = ['Model Range', 'Here you can enter informations about the model range of the vehicle.'];
