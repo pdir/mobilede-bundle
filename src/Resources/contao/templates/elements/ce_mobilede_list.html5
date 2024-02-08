@@ -10,7 +10,7 @@
   <?php endif; ?>
 
   <?php if(!$this->hideFilters): ?>
-  <div class="md-filters<?php if($this->openFilters): ?> open-filters<?php endif; ?>">
+  <div class="md-filters<?php if($this->openFilters): ?> open-filters<?php endif; ?><?php if($this->combineFilter): ?> combine-filter<?php endif; ?>">
     <?php if(!$this->openFilters): ?><button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button><?php endif; ?>
     <?php if($this->onlyFilter): ?>
     <div class="md-filters-header">
@@ -109,7 +109,7 @@
         <label>Farbe</label>
         <ul>
           <?php foreach($this->filters['colors'] as $key=>$col): ?>
-          <li><input type="checkbox" name="<?= $key ?>" data-filter=".<?= $key ?>" value=".<?= $key ?>"
+          <li class="cb-<?= strtolower($key) ?>"><input type="checkbox" name="<?= $key ?>" data-filter=".<?= $key ?>" value=".<?= $key ?>"
                      id="<?= $key ?>"><label for="<?= $key ?>"><?= $col['label'] ?> <?php /*(<?= $col['count'] ?>)*/ ?></label></li>
           <?php endforeach; ?>
         </ul>

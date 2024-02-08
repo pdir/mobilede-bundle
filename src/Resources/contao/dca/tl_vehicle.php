@@ -151,7 +151,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'search' => true,
             'inputType' => 'text',
-            'eval' => ['rgxp' => 'alias', 'unique' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
+            'eval' => ['mandatory' => true, 'rgxp' => 'alias', 'unique' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
             'save_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'generateAlias'],
             'sql' => "varchar(128) COLLATE utf8_bin NOT NULL default ''",
         ],

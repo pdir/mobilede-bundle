@@ -10,6 +10,14 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.4.0](https://github.com/pdir/mobilede-bundle/tree/3.4.0) – 2024-02-08
+
+- [Added] Add option to combine filters
+- [Added] Add option to show gross and net price
+- [Fixed] Fix warnings in reader template
+- [Fixed] Hide pseudo price if price is null
+- [Changed] Change alias to mandatory and change translations
+
 ## [3.3.10](https://github.com/pdir/mobilede-bundle/tree/3.3.10) – 2024-01-17
 
 - [Added] Add new field for loading space height

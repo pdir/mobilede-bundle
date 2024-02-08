@@ -34,7 +34,7 @@ $GLOBALS['TL_LANG'][$strTable]['accountError'] = 'Import error: %s (ID: %s) - %s
 $GLOBALS['TL_LANG'][$strTable]['customerIdError'] = 'Please specify a customer ID for account %s.';
 
 $GLOBALS['TL_LANG'][$strTable]['vehicle_id'] = ['mobile.de ID', 'The unique mobile.de ID.'];
-$GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];
+$GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'The alias is a unique reference for generating the URL.'];
 $GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'] = ['Consumer Price Amount (Euro)', 'Here you can enter the consumer price amount (gross price).'];
 $GLOBALS['TL_LANG'][$strTable]['pseudo_price'] = ['Pseudo price', 'Enter a price here that will be shown as crossed out on the web page.'];
 $GLOBALS['TL_LANG'][$strTable]['price_currency'] = ['Price Currency', 'Here you can enter the consumer price currency.'];

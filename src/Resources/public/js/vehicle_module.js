@@ -41,6 +41,10 @@
             event.preventDefault();
             listView.container.trigger('filter-update');
             listView.updateLocationHash(listView.filters, listView.options.sortBy);
+
+            if($('.md-filters').hasClass('combine-filter')) {
+                listView.combineFilters('checkbox');
+            }
         });
 
         // bind filter on select change
@@ -48,7 +52,15 @@
             event.preventDefault();
             listView.container.trigger('filter-update');
             listView.updateLocationHash(listView.filters, listView.options.sortBy);
+
+            if($('.md-filters').hasClass('combine-filter')) {
+                listView.combineFilters('select');
+            }
         });
+
+        if($('.md-filters').hasClass('combine-filter')) {
+            listView.combineFilters('');
+        }
 
         // Listen to filter update event and update Isotope filters
         listView.container.on('filter-update', function (event, opts) {
@@ -319,6 +331,9 @@
                 'mileage': {'min': 0, 'max': 10000000}
             };
 
+            $('.md-select option:not([value="*"])').show();
+            $('.md-filter-attr.checkbox-group li').removeClass('hide');
+
             listView.container.isotope({filter: '*'});
             listView.container.trigger('filter-update');
             listView.updateLocationHash(listView.filters, listView.options.sortBy);
@@ -512,8 +527,30 @@
         return obj['select'];
     };
 
+    listView.combineFilters = function (field) {
+        $('.md-select option:not([value="*"])').hide();
+
+        if('checkbox' !== field) {
+            $('.md-filter-attr.checkbox-group li').addClass('hide');
+        }
+
+        setTimeout(function() {
+            $('.md-ads .item:visible').each(function() {
+                let filterClasses = $(this).attr('class').split(' ');
+
+                $.each( filterClasses, function( key, value ) {
+                    $('.md-select option[value=".' + value + '"]').show();
+
+                    let checkbox = $('.md-filter-attr.checkbox-group li.cb-' + value.toLowerCase());
+                    if(checkbox.length > 0) {
+                        checkbox.removeClass('hide');
+                    }
+                });
+            })
+        },500);
+    };
+
     $(window).on( 'hashchange', listView.updateFiltersFromHash );
     $(window).on("load", listView.init );
 
 })(window, document, jQuery);
-

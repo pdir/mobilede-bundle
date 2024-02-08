@@ -221,6 +221,7 @@ class ListingElement extends ContentElement
         // Add ads to template
         $this->Template->ads = isset($this->ads['searchResultItems']) ? $this->renderAdItem($this->ads['searchResultItems']) : [];
         $this->Template->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
+        $this->Template->combineFilter = 1 === (int) $this->pdir_md_combine_filter;
         $this->Template->listingPage = $this->pdir_md_listingPage;
 
         // Filters
@@ -318,11 +319,16 @@ class ListingElement extends ContentElement
                 $objFilterTemplate->imageSrc_M = isset($ad['image'])? str_replace('http://', 'https://', $ad['image']['src']): null;
             }
 
+            $objFilterTemplate->showGrossPrice = 1 === (int) $this->pdir_md_show_gross_price;
+            $objFilterTemplate->showNetPrice = 1 === (int) $this->pdir_md_show_net_price;
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
+            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], $ad['price_vat_rate'] * 100 . ' %');
+            $objFilterTemplate->netPrice = System::getFormattedNumber($ad['consumer_price_amount'] / (1 + $ad['price_vat_rate']), 2).' '.$ad['price_currency'];
+            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], $ad['price_vat_rate'] * 100 . ' %');
 
-            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price']) {
+            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && !is_null($ad['pseudo_price'])) {
                 $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 

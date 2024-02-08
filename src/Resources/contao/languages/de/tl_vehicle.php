@@ -34,7 +34,7 @@ $GLOBALS['TL_LANG'][$strTable]['accountError'] = 'Importfehler: %s (ID: %s) - %s
 $GLOBALS['TL_LANG'][$strTable]['customerIdError'] = 'Bitte gib eine Kunden ID für das Konto %s an.';
 
 $GLOBALS['TL_LANG'][$strTable]['vehicle_id'] = ['Vehicle ID', 'Die eindeutige Vehicle ID.'];
-$GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Alias'];
+$GLOBALS['TL_LANG'][$strTable]['alias'] = ['Alias', 'Der Alias ist eine eindeutige Referenz zur Generierung der URL.'];
 $GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'] = ['Endverbraucherpreis (Euro)', 'Geben Sie hier den Endverbraucherpreisbetrag (Bruttopreis) ein.'];
 $GLOBALS['TL_LANG'][$strTable]['pseudo_price'] = ['Pseudo-Preis', 'Geben Sie hier einen Preis an, der auf der Webseite als durchgestrichen dargestellt wird.'];
 $GLOBALS['TL_LANG'][$strTable]['price_currency'] = ['Währung', 'Geben sie hier die Währung an.'];

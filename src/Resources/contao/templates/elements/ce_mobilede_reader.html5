@@ -170,10 +170,10 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         <?php if (isset($this->ad['seller'])): ?>
         <div class="md-detail-box additional-contact">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-seller'] ?></h2>
-          <?php if($this->ad['seller']['company-name']['@value'] != ""): ?>
+          <?php if(isset($this->ad['seller']['company-name']['@value'])): ?>
           <p><strong><?= $this->ad['seller']['company-name']['@value'] ?></strong></p>
           <?php endif; ?>
-          <?php if($this->ad['seller']['logo-image']['representation']): ?>
+          <?php if(isset($this->ad['seller']['logo-image']['representation'])): ?>
           <?php $i = 0; foreach($this->ad['seller']['logo-image']['representation'] as $logoImage): ?>
           <?php if($i == 0): ?>
           <p><img src="<?= $logoImage['@url'] ?>" alt="Verkäufer Logo"></p>
@@ -185,21 +185,21 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
             <?= $this->ad['seller']['address']['zipcode']['@value'] ?> <?= $this->ad['seller']['address']['city']['@value']
             ?></p>
           <p>
-            <?php if($this->ad['seller']['phone']['@value'] != ""): ?>
+            <?php if(isset($this->ad['seller']['phone']['@value'])): ?>
             <i class="icon-phone" title="Telefon"></i><?= $this->ad['seller']['phone']['@value'] ?><br>
             <?php endif; ?>
-            <?php if($this->ad['seller']['email']['@value'] != ""): ?>
+            <?php if(isset($this->ad['seller']['email']['@value'])): ?>
             <i class="icon-mail" title="E-Mail"></i> <a href="<?= $this->ad['seller']['email']['@value'] ?>"><?= $this->
             ad['seller']['email']['@value'] ?></a><br>
             <?php endif; ?>
-            <?php if($this->ad['seller']['homepage']['@value'] != ""): ?>
+            <?php if(isset($this->ad['seller']['homepage']['@value'])): ?>
             <i class="icon-globe" title="Web"></i> <a href="<?= $this->ad['seller']['homepage']['@value'] ?>"
                                                       target="_blank"><?= $this->ad['seller']['homepage']['@value'] ?></a>
             <?php endif; ?>
 
-            <?php if($this->ad['seller']['mobile-seller-since']['@value'] != ""): ?>
-          <p><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] ?> <?= date($GLOBALS['TL_CONFIG']['dateFormat'] ,strtotime($this->ad['seller']['mobile-seller-since']['@value'])) ?></p>
-          <?php endif; ?>
+            <?php if(isset($this->ad['seller']['mobile-seller-since']['@value'])): ?>
+              <p><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] ?> <?= date($GLOBALS['TL_CONFIG']['dateFormat'] ,strtotime($this->ad['seller']['mobile-seller-since']['@value'])) ?></p>
+            <?php endif; ?>
           </p>
         </div>
         <?php endif; ?>
