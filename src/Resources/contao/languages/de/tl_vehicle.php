@@ -522,6 +522,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_lifting_height'] = ['Hubhöhe (mm)', '
 $GLOBALS['TL_LANG'][$strTable]['specifics_load_capacity'] = ['Ladekapazität (kg)', 'Geben Sie hier die Ladekapazität in kg ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_length'] = ['Laderaumlänge (mm)', 'Geben Sie hier die Laderaumlänge in mm ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_width'] = ['Laderaumbreite (mm)', 'Geben Sie hier die Laderaumbreite in mm ein.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_loading_space_height'] = ['Laderaumhöhe (mm)', 'Geben Sie hier die Laderaumhöhe in mm ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_manufacturer_color_name'] = ['Farbname des Herstellers', 'Geben Sie hier den Farbnamen des Fahrzeugherstellers ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_metallic'] = ['Metallic', 'Wählen Sie die Option aus, wenn es eine Metallic-Farbe ist.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_model_range'] = ['Baureihe', 'Geben Sie hier Informationen zur Baureihe des Fahrzeuges ein.'];

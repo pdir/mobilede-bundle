@@ -178,7 +178,7 @@ class ReaderElement extends ContentElement
         }
 
         if ($this->ad['specifics_first_models_production_date']) {
-            $this->ad['specifics_first_models_production_date'] = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->ad['specifics_first_models_production_date']);
+            $this->ad['specifics_first_models_production_date'] = ListingElement::formatDate($this->ad['specifics_first_models_production_date']);
         }
 
         if ($this->ad['specifics_power']) {
