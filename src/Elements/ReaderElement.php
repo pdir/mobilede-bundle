@@ -119,6 +119,10 @@ class ReaderElement extends ContentElement
                     'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
                     'key' => $feature,
                 ];
+
+                if('HYBRID_PLUGIN' === $feature) {
+                    $this->ad['hybrid_plugin'] = true;
+                }
             }
             $this->ad['features'] = $newFeatures;
         }
@@ -184,6 +188,20 @@ class ReaderElement extends ContentElement
         if ($this->ad['specifics_power']) {
             $this->ad['specifics_power'] = $this->ad['specifics_power'].' kW ('.System::getFormattedNumber($this->ad['specifics_power'] * 1.35962, 0).' PS)';
         }
+
+        $emissions = [];
+        $consumptions = [];
+
+        if($this->ad['emissions']) {
+            $emissions = json_decode($this->ad['emissions']);
+        }
+
+        if($this->ad['consumptions']) {
+            $consumptions = json_decode($this->ad['consumptions']);
+        }
+
+        $this->ad['emissions'] = $emissions;
+        $this->ad['consumptions'] = $consumptions;
 
         // images
         $newGallery = [];

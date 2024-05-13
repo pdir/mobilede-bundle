@@ -353,6 +353,20 @@ class ListingElement extends ContentElement
                 $objFilterTemplate->specifics_gearbox = $GLOBALS['TL_LANG'][$this->strTable]['specifics_gearbox']['options'][$ad['specifics_gearbox']];
             }
 
+            $emissions = [];
+            $consumptions = [];
+
+            if($ad['emissions']) {
+                $emissions = json_decode($ad['emissions']);
+            }
+
+            if($ad['consumptions']) {
+                $consumptions = json_decode($ad['consumptions']);
+            }
+
+            $objFilterTemplate->emissions = $emissions;
+            $objFilterTemplate->consumptions = $consumptions;
+
             $fuelConsumption = [];
 
             if ($ad['emission_fuel_consumption_co2_emission']) {
