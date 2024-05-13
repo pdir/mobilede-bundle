@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.5.0](https://github.com/pdir/mobilede-bundle/tree/3.5.0) – 2024-05-13
+
+- [Added] Add new emission and consumption fields
+
 ## [3.4.0](https://github.com/pdir/mobilede-bundle/tree/3.4.0) – 2024-02-08
 
 - [Added] Add option to combine filters
