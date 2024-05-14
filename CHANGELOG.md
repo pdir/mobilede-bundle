@@ -10,7 +10,7 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.5.0](https://github.com/pdir/mobilede-bundle/tree/3.5.0) – 2024-05-13
+## [3.5.0](https://github.com/pdir/mobilede-bundle/tree/3.5.0) – 2024-05-14
 
 - [Added] Add new fields emission, consumption and hybrid_plugin
 
