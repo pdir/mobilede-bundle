@@ -82,6 +82,38 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               </span></li>
             <?php endif; ?>
 
+            <?php if(isset($this->ad['emissions'])): ?>
+              <?php foreach($this->ad['emissions'] as $key=>$value): ?>
+                <?php foreach($this->ad['emissions']->$key as $key2=>$value2): ?>
+                  <li class="emissions-<?= $key ?>-<?= $key2 ?>">
+                    <?php if(!isset($this->ad['hybrid_plugin'])): ?>
+                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-'.$key.'-'.$key2] ?? 'emissions-'.$key.'-'.$key2 ?></span>
+                    <?php endif; ?>
+                    <?php if(isset($this->ad['hybrid_plugin'])): ?>
+                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-'.$key.'-'.$key2] ?? 'hybrid-emissions-'.$key.'-'.$key2 ?></span>
+                    <?php endif; ?>
+                    <span class="value"><?= $value2 ?></span>
+                  </li>
+                <?php endforeach; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(isset($this->ad['consumptions'])): ?>
+              <?php foreach($this->ad['consumptions'] as $key=>$value): ?>
+                <?php foreach($this->ad['consumptions']->$key as $key2=>$value2): ?>
+                  <li class="consumptions-<?= $key ?>-<?= $key2 ?>">
+                    <?php if(!isset($this->ad['hybrid_plugin'])): ?>
+                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key.'-'.$key2] ?? 'consumptions-'.$key.'-'.$key2 ?></span>
+                    <?php endif; ?>
+                    <?php if(isset($this->ad['hybrid_plugin'])): ?>
+                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-'.$key.'-'.$key2] ?? 'hybrid-consumptions-'.$key.'-'.$key2 ?></span>
+                    <?php endif; ?>
+                    <span class="value"><?= $value2 ?></span>
+                  </li>
+                <?php endforeach; ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
+
             <?php if(isset($this->ad['specifics'])): ?>
             <?php foreach($this->ad['specifics'] as $key=>$feature): ?>
             <li class="specifics-<?= $feature['key'] ?>">

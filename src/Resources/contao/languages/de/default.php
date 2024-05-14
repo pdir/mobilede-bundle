@@ -87,6 +87,20 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value']
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Nur Admins dürfen diese Einstellung ändern.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manuelle Konten können nicht synchronisiert werden.';
 
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] = 'CO2-Emissionen (komb.) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2-class'] = 'CO2-Klasse (komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-weighted-combined-fuel-@value'] = 'Energieverbrauch (komb.) in l/100km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-weighted-combined-power-@value'] = 'Energieverbrauch (komb.) in kWh/100km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-fuel-consumption-@combined'] = 'Kraftstoffverbrauch (komb.) in l/100km';
+
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'] = 'CO2-Emissionen (gew. komb.) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'] = 'CO2-Klasse (gew. komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2-class'] = 'CO2-Klasse (bei entladener Batterie)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energieverbrauch (gew. komb.) in l/100km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energieverbrauch (gew. komb.) in kWh/100km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-fuel-consumption-@combined'] = 'Kraftstoffverbrauch bei entladener Batterie in l/100km (komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-power-consumption-@combined'] = 'Stromverbrauch bei rein elektrischem Antrieb in l/100km (komb.)';
+
 /*
  * List View
  */
