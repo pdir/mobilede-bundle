@@ -55,10 +55,10 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         <div class="md-detail-description">
           <?php if($this->ad['vehicle_free_text'] || $this->ad['htmlDescription']): ?>
             <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-description'] ?></h2>
-            <?php if (isset($this->ad['vehicle_free_text'])): ?>
-              <?= $this->ad['vehicle_free_text'] ?>
-            <?php else: ?>
+            <?php if (isset($this->ad['htmlDescription'])): ?>
               <?= $this->ad['htmlDescription'] ?>
+            <?php elseif (isset($this->ad['vehicle_free_text'])): ?>
+              <?= $this->ad['vehicle_free_text'] ?>
             <?php endif; ?>
           <?php endif; ?>
         </div>
