@@ -12,7 +12,7 @@ Types of changes
 
 ## [3.5.1](https://github.com/pdir/mobilede-bundle/tree/3.5.1) – 2024-06-24
 
-- [Fixed] Fix mobile range sliders
+- [Fixed] Fix mobile range slider
 
 ## [3.5.0](https://github.com/pdir/mobilede-bundle/tree/3.5.0) – 2024-05-14
 
