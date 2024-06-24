@@ -199,6 +199,8 @@ class ListingElement extends ContentElement
         $assetsDir = $webDir.'/bundles/pdirmobilede';
 
         if (!$this->pdir_md_removeModuleJs) {
+            $GLOBALS['TL_JAVASCRIPT']['jQueryUi'] = 'bundles/pdirmobilede/js/jquery-ui.js|static';
+            $GLOBALS['TL_JAVASCRIPT']['jQueryUiTouchPunch'] = 'bundles/pdirmobilede/js/jquery.ui.touch-punch.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_1'] = $assetsDir.'/js/vehicle_module.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_2'] = $assetsDir.'/vendor/isotope/dist/isotope.pkgd.min.js|static';
             $GLOBALS['TL_JAVASCRIPT']['md_js_3'] = $assetsDir.'/js/URI.min.js|static';
