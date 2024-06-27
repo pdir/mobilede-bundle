@@ -500,6 +500,10 @@
         }
 
         // set sorting from hash
+        if (null === sortFilter) {
+            sortFilter = 'original-order';
+        }
+
         $('.md-select.sorting').val(sortFilter);
 
         listView.container.trigger('filter-update');
