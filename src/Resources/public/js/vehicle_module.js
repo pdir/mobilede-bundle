@@ -302,6 +302,7 @@
         $("#filterReset").on('click', function () {
             $(".md-filters input[type=checkbox]").prop("checked", false);
             $(".md-filters select").val("*");
+            $(".md-select.sorting").val("original-order");
             $(".range-slider").removeClass("updated");
 
             if(typeof $priceSlider !== 'undefined') {
@@ -528,7 +529,7 @@
     };
 
     listView.combineFilters = function (field) {
-        $('.md-select option:not([value="*"])').hide();
+        $('.md-select:not(.sorting) option:not([value="*"])').hide();
 
         if('checkbox' !== field) {
             $('.md-filter-attr.checkbox-group li').addClass('hide');
@@ -539,7 +540,7 @@
                 let filterClasses = $(this).attr('class').split(' ');
 
                 $.each( filterClasses, function( key, value ) {
-                    $('.md-select option[value=".' + value + '"]').show();
+                    $('.md-select:not(.sorting) option[value=".' + value + '"]').show();
 
                     let checkbox = $('.md-filter-attr.checkbox-group li.cb-' + value.toLowerCase());
                     if(checkbox.length > 0) {
