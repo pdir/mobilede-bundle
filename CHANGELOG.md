@@ -10,7 +10,7 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.5.2](https://github.com/pdir/mobilede-bundle/tree/3.5.2) – 2024-06-27
+## [3.5.2](https://github.com/pdir/mobilede-bundle/tree/3.5.2) – 2024-06-28
 
 - [Fixed] Fix showing sorting field
 
