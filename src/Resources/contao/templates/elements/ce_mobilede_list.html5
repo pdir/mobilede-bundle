@@ -10,7 +10,6 @@
   <?php if(!$this->hideFilters): ?>
   <div class="md-filters<?php if($this->openFilters): ?> open-filters<?php endif; ?><?php if($this->combineFilter): ?> combine-filter<?php endif; ?>">
     <?php if(!$this->openFilters): ?><button id="showFilters"><i class="demo-icon icon-filter"></i> Erweiterte Suche</button><?php endif; ?>
-    <?php if($this->onlyFilter): ?>
     <div class="md-filters-header">
       <div class="md-filter-sort button-group">
         <i class="icon-sort"></i>
@@ -28,7 +27,6 @@
         </select>
       </div>
     </div>
-    <?php endif; ?>
     <div class="md-filters-body"<?php if($this->onlyFilter): ?> style='display:block;'<?php endif; ?>>
       <?php if(isset($this->filters['make'])): ?>
       <div class="brands select-container">

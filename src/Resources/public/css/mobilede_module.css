@@ -21,6 +21,7 @@
   background: #fff;
   border: 0;
   color: #7B7B7B;
+  padding: 5px;
 }
 
 .md-filters select {
@@ -70,10 +71,6 @@
   width: inherit;
 }
 
-.md-filters .md-filters-header .md-filter-sort {
-  float: right;
-}
-
 .md-filters .md-filters-header .md-filter-sort i {
   float: left;
   display: inline-block;
@@ -86,6 +83,7 @@
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
   margin-top: 15px;
+  clear: both;
 }
 
 .md-filters .btn-shuffle {
@@ -878,6 +876,17 @@
 
 .md-filters.open-filters .md-filters-header .md-filter-sort select {
   width: auto;
+}
+
+.md-filters-header {
+  float: right;
+  padding-bottom: 15px;
+}
+
+.md-filter-sort.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
 
 @media (min-width: 768px) {
