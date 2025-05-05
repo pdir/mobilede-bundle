@@ -27,8 +27,8 @@
     }
   ],
   "require": {
-    "php": "^7.2 || ^8.0",
-    "contao/core-bundle": "^4.9",
+    "php": "^8.0",
+    "contao/core-bundle": "^4.3 || ^5.3",
     "doctrine/orm": "^2.6",
     "doctrine/annotations": "^1.6"
   },

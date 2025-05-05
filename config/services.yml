@@ -12,15 +12,6 @@ services:
      calls:
        - [setContainer, ['@service_container']]
 
-  pdir.mobile_de.dca.ad:
-    class: Pdir\MobileDeBundle\Dca\Ad
-    arguments:
-      - "@contao.framework"
-      - "@security.token_storage"
-      - "@session"
-      - "doctrine.orm.entity_manager"
-    public: true
-
   Pdir\MobileDeBundle\Migration\VehicleMigration:
     arguments:
       - '@database_connection'

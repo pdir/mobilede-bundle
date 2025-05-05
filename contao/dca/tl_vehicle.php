@@ -119,7 +119,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "int(10) unsigned NOT NULL default '0'",
         ],
         'published' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['published'],
             'exclude' => true,
             'filter' => true,
             'inputType' => 'checkbox',
@@ -127,7 +126,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "char(1) NOT NULL default ''",
         ],
         'name' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['name'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -137,7 +135,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_id' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_id'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -147,37 +144,32 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'alias' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['alias'],
             'exclude' => true,
             'search' => true,
             'inputType' => 'text',
             'eval' => ['mandatory' => true, 'rgxp' => 'alias', 'unique' => true, 'maxlength' => 128, 'tl_class' => 'w50'],
             'save_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'generateAlias'],
-            'sql' => "varchar(128) COLLATE utf8_bin NOT NULL default ''",
+            'sql' => "varchar(255) BINARY NOT NULL default ''",
         ],
         'dealer_price_amount' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['dealer_price_amount'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
             'sql' => 'float(10,2) NULL',
         ],
         'consumer_price_amount' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['consumer_price_amount'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
             'sql' => 'float(10,2) NULL',
         ],
         'pseudo_price' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['pseudo_price'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
             'sql' => 'float(10,2) NULL',
         ],
         'price_included_delivery_costs' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_included_delivery_costs'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -187,7 +179,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "char(1) NOT NULL default ''",
         ],
         'price_vatable' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_vatable'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -197,14 +188,12 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "char(1) NOT NULL default ''",
         ],
         'price_vat_rate' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_vat_rate'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['tl_class' => 'w50'],
             'sql' => 'text NULL',
         ],
         'price_vat_rating' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_vat_rating'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -215,14 +204,12 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'price_currency' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_currency'],
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['tl_class' => 'w50'],
             'sql' => 'text NULL',
         ],
         'price_rating' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['price_rating'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -233,7 +220,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'type' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['type'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -263,7 +249,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "int(10) NOT NULL default '0'",
         ],
         'creation_date' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['creation_date'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -273,7 +258,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "varchar(30) NOT NULL default ''",
         ],
         'modification_date' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['modification_date'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -283,7 +267,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "varchar(30) NOT NULL default ''",
         ],
         'vehicle_class' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_class'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -294,7 +277,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_category' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_category'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -306,7 +288,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_make' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_make'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -316,7 +297,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_model' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_model'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -326,7 +306,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_model_description' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_model_description'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -336,7 +315,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_free_text' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_free_text'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -346,7 +324,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'vehicle_damage' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['vehicle_damage'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -357,7 +334,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_exterior_color' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -368,7 +344,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_metallic' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_metallic'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -378,7 +353,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => "char(1) NOT NULL default ''",
         ],
         'specifics_manufacturer_color_name' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_manufacturer_color_name'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -388,7 +362,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_mileage' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_mileage'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -398,7 +371,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_exhaust_inspection' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_exhaust_inspection'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -408,7 +380,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_general_inspection' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_general_inspection'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -418,7 +389,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_delivery_date' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_delivery_date'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -428,7 +398,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_delivery_period' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_delivery_period'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -438,7 +407,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_door_count' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_door_count'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -449,7 +417,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_first_registration' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_first_registration'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -459,7 +426,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'specifics_emission_class' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_emission_class'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1075,7 +1041,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_inner' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_inner'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1085,7 +1050,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_outer' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_outer'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1095,7 +1059,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_combined' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1105,7 +1068,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_petrol_type' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1115,7 +1077,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_combined_power_consumption' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1125,7 +1086,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_fuel_consumption_unit' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_unit'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1139,7 +1099,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'images' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['images'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1160,7 +1119,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'blob NULL',
         ],
         'api_images' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['api_images'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1170,11 +1128,9 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'orderSRC' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['orderSRC'],
             'sql' => 'blob NULL',
         ],
         'features' => [
-            'label' => &$GLOBALS['TL_LANG'][$strTable]['features'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,
