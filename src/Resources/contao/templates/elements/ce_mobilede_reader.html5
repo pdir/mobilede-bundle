@@ -124,7 +124,13 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
           </ul>
         </div>
 
-        <?php $class = $this->ad['emission_fuel_consumption_energy_efficiency_class']; ?>
+        <?php
+        if (isset($this->ad['emissions']->combined->{'@co2-class'})) {
+          $class = $this->ad['emissions']->combined->{'@co2-class'};
+        } else {
+          $class = $this->ad['emission_fuel_consumption_energy_efficiency_class'];
+        }
+        ?>
         <?php if($class != ''): ?>
           <div class="energy-class-label">
             <div class="left-col">
