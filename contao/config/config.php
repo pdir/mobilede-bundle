@@ -48,8 +48,8 @@ if (true !== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
 ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 0, [
     'vehicleSetup' => [
         'callback' => MobileDeSetup::class,
-        #'hideInNavigation'        => true,
-        #sdisablePermissionChecks' => true
+        'hideInNavigation' => true,
+        #disablePermissionChecks' => true
     ],
 ]);
 
