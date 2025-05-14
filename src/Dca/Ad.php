@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace Pdir\MobileDeBundle\Dca;
 
 use Contao\Backend;
+use Contao\Database;
 use Contao\DataContainer;
 use Contao\Exception;
 use Contao\Image;
@@ -32,7 +33,7 @@ class Ad
 
     public function __construct()
     {
-        $this->Database = System::importStatic('Database');
+        $this->Database = Database::getInstance();
     }
 
     /**
@@ -52,7 +53,7 @@ class Ad
         // Generate an alias if there is none
         if ('' === $varValue) {
             $autoAlias = true;
-            $varValue = standardize(StringUtil::restoreBasicEntities($dc->activeRecord->name));
+            $varValue = StringUtil::standardize(StringUtil::restoreBasicEntities($dc->activeRecord->name));
         }
         $objAlias = $this->Database->prepare('SELECT id FROM tl_vehicle WHERE (id=? OR alias=?)')
             ->execute($dc->id, $varValue)
@@ -81,7 +82,7 @@ class Ad
      */
     public function generateAliasByName($varValue)
     {
-        $varValue = standardize(StringUtil::restoreBasicEntities($varValue));
+        $varValue = StringUtil::standardize(StringUtil::restoreBasicEntities($varValue));
 
         $objAlias = $this->Database->prepare('SELECT id FROM tl_vehicle WHERE alias=?')
             ->execute($varValue)
@@ -151,7 +152,7 @@ class Ad
     public function featuresOptionsCallback(DataContainer $dc)
     {
         if(!isset($dc->activeRecord->vehicle_class)) {
-            return '';
+            return [];
         }
 
         return $GLOBALS['TL_LANG']['tl_vehicle']['features_'.$dc->activeRecord->vehicle_class]['options'];
