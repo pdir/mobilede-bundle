@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -22,13 +24,13 @@ use Pdir\MobileDeBundle\PdirMobileDeBundle;
 
 class PdirMobileDeBundleTest extends ContaoTestCase
 {
-    public function testCanBeInstantiated()
+    public function testCanBeInstantiated(): void
     {
         $bundle = new PdirMobileDeBundle();
         $this->assertInstanceOf(PdirMobileDeBundle::class, $bundle);
     }
 
-    public function testGetContainerExtension()
+    public function testGetContainerExtension(): void
     {
         $bundle = new PdirMobileDeBundle();
         $this->assertInstanceOf(PdirMobileDeExtension::class, $bundle->getContainerExtension());

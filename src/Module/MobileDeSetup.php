@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -37,14 +37,12 @@ class MobileDeSetup extends BackendModule
     /**
      * mobilede version.
      */
-    const VERSION = '3.6.0';
+    public const VERSION = '3.6.0';
 
     /**
      * Extension mode.
-     *
-     * @var bool
      */
-    const MODE = 'FREE';
+    public const MODE = 'FREE';
 
     /**
      * API Url.
@@ -129,8 +127,9 @@ class MobileDeSetup extends BackendModule
 
         if ('error' === $strHelperData) {
             $this->logger->log(
-                LogLevel::ERROR, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'],
-                ['contao' => new ContaoContext($GLOBALS['TL_LANG']['tl_vehicle']['downloadError'], ContaoContext::ERROR,),]
+                LogLevel::ERROR,
+                $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'],
+                ['contao' => new ContaoContext($GLOBALS['TL_LANG']['tl_vehicle']['downloadError'], ContaoContext::ERROR, )]
             );
         }
 
@@ -164,8 +163,9 @@ class MobileDeSetup extends BackendModule
             }
 
             $this->logger->log(
-                LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'],
-                ['contao' => new ContaoContext($GLOBALS['TL_LANG']['tl_vehicle']['downloadSuccess'], ContaoContext::ERROR,),]
+                LogLevel::INFO,
+                $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'],
+                ['contao' => new ContaoContext($GLOBALS['TL_LANG']['tl_vehicle']['downloadSuccess'], ContaoContext::ERROR, )]
             );
 
             // set images

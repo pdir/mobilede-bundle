@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -30,7 +30,6 @@ use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
-use Pdir\MobileDeSyncBundle\Api\MobileDe;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReaderElement extends ContentElement
@@ -121,7 +120,7 @@ class ReaderElement extends ContentElement
                     'key' => $feature,
                 ];
 
-                if('HYBRID_PLUGIN' === $feature) {
+                if ('HYBRID_PLUGIN' === $feature) {
                     $this->ad['hybrid_plugin'] = true;
                 }
             }
@@ -193,11 +192,11 @@ class ReaderElement extends ContentElement
         $emissions = [];
         $consumptions = [];
 
-        if($this->ad['emissions']) {
+        if ($this->ad['emissions']) {
             $emissions = json_decode($this->ad['emissions']);
         }
 
-        if($this->ad['consumptions']) {
+        if ($this->ad['consumptions']) {
             $consumptions = json_decode($this->ad['consumptions']);
         }
 

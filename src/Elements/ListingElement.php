@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -21,7 +21,6 @@ namespace Pdir\MobileDeBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
-use Contao\Controller;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Date;
@@ -48,7 +47,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ListingElement extends ContentElement
 {
-    const PARAMETER_KEY = 'ad';
+    public const PARAMETER_KEY = 'ad';
 
     /**
      * Template.
@@ -166,7 +165,9 @@ class ListingElement extends ContentElement
             System::getContainer()
                 ->get('monolog.logger.contao')
                 ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], [
-                    'contao' => new ContaoContext(self::class.'::'.__FUNCTION__, ContaoContext::GENERAL,
+                    'contao' => new ContaoContext(
+                        self::class.'::'.__FUNCTION__,
+                        ContaoContext::GENERAL,
                     ), ])
             ;
         }
@@ -261,15 +262,13 @@ class ListingElement extends ContentElement
      *
      * @param array
      * @param mixed $arrAds
-     *
-     * @return array
      */
     protected function renderAdItem($arrAds): array
     {
         $arrReturn = [];
 
         foreach ($arrAds as $ad) {
-            if('' === $ad['published']) {
+            if ('' === $ad['published']) {
                 continue;
             }
 
@@ -279,6 +278,7 @@ class ListingElement extends ContentElement
 
             if (null !== $ad['api_images']) {
                 $apiImages = StringUtil::deserialize($ad['api_images']);
+
                 if (isset($apiImages['images']['image'][0]['representation'])) {
                     $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
                 }
@@ -299,7 +299,7 @@ class ListingElement extends ContentElement
                 }
             }
 
-            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && !is_null($ad['orderSRC'])) {
+            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && null !== $ad['orderSRC']) {
                 $manImages = unserialize($ad['orderSRC']);
 
                 $objFile = FilesModel::findByUuid($manImages[0]);
@@ -322,7 +322,7 @@ class ListingElement extends ContentElement
                 !$objFilterTemplate->imageSrc_M
             ) {
                 $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
-                $objFilterTemplate->imageSrc_M = isset($ad['image'])? str_replace('http://', 'https://', $ad['image']['src']): null;
+                $objFilterTemplate->imageSrc_M = isset($ad['image']) ? str_replace('http://', 'https://', $ad['image']['src']) : null;
             }
 
             $objFilterTemplate->showGrossPrice = 1 === (int) $this->pdir_md_show_gross_price;
@@ -330,11 +330,11 @@ class ListingElement extends ContentElement
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
-            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], $ad['price_vat_rate'] * 100 . ' %');
+            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], $ad['price_vat_rate'] * 100 .' %');
             $objFilterTemplate->netPrice = System::getFormattedNumber($ad['consumer_price_amount'] / (1 + $ad['price_vat_rate']), 2).' '.$ad['price_currency'];
-            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], $ad['price_vat_rate'] * 100 . ' %');
+            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], $ad['price_vat_rate'] * 100 .' %');
 
-            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && !is_null($ad['pseudo_price'])) {
+            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && null !== $ad['pseudo_price']) {
                 $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 
@@ -362,11 +362,11 @@ class ListingElement extends ContentElement
             $emissions = [];
             $consumptions = [];
 
-            if($ad['emissions']) {
+            if ($ad['emissions']) {
                 $emissions = json_decode($ad['emissions']);
             }
 
-            if($ad['consumptions']) {
+            if ($ad['consumptions']) {
                 $consumptions = json_decode($ad['consumptions']);
             }
 
@@ -495,13 +495,15 @@ class ListingElement extends ContentElement
 
     protected function getReaderPageLink($pageId)
     {
-        $paramString = sprintf('/%s/%s',
+        $paramString = sprintf(
+            '/%s/%s',
             self::PARAMETER_KEY,
             $pageId
         );
 
         if (Config::get('useAutoItem')) {
-            $paramString = sprintf('/%s',
+            $paramString = sprintf(
+                '/%s',
                 $pageId
             );
         }
