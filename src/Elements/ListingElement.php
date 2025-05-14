@@ -33,6 +33,7 @@ use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Psr\Log\LogLevel;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Provide methods to render content element "vehicle listing".
@@ -73,7 +74,7 @@ class ListingElement extends ContentElement
      */
     public function generate()
     {
-        if ('BE' === TL_MODE) {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe LIST ###';
             $objTemplate->title = $this->headline;

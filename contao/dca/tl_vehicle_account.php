@@ -16,12 +16,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Contao\DataContainer;
+use Contao\DC_Table;
+
 $strTable = 'tl_vehicle_account';
 
 $GLOBALS['TL_DCA'][$strTable] = [
     // Config
     'config' => [
-        'dataContainer' => 'Table',
+        'dataContainer' =>  DC_Table::class,
         'switchToEdit' => true,
         'enableVersioning' => true,
         'sql' => [
@@ -34,9 +37,9 @@ $GLOBALS['TL_DCA'][$strTable] = [
     // List
     'list' => [
         'sorting' => [
-            'mode' => 2,
+            'mode' => DataContainer::MODE_SORTABLE,
             'fields' => ['description'],
-            'flag' => 1,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'panelLayout' => 'sort,search,limit',
         ],
         'label' => [

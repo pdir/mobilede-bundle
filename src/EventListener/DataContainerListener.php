@@ -190,7 +190,7 @@ class DataContainerListener
             throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to import themes.');
         }
 
-        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;
+        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . $this->requestToken;
 
         if (!$row['enabled'])
         {
@@ -223,7 +223,7 @@ class DataContainerListener
             return '';
         }
 
-        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;;
+        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . $this->requestToken;
 
         if (!$row['published'])
         {

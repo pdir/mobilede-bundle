@@ -1,8 +1,9 @@
 <div id="pdirVehicleToolbar" class="be_vehicle_toolbar">
   <div class="container">
-    <div class="logo"><a href="https://pdir.de/mobilede.html" target="_blank"><img
-      src="bundles/pdirmobilede/img/icon.svg"
-      alt="Fahrzeugmanager für Contao" width="50" height="50" class="logo">&nbsp; <?= $GLOBALS['TL_LANG']['MOD']['vehicle_show'][0] ?></a>
+    <div class="logo">
+      <a href="https://pdir.de/mobilede.html" target="_blank">
+        <img src="bundles/pdirmobilede/img/icon.svg" alt="Fahrzeugmanager für Contao" width="50" height="50" class="logo">&nbsp; <?= $GLOBALS['TL_LANG']['MOD']['vehicle_show'][0] ?>
+      </a>
     </div>
     <div class="button<?php if($this->extMode == 'FREE'): ?> inactive" title="inactive in free version"<?php else: ?>"<?php endif; ?>>
       <a href="contao/main.php?do=vehicleSetup&act=import">
@@ -18,6 +19,7 @@
     </div>
   </div>
 </div>
+<p>&nbsp;</p>
 <div id="pdirVehicleInfo" class="be_vehicle_info">
   <div class="bundle_description">
     <div>

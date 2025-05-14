@@ -10,6 +10,12 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+## [3.6.0](https://github.com/pdir/mobilede-bundle/tree/3.5.2) – 2025-05-15
+
+- [Added] Support for Contao 5.3 and higher
+- [Added] New design for list and detail view
+- [Removed] Support for Contao 4.4
+
 ## [3.5.2](https://github.com/pdir/mobilede-bundle/tree/3.5.2) – 2024-07-30
 
 - [Fixed] Fix showing sorting field

@@ -20,7 +20,10 @@ declare(strict_types=1);
  * Add frontend module.
  */
 
+use Contao\ArrayUtil;
 use Contao\Combiner;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
 
 /*
  * Add content element.
@@ -32,18 +35,18 @@ $GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\Elemen
 * Backend modules
 */
 if (true !== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
-    array_insert($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
+    ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
 }
 
 $assetsDir = 'bundles/pdirmobilede';
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 0, [
+ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 0, [
     'vehicleSetup' => [
         'callback' => 'Pdir\MobileDeBundle\Module\MobileDeSetup',
     ],
 ]);
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
+ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 1, [
     'vehicle_show' => [
         'tables' => ['tl_vehicle'],
         'icon' => $assetsDir.'/img/icon.png',
@@ -54,7 +57,7 @@ array_insert($GLOBALS['BE_MOD']['pdir'], 1, [
     ],
 ]);
 
-array_insert($GLOBALS['BE_MOD']['pdir'], 0, []);
+ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 0, []);
 
 /*
  * Models
@@ -78,7 +81,7 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = ['pdir.mobileDe.listener.hooks', 
  * Back end styles & css
  */
 
-if ('BE' === TL_MODE) {
+if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
     if (!isset($GLOBALS['TL_JAVASCRIPT'])) {
         $GLOBALS['TL_JAVASCRIPT'] = [];
     }

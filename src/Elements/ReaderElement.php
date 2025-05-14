@@ -31,6 +31,7 @@ use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Pdir\MobileDeSyncBundle\Api\MobileDe;
+use Symfony\Component\HttpFoundation\Request;
 
 class ReaderElement extends ContentElement
 {
@@ -53,7 +54,7 @@ class ReaderElement extends ContentElement
      */
     public function generate()
     {
-        if (TL_MODE === 'BE') {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe READER ###';
             $objTemplate->title = $this->headline;
