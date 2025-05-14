@@ -92,9 +92,9 @@ class HooksListener
             );
         }
 
-        $readerPage = PageModel::findPublishedByIdOrAlias($readerPageId)->current()->row();
+        $readerPage = PageModel::findOneById($readerPageId);
 
-        return Controller::generateFrontendUrl($readerPage, $paramString);
+        return $readerPage->getFrontendUrl($paramString);
     }
 
     /**

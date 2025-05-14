@@ -21,6 +21,7 @@ namespace Pdir\MobileDeBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
+use Contao\Controller;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Date;
@@ -505,7 +506,9 @@ class ListingElement extends ContentElement
             );
         }
 
-        return $this->generateFrontendUrl($this->readerPage, $paramString);
+        $readerPage = PageModel::findOneById($this->readerPage['id']);
+
+        return $readerPage->getFrontendUrl($paramString);
     }
 
     protected function getFilterClasses($ad)
