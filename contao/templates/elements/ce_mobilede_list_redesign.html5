@@ -1,7 +1,8 @@
 <!-- indexer::stop -->
 <?php
 $GLOBALS['TL_CSS'][] = 'bundles/pdirmobilede/css/jquery-ui.css|static';
-$GLOBALS['TL_CSS']['md_css_3'] = 'bundles/pdirmobilede/scss/vehicle-list.scss||static';
+$GLOBALS['TL_CSS']['md_css_3'] = '';
+$GLOBALS['TL_CSS'][''] = 'bundles/pdirmobilede/scss/vehicle-list.scss|static';
 ?>
 
 <div class="<?php echo $this->class; ?> block<?php if($this->onlyFilter): ?> only-filter<?php endif; ?>"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>

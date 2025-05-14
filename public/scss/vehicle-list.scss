@@ -213,8 +213,7 @@
           list-style: none;
           padding: 0;
           margin: 0;
-          color: #777;
-          font-size: .8em;
+          font-size: .9em;
 
           li {
             margin-bottom: 0.2em;
@@ -285,4 +284,10 @@
 
 #mileageSlider .ui-slider-handle:nth-of-type(2):after {
   content: attr(data-mileage-max);
+}
+
+.pseudo-price {
+  text-decoration: line-through;
+  font-size: .8em;
+  margin-left: 10px;
 }
