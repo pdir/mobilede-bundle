@@ -23,13 +23,18 @@ declare(strict_types=1);
 use Contao\ArrayUtil;
 use Contao\Combiner;
 use Contao\System;
+use Pdir\MobileDeBundle\Elements\ListingElement;
+use Pdir\MobileDeBundle\Elements\ReaderElement;
+use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Symfony\Component\HttpFoundation\Request;
+
+$assetsDir = 'bundles/pdirmobilede';
 
 /*
  * Add content element.
  */
-$GLOBALS['TL_CTE']['includes']['mobileDeList'] = 'Pdir\\MobileDeBundle\\Elements\\ListingElement';
-$GLOBALS['TL_CTE']['includes']['mobileDeReader'] = 'Pdir\\MobileDeBundle\\Elements\\ReaderElement';
+$GLOBALS['TL_CTE']['includes']['mobileDeList'] = ListingElement::class;
+$GLOBALS['TL_CTE']['includes']['mobileDeReader'] = ReaderElement::class;
 
 /*
 * Backend modules
@@ -38,11 +43,9 @@ if (true !== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
     ArrayUtil::arrayInsert($GLOBALS['BE_MOD'], 1, ['pdir' => []]);
 }
 
-$assetsDir = 'bundles/pdirmobilede';
-
 ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 0, [
     'vehicleSetup' => [
-        'callback' => 'Pdir\MobileDeBundle\Module\MobileDeSetup',
+        'callback' => MobileDeSetup::class,
     ],
 ]);
 

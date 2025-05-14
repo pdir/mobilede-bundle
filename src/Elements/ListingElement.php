@@ -21,6 +21,7 @@ namespace Pdir\MobileDeBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
+use Contao\Controller;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Date;
@@ -101,7 +102,7 @@ class ListingElement extends ContentElement
             $this->strItemTemplate = $this->pdir_md_itemTemplate;
         }
 
-        $this->pdirVehicleFilterWhere = $this->replaceInsertTags($this->pdirVehicleFilterWhere, false);
+        $this->pdirVehicleFilterWhere = Controller::replaceInsertTags($this->pdirVehicleFilterWhere, false);
 
         // prepare data for sql
         $strWhere = '';
