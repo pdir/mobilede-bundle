@@ -52,7 +52,7 @@
       <div class="left">
         <?php if($this->extModeTxt === 'Vollversion'): ?>
         <div class="button">
-          <a href="/contao/main.php?do=mobileDeSetup&act=import">
+          <a href="<?= Contao\System::getContainer()->get('router')->generate('contao_backend') ?>?do=mobileDeSetup&act=import">
             <div class="kreis">
               <img src="bundles/pdirmobilede/img/icon_index.png" alt="Import starten" width="60" height="60"/>
             </div>
@@ -62,7 +62,7 @@
         </div>
         <?php endif; ?>
         <div class="button">
-          <a href="/contao/main.php?do=mobileDeSetup&act=download">
+          <a href="<?= Contao\System::getContainer()->get('router')->generate('contao_backend') ?>?do=mobileDeSetup&act=download">
             <div class="kreis">
               <img src="bundles/pdirmobilede/img/icon_download.png"
                alt="Demo Daten importieren" width="60" height="60"/>

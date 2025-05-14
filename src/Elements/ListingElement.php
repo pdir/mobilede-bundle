@@ -21,7 +21,6 @@ namespace Pdir\MobileDeBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
-use Contao\Controller;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Date;
@@ -81,7 +80,7 @@ class ListingElement extends ContentElement
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
-            $objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
+            $objTemplate->href = Contao\System::getContainer()->get('router')->generate('contao_backend').'?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
 
             return $objTemplate->parse();
         }
@@ -102,7 +101,9 @@ class ListingElement extends ContentElement
             $this->strItemTemplate = $this->pdir_md_itemTemplate;
         }
 
-        $this->pdirVehicleFilterWhere = Controller::replaceInsertTags($this->pdirVehicleFilterWhere, false);
+        $insertTagParser = System::getContainer()->get('contao.insert_tag.parser');
+
+        $this->pdirVehicleFilterWhere = $insertTagParser->replaceInline($this->pdirVehicleFilterWhere, false);
 
         // prepare data for sql
         $strWhere = '';
@@ -113,7 +114,7 @@ class ListingElement extends ContentElement
         }
 
         // Get the selected records
-        $strQuery = 'SELECT '.implode(', ', array_map('Database::quoteIdentifier', $arrFields));
+        $strQuery = 'SELECT '.implode(', ', array_map('Contao\Database::quoteIdentifier', $arrFields));
 
         $strQuery .= ' FROM '.$this->strTable;
 
@@ -164,7 +165,7 @@ class ListingElement extends ContentElement
             System::getContainer()
                 ->get('monolog.logger.contao')
                 ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], [
-                    'contao' => new ContaoContext(self::class.'::'.__FUNCTION__, TL_GENERAL
+                    'contao' => new ContaoContext(self::class.'::'.__FUNCTION__, ContaoContext::GENERAL,
                     ), ])
             ;
         }

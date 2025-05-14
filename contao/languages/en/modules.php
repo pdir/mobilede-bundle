@@ -47,8 +47,8 @@ $GLOBALS['TL_LANG']['MOD']['vehicle']['help_h2'] = 'Hilfe & Links';
 $GLOBALS['TL_LANG']['MOD']['vehicle']['optionalBundles'] = 'Optionale Erweiterungen';
 
 $GLOBALS['TL_LANG']['MOD']['vehicle']['buttons'] = [
-    ['href' => 'contao/main.php?do=vehicleSetup&act=import', 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
-    ['href' => 'contao/main.php?do=vehicleSetup&act=download', 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
+    ['href' => Contao\System::getContainer()->get('router')->generate('contao_backend').'?do=vehicleSetup&act=import', 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'], 'image' => 'bundles/pdirmobilede/img/icon_index.png'],
+    ['href' => Contao\System::getContainer()->get('router')->generate('contao_backend').'?do=vehicleSetup&act=download', 'target' => '_blank', 'alt' => $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'], 'image' => 'bundles/pdirmobilede/img/icon_download.png'],
 ];
 
 $GLOBALS['TL_LANG']['MOD']['vehicle']['setupLinks'] = [

@@ -6,13 +6,13 @@
       </a>
     </div>
     <div class="button<?php if($this->extMode == 'FREE'): ?> inactive" title="inactive in free version"<?php else: ?>"<?php endif; ?>>
-      <a href="contao/main.php?do=vehicleSetup&act=import">
+      <a href="<?= Contao\System::getContainer()->get('router')->generate('contao_backend') ?>?do=vehicleSetup&act=import">
         <img src="bundles/pdirmobilede/img/icon_index.png" alt="<?= $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] ?>" width="30" height="30" />
         <?= $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport']  ?>
       </a>
     </div>
     <div class="button">
-      <a href="contao/main.php?do=vehicleSetup&act=download" onclick="if(!confirm('Should the table really be emptied?'))return false;Backend.getScrollOffset()">
+      <a href="<?= Contao\System::getContainer()->get('router')->generate('contao_backend') ?>?do=vehicleSetup&act=download" onclick="if(!confirm('Should the table really be emptied?'))return false;Backend.getScrollOffset()">
         <img src="bundles/pdirmobilede/img/icon_download.png" alt="<?= $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'] ?>" width="30" height="30" />
         <?= $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runDownload'] ?>
       </a>

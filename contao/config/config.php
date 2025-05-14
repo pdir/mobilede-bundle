@@ -25,6 +25,8 @@ use Contao\Combiner;
 use Contao\System;
 use Pdir\MobileDeBundle\Elements\ListingElement;
 use Pdir\MobileDeBundle\Elements\ReaderElement;
+use Pdir\MobileDeBundle\Model\VehicleModel;
+use Pdir\MobileDeBundle\Model\VehicleAccountModel;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -46,6 +48,8 @@ if (true !== array_key_exists('pdir', $GLOBALS['BE_MOD'])) {
 ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 0, [
     'vehicleSetup' => [
         'callback' => MobileDeSetup::class,
+        #'hideInNavigation'        => true,
+        #sdisablePermissionChecks' => true
     ],
 ]);
 
@@ -65,8 +69,8 @@ ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['pdir'], 0, []);
 /*
  * Models
  */
-$GLOBALS['TL_MODELS']['tl_vehicle'] = 'Pdir\MobileDeBundle\Model\VehicleModel';
-$GLOBALS['TL_MODELS']['tl_vehicle_account'] = 'Pdir\MobileDeBundle\Model\VehicleAccountModel';
+$GLOBALS['TL_MODELS']['tl_vehicle'] = VehicleModel::class;
+$GLOBALS['TL_MODELS']['tl_vehicle_account'] = VehicleAccountModel::class;
 
 /*
  * Register auto_item

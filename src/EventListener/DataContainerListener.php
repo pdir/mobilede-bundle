@@ -47,6 +47,7 @@ class DataContainerListener
     public function __construct()
     {
         $this->user = BackendUser::getInstance();
+        $this->requestToken = System::getContainer()->get('contao.csrf.token_manager')->getDefaultTokenValue();
     }
 
     /**
