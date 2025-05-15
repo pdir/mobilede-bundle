@@ -4,7 +4,7 @@ $GLOBALS['TL_CSS'][''] = 'bundles/pdirmobilede/scss/vehicle-detail.scss||static'
 global $objPage;
 // Meta Angaben
 $objPage->title = $this->ad['name'];
-$description = strip_tags(str_replace('</p>',' ',$this->ad['htmlDescription']));
+$description = strip_tags(str_replace('</p>',' ',$this->ad['vehicle_free_text']));
 $objPage->description = \Contao\StringUtil::substrHtml($description, 320);
 $text = $objPage->title.' '.$objPage->description;
 preg_match_all("/[a-z0-9\-]{4,}/i", $text, $matches);
@@ -34,9 +34,9 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         <div class="ce_sliderStart block">
           <div class="content-slider" data-config="4000,300,0,1">
             <div class="slider-wrapper">
-              <?php if($this->ad['images'] && isset($this->ad['images']['XXL'])): ?>
-                <?php foreach($this->ad['images']['XXL'] as $key => $img): ?>
-                  <div class="slide"><img src="<?= $img ?>"/></div>
+              <?php if($this->ad['images']): ?>
+                <?php foreach($this->ad['images'] as $image): ?>
+                  <div class="slide"><?php $this->insert('image', $image); ?></div>
                 <?php endforeach; ?>
               <?php else: ?>
                 <picture>
@@ -45,7 +45,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               <?php endif; ?>
             </div>
           </div>
-          <?php if($this->ad['images'] && isset($this->ad['images']['XXL'])): ?>
+          <?php if($this->ad['images']): ?>
             <nav class="slider-control">
               <a href="#" class="slider-prev"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['prev'] ?></a>
               <span class="slider-menu"></span>
@@ -200,7 +200,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
             <?php if($this->ad['vehicle_class']): ?>
             <li class="attr-bodyType"><span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_class'][0] ?></span><span class="value"><?= $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_class']['options'][$this->ad['vehicle_class']] ?></span></li>
             <?php endif; ?>
-            <?php if($this->ad['sellerInventoryKey']): ?>
+            <?php if(isset($this->ad['sellerInventoryKey'])): ?>
             <li class="seller-inventory-key"><span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['sellerInventoryKey'][0] ?></span><span class="value"><?= $this->ad['sellerInventoryKey'] ?></span></li>
             <?php endif; ?>
           </ul>
@@ -243,10 +243,12 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
         <?php endif; ?>
 
+        <?php if ($this->form): ?>
         <div class="md-detail-box additional-form">
           <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-contact-form'] ?></h2>
-          {{insert_form::6}}
+          {{insert_form::<?= $this->form ?>}}
         </div>
+        <?php endif; ?>
       </div>
     </div>
     <div class="md-detail-footer">

@@ -22,6 +22,7 @@ use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\File\Metadata;
 use Contao\Environment;
 use Contao\File;
 use Contao\FilesModel;
@@ -192,11 +193,11 @@ class ReaderElement extends ContentElement
         $emissions = [];
         $consumptions = [];
 
-        if ($this->ad['emissions']) {
+        if (isset($this->ad['emissions'])) {
             $emissions = json_decode($this->ad['emissions']);
         }
 
-        if ($this->ad['consumptions']) {
+        if (isset($this->ad['consumptions'])) {
             $consumptions = json_decode($this->ad['consumptions']);
         }
 
@@ -228,20 +229,20 @@ class ReaderElement extends ContentElement
                 $objFile = FilesModel::findByUuid($uuid);
 
                 if ($objFile) {
-                    if (!isset($newGallery['XXL'])) {
-                        $newGallery['XXL'] = [];
-                    }
+                    $metadata = new Metadata([
+                        Metadata::VALUE_ALT => $this->ad['name']
+                    ]);
 
-                    $newGallery['XXL'][] = $this->getImageByPath($objFile->path, 'XXL');
-
-                    if (!isset($newGallery['original'])) {
-                        $newGallery['original'] = [];
-                    }
-
-                    $newGallery['original'][] = [
-                        'path' => $objFile->path,
-                        'uuid' => $uuid,
-                    ];
+                    $figure = System::getContainer()
+                        ->get('contao.image.studio')
+                        ->createFigureBuilder()
+                        ->from($objFile->path)
+                        ->setSize($this->size)
+                        ->setMetadata($metadata)
+                        ->enableLightbox('1' === $this->fullsize || true === $this->fullsize ? true : false)
+                        ->buildIfResourceExists()
+                    ;
+                    $newGallery[] = $figure->getLegacyTemplateData();
                 }
             }
         }
@@ -347,7 +348,7 @@ class ReaderElement extends ContentElement
 
         $this->ad['fuelConsumption'] = $fuelConsumption;
 
-        if ($this->ad['sellerInfo']) {
+        if (isset($this->ad['sellerInfo'])) {
             $this->ad['seller'] = json_decode($this->ad['sellerInfo'], true);
         }
 
@@ -361,6 +362,7 @@ class ReaderElement extends ContentElement
         $this->ad['images'] = $newGallery;
 
         $this->Template->ad = $this->ad;
+        $this->Template->form = $this->pdirVehicleReaderForm;
 
         // Debug mode
         if ($this->pdir_md_enableDebugMode) {

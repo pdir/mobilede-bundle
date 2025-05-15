@@ -1,14 +1,45 @@
 .md-filters {
-  background-color: #f9f9f9;
+  background-color: #fff;
   border-radius: 0.3em;
   padding: 1.5em;
   box-shadow: 0 0.1em 0.2em rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &:not(.open-filters) .md-filters-body {
+    display: none;
+  }
+
+  .button-group {
+    margin: 0;
+    align-items: center;
+  }
+
+  .md-filters-body {
+    width: 100%;
+    padding: 20px 0 0;
+  }
 
   .md-filters-header {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1em;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      justify-content: flex-start;
+      margin: 20px 0 0;
+    }
+  }
+
+  .md-select {
+    width: 100%;
+    padding: 0.5em 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 0.2em;
   }
 
   .md-filters-select {
@@ -17,19 +48,20 @@
     gap: 0.5em;
     margin-bottom: 1.5em;
 
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, minmax(10em, 1fr));
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(1, minmax(10em, 1fr));
+    }
+
     .select-container {
       label {
         display: block;
         margin-bottom: 0.3em;
         font-weight: bold;
         color: #333;
-      }
-
-      .md-select {
-        width: 100%;
-        padding: 0.5em 0.8em;
-        border: 1px solid #ccc;
-        border-radius: 0.2em;
       }
     }
   }
@@ -100,7 +132,7 @@
     }
   }
 
-  .filter-reset, .submit {
+  .filter-reset, .submit, #showFilters {
     display: inline-block;
     padding: 0.7em 1em;
     background-color: #dc3545;
@@ -109,6 +141,7 @@
     border-radius: 0.2em;
     text-decoration: none;
     font-size: 1em;
+    cursor: pointer;
 
     &:hover {
       background-color: darken(#dc3545, 10%);
@@ -140,9 +173,13 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      background-color: #f9f9f9;
+      background-color: #fff;
       border-radius: 0.3em;
       box-shadow: 0 0.1em 0.2em rgba(0, 0, 0, 0.1);
+
+      figure {
+        margin: 0;
+      }
 
       .image {
         position: relative;

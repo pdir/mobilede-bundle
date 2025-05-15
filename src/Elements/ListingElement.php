@@ -21,6 +21,7 @@ namespace Pdir\MobileDeBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
+use Contao\CoreBundle\File\Metadata;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Date;
@@ -305,14 +306,21 @@ class ListingElement extends ContentElement
                 $objFile = FilesModel::findByUuid($manImages[0]);
 
                 if ($objFile) {
-                    $imageObj = new Image(new File($objFile->path));
-                    $objFilterTemplate->imageSrc_S = $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_XL = $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_L = $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_M = $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_ICON = $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_ORIGINAL = $objFile->path;
-                    $objFilterTemplate->imageSrc_XXL = $imageObj->setTargetWidth(1600)->setTargetHeight(800)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                    $metadata = new Metadata([
+                        Metadata::VALUE_ALT => $ad['name']
+                    ]);
+
+                    $figure = System::getContainer()
+                        ->get('contao.image.studio')
+                        ->createFigureBuilder()
+                        ->from($objFile->path)
+                        ->setSize($this->size)
+                        ->setMetadata($metadata)
+                        ->buildIfResourceExists()
+                    ;
+
+                    $objFilterTemplate->image = true;
+                    $figure?->applyLegacyTemplateData($objFilterTemplate, null, $this->floating);
                 }
             }
 
@@ -362,11 +370,11 @@ class ListingElement extends ContentElement
             $emissions = [];
             $consumptions = [];
 
-            if ($ad['emissions']) {
+            if (isset($ad['emissions'])) {
                 $emissions = json_decode($ad['emissions']);
             }
 
-            if ($ad['consumptions']) {
+            if (isset($ad['consumptions'])) {
                 $consumptions = json_decode($ad['consumptions']);
             }
 

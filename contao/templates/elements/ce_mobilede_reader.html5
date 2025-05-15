@@ -33,10 +33,10 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         <div class="ce_sliderStart block">
           <div class="content-slider" data-config="4000,300,0,1">
             <div class="slider-wrapper">
-              <?php if($this->ad['images'] && isset($this->ad['images']['XXL'])): ?>
-                <?php foreach($this->ad['images']['XXL'] as $key => $img): ?>
-                  <div class="slide"><img src="<?= $img ?>"/></div>
-                <?php endforeach; ?>
+              <?php if($this->ad['images']): ?>
+              <?php foreach($this->ad['images'] as $image): ?>
+              <div class="slide"><?php $this->insert('image', $image); ?></div>
+              <?php endforeach; ?>
               <?php else: ?>
                 <picture>
                   <img src="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg" srcset="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1.5x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 2x"  alt="Fahrzeug Platzhalter">
@@ -44,7 +44,7 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               <?php endif; ?>
             </div>
           </div>
-          <?php if($this->ad['images'] && isset($this->ad['images']['XXL'])): ?>
+          <?php if($this->ad['images']): ?>
             <nav class="slider-control">
               <a href="#" class="slider-prev"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['prev'] ?></a>
               <span class="slider-menu"></span>
@@ -242,10 +242,12 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
         <?php endif; ?>
 
-        <div class="md-detail-box additional-form">
-          <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-contact-form'] ?></h2>
-          {{insert_form::6}}
-        </div>
+        <?php if ($this->form): ?>
+          <div class="md-detail-box additional-form">
+            <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-contact-form'] ?></h2>
+            {{insert_form::<?= $this->form ?>}}
+          </div>
+        <?php endif; ?>
       </div>
     </div>
     <div class="md-detail-footer">

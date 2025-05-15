@@ -1,117 +1,84 @@
 <?php if($this->desc == ''): return ''; endif; ?>
-<div class="item md-ad-box vehicle-item <?= $this->filterClasses ?><?php if($this->onlyFilter): ?> hidden<?php endif; ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>" data-acc="<?= $this->account ?>">
-  <div class="inside">
-  <?php if(!$this->onlyFilter): ?>
-  <div class="image">
-    <?php if($this->imageSrc_L): ?>
-      <picture>
-        <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>">
-      </picture>
-    <?php else: ?>
-      <picture>
-        <img src="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg" srcset="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1.5x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 2x"  alt="Fahrzeug Platzhalter">
-      </picture>
-    <?php endif; ?>
-  </div>
-  <h2 class="title">
-    <?= $this->desc ?>
-  </h2>
-  <div class="price">
-    <?php if($this->showGrossPrice): ?>
-      <span class="gross-price">
+<a href="<?= $this->link ?>" class="item md-ad-box <?= $this->filterClasses ?><?php if($this->onlyFilter): ?> hidden<?php endif; ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>" data-acc="<?= $this->account ?>">
+<?php if(!$this->onlyFilter): ?>
+<div class="image">
+  <?php if($this->image): ?>
+    <?php $this->insert('image', $this->arrData); ?>
+  <?php else: ?>
+  <picture>
+    <img src="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg" srcset="bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 1.5x, bundles/pdirmobilede/img/fahrzeugmanager_platzhalter.jpg 2x"  alt="Fahrzeug Platzhalter">
+  </picture>
+  <?php endif; ?>
+</div>
+<div class="price">
+  <?php if($this->showGrossPrice): ?>
+  <span class="gross-price">
         <?= $this->price ?>
-        <?php if(isset($this->pseudoPrice)): ?><span class="pseudo-price"><?= $this->pseudoPrice ?></span><?php endif; ?>
-        <span class="price-label"> <?= $this->priceLabel ?></span></span>
-    <?php endif; ?>
+    <?php if(isset($this->pseudoPrice)): ?><span class="pseudo-price"><?= $this->pseudoPrice ?></span><?php endif; ?>
+    <span class="price-label"> <?= $this->priceLabel ?></span></span>
+  <?php endif; ?>
 
-    <?php if($this->showNetPrice): ?>
-      <span class="net-price"><?= $this->netPrice ?><span class="price-label"> <?= $this->netPriceLabel ?></span></span>
-    <?php endif; ?>
-  </div>
-  <div class="vehicle-fields">
-    <ul>
-      <?php if (isset($this->rawData['specifics_power'])): ?>
-        <li>
-          <span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_power'][0] ?></span>
-          <span class="value"><?= $this->rawData['specifics_power'] ?></span>
-        </li>
+  <?php if($this->showNetPrice): ?>
+  <span class="net-price"><?= $this->netPrice ?><span class="price-label"> <?= $this->netPriceLabel ?></span></span>
+  <?php endif; ?>
+</div>
+<div class="detail">
+  <!-- Header -->
+  <header class="clearfix">
+
+    <h5 class="title">
+      <?= $this->desc ?>
+    </h5>
+    <ul class="custom-list">
+      <?php if($this->power): ?>
+      <li>
+        <i class="icon-gauge"></i><?= $this->power ?>
+      </li>
       <?php endif; ?>
-      <?php if (isset($this->rawData['specifics_power'])): ?>
-        <li>
-          <span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_fuel'][0] ?></span>
-          <span class="value"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_fuel']['options'][$this->rawData['specifics_fuel']] ?></span>
-        </li>
+      <?php if($this->fuelType): ?>
+      <li>
+        <?= $this->fuelType ?>
+      </li>
       <?php endif; ?>
-      <?php if (isset($this->rawData['specifics_gearbox'])): ?>
-        <li>
-          <span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_gearbox'][0] ?></span>
-          <span class="value"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_gearbox']['options'][$this->rawData['specifics_gearbox']] ?></span>
-        </li>
-      <?php endif; ?>
-      <?php if (isset($this->rawData['specifics_first_registration'])): ?>
-        <li>
-          <span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_first_registration'][0] ?></span>
-          <span class="value"><?= $this->rawData['specifics_first_registration'] ?></span>
-        </li>
-      <?php endif; ?>
-      <?php if (isset($this->rawData['specifics_mileage'])): ?>
-        <li>
-          <span class="label"><?= $GLOBALS['TL_LANG']['tl_vehicle']['specifics_mileage'][0] ?></span>
-          <span class="value"><?= $this->rawData['specifics_mileage'] ?></span>
-        </li>
+      <?php if($this->transmission): ?>
+      <li class="last">
+        <?= $this->transmission ?>
+      </li>
       <?php endif; ?>
     </ul>
-  </div>
-  <div class="detail">
-    <!-- Fuel and type -->
+  </header>
+  <!-- Fuel and type -->
+  <p>
     <?php if(is_array($this->fuelConsumption) && count($this->fuelConsumption) > 0): ?>
-      <ul class="fuelConsumption fields">
-        <?php foreach($this->fuelConsumption as $fuelItem): ?>
-          <li><span class="label"><?= $fuelItem['label'] ?>:</span><span class="value"><?= $fuelItem['value'] ?></span></li>
-        <?php endforeach; ?>
-      </ul>
+    <?php foreach($this->fuelConsumption as $fuelItem): ?>
+    <?= $fuelItem['label'] ?>: <?= $fuelItem['value'] ?><br>
+    <?php endforeach; ?>
     <?php endif; ?>
-
-    <?php if(isset($this->emissions)): ?>
-      <ul class="emissions fields">
-        <?php foreach($this->emissions as $key=>$value): ?>
-          <?php foreach($this->emissions->$key as $key2=>$value2): ?>
-            <li class="emissions-<?= $key ?>-<?= $key2 ?>">
-              <?php if(!isset($this->ad['hybrid_plugin'])): ?>
-                <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-'.$key.'-'.$key2] ?? 'emissions-'.$key.'-'.$key2 ?>:</span>
-              <?php endif; ?>
-              <?php if(isset($this->ad['hybrid_plugin'])): ?>
-                <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-'.$key.'-'.$key2] ?? 'hybrid-emissions-'.$key.'-'.$key2 ?>:</span>
-              <?php endif; ?>
-              <span class="value"><?= $value2 ?></span>
-            </li>
-          <?php endforeach; ?>
-        <?php endforeach; ?>
-      </ul>
-    <?php endif; ?>
-
-    <?php if(isset($this->consumptions)): ?>
-      <ul class="consumptions fields">
-        <?php foreach($this->consumptions as $key=>$value): ?>
-          <?php foreach($this->consumptions->$key as $key2=>$value2): ?>
-            <li class="consumptions-<?= $key ?>-<?= $key2 ?>">
-              <?php if(!isset($this->ad['hybrid_plugin'])): ?>
-                <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key.'-'.$key2] ?? 'consumptions-'.$key.'-'.$key2 ?>:</span>
-              <?php endif; ?>
-              <?php if(isset($this->ad['hybrid_plugin'])): ?>
-                <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-'.$key.'-'.$key2] ?? 'hybrid-consumptions-'.$key.'-'.$key2 ?>:</span>
-              <?php endif; ?>
-              <span class="value"><?= $value2 ?></span>
-            </li>
-          <?php endforeach; ?>
-        <?php endforeach; ?>
-      </ul>
-    <?php endif; ?>
+    <?php if($this->usageType): ?><?= $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_class']['options'][$this->bodyType] ?>, <?= $this->usageType ?><?php endif; ?>
+  </p>
+  <!-- Features List -->
+  <div class="features-area">
+    <ul class="features-list clearfix">
+      <li>
+        <i class="icon-calendar-times-o"></i>
+        <span><?= $this->firstRegistration ?></span>
+      </li>
+      <li>
+        <i class="icon-road"></i>
+        <span><?= $this->mileage ?><?php #= number_format($this->mileage, 2, "," ,".") ?> km</span>
+      </li>
+    </ul>
   </div>
 
-  <a href="<?= $this->link ?>" class="btn">Zum Fahrzeug</a>
+  <div class="md-ad-box-overlap-wrapper">
+    <h2><?= $this->desc ?></h2>
 
-  <?php endif; ?>
+    <div class="md-ad-box-overlap-btns-area">
+      <div class="overlap-btn"><i class="icon-picture"></i></div>
+    </div>
   </div>
 </div>
+
+<?php endif; ?>
+</a>
 <!-- mobilede ad box end-->

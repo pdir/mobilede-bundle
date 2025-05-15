@@ -53,3 +53,4 @@ $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSearch'] = ['Searchable fiel
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterSort'] = ['Order by', 'Here you can enter a comma separated list of fields to sort the results by.'];
 $GLOBALS['TL_LANG']['tl_content']['pdirVehicleFilterMaxItems'] = ['Maximum number', 'Here you can enter a maximum number, only so many vehicles will be displayed. [Use "10" for the first 10 vehicles or "10, 10" for vehicle 11-20.]'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_open_filter'] = ['Show filter unfolded', 'Activate the checkbox to show all filters expanded by default.'];
+$GLOBALS['TL_LANG']['tl_content']['pdirVehicleReaderForm'] = ['Contact form', 'Here you can select a contact form, which will be displayed in the detailed view.'];
