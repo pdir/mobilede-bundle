@@ -22,6 +22,7 @@ use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
 use Contao\CoreBundle\File\Metadata;
 use Contao\Environment;
 use Contao\File;
@@ -363,6 +364,42 @@ class ReaderElement extends ContentElement
 
         $this->Template->ad = $this->ad;
         $this->Template->form = $this->pdirVehicleReaderForm;
+
+        // Get page model
+        $page = $GLOBALS['objPage'] ?? $this->getPageModel();
+
+        // Set metadata
+        $page->pageTitle = $this->ad['name'];
+        $page->description = htmlspecialchars(wordwrap( $this->ad['vehicle_free_text'], 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+
+        // Overwrite the page metadata (see #2853, #4955 and #87)
+        $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
+
+        if ($responseContext && $responseContext->has(HtmlHeadBag::class))
+        {
+            /** @var HtmlHeadBag $htmlHeadBag */
+            $htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
+            $htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
+
+            if ($page->pageTitle)
+            {
+                $htmlHeadBag->setTitle($page->pageTitle); // Already stored decoded
+            }
+            elseif ($page->headline)
+            {
+                $htmlHeadBag->setTitle($htmlDecoder->inputEncodedToPlainText($page->headline));
+            }
+
+            if ($page->description)
+            {
+                $htmlHeadBag->setMetaDescription($htmlDecoder->inputEncodedToPlainText($page->description));
+            }
+
+            if ($page->robots)
+            {
+                $htmlHeadBag->setMetaRobots($page->robots);
+            }
+        }
 
         // Debug mode
         if ($this->pdir_md_enableDebugMode) {
