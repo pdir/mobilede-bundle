@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -25,11 +25,11 @@ use Contao\CoreBundle\Security\ContaoCorePermissions;
 use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
 use Contao\Image;
-use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
-use Pdir\MobileDeBundle\Module\MobileDeSetup;
+use Contao\User;
 use Pdir\MobileDeBundle\Model\VehicleAccountModel;
+use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Pdir\MobileDeSyncBundle\Module\Sync;
 
 class DataContainerListener
@@ -37,7 +37,7 @@ class DataContainerListener
     use ListenerHelperTrait;
 
     /**
-     * @var BackendUser|\Contao\User
+     * @var BackendUser|User
      */
     private $user;
 
@@ -47,6 +47,7 @@ class DataContainerListener
     public function __construct()
     {
         $this->user = BackendUser::getInstance();
+        $this->requestToken = System::getContainer()->get('contao.csrf.token_manager')->getDefaultTokenValue();
     }
 
     /**
@@ -86,14 +87,14 @@ class DataContainerListener
     }
 
     /**
-     * Get elements templates
+     * Get elements templates.
+     *
      * @param string $strTmpl
      */
     public function getElementsTemplates(DataContainer $dc, $strTmpl = 'list'): array
     {
         return Controller::getTemplateGroup('ce_mobilede_'.$strTmpl);
     }
-
 
     /**
      * @Callback(
@@ -175,29 +176,25 @@ class DataContainerListener
      */
     public function visibleButtonCallback(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
     {
-
         $security = System::getContainer()->get('security.helper');
 
         // Contao 5.13 and 5 / Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled'))
-        {
+        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled')) {
             return '';
         }
 
         // Contao 4.9 / Check the permissions (see #5835)
-        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('enabled', 'tl_vehicle_account'))
-        {
+        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('enabled', 'tl_vehicle_account')) {
             throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to import themes.');
         }
 
-        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;
+        $href .= '&amp;id='.$row['id'].'&amp;rt='.$this->requestToken;
 
-        if (!$row['enabled'])
-        {
+        if (!$row['enabled']) {
             $icon = 'invisible.svg';
         }
 
-        return '<a href="' . Controller::addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">' . Image::getHtml($icon, $label, 'data-icon="' . Image::getPath('visible.svg') . '" data-icon-disabled="' . Image::getPath('invisible.svg') . '" data-state="' . ($row['enabled'] ? 1 : 0) . '"') . '</a> ';
+        return '<a href="'.Controller::addToUrl($href).'" title="'.StringUtil::specialchars($title).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">'.Image::getHtml($icon, $label, 'data-icon="'.Image::getPath('visible.svg').'" data-icon-disabled="'.Image::getPath('invisible.svg').'" data-state="'.($row['enabled'] ? 1 : 0).'"').'</a> ';
     }
 
     /**
@@ -212,25 +209,22 @@ class DataContainerListener
         $security = System::getContainer()->get('security.helper');
 
         // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle::published'))
-        {
+        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle::published')) {
             return '';
         }
 
         // Contao 4.9 / Check the permissions (see #5835)
-        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('published', 'tl_vehicle'))
-        {
+        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('published', 'tl_vehicle')) {
             return '';
         }
 
-        $href .= '&amp;id=' . $row['id'] . '&amp;rt=' . REQUEST_TOKEN;;
+        $href .= '&amp;id='.$row['id'].'&amp;rt='.$this->requestToken;
 
-        if (!$row['published'])
-        {
+        if (!$row['published']) {
             $icon = 'invisible.svg';
         }
 
-        return '<a href="' . Controller::addToUrl($href) . '" title="' . StringUtil::specialchars($title) . '" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">' . Image::getHtml($icon, $label, 'data-icon="' . Image::getPath('visible.svg') . '" data-icon-disabled="' . Image::getPath('invisible.svg') . '" data-state="' . ($row['published'] ? 1 : 0) . '"') . '</a> ';
+        return '<a href="'.Controller::addToUrl($href).'" title="'.StringUtil::specialchars($title).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">'.Image::getHtml($icon, $label, 'data-icon="'.Image::getPath('visible.svg').'" data-icon-disabled="'.Image::getPath('invisible.svg').'" data-state="'.($row['published'] ? 1 : 0).'"').'</a> ';
     }
 
     /**

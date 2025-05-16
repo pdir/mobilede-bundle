@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -20,6 +20,7 @@ namespace Pdir\MobileDeBundle\Module;
 
 use Contao\BackendModule;
 use Contao\Controller;
+use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Environment;
 use Contao\File;
@@ -27,21 +28,21 @@ use Contao\FilesModel;
 use Contao\Folder;
 use Contao\Input;
 use Contao\Message;
+use Contao\System;
 use Contao\ZipReader;
+use Psr\Log\LogLevel;
 
 class MobileDeSetup extends BackendModule
 {
     /**
      * mobilede version.
      */
-    const VERSION = '3.5.1';
+    public const VERSION = '3.6.0';
 
     /**
      * Extension mode.
-     *
-     * @var bool
      */
-    const MODE = 'FREE';
+    public const MODE = 'FREE';
 
     /**
      * API Url.
@@ -76,6 +77,16 @@ class MobileDeSetup extends BackendModule
      * @var string
      */
     protected $strDomain = '';
+
+    /**
+     * @throws \Exception
+     */
+    public function generate(): string
+    {
+        $this->logger = System::getContainer()->get('monolog.logger.contao');
+
+        $this->compile();
+    }
 
     /**
      * Generate the module.
@@ -113,7 +124,14 @@ class MobileDeSetup extends BackendModule
         }
 
         $strHelperData = file_get_contents(self::$apiUrl.'demodata/'.self::VERSION.'/'.$this->strDomain);
-        $this->Template->message = [$GLOBALS['TL_LANG']['tl_vehicle']['downloadError'], 'error'];
+
+        if ('error' === $strHelperData) {
+            $this->logger->log(
+                LogLevel::ERROR,
+                $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'],
+                ['contao' => new ContaoContext($GLOBALS['TL_LANG']['tl_vehicle']['downloadError'], ContaoContext::ERROR, )]
+            );
+        }
 
         if ('error' !== $strHelperData) {
             File::putContent($strFile, $strHelperData);
@@ -144,7 +162,11 @@ class MobileDeSetup extends BackendModule
                 Database::getInstance()->query($query);
             }
 
-            $this->Template->message = [$GLOBALS['TL_LANG']['tl_vehicle']['downloadSuccess'], 'confirm'];
+            $this->logger->log(
+                LogLevel::INFO,
+                $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'],
+                ['contao' => new ContaoContext($GLOBALS['TL_LANG']['tl_vehicle']['downloadSuccess'], ContaoContext::ERROR, )]
+            );
 
             // set images
             $adIds = Database::getInstance()->prepare("SELECT vehicle_id FROM  $this->strTable")->execute();

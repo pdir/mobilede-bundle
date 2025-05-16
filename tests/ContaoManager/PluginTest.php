@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -25,7 +27,7 @@ use Pdir\MobileDeBundle\PdirMobileDeBundle;
 
 class PluginTest extends ContaoTestCase
 {
-    public function testReturnsTheBundles()
+    public function testReturnsTheBundles(): void
     {
         $parser = $this->createMock(ParserInterface::class);
 

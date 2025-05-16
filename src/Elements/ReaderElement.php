@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -22,6 +22,8 @@ use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
 use Contao\CoreBundle\Exception\PageNotFoundException;
+use Contao\CoreBundle\Routing\ResponseContext\HtmlHeadBag\HtmlHeadBag;
+use Contao\CoreBundle\File\Metadata;
 use Contao\Environment;
 use Contao\File;
 use Contao\FilesModel;
@@ -30,7 +32,7 @@ use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
-use Pdir\MobileDeSyncBundle\Api\MobileDe;
+use Symfony\Component\HttpFoundation\Request;
 
 class ReaderElement extends ContentElement
 {
@@ -53,13 +55,13 @@ class ReaderElement extends ContentElement
      */
     public function generate()
     {
-        if (TL_MODE === 'BE') {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe READER ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
-            $objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
+            $objTemplate->href = System::getContainer()->get('router')->generate('contao_backend').'?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
 
             return $objTemplate->parse();
         }
@@ -120,7 +122,7 @@ class ReaderElement extends ContentElement
                     'key' => $feature,
                 ];
 
-                if('HYBRID_PLUGIN' === $feature) {
+                if ('HYBRID_PLUGIN' === $feature) {
                     $this->ad['hybrid_plugin'] = true;
                 }
             }
@@ -192,11 +194,11 @@ class ReaderElement extends ContentElement
         $emissions = [];
         $consumptions = [];
 
-        if($this->ad['emissions']) {
+        if (isset($this->ad['emissions'])) {
             $emissions = json_decode($this->ad['emissions']);
         }
 
-        if($this->ad['consumptions']) {
+        if (isset($this->ad['consumptions'])) {
             $consumptions = json_decode($this->ad['consumptions']);
         }
 
@@ -228,20 +230,20 @@ class ReaderElement extends ContentElement
                 $objFile = FilesModel::findByUuid($uuid);
 
                 if ($objFile) {
-                    if (!isset($newGallery['XXL'])) {
-                        $newGallery['XXL'] = [];
-                    }
+                    $metadata = new Metadata([
+                        Metadata::VALUE_ALT => $this->ad['name']
+                    ]);
 
-                    $newGallery['XXL'][] = $this->getImageByPath($objFile->path, 'XXL');
-
-                    if (!isset($newGallery['original'])) {
-                        $newGallery['original'] = [];
-                    }
-
-                    $newGallery['original'][] = [
-                        'path' => $objFile->path,
-                        'uuid' => $uuid,
-                    ];
+                    $figure = System::getContainer()
+                        ->get('contao.image.studio')
+                        ->createFigureBuilder()
+                        ->from($objFile->path)
+                        ->setSize($this->size)
+                        ->setMetadata($metadata)
+                        ->enableLightbox('1' === $this->fullsize || true === $this->fullsize ? true : false)
+                        ->buildIfResourceExists()
+                    ;
+                    $newGallery[] = $figure->getLegacyTemplateData();
                 }
             }
         }
@@ -347,7 +349,7 @@ class ReaderElement extends ContentElement
 
         $this->ad['fuelConsumption'] = $fuelConsumption;
 
-        if ($this->ad['sellerInfo']) {
+        if (isset($this->ad['sellerInfo'])) {
             $this->ad['seller'] = json_decode($this->ad['sellerInfo'], true);
         }
 
@@ -361,6 +363,43 @@ class ReaderElement extends ContentElement
         $this->ad['images'] = $newGallery;
 
         $this->Template->ad = $this->ad;
+        $this->Template->form = $this->pdirVehicleReaderForm;
+
+        // Get page model
+        $page = $GLOBALS['objPage'] ?? $this->getPageModel();
+
+        // Set metadata
+        $page->pageTitle = $this->ad['name'];
+        $page->description = htmlspecialchars(wordwrap( $this->ad['vehicle_free_text'], 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+
+        // Overwrite the page metadata (see #2853, #4955 and #87)
+        $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
+
+        if ($responseContext && $responseContext->has(HtmlHeadBag::class))
+        {
+            /** @var HtmlHeadBag $htmlHeadBag */
+            $htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
+            $htmlDecoder = System::getContainer()->get('contao.string.html_decoder');
+
+            if ($page->pageTitle)
+            {
+                $htmlHeadBag->setTitle($page->pageTitle); // Already stored decoded
+            }
+            elseif ($page->headline)
+            {
+                $htmlHeadBag->setTitle($htmlDecoder->inputEncodedToPlainText($page->headline));
+            }
+
+            if ($page->description)
+            {
+                $htmlHeadBag->setMetaDescription($htmlDecoder->inputEncodedToPlainText($page->description));
+            }
+
+            if ($page->robots)
+            {
+                $htmlHeadBag->setMetaRobots($page->robots);
+            }
+        }
 
         // Debug mode
         if ($this->pdir_md_enableDebugMode) {

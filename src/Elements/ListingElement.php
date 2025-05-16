@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -21,6 +21,7 @@ namespace Pdir\MobileDeBundle\Elements;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\ContentElement;
+use Contao\CoreBundle\File\Metadata;
 use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\Database;
 use Contao\Date;
@@ -33,6 +34,7 @@ use Contao\StringUtil;
 use Contao\System;
 use Pdir\MobileDeBundle\Module\MobileDeSetup;
 use Psr\Log\LogLevel;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Provide methods to render content element "vehicle listing".
@@ -46,7 +48,7 @@ use Psr\Log\LogLevel;
  */
 class ListingElement extends ContentElement
 {
-    const PARAMETER_KEY = 'ad';
+    public const PARAMETER_KEY = 'ad';
 
     /**
      * Template.
@@ -73,13 +75,13 @@ class ListingElement extends ContentElement
      */
     public function generate()
     {
-        if ('BE' === TL_MODE) {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### MobileDe LIST ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
-            $objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
+            $objTemplate->href = System::getContainer()->get('router')->generate('contao_backend').'?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
 
             return $objTemplate->parse();
         }
@@ -100,7 +102,9 @@ class ListingElement extends ContentElement
             $this->strItemTemplate = $this->pdir_md_itemTemplate;
         }
 
-        $this->pdirVehicleFilterWhere = $this->replaceInsertTags($this->pdirVehicleFilterWhere, false);
+        $insertTagParser = System::getContainer()->get('contao.insert_tag.parser');
+
+        $this->pdirVehicleFilterWhere = $insertTagParser->replaceInline($this->pdirVehicleFilterWhere, false);
 
         // prepare data for sql
         $strWhere = '';
@@ -111,7 +115,7 @@ class ListingElement extends ContentElement
         }
 
         // Get the selected records
-        $strQuery = 'SELECT '.implode(', ', array_map('Database::quoteIdentifier', $arrFields));
+        $strQuery = 'SELECT '.implode(', ', array_map('Contao\Database::quoteIdentifier', $arrFields));
 
         $strQuery .= ' FROM '.$this->strTable;
 
@@ -162,7 +166,9 @@ class ListingElement extends ContentElement
             System::getContainer()
                 ->get('monolog.logger.contao')
                 ->log(LogLevel::INFO, $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['noResultMessage'], [
-                    'contao' => new ContaoContext(self::class.'::'.__FUNCTION__, TL_GENERAL
+                    'contao' => new ContaoContext(
+                        self::class.'::'.__FUNCTION__,
+                        ContaoContext::GENERAL,
                     ), ])
             ;
         }
@@ -257,15 +263,13 @@ class ListingElement extends ContentElement
      *
      * @param array
      * @param mixed $arrAds
-     *
-     * @return array
      */
     protected function renderAdItem($arrAds): array
     {
         $arrReturn = [];
 
         foreach ($arrAds as $ad) {
-            if('' === $ad['published']) {
+            if ('' === $ad['published']) {
                 continue;
             }
 
@@ -275,6 +279,7 @@ class ListingElement extends ContentElement
 
             if (null !== $ad['api_images']) {
                 $apiImages = StringUtil::deserialize($ad['api_images']);
+
                 if (isset($apiImages['images']['image'][0]['representation'])) {
                     $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
                 }
@@ -295,20 +300,27 @@ class ListingElement extends ContentElement
                 }
             }
 
-            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && !is_null($ad['orderSRC'])) {
+            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && null !== $ad['orderSRC']) {
                 $manImages = unserialize($ad['orderSRC']);
 
                 $objFile = FilesModel::findByUuid($manImages[0]);
 
                 if ($objFile) {
-                    $imageObj = new Image(new File($objFile->path));
-                    $objFilterTemplate->imageSrc_S = $imageObj->setTargetWidth(200)->setTargetHeight(150)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_XL = $imageObj->setTargetWidth(640)->setTargetHeight(480)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_L = $imageObj->setTargetWidth(400)->setTargetHeight(300)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_M = $imageObj->setTargetWidth(298)->setTargetHeight(224)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_ICON = $imageObj->setTargetWidth(80)->setTargetHeight(60)->setResizeMode('center_center')->executeResize()->getResizedPath();
-                    $objFilterTemplate->imageSrc_ORIGINAL = $objFile->path;
-                    $objFilterTemplate->imageSrc_XXL = $imageObj->setTargetWidth(1600)->setTargetHeight(800)->setResizeMode('center_center')->executeResize()->getResizedPath();
+                    $metadata = new Metadata([
+                        Metadata::VALUE_ALT => $ad['name']
+                    ]);
+
+                    $figure = System::getContainer()
+                        ->get('contao.image.studio')
+                        ->createFigureBuilder()
+                        ->from($objFile->path)
+                        ->setSize($this->size)
+                        ->setMetadata($metadata)
+                        ->buildIfResourceExists()
+                    ;
+
+                    $objFilterTemplate->image = true;
+                    $figure?->applyLegacyTemplateData($objFilterTemplate, null, $this->floating);
                 }
             }
 
@@ -318,7 +330,7 @@ class ListingElement extends ContentElement
                 !$objFilterTemplate->imageSrc_M
             ) {
                 $objFilterTemplate->imageSrc_S = $objFilterTemplate->imageSrc_XL = $objFilterTemplate->imageSrc_L =
-                $objFilterTemplate->imageSrc_M = isset($ad['image'])? str_replace('http://', 'https://', $ad['image']['src']): null;
+                $objFilterTemplate->imageSrc_M = isset($ad['image']) ? str_replace('http://', 'https://', $ad['image']['src']) : null;
             }
 
             $objFilterTemplate->showGrossPrice = 1 === (int) $this->pdir_md_show_gross_price;
@@ -326,11 +338,11 @@ class ListingElement extends ContentElement
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
-            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], $ad['price_vat_rate'] * 100 . ' %');
+            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], $ad['price_vat_rate'] * 100 .' %');
             $objFilterTemplate->netPrice = System::getFormattedNumber($ad['consumer_price_amount'] / (1 + $ad['price_vat_rate']), 2).' '.$ad['price_currency'];
-            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], $ad['price_vat_rate'] * 100 . ' %');
+            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], $ad['price_vat_rate'] * 100 .' %');
 
-            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && !is_null($ad['pseudo_price'])) {
+            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && null !== $ad['pseudo_price']) {
                 $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
             }
 
@@ -358,11 +370,11 @@ class ListingElement extends ContentElement
             $emissions = [];
             $consumptions = [];
 
-            if($ad['emissions']) {
+            if (isset($ad['emissions'])) {
                 $emissions = json_decode($ad['emissions']);
             }
 
-            if($ad['consumptions']) {
+            if (isset($ad['consumptions'])) {
                 $consumptions = json_decode($ad['consumptions']);
             }
 
@@ -491,18 +503,22 @@ class ListingElement extends ContentElement
 
     protected function getReaderPageLink($pageId)
     {
-        $paramString = sprintf('/%s/%s',
+        $paramString = sprintf(
+            '/%s/%s',
             self::PARAMETER_KEY,
             $pageId
         );
 
         if (Config::get('useAutoItem')) {
-            $paramString = sprintf('/%s',
+            $paramString = sprintf(
+                '/%s',
                 $pageId
             );
         }
 
-        return $this->generateFrontendUrl($this->readerPage, $paramString);
+        $readerPage = PageModel::findOneById($this->readerPage['id']);
+
+        return $readerPage->getFrontendUrl($paramString);
     }
 
     protected function getFilterClasses($ad)

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -19,7 +19,6 @@ declare(strict_types=1);
 namespace Pdir\MobileDeBundle\EventListener;
 
 use Contao\Config;
-use Contao\Controller;
 use Contao\Database;
 use Contao\Environment;
 use Contao\PageModel;
@@ -27,7 +26,7 @@ use Pdir\MobileDeBundle\Model\VehicleModel;
 
 class HooksListener
 {
-    const PARAMETER_KEY = 'ad';
+    public const PARAMETER_KEY = 'ad';
 
     public function parseFrontendTemplate($strContent, $strTemplate)
     {
@@ -81,20 +80,22 @@ class HooksListener
 
     protected function getReaderPageLink($pageId, $readerPageId)
     {
-        $paramString = sprintf('/%s/%s',
+        $paramString = sprintf(
+            '/%s/%s',
             self::PARAMETER_KEY,
             $pageId
         );
 
         if (Config::get('useAutoItem')) {
-            $paramString = sprintf('/%s',
+            $paramString = sprintf(
+                '/%s',
                 $pageId
             );
         }
 
-        $readerPage = PageModel::findPublishedByIdOrAlias($readerPageId)->current()->row();
+        $readerPage = PageModel::findOneById($readerPageId);
 
-        return Controller::generateFrontendUrl($readerPage, $paramString);
+        return $readerPage->getFrontendUrl($paramString);
     }
 
     /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2022 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -18,9 +18,7 @@ declare(strict_types=1);
 
 error_reporting(E_ALL);
 
-$include = function ($file) {
-    return file_exists($file) ? include $file : false;
-};
+$include = fn ($file) => file_exists($file) ? include $file : false;
 
 if (
     false === ($loader = $include(__DIR__.'/../vendor/autoload.php'))

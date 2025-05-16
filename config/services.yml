@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  Pdir\MobileDeBundle\Migration\VehicleMigration:
+    arguments:
+      - '@database_connection'
+    tags:
+      - { name: contao.migration, priority: 0 }

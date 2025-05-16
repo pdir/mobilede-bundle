@@ -93,8 +93,9 @@ Developing & Pull Request
 -------------------------
 Run the PHP-CS-Fixer and the unit tests before you make a pull request to the bundle:
 
-    vendor/bin/php-cs-fixer fix -v
-    vendor/bin/phpunit
+    vendor/bin/ecs check src tests
+    vendor/bin/phpstan analyse
+    vendor/bin/phpunit --colors=always
 
 Run cypress tests against demo data
 
