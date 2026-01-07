@@ -2,6 +2,8 @@ services:
   _defaults:
     public: true
 
+  Pdir\MobileDeBundle\EventListener\GetSearchablePagesListener:
+
   pdir.mobileDe.listener.hooks:
     class: Pdir\MobileDeBundle\EventListener\HooksListener
 

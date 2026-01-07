@@ -80,12 +80,11 @@ $GLOBALS['TL_AUTO_ITEM'][] = 'ad';
 /*
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['pdir.mobileDe.listener.hooks', 'parseFrontendTemplate'];
-$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', 'onReplaceInsertTags'];
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = ['pdir.mobileDe.listener.hooks', 'addVehiclesToSearchIndex'];
+#$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['pdir.mobileDe.listener.hooks', 'parseFrontendTemplate'];
+#$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', 'onReplaceInsertTags'];
 
 /*
- * Back end styles & css
+ * Back end styles & CSS
  */
 
 if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {

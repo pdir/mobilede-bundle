@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace Pdir\MobileDeBundle\EventListener;
 
 use Contao\Config;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\Database;
 use Contao\Environment;
 use Contao\PageModel;
@@ -54,28 +55,24 @@ class HooksListener
         return false;
     }
 
-    /**
-     * @param array $arrPages
-     * @param array $intRoot
-     *
-     * @return array
-     */
-    public function addVehiclesToSearchIndex($arrPages)
+    #[AsHook('getSearchablePages')]
+    public function addVehiclesToSearchIndex(array $pages, $rootId = 0, bool $isSitemap = false, string $language = null): array
     {
+        dump('addVehiclesToSearchIndex');
+        dump($pages);
+
         $vehicles = VehicleModel::findAll();
-        $newVehiclePage = [];
+        $newVehiclePages = [];
 
         $db = Database::getInstance();
         $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ?')->execute(0);
         $readerPageId = $result->pdir_md_readerPage;
 
         foreach ($vehicles as $vehicle) {
-            $newVehiclePage[] = Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
+            $newVehiclePages[] = Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
         }
 
-        $newVehiclePage = array_unique($newVehiclePage);
-
-        return array_merge($arrPages, $newVehiclePage);
+        return array_merge($pages, array_unique($newVehiclePages));
     }
 
     protected function getReaderPageLink($pageId, $readerPageId)
