@@ -10,7 +10,11 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-## [3.6.0](https://github.com/pdir/mobilede-bundle/tree/3.5.2) – 2025-05-16
+### [3.7.0](https://github.com/pdir/mobilede-bundle/tree/3.7.0) – 2026-01-15
+
+- [Changed] Refactor database to use new API endpoints
+
+## [3.6.0](https://github.com/pdir/mobilede-bundle/tree/3.6.0) – 2025-05-16
 
 - [Added] Support for Contao 5.3 and higher
 - [Added] New design for list and detail view
