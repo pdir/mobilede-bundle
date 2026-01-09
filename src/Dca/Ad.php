@@ -155,6 +155,6 @@ class Ad
             return [];
         }
 
-        return $GLOBALS['TL_LANG']['tl_vehicle']['features_'.$dc->activeRecord->vehicle_class]['options'];
+        return $GLOBALS['TL_LANG']['tl_vehicle']['features']['options'];
     }
 }

@@ -284,19 +284,24 @@ class ListingElement extends ContentElement
                     $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
                 }
 
+                if (isset($apiImages[0])) {
+                    $images = $apiImages[0];
+                }
+
                 // add fallback for images
                 if (!isset($apiImages['images']['image'][0]['representation']) && isset($apiImages['images']['image']['representation'])) {
                     $images = $apiImages['images']['image']['representation'];
                 }
 
                 if (\is_array($images) && 0 < \count($images)) {
-                    $objFilterTemplate->imageSrc_S = $images[0]['@url'];
-                    $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
-                    $objFilterTemplate->imageSrc_L = $images[3]['@url'];
-                    $objFilterTemplate->imageSrc_M = $images[4]['@url'];
-                    $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+                    $objFilterTemplate->imageSrc_S = $images[0]['@url'] ?? $images['s'];
+                    $objFilterTemplate->imageSrc_XL = $images[1]['@url'] ?? $images['xl'];
+                    $objFilterTemplate->imageSrc_L = $images[3]['@url'] ?? $images['l'];
+                    $objFilterTemplate->imageSrc_M = $images[4]['@url'] ?? $images['m'];
+                    $objFilterTemplate->imageSrc_ICON = $images[2]['@url'] ?? $images['icon'];
                     // fix for xxl image which is not included in xml response
-                    $objFilterTemplate->imageSrc_XXL = str_replace('$_27.JPG', '$_57.JPG', $images[1]['@url']);
+                    $objFilterTemplate->imageSrc_XXL = str_replace('$_27.JPG', '$_57.JPG', $images[1]['@url'] ?? $images['xxl']);
+                    $objFilterTemplate->imageSrc_XXXL = $images['xxxl'] ?? '';
                 }
             }
 
