@@ -550,8 +550,8 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_parking_assistants']['options']['AUTOM
 $GLOBALS['TL_LANG'][$strTable]['specifics_parking_assistants']['options']['CAM_360_DEGREES'] = 'Cam 360 degrees';
 $GLOBALS['TL_LANG'][$strTable]['specifics_power'] = ['Power (kW)', 'Here you can enter the power in kW.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_radio'] = ['Radio', 'Here you can choose the kind of radio.'];
-$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['tuner'] = 'Tuner/radio';
-$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['dabRadio'] = 'Radio DAB';
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['TUNER'] = 'Tuner/radio';
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['DAB_RADIO'] = 'Radio DAB';
 $GLOBALS['TL_LANG'][$strTable]['specifics_schwacke_code'] = ['Schwacke-Code', 'Here you can enter the Schwacke-Code (Eurotax/Schwacke).'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_shipping_volume'] = ['Shipping Volume (m³)', 'Here you can enter the shipping volume in m³.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_sliding_door_type'] = ['Sliding Door Type', 'Here you can choose the sliding door type.'];
@@ -1021,3 +1021,7 @@ $GLOBALS['TL_LANG'][$strTable]['features']['options_en'] = [
     'suspendedCab' => 'Suspended cab',
     'frontPTO' => 'Front PTO',
 ];
+
+//deprecated
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['tuner'] = 'Tuner/radio';
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['dabRadio'] = 'Radio DAB';

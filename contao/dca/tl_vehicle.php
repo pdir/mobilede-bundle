@@ -869,7 +869,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'select',
             'options' => &$GLOBALS['TL_LANG'][$strTable]['specifics_parking_assistants']['options'],
-            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'eval' => ['mandatory' => false, 'tl_class' => 'w50', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
             'sql' => 'text NULL',
         ],
         'specifics_speed_control' => [
@@ -891,7 +891,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'select',
             'options' => &$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options'],
-            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'eval' => ['mandatory' => false, 'tl_class' => 'w50', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
             'sql' => 'text NULL',
         ],
         'specifics_daytime_running_lamps' => [
