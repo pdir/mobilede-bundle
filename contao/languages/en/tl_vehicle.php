@@ -565,6 +565,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type'] = ['Trailer Co
 $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_FIX'] = 'Trailer coupling fix';
 $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_SWIVELING'] = 'Trailer coupling swiveling';
 $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_DETACHABLE'] = 'Trailer coupling detachable';
+$GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_PREPARATION'] = 'Trailer coupling preparation';
 $GLOBALS['TL_LANG'][$strTable]['specifics_trim_line'] = ['Trim Line', 'Here you can enter informations about the trim line.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_tsn'] = ['TSN (Germany only)', 'Here you can enter the eight-digit type number (Germany only).'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_usage_type'] = ['Usage Typ', 'Here you can choose the usage typ if the vehicle is used.'];

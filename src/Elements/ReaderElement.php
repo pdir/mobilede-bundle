@@ -117,10 +117,19 @@ class ReaderElement extends ContentElement
                     continue;
                 }
 
-                $newFeatures[] = [
-                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
-                    'key' => $feature,
-                ];
+                if ('v2' !== $this->ad['import_version'] ) {
+                    $newFeatures[] = [
+                        'value' => $GLOBALS['TL_LANG'][$this->strTable]['features_'.$this->ad['vehicle_class']]['options'][$feature],
+                        'key' => $feature,
+                    ];
+                } else {
+                    $newFeatures[] = [
+                        'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
+                        'key' => $feature,
+                    ];
+                }
+
+
 
                 if ('HYBRID_PLUGIN' === $feature) {
                     $this->ad['hybrid_plugin'] = true;
@@ -139,11 +148,34 @@ class ReaderElement extends ContentElement
             }
 
             if ('exhaust_inspection' !== $specific && 'general_inspection' !== $specific && 'construction_date' !== $specific && 'first_registration' !== $specific && 'delivery_date' !== $specific && 'first_models_production_date' !== $specific && 'mileage' !== $specific) {
+                $rawValue = deserialize($this->ad['specifics_'.$specific], true);
+                $options  = $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'] ?? null;
+
+                if (is_array($rawValue)) {
+                    // Mehrfachauswahl (Checkbox etc.)
+                    $labels = [];
+
+                    foreach ($rawValue as $v) {
+                        if (isset($options[$v])) {
+                            $labels[] = $options[$v];
+                        } else {
+                            $labels[] = $v;
+                        }
+                    }
+
+                    $value      = implode(', ', $labels);
+                    $plainValue = implode(', ', $rawValue);
+                } else {
+                    // Einzelwert
+                    $value      = isset($options[$rawValue]) ? $options[$rawValue] : $rawValue;
+                    $plainValue = $rawValue;
+                }
+
                 $newSpecifics[] = [
-                    'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
-                    'value' => isset($GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options']) ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] : $this->ad['specifics_'.$specific],
-                    'plainValue' => $this->ad['specifics_'.$specific],
+                    'key'        => $specific,
+                    'label'      => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
+                    'value'      => $value,
+                    'plainValue' => $plainValue,
                 ];
             } elseif ('mileage' === $specific) {
                 $newSpecifics[] = [
@@ -209,12 +241,24 @@ class ReaderElement extends ContentElement
         $newGallery = [];
 
         if (null !== $this->ad['api_images']) {
-            $images = StringUtil::deserialize($this->ad['api_images'])['images']['image'];
+            $images = StringUtil::deserialize($this->ad['api_images']);
 
-            if (\is_array($images) && 0 < \count($images)) {
-                foreach ($images as $row) {
-                    foreach ($row['representation'] as $image) {
-                        $newGallery[$image['@size']][] = $image['@url'];
+            if (isset($images['images']['image'])) {
+                $images = $images['images']['image'];
+
+                if (\is_array($images) && 0 < \count($images)) {
+                    foreach ($images as $row) {
+                        foreach ($row['representation'] as $image) {
+                            $newGallery[$image['@size']][] = $image['@url'];
+                        }
+                    }
+                }
+            } else {
+                if (\is_array($images) && 0 < \count($images)) {
+                    foreach ($images as $row) {
+                        foreach ($row as $key => $image) {
+                            $newGallery[\strtoupper($key)][] = $image;
+                        }
                     }
                 }
             }

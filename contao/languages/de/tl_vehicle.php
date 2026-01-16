@@ -554,6 +554,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type'] = ['Anhängerk
 $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_FIX'] = 'Anhängerkupplung fest';
 $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_SWIVELING'] = 'Anhängerkupplung schwenkbar';
 $GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_DETACHABLE'] = 'Anhängerkupplung abnehmbar';
+$GLOBALS['TL_LANG'][$strTable]['specifics_trailer_coupling_type']['options']['TRAILER_COUPLING_PREPARATION'] = 'Anhängerkupplung-Vorbereitung';
 $GLOBALS['TL_LANG'][$strTable]['specifics_trim_line'] = ['Ausstattungslinie', 'Geben Sie hier Informationen zur Ausstattungslinie des Fahrzeuges ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_tsn'] = ['Typschlüsselnummer', 'Geben Sie hier den achtstelligen Typschlüsselnummer ein (nur in Deutschland).'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_usage_type'] = ['Gebrauchtwagen-Typ', 'Wählen Sie eine Option aus, wenn es sich um ein Gebrauchtwagentyp handelt.'];
