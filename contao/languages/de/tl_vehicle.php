@@ -831,7 +831,6 @@ $GLOBALS['TL_LANG'][$strTable]['wltp_consumption_fuel_combined_weighted'] = ['Ge
 $GLOBALS['TL_LANG'][$strTable]['wltp_consumption_power_combined_weighted'] = ['Gewichteter kombinierter Stromverbrauch in kWh/100 km', 'Gewichteter kombinierter Stromverbrauch für Plugin-Hybride in kWh/100km.'];
 $GLOBALS['TL_LANG'][$strTable]['wltp_co2_emission_combined_weighted'] = ['Gewichtete CO2-Emissionen in g/km', 'Gewichteter Betrag der Kohlendioxid-Emissionen in g/km für Plugin-Hybride.'];
 
-
 $GLOBALS['TL_LANG'][$strTable]['features']['options'] = [
     'hybridPlugin' => 'Plug-in-Hybrid',
     'e10Enabled' => 'E10-tauglich',
@@ -1013,6 +1012,6 @@ $GLOBALS['TL_LANG'][$strTable]['features']['options'] = [
     'frontPTO' => 'Frontzapfwelle',
 ];
 
-//deprecated
-$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['tuner'] = 'Tuner/Radio';
-$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['dabRadio'] = 'Radio DAB';
+// Altes Label als Alias (Backward Compatibility)
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['tuner'] = $GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['TUNER'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['dabRadio'] = $GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['DAB_RADIO'];

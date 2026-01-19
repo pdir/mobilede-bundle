@@ -86,6 +86,40 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value']
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Only admins are allowed to change this setting.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manual accounts cannot be synchronized.';
 
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-combined-co2'] = 'CO₂ emissions (combined) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-combined-co2Class'] = 'CO₂ class (combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-discharged-co2'] = 'CO₂ emissions (battery discharged) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-discharged-co2Class'] = 'CO₂ class based on emissions with battery discharged';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-fuel-consumption-@combined'] = 'Fuel consumption (combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-fuel-combined'] = 'Fuel consumption (combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-fuel-city'] = 'Fuel consumption (city) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-fuel-suburban'] = 'Fuel consumption (suburban) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-fuel-rural'] = 'Fuel consumption (rural) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-fuel-highway'] = 'Fuel consumption (highway) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-power-combined'] = 'Electricity consumption (combined) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-power-city'] = 'Electricity consumption (city) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-power-suburban'] = 'Electricity consumption (suburban) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-power-rural'] = 'Electricity consumption (rural) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-power-highway'] = 'Electricity consumption (highway) in kWh/100 km';
+
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-combined-@co2'] = 'CO₂ emissions (weighted combined) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-combined-@co2-class'] = 'CO₂ class (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-discharged-@co2'] = 'CO₂ emissions (battery discharged) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-discharged-@co2-class'] = 'CO₂ class (battery discharged)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-fuel-consumption-@combined'] = 'Fuel consumption with battery discharged (combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-power-consumption-@combined'] = 'Electricity consumption in pure electric mode (combined) in kWh/100 km';
+
+// Altes Label als Alias (Backward Compatibility)
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2Class'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-consumption-@combined'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-combined'];
+
 /*
  * List View
  */

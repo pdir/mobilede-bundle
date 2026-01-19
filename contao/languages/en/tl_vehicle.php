@@ -1023,6 +1023,6 @@ $GLOBALS['TL_LANG'][$strTable]['features']['options_en'] = [
     'frontPTO' => 'Front PTO',
 ];
 
-//deprecated
-$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['tuner'] = 'Tuner/radio';
-$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['dabRadio'] = 'Radio DAB';
+// Altes Label als Alias (Backward Compatibility)
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['tuner'] =& $GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['TUNER'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['dabRadio'] =& $GLOBALS['TL_LANG'][$strTable]['specifics_radio']['options']['DAB_RADIO'];
