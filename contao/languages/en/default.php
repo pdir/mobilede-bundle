@@ -120,6 +120,15 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2'] =& $GLOBALS['TL
 $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2Class'];
 $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-consumption-@combined'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-combined'];
 
+// Short labels
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-fuel'] = 'Fuel consumption (l/100 km)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power'] = 'Electricity consumption (kWh/100 km)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'] = 'combined';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'] = 'city';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'] = 'suburban';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'] = 'rural';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'] = 'highway';
+
 /*
  * List View
  */

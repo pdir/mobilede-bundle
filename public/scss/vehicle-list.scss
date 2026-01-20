@@ -277,6 +277,19 @@
       }
     }
   }
+
+  .consumptions.fields {
+    .label {
+      display: block;
+      font-weight: 700 !important;
+      margin-top: 5px;
+    }
+
+    .value > span:not(:last-child)::after {
+      content: " · ";
+      margin: 0 4px;
+    }
+  }
 }
 
 .ui-slider-handle:nth-of-type(1):after, .ui-slider-handle:nth-of-type(2):after {

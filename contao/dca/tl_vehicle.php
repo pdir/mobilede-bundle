@@ -145,10 +145,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50'],
             'sql' => 'text NULL',
         ],
-        'import_version' => [
-            'inputType' => 'text',
-            'sql' => 'text NULL',
-        ],
         'alias' => [
             'exclude' => true,
             'search' => true,

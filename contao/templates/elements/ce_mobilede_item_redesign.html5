@@ -95,17 +95,14 @@
     <?php if(isset($this->consumptions)): ?>
       <ul class="consumptions fields">
         <?php foreach($this->consumptions as $key=>$value): ?>
-          <?php foreach($this->consumptions->$key as $key2=>$value2): ?>
-            <li class="consumptions-<?= $key ?>-<?= $key2 ?>">
-              <?php if(!isset($this->ad['hybrid_plugin'])): ?>
-                <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key.'-'.$key2] ?? 'consumptions-'.$key.'-'.$key2 ?>:</span>
-              <?php endif; ?>
-              <?php if(isset($this->ad['hybrid_plugin'])): ?>
-                <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-'.$key.'-'.$key2] ?? 'hybrid-consumptions-'.$key.'-'.$key2 ?>:</span>
-              <?php endif; ?>
-              <span class="value"><?= $value2 ?></span>
-            </li>
-          <?php endforeach; ?>
+          <li>
+            <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key] ?></span>
+            <span class="value">
+              <?php foreach($this->consumptions->$key as $key2=>$value2): ?>
+                <span><?= Contao\System::getFormattedNumber($value2,1) ?>&nbsp;(<?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-'.$key2] ?>)</span>
+              <?php endforeach; ?>
+            </span>
+          </li>
         <?php endforeach; ?>
       </ul>
     <?php endif; ?>

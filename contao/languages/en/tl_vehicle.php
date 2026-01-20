@@ -465,7 +465,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options']['EMISSIO
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options']['EMISSIONSSTICKER_RED'] = '2 (Red)';
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options']['NONE'] = '1 (No emisson sticker)';
 $GLOBALS['TL_LANG'][$strTable]['specifics_europallet_storage_spaces'] = ['Europallet Storage Spaces', 'Here you can enter the information about how many europallets suit in the vehicle.'];
-$GLOBALS['TL_LANG'][$strTable]['specifics_exhaust_inspection'] = ['Last Exhaust Inspection', 'Here you can choose the date of the last exhaust inspection.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_exhaust_inspection'] = ['Next Exhaust Inspection', 'Here you can choose the date of the next exhaust inspection.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color'] = ['Exterior Color', 'Here you can choose the exterior color.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color']['options']['BLACK'] = 'Black';
 $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color']['options']['GREY'] = 'Grey';
@@ -499,7 +499,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox'] = ['Gearbox', 'Here you can 
 $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options']['MANUAL_GEAR'] = 'Manuel gear';
 $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options']['SEMI_AUTOMATIC_GEAR'] = 'Semi automatic gear';
 $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options']['AUTOMATIC_GEAR'] = 'Automatic gear';
-$GLOBALS['TL_LANG'][$strTable]['specifics_general_inspection'] = ['Last General Inspection', 'Here you can choose the date of the last general inspection.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_general_inspection'] = ['Next General Inspection', 'Here you can choose the date of the next general inspection.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type'] = ['Headlight Type', 'Here you can choose the kind of headlight type.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type']['options']['XENON_HEADLIGHTS'] = 'Xenon headlights';
 $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type']['options']['BI_XENON_HEADLIGHTS'] = 'Bi Xenon headlights';

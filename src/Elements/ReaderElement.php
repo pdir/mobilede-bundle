@@ -117,19 +117,10 @@ class ReaderElement extends ContentElement
                     continue;
                 }
 
-                if ('v2' !== $this->ad['import_version'] ) {
-                    $newFeatures[] = [
-                        'value' => $GLOBALS['TL_LANG'][$this->strTable]['features_'.$this->ad['vehicle_class']]['options'][$feature],
-                        'key' => $feature,
-                    ];
-                } else {
-                    $newFeatures[] = [
-                        'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
-                        'key' => $feature,
-                    ];
-                }
-
-
+                $newFeatures[] = [
+                    'value' => $GLOBALS['TL_LANG'][$this->strTable]['features']['options'][$feature],
+                    'key' => $feature,
+                ];
 
                 if ('HYBRID_PLUGIN' === $feature) {
                     $this->ad['hybrid_plugin'] = true;

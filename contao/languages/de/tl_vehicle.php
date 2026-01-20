@@ -454,7 +454,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options']['EMISSIO
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options']['EMISSIONSSTICKER_RED'] = '2 (Rot)';
 $GLOBALS['TL_LANG'][$strTable]['specifics_emission_sticker']['options']['NONE'] = '1 (Keine)';
 $GLOBALS['TL_LANG'][$strTable]['specifics_europallet_storage_spaces'] = ['Anzahl der Europaletten', 'Geben Sie hier die Anzahl der Europaletten ein, die in das Fahrzeug hineinpassen.'];
-$GLOBALS['TL_LANG'][$strTable]['specifics_exhaust_inspection'] = ['Letzte Abgasuntersuchung', 'Wählen Sie hier das Datum der letzten Abgasuntersuchung aus.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_exhaust_inspection'] = ['Nächste Abgasuntersuchung', 'Wählen Sie hier das Datum der nächsten Abgasuntersuchung aus.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color'] = ['Außenfarbe', 'Wählen Sie hier eine Außenfarbe aus.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color']['options']['BLACK'] = 'Schwarz';
 $GLOBALS['TL_LANG'][$strTable]['specifics_exterior_color']['options']['GREY'] = 'Grau';
@@ -488,7 +488,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox'] = ['Getriebeart', 'Wählen S
 $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options']['MANUAL_GEAR'] = 'Schaltgetriebe';
 $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options']['SEMI_AUTOMATIC_GEAR'] = 'Halbautomatik';
 $GLOBALS['TL_LANG'][$strTable]['specifics_gearbox']['options']['AUTOMATIC_GEAR'] = 'Automatik';
-$GLOBALS['TL_LANG'][$strTable]['specifics_general_inspection'] = ['Letzte Hauptuntersuchung', 'Wählen Sie hier das Datum der letzten Hauptuntersuchung aus.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_general_inspection'] = ['Nächste Hauptuntersuchung', 'Wählen Sie hier das Datum der nächsten Hauptuntersuchung aus.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type'] = ['Scheinwerfer', 'Wählen Sie hier die Art der Scheinwerfer aus.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type']['options']['XENON_HEADLIGHTS'] = 'Xenonscheinwerfer';
 $GLOBALS['TL_LANG'][$strTable]['specifics_headlight_type']['options']['BI_XENON_HEADLIGHTS'] = 'Bi-Xenon Scheinwerfer';

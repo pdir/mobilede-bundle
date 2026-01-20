@@ -155,10 +155,6 @@ class Ad
             return [];
         }
 
-        if ('v2' === $dc->activeRecord->import_version) {
-            return $GLOBALS['TL_LANG']['tl_vehicle']['features']['options'];
-        }
-
-        return $GLOBALS['TL_LANG']['tl_vehicle']['features_'.$dc->activeRecord->vehicle_class]['options'];
+        return $GLOBALS['TL_LANG']['tl_vehicle']['features']['options'];
     }
 }
