@@ -104,17 +104,14 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
 
             <?php if(isset($this->ad['consumptions'])): ?>
               <?php foreach($this->ad['consumptions'] as $key=>$value): ?>
-                <?php foreach($this->ad['consumptions']->$key as $key2=>$value2): ?>
-                  <li class="consumptions-<?= $key ?>-<?= $key2 ?>">
-                    <?php if(!isset($this->ad['hybrid_plugin'])): ?>
-                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key.'-'.$key2] ?? 'consumptions-'.$key.'-'.$key2 ?></span>
-                    <?php endif; ?>
-                    <?php if(isset($this->ad['hybrid_plugin'])): ?>
-                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-'.$key.'-'.$key2] ?? 'hybrid-consumptions-'.$key.'-'.$key2 ?></span>
-                    <?php endif; ?>
-                    <span class="value"><?= $value2 ?></span>
-                  </li>
-                <?php endforeach; ?>
+                <li>
+                  <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key] ?></span>
+                  <span class="value">
+                    <?php foreach($this->ad['consumptions']->$key as $key2=>$value2): ?>
+                      <?= Contao\System::getFormattedNumber($value2,1) ?> (<?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-'.$key2] ?>)<br>
+                    <?php endforeach; ?>
+                  </span>
+                </li>
               <?php endforeach; ?>
             <?php endif; ?>
 
@@ -129,7 +126,9 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
 
         <?php
-        if (isset($this->ad['emissions']->combined->{'@co2-class'})) {
+        if (isset($this->ad['emissions']->combined->co2Class)) {
+          $class = $this->ad['emissions']->combined->co2Class;
+        } else if (isset($this->ad['emissions']->combined->{'@co2-class'})) {
           $class = $this->ad['emissions']->combined->{'@co2-class'};
         } else {
           $class = $this->ad['emission_fuel_consumption_energy_efficiency_class'];
@@ -210,40 +209,47 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
 
         <?php if (isset($this->ad['seller'])): ?>
-        <div class="md-detail-box additional-contact">
-          <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-seller'] ?></h2>
-          <?php if(isset($this->ad['seller']['company-name']['@value'])): ?>
-          <p><strong><?= $this->ad['seller']['company-name']['@value'] ?></strong></p>
-          <?php endif; ?>
-          <?php if(isset($this->ad['seller']['logo-image']['representation'])): ?>
-          <?php $i = 0; foreach($this->ad['seller']['logo-image']['representation'] as $logoImage): ?>
-          <?php if($i == 0): ?>
-          <p><img src="<?= $logoImage['@url'] ?>" alt="Verkäufer Logo"></p>
-          <?php endif; ?>
-          <?php $i++; endforeach; ?>
-          <p><strong><?= $this->ad['seller']['company-name']['@value'] ?></strong><br>
-            <?php endif; ?>
-            <?= $this->ad['seller']['address']['street']['@value'] ?><br>
-            <?= $this->ad['seller']['address']['zipcode']['@value'] ?> <?= $this->ad['seller']['address']['city']['@value']
-            ?></p>
-          <p>
-            <?php if(isset($this->ad['seller']['phone']['@value'])): ?>
-            <i class="icon-phone" title="Telefon"></i><?= $this->ad['seller']['phone']['@value'] ?><br>
-            <?php endif; ?>
-            <?php if(isset($this->ad['seller']['email']['@value'])): ?>
-            <i class="icon-mail" title="E-Mail"></i> <a href="<?= $this->ad['seller']['email']['@value'] ?>"><?= $this->
-            ad['seller']['email']['@value'] ?></a><br>
-            <?php endif; ?>
-            <?php if(isset($this->ad['seller']['homepage']['@value'])): ?>
-            <i class="icon-globe" title="Web"></i> <a href="<?= $this->ad['seller']['homepage']['@value'] ?>"
-                                                      target="_blank"><?= $this->ad['seller']['homepage']['@value'] ?></a>
+          <div class="md-detail-box additional-contact">
+            <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-seller'] ?></h2>
+            <?php if(isset($this->ad['seller']['companyName'])): ?>
+              <p><strong><?= $this->ad['seller']['companyName'] ?></strong></p>
             <?php endif; ?>
 
-            <?php if(isset($this->ad['seller']['mobile-seller-since']['@value'])): ?>
-              <p><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] ?> <?= date($GLOBALS['TL_CONFIG']['dateFormat'] ,strtotime($this->ad['seller']['mobile-seller-since']['@value'])) ?></p>
+            <?php if (isset($this->ad['seller']['dealerLogo']['xl'])): ?>
+              <p><img src="<?= $this->ad['seller']['dealerLogo']['xl'] ?>" alt="Verkäufer Logo"></p>
             <?php endif; ?>
-          </p>
-        </div>
+
+            <p><?= $this->ad['seller']['address']['street'] ?><br>
+            <?= $this->ad['seller']['address']['zipcode'] ?> <?= $this->ad['seller']['address']['city'] ?></p>
+
+            <?php if (isset($this->ad['seller']['phones']) && is_array($this->ad['seller']['phones'])): ?>
+              <?php foreach($this->ad['seller']['phones'] as $phone): ?>
+                <?php
+                // Zusammensetzen der Telefonnummer
+                $formatted = '+' . $phone['internationalPrefix'] . ' ' . $phone['nationalPrefix'] . ' ' . $phone['number'];
+                // Für tel:-Link nur Zahlen und + verwenden
+                $tel = '+' . $phone['internationalPrefix'] . $phone['nationalPrefix'] . $phone['number'];
+                ?>
+                <i class="icon-phone" title="Telefon"></i>
+                <a href="tel:<?= $tel ?>"><?= $formatted ?></a><br>
+              <?php endforeach; ?>
+            <?php endif; ?>
+
+            <p>
+              <?php if(isset($this->ad['seller']['email'])): ?>
+                <i class="icon-mail" title="E-Mail"></i> {{email::<?= $this->ad['seller']['email'] ?>}}<br>
+              <?php endif; ?>
+
+              <?php if(isset($this->ad['seller']['homepage'])): ?>
+                <i class="icon-globe" title="Web"></i>
+                <a href="<?= $this->ad['seller']['homepage'] ?>" target="_blank">Web</a>
+              <?php endif; ?>
+
+              <?php if(isset($this->ad['seller']['mobileSellerSince'])): ?>
+                <p><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['seller-since'] ?> <?= date($GLOBALS['TL_CONFIG']['dateFormat'] ,strtotime($this->ad['seller']['mobileSellerSince'])) ?></p>
+              <?php endif; ?>
+            </p>
+          </div>
         <?php endif; ?>
 
         <?php if ($this->form): ?>

@@ -377,6 +377,10 @@ class ListingElement extends ContentElement
 
             if (isset($ad['emissions'])) {
                 $emissions = json_decode($ad['emissions']);
+
+                if (isset($emissions->combined->co2)) {
+                    $emissions->combined->co2 = System::getFormattedNumber($emissions->combined->co2, 1);
+                }
             }
 
             if (isset($ad['consumptions'])) {

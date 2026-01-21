@@ -219,6 +219,10 @@ class ReaderElement extends ContentElement
 
         if (isset($this->ad['emissions'])) {
             $emissions = json_decode($this->ad['emissions']);
+
+            if (isset($emissions->combined->co2)) {
+                $emissions->combined->co2 = System::getFormattedNumber($emissions->combined->co2, 1);
+            }
         }
 
         if (isset($this->ad['consumptions'])) {
