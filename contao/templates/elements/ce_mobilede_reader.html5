@@ -69,50 +69,35 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         <h2><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['headline-specifics'] ?></h2>
         <div class="md-detail-box additional-attributes">
           <ul class="detail-list">
-            <?php if($this->ad['fuelConsumption']): ?>
-              <?php foreach($this->ad['fuelConsumption'] as $key=>$feature): ?>
-                <?php if($feature['value'] != ''): ?>
-                  <li class="feature-<?= $key ?>"><span class="label"><?= $feature['label'] ?></span><span class="value"><?= $feature['value'] ?></span>
-                </li>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            <?php endif; ?>
-
-            <?php if (isset($this->ad['fuelConsumptionSE'])): ?>
-            <li class="feature-fuel"><span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['consumption'] ?></span><span class="value">
-              <?php if($this->ad['fuelConsumptionSE']['combined']): ?>≈ <?= $this->ad['fuelConsumptionSE']['combined'] ?> l/100 km (kombiniert) <?php endif; ?>
-              <?php if($this->ad['fuelConsumptionSE']['outer']): ?>≈ <?= $this->ad['fuelConsumptionSE']['outer'] ?> l/100 km (außerorts) <?php endif; ?>
-              <?php if($this->ad['fuelConsumptionSE']['inner']): ?>≈ <?= $this->ad['fuelConsumptionSE']['inner'] ?> l/100 km (innerorts) <?php endif; ?>
-              </span></li>
-            <?php endif; ?>
-
-            <?php if(isset($this->ad['emissions'])): ?>
-              <?php foreach($this->ad['emissions'] as $key=>$value): ?>
-                <?php foreach($this->ad['emissions']->$key as $key2=>$value2): ?>
-                  <li class="emissions-<?= $key ?>-<?= $key2 ?>">
-                    <?php if(!isset($this->ad['hybrid_plugin'])): ?>
-                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-'.$key.'-'.$key2] ?? 'emissions-'.$key.'-'.$key2 ?></span>
-                    <?php endif; ?>
-                    <?php if(isset($this->ad['hybrid_plugin'])): ?>
-                      <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-'.$key.'-'.$key2] ?? 'hybrid-emissions-'.$key.'-'.$key2 ?></span>
-                    <?php endif; ?>
-                    <span class="value"><?= $value2 ?></span>
-                  </li>
-                <?php endforeach; ?>
-              <?php endforeach; ?>
-            <?php endif; ?>
-
-            <?php if(isset($this->ad['consumptions'])): ?>
-              <?php foreach($this->ad['consumptions'] as $key=>$value): ?>
+            <?php if(!empty($this->ad['emissionValues'])): ?>
+              <?php foreach($this->ad['emissionValues'] as $emissionValue): ?>
                 <li>
-                  <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key] ?></span>
-                  <span class="value">
-                    <?php foreach($this->ad['consumptions']->$key as $key2=>$value2): ?>
-                      <?= Contao\System::getFormattedNumber($value2,1) ?> (<?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-'.$key2] ?>)<br>
-                    <?php endforeach; ?>
-                  </span>
+                  <span class="label"><?= $emissionValue['label'] ?></span>
+                  <span class="value"><?= $emissionValue['value'] ?></span>
                 </li>
               <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(!empty($this->ad['fuelConsumptions'])): ?>
+              <li>
+                <span class="label"><?= $this->ad['fuelConsumptionLabel'] ?></span>
+                <span class="value">
+                  <?php foreach($this->ad['fuelConsumptions'] as $consumption): ?>
+                    <?= $consumption['value'] ?> (<?= $consumption['label'] ?>)<br>
+                  <?php endforeach; ?>
+                </span>
+              </li>
+            <?php endif; ?>
+
+            <?php if(!empty($this->ad['powerConsumptions'])): ?>
+              <li>
+                <span class="label"><?= $this->ad['powerConsumptionLabel'] ?></span>
+                <span class="value">
+                  <?php foreach($this->ad['powerConsumptions'] as $consumption): ?>
+                    <?= $consumption['value'] ?> (<?= $consumption['label'] ?>)<br>
+                  <?php endforeach; ?>
+                </span>
+              </li>
             <?php endif; ?>
 
             <?php if(isset($this->ad['specifics'])): ?>
@@ -126,24 +111,26 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         </div>
 
         <?php
-        if (isset($this->ad['emissions']->combined->co2Class)) {
-          $class = $this->ad['emissions']->combined->co2Class;
-        } else if (isset($this->ad['emissions']->combined->{'@co2-class'})) {
-          $class = $this->ad['emissions']->combined->{'@co2-class'};
-        } else {
+        if (isset($this->ad['emission_co2_class'])) {
+          $class = $this->ad['emission_co2_class'];
+        }
+
+        if (isset($this->ad['emission_fuel_consumption_energy_efficiency_class'])) {
           $class = $this->ad['emission_fuel_consumption_energy_efficiency_class'];
         }
         ?>
         <?php if($class != ''): ?>
-          <div class="energy-class-label">
+          <div class="energy-class-label<?php if('' !== $this->ad['emission_co2_class']): ?> co2-class<?php endif; ?>">
             <div class="left-col">
               <div class="label">CO-2-Effizienz</div>
               <div class="description">*Auf der Grundlage der gemessenen CO-2 Emissionen unter Berücksichtigung der Masse des Fahrzeugs ermittelt.</div>
             </div>
             <div class="right-col">
-              <div class="energy-class class-a-plus-plus-plus<?php if($class == 'A+++'): ?> active<?php endif; ?>"><span>A+++</span></div>
-              <div class="energy-class class-a-plus-plus<?php if($class == 'A++'): ?> active<?php endif; ?>"><span>A++</span></div>
-              <div class="energy-class class-a-plus<?php if($class == 'A+'): ?> active<?php endif; ?>"><span>A+</span></div>
+              <?php if($this->ad['emission_fuel_consumption_energy_efficiency_class'] && !$this->ad['emission_co2_class']): ?>
+                <div class="energy-class class-a-plus-plus-plus<?php if($class == 'A+++'): ?> active<?php endif; ?>"><span>A+++</span></div>
+                <div class="energy-class class-a-plus-plus<?php if($class == 'A++'): ?> active<?php endif; ?>"><span>A++</span></div>
+                <div class="energy-class class-a-plus<?php if($class == 'A+'): ?> active<?php endif; ?>"><span>A+</span></div>
+              <?php endif; ?>
               <div class="energy-class class-a<?php if($class == 'A'): ?> active<?php endif; ?>"><span>A</span></div>
               <div class="energy-class class-b<?php if($class == 'B'): ?> active<?php endif; ?>"><span>B</span></div>
               <div class="energy-class class-c<?php if($class == 'C'): ?> active<?php endif; ?>"><span>C</span></div>

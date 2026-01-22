@@ -53,12 +53,42 @@
   </header>
   <!-- Fuel and type -->
   <p>
-    <?php if(is_array($this->fuelConsumption) && count($this->fuelConsumption) > 0): ?>
-    <?php foreach($this->fuelConsumption as $fuelItem): ?>
-    <?= $fuelItem['label'] ?>: <?= $fuelItem['value'] ?><br>
-    <?php endforeach; ?>
+    <?php if(!empty($this->emissionValues)): ?>
+      <ul>
+        <?php foreach($this->emissionValues as $emissionValue): ?>
+          <li>
+            <span class="label"><?= $emissionValue['label'] ?></span>
+            <span class="value"><?= $emissionValue['value'] ?></span>
+          </li>
+        <?php endforeach; ?>
+      </ul>
     <?php endif; ?>
-    <?php if($this->usageType): ?><?= $GLOBALS['TL_LANG']['tl_vehicle']['vehicle_class']['options'][$this->bodyType] ?>, <?= $this->usageType ?><?php endif; ?>
+
+    <?php if(!empty($this->fuelConsumptions)): ?>
+      <ul class="consumptions fields">
+        <li>
+          <span class="label"><?= $this->fuelConsumptionLabel ?></span>
+          <span class="value">
+            <?php foreach($this->fuelConsumptions as $consumption): ?>
+              <span><?= $consumption['value'] ?> (<?= $consumption['label'] ?>)</span>
+            <?php endforeach; ?>
+          </span>
+        </li>
+      </ul>
+    <?php endif; ?>
+
+    <?php if(!empty($this->powerConsumptions)): ?>
+      <ul class="consumptions fields">
+        <li>
+          <span class="label"><?= $this->powerConsumptionLabel ?></span>
+          <span class="value">
+            <?php foreach($this->powerConsumptions as $consumption): ?>
+              <span><?= $consumption['value'] ?> (<?= $consumption['label'] ?>)</span>
+            <?php endforeach; ?>
+          </span>
+        </li>
+      </ul>
+    <?php endif; ?>
   </p>
   <!-- Features List -->
   <div class="features-area">
@@ -73,47 +103,6 @@
       </li>
     </ul>
   </div>
-
-  <?php if(is_array($this->fuelConsumption) && count($this->fuelConsumption) > 0): ?>
-    <ul class="fuelConsumption fields">
-      <?php foreach($this->fuelConsumption as $fuelItem): ?>
-      <li><span class="label"><?= $fuelItem['label'] ?>:</span><span class="value"><?= $fuelItem['value'] ?></span></li>
-      <?php endforeach; ?>
-    </ul>
-  <?php endif; ?>
-
-  <?php if(isset($this->emissions)): ?>
-    <ul class="emissions fields">
-      <?php foreach($this->emissions as $key=>$value): ?>
-      <?php foreach($this->emissions->$key as $key2=>$value2): ?>
-      <li class="emissions-<?= $key ?>-<?= $key2 ?>">
-        <?php if(!isset($this->ad['hybrid_plugin'])): ?>
-        <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-'.$key.'-'.$key2] ?? 'emissions-'.$key.'-'.$key2 ?>:</span>
-        <?php endif; ?>
-        <?php if(isset($this->ad['hybrid_plugin'])): ?>
-        <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-'.$key.'-'.$key2] ?? 'hybrid-emissions-'.$key.'-'.$key2 ?>:</span>
-        <?php endif; ?>
-        <span class="value"><?= $value2 ?></span>
-      </li>
-      <?php endforeach; ?>
-      <?php endforeach; ?>
-    </ul>
-  <?php endif; ?>
-
-  <?php if(isset($this->consumptions)): ?>
-    <ul class="consumptions fields">
-      <?php foreach($this->consumptions as $key=>$value): ?>
-      <li>
-        <span class="label"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-'.$key] ?></span>
-        <span class="value">
-                <?php foreach($this->consumptions->$key as $key2=>$value2): ?>
-                  <span><?= Contao\System::getFormattedNumber($value2,1) ?>&nbsp;(<?= $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-'.$key2] ?>)</span>
-          <?php endforeach; ?>
-              </span>
-      </li>
-      <?php endforeach; ?>
-    </ul>
-  <?php endif; ?>
 
   <div class="md-ad-box-overlap-wrapper">
     <h2><?= $this->desc ?></h2>

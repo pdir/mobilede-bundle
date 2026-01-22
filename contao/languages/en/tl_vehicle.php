@@ -40,10 +40,13 @@ $GLOBALS['TL_LANG'][$strTable]['pseudo_price'] = ['Pseudo price', 'Enter a price
 $GLOBALS['TL_LANG'][$strTable]['price_currency'] = ['Price Currency', 'Here you can enter the consumer price currency.'];
 $GLOBALS['TL_LANG'][$strTable]['price_vat_rate'] = ['Vat rate', 'Here you can enter the price vat rate.'];
 $GLOBALS['TL_LANG'][$strTable]['dealer_price_amount'] = ['Dealer Price Amount (Euro)', 'Here you can enter the dealer price amount (gross price).'];
-$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_co2_emission'] = ['CO₂ emissions (combined) in g/km', 'Here you can enter the co² emission (g/km). Set it to 0 for fuel type electricity.'];
-$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_legend'] = 'Emission Fuel Consumption';
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_co2_emission'] = ['CO₂ emissions (combined)', 'Here you can enter the co² emission (g/km). Set it to 0 for fuel type electricity.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_legend'] = 'Fuel consumption (combustion engine)';
+$GLOBALS['TL_LANG'][$strTable]['emission_power_consumption_legend'] = 'Electric power consumption (electric / hybrid)';
+$GLOBALS['TL_LANG'][$strTable]['emission_legend'] = 'Emission values';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_energy_efficiency_class'] = ['Energy Efficiency Class', 'Here you can choose the energy efficiency class.'];
-$GLOBALS['TL_LANG'][$strTable]['emission_co2_class'] = ['CO₂ emission class', 'Specifies the vehicle’s CO₂ class (e.g. A–G) based on its CO₂ emissions.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_co2_class'] = ['CO₂ class', 'Specifies the vehicle’s CO₂ class (e.g. A–G) based on its CO₂ emissions.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_co2_class_discharged'] = ['CO₂ emission class (battery discharged)', 'Specifies the vehicle’s CO₂ emission class when the battery is discharged (e.g. A–G), based on CO₂ emissions.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_envkv_compliant'] = ['German EnvKV compliant', 'Do the given values comply with the German PKW-EnvKV act?'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined'] = ['Fuel consumption (combined) in l/100 km', 'Specifies the combined fuel consumption.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_inner'] = ['Fuel consumption (city) in l/100 km', 'Specifies the fuel consumption in city traffic.'];
@@ -60,7 +63,7 @@ $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options'][
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['SUPER_PLUS'] = 'Super Plus';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['NORMAL'] = 'Normal';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['DIESEL'] = 'Diesel';
-$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'] = ['Combined electric energy consumption', 'Combined electric energy consumption for plugin hybrid.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'] = ['Electric energy consumption (comb.)', 'Combined electric energy consumption for plugin hybrid.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_unit'] = ['Energy consumption unit', 'Enter the unit of energy consumption here.'];
 $GLOBALS['TL_LANG'][$strTable]['features'] = ['Features', 'Select here the features which can differ according to the chosen vehicle class.'];
 $GLOBALS['TL_LANG'][$strTable]['features_AgriculturalVehicle'] = ['Features', '.'];
@@ -369,6 +372,7 @@ $GLOBALS['TL_LANG'][$strTable]['features']['options'] = array_merge(
     $GLOBALS['TL_LANG'][$strTable]['features_TruckOver7500']['options'],
     $GLOBALS['TL_LANG'][$strTable]['features_VanUpTo7500']['options']
 );
+$GLOBALS['TL_LANG'][$strTable]['hybrid_plugin'] = ['Plug-in hybrid', 'Activate this option if the vehicle is a plug-in hybrid (PHEV). This enables weighted WLTP combined fuel and power consumption values.'];
 $GLOBALS['TL_LANG'][$strTable]['images'] = ['Images', 'Here you can choose pictures to the vehicle.'];
 $GLOBALS['TL_LANG'][$strTable]['name'] = ['Title', 'Here you can enter a title for this ad.'];
 $GLOBALS['TL_LANG'][$strTable]['price_legend'] = 'Price';

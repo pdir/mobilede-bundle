@@ -493,6 +493,148 @@ class ListingElement extends ContentElement
                 $objFilterTemplate->featureCss = $this->featureCss;
             }
 
+            // emission values
+            $emissionValues = [];
+
+            if ($ad['emission_co2_class']) {
+                $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class'][0];
+
+                if ($ad['hybrid_plugin']) {
+                    $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'];
+                }
+
+                $emissionValues[] = [
+                    'label' => $label,
+                    'value' => $ad['emission_co2_class']
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_co2_emission']) {
+                $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0];
+
+                if ($ad['hybrid_plugin']) {
+                    $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'];
+                }
+
+                $emissionValues[] = [
+                    'label' => $label,
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'],1) . ' g/km'
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_combined_power_consumption'] && !$ad['hybrid_plugin']) {
+                $emissionValues[] = [
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
+                ];
+            }
+
+            if ($ad['wltp_consumption_fuel_combined_weighted']) {
+                $emissionValues[] = [
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0],
+                    'value' => System::getFormattedNumber($ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km'
+                ];
+            }
+
+            if ($ad['wltp_consumption_power_combined_weighted']) {
+                $emissionValues[] = [
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0],
+                    'value' => System::getFormattedNumber($ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km'
+                ];
+            }
+
+            $objFilterTemplate->emissionValues = $emissionValues;
+
+            // fuel consumptions
+            $fuelConsumptions = [];
+            $objFilterTemplate->fuelConsumptionLabel =
+                $GLOBALS['TL_LANG']['pdirMobileDe'][!($ad['hybrid_plugin'])
+                    ? 'consumptions-fuel'
+                    : 'hybrid-consumptions-fuel-consumption-@combined'
+                ]. ' (l/100km)';
+
+            if ($ad['emission_fuel_consumption_inner']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_inner'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_outer']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_outer'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_rural']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_rural'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_highway']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_highway'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_combined']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined'],1)
+                ];
+            }
+
+            $objFilterTemplate->fuelConsumptions = $fuelConsumptions;
+
+            // power consumptions
+            $powerConsumptions = [];
+            $objFilterTemplate->powerConsumptionLabel =
+                $GLOBALS['TL_LANG']['pdirMobileDe'][!($ad['hybrid_plugin'])
+                    ? 'consumptions-power'
+                    : 'hybrid-consumptions-power-consumption-@combined'
+                ] . ' (kWh/100km)';
+
+            if ($ad['emission_power_consumption_inner']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_inner'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_outer']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_outer'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_rural']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_rural'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_highway']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_highway'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_combined']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_combined'],1)
+                ];
+            }
+
+            $objFilterTemplate->powerConsumptions = $powerConsumptions;
+
             // add account
             $objFilterTemplate->account = $ad['account'];
 

@@ -105,13 +105,15 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'specifics_headlight_type,specifics_bending_lights_type,specifics_breakdown_service,specifics_battery,'.
                 'specifics_trailer_coupling_type,specifics_trim_line,specifics_model_range,specifics_first_models_production_date,'.
                 'specifics_battery_capacity,specifics_cylinder,specifics_trailer_load_braked;'.
-            '{emission_fuel_consumption_legend},emission_fuel_consumption_envkv_compliant,emission_fuel_consumption_energy_efficiency_class,'.
-                'emission_co2_class,emission_fuel_consumption_co2_emission,emission_fuel_consumption_inner,emission_fuel_consumption_outer,'.
-                'emission_fuel_consumption_rural,emission_fuel_consumption_highway,emission_power_consumption_inner,emission_power_consumption_outer,'.
-                'emission_power_consumption_rural,emission_power_consumption_highway,'.
-                'emission_fuel_consumption_combined,emission_fuel_consumption_petrol_type,emission_fuel_consumption_combined_power_consumption;'.
+                '{emission_legend},emission_fuel_consumption_envkv_compliant,hybrid_plugin,emission_fuel_consumption_energy_efficiency_class,'.
+                'emission_co2_class,emission_co2_class_discharged,emission_fuel_consumption_co2_emission,emission_fuel_consumption_petrol_type;{emission_fuel_consumption_legend},'.
+                'emission_fuel_consumption_inner,emission_fuel_consumption_outer,emission_fuel_consumption_rural,'.
+                'emission_fuel_consumption_highway,emission_fuel_consumption_combined,wltp_consumption_fuel_combined_weighted;{emission_power_consumption_legend},'.
+                'emission_power_consumption_inner,emission_power_consumption_outer,emission_power_consumption_rural,'.
+                'emission_power_consumption_highway,emission_power_consumption_combined,emission_fuel_consumption_combined_power_consumption,'.
+                'wltp_consumption_power_combined_weighted,wltp_electric_range;'.
             '{wltp_values_legend},wltp_consumption_fuel_combined,wltp_co2_emission_combined,wltp_consumption_power_combined,'.
-                'wltp_electric_range,wltp_consumption_fuel_combined_weighted,wltp_consumption_power_combined_weighted,'.
+                ','.
                 'wltp_co2_emission_combined_weighted;',
     ],
     'subpalettes' => [],
@@ -1038,7 +1040,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sorting' => true,
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'checkbox',
-            'eval' => ['mandatory' => false, 'tl_class' => 'clr'],
+            'eval' => ['mandatory' => false, 'tl_class' => 'w50'],
+            'sql' => "char(1) NOT NULL default ''",
+        ],
+        'hybrid_plugin' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'inputType' => 'checkbox',
+            'eval' => ['mandatory' => false, 'tl_class' => 'w50'],
             'sql' => "char(1) NOT NULL default ''",
         ],
         'emission_fuel_consumption_energy_efficiency_class' => [
@@ -1053,6 +1064,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sql' => 'text NULL',
         ],
         'emission_co2_class' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'inputType' => 'select',
+            'options' => ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
+            'sql' => 'text NULL',
+        ],
+        'emission_co2_class_discharged' => [
             'exclude' => true,
             'search' => true,
             'sorting' => true,
@@ -1078,7 +1099,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sorting' => true,
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
-            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 clr'],
             'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
         ],
         'emission_fuel_consumption_outer' => [
@@ -1123,7 +1144,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'sorting' => true,
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
-            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 clr'],
             'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
         ],
         'emission_power_consumption_outer' => [

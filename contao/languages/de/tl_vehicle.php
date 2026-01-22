@@ -40,10 +40,13 @@ $GLOBALS['TL_LANG'][$strTable]['pseudo_price'] = ['Pseudo-Preis', 'Geben Sie hie
 $GLOBALS['TL_LANG'][$strTable]['price_currency'] = ['Währung', 'Geben sie hier die Währung an.'];
 $GLOBALS['TL_LANG'][$strTable]['price_vat_rate'] = ['Mehrwertsteuer-Satz', 'Geben sie hier den Mehrwertsteuer-Satz an.'];
 $GLOBALS['TL_LANG'][$strTable]['dealer_price_amount'] = ['Händlerpreis (Euro)', 'Geben Sie hier den Händlerpreisbetrag (Bruttopreis) ein.'];
-$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_co2_emission'] = ['CO2-Emissionen (komb.) in g/km', 'Geben Sie hier den Co²-Ausstoß in g/km ein. Geben Sie 0 ein, wenn die Kraftstoffart Elektro ist.'];
-$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_legend'] = 'Kraftstoffverbrauch';
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_co2_emission'] = ['CO2-Emissionen (komb.)', 'Geben Sie hier den Co²-Ausstoß in g/km ein. Geben Sie 0 ein, wenn die Kraftstoffart Elektro ist.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_legend'] = 'Kraftstoffverbrauch (Verbrenner)';
+$GLOBALS['TL_LANG'][$strTable]['emission_power_consumption_legend'] = 'Stromverbrauch (Elektro / Hybrid)';
+$GLOBALS['TL_LANG'][$strTable]['emission_legend'] = 'Emissionswerte';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_energy_efficiency_class'] = ['Energieeffizienzklasse', 'Wählen Sie die Energieeffizienzklasse des Fahrzeuges aus.'];
-$GLOBALS['TL_LANG'][$strTable]['emission_co2_class'] = ['CO₂-Emissionsklasse', 'Gibt die CO₂-Klasse des Fahrzeugs an (z. B. A–G) basierend auf dem CO₂-Ausstoß.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_co2_class'] = ['CO₂-Klasse', 'Gibt die CO₂-Klasse des Fahrzeugs an (z. B. A–G) basierend auf dem CO₂-Ausstoß.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_co2_class_discharged'] = ['CO₂-Klasse (bei entladener Batterie)', 'Gibt die CO₂-Klasse des Fahrzeugs bei entladener Batterie an (z. B. A–G) basierend auf dem CO₂-Ausstoß.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_envkv_compliant'] = ['PKW-EnvKV konform', 'Wählen Sie diese Option aus, wenn das Fahrzeug mit der deutschen PKW-EnvKV konform ist (Verordnung über Verbraucherinformationen zu Kraftstoffverbrauch, CO2-Emissionen und Stromverbrauch neuer Personenkraftwagen).'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined'] = ['Kraftstoffverbrauch (kombiniert) in l/100 km', 'Gibt den kombinierten Kraftstoffverbrauch an.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_inner'] = ['Kraftstoffverbrauch (Innenstadt) in l/100 km', 'Gibt den Kraftstoffverbrauch im Stadtverkehr an.'];
@@ -60,7 +63,7 @@ $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options'][
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['SUPER_PLUS'] = 'Super Plus';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['NORMAL'] = 'Normal';
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_petrol_type_options']['DIESEL'] = 'Diesel';
-$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'] = ['Kombinierter elektrischer Energieverbrauch in kWh/100 km', 'Geben Sie hier den kombinierten elektrischen Energieverbrauch für Plugin-Hybrid ein.'];
+$GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_combined_power_consumption'] = ['Energieverbrauch (komb.)', 'Geben Sie hier den kombinierten elektrischen Energieverbrauch für Plugin-Hybrid ein.'];
 $GLOBALS['TL_LANG'][$strTable]['emission_fuel_consumption_unit'] = ['Einheit des Energieverbbrauch', 'Geben Sie hier die Einheit des Energieverbrauch ein.'];
 $GLOBALS['TL_LANG'][$strTable]['features'] = ['Features', 'Wählen Sie hier die Features aus welche sich entsprechend der gewählten Fahrzeugklasse unterscheiden können.'];
 $GLOBALS['TL_LANG'][$strTable]['features_AgriculturalVehicle']['options']['ABS'] = 'ABS';
@@ -357,6 +360,7 @@ $GLOBALS['TL_LANG'][$strTable]['features']['options'] = array_merge(
     $GLOBALS['TL_LANG'][$strTable]['features_TruckOver7500']['options'],
     $GLOBALS['TL_LANG'][$strTable]['features_VanUpTo7500']['options']
 );
+$GLOBALS['TL_LANG'][$strTable]['hybrid_plugin'] = ['Plug-in-Hybrid', 'Aktivieren Sie diese Option, wenn es sich um ein Plug-in-Hybrid-Fahrzeug handelt. Dadurch werden die gewichteten WLTP-Verbrauchswerte für Kraftstoff und Strom aktiviert.'];
 $GLOBALS['TL_LANG'][$strTable]['images'] = ['Bilder', 'Wählen Sie hier passende Bilder zum Fahrzeug aus.'];
 $GLOBALS['TL_LANG'][$strTable]['name'] = ['Titel', 'Geben Sie hier den Titel des Inserats sein.'];
 $GLOBALS['TL_LANG'][$strTable]['price_legend'] = 'Preis';
@@ -839,9 +843,9 @@ $GLOBALS['TL_LANG'][$strTable]['wltp_values_legend'] = 'WLTP - Informationen zum
 $GLOBALS['TL_LANG'][$strTable]['wltp_consumption_fuel_combined'] = ['Kombinierter Kraftstoffverbrauch in l/100 km', 'Kombinierter Kraftstoffverbrauch für alle nicht-elektrischen Fahrzeuge, optional für Plugin-Hybride, Angabe in l/100km (Erdgas (CNG) in kg/100km).'];
 $GLOBALS['TL_LANG'][$strTable]['wltp_co2_emission_combined'] = ['Kombinierte CO2-Emissionen in g/km', 'Menge der Kohlendioxid-Emissionen in g/km für alle Fahrzeuge, optional für Plugin-Hybride.'];
 $GLOBALS['TL_LANG'][$strTable]['wltp_consumption_power_combined'] = ['Kombinierter Stromverbrauch in kWh/100 km', 'Kombinierter Stromverbrauch für Elektrofahrzeuge in kWh/100km.'];
-$GLOBALS['TL_LANG'][$strTable]['wltp_electric_range'] = ['Elektrische Reichweite in km', 'Elektrische Reichweite für Plugin-Hybride und Elektrofahrzeuge in km.'];
-$GLOBALS['TL_LANG'][$strTable]['wltp_consumption_fuel_combined_weighted'] = ['Gewichteter kombinierter Kraftstoffverbrauch in l/100 km', 'Gewichteter kombinierter Kraftstoffverbrauch für Plugin-Hybride.'];
-$GLOBALS['TL_LANG'][$strTable]['wltp_consumption_power_combined_weighted'] = ['Gewichteter kombinierter Stromverbrauch in kWh/100 km', 'Gewichteter kombinierter Stromverbrauch für Plugin-Hybride in kWh/100km.'];
+$GLOBALS['TL_LANG'][$strTable]['wltp_electric_range'] = ['Elektrische Reichweite', 'Elektrische Reichweite für Plugin-Hybride und Elektrofahrzeuge in km.'];
+$GLOBALS['TL_LANG'][$strTable]['wltp_consumption_fuel_combined_weighted'] = ['Kraftstoffverbrauch (gew. komb.)', 'Gewichteter kombinierter Kraftstoffverbrauch für Plugin-Hybride.'];
+$GLOBALS['TL_LANG'][$strTable]['wltp_consumption_power_combined_weighted'] = ['Stromverbrauch (gew. komb.)', 'Gewichteter kombinierter Stromverbrauch für Plugin-Hybride in kWh/100km.'];
 $GLOBALS['TL_LANG'][$strTable]['wltp_co2_emission_combined_weighted'] = ['Gewichtete CO2-Emissionen in g/km', 'Gewichteter Betrag der Kohlendioxid-Emissionen in g/km für Plugin-Hybride.'];
 
 $GLOBALS['TL_LANG'][$strTable]['features']['options'] = [

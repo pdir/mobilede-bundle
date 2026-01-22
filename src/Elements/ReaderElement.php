@@ -232,6 +232,176 @@ class ReaderElement extends ContentElement
         $this->ad['emissions'] = $emissions;
         $this->ad['consumptions'] = $consumptions;
 
+        // emission values
+        $emissionValues = [];
+
+        if ($this->ad['emission_fuel_consumption_energy_efficiency_class']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_energy_efficiency_class'][0],
+                'value' => $this->ad['emission_fuel_consumption_energy_efficiency_class']
+            ];
+        }
+
+        if ($this->ad['emission_co2_class']) {
+            $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class'][0];
+
+            if ($this->ad['hybrid_plugin']) {
+                $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'];
+            }
+
+            $emissionValues[] = [
+                'label' => $label,
+                'value' => $this->ad['emission_co2_class']
+            ];
+        }
+
+        if ($this->ad['emission_co2_class_discharged']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class_discharged'][0],
+                'value' => $this->ad['emission_co2_class_discharged']
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_co2_emission']) {
+            $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0];
+
+            if ($this->ad['hybrid_plugin']) {
+                $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'];
+            }
+
+            $emissionValues[] = [
+                'label' => $label,
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_co2_emission'],1) . ' g/km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_combined_power_consumption'] && !$this->ad['hybrid_plugin']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_petrol_type']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type'][0],
+                'value' => $this->ad['emission_fuel_consumption_petrol_type']
+            ];
+        }
+
+        if ($this->ad['wltp_electric_range']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_electric_range'],1) . ' km'
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_fuel_combined_weighted']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_power_combined_weighted']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km'
+            ];
+        }
+
+        $this->ad['emissionValues'] = $emissionValues;
+
+        // fuel consumptions
+        $fuelConsumptions = [];
+        $this->ad['fuelConsumptionLabel'] =
+            $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
+                ? 'consumptions-fuel'
+                : 'hybrid-consumptions-fuel-consumption-@combined'
+            ];
+
+        if ($this->ad['emission_fuel_consumption_inner']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_inner'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_outer']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_outer'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_rural']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_rural'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_highway']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_highway'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_combined']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined'],1) . ' l/100km'
+            ];
+        }
+
+        $this->ad['fuelConsumptions'] = $fuelConsumptions;
+
+        // power consumptions
+        $powerConsumptions = [];
+        $this->ad['powerConsumptionLabel'] =
+            $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
+                ? 'consumptions-power'
+                : 'hybrid-consumptions-power-consumption-@combined'
+            ];
+
+        if ($this->ad['emission_power_consumption_inner']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_inner'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_outer']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_outer'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_rural']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_rural'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_highway']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_highway'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_combined']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_combined'],1) . ' kWh/100km'
+            ];
+        }
+
+        $this->ad['powerConsumptions'] = $powerConsumptions;
+
         // images
         $newGallery = [];
 
