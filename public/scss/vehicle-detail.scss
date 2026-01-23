@@ -60,7 +60,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 -15px;
+    margin: 15px -15px;
 
     h1, .price {
       padding: 0 15px;
@@ -69,6 +69,7 @@
     h1 {
       display: inline;
       font-size: 1.5em;
+      margin: 0;
     }
 
     .price {
@@ -90,6 +91,7 @@
       text-align: left;
       font-weight: bold;
       display: flex;
+      flex-wrap: wrap;
       margin: 0;
 
       &:last-child {
@@ -130,6 +132,11 @@
     display: table;
   }
 
+  .slider-control .slider-menu {
+    flex-wrap: wrap;
+    max-width: calc(100% - 8rem);
+  }
+
   .features {
     li {
       width: 50%;
@@ -139,6 +146,7 @@
 
       span {
         width: 100%;
+        display: flex;
       }
     }
   }
@@ -393,5 +401,18 @@
     .md-detail-left, .md-detail-right {
       width: 100%;
     }
+  }
+
+  .md-detail .md-detail-header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 450px) {
+  .md-detail .detail-list li span,
+  .md-detail .features li,
+  .energy-class-label .left-col,
+  .energy-class-label .right-col {
+    width: 100%;
   }
 }
