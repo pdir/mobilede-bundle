@@ -140,7 +140,7 @@ class ReaderElement extends ContentElement
             }
 
             if ('exhaust_inspection' !== $specific && 'general_inspection' !== $specific && 'construction_date' !== $specific && 'first_registration' !== $specific && 'delivery_date' !== $specific && 'first_models_production_date' !== $specific && 'mileage' !== $specific) {
-                $rawValue = deserialize($this->ad['specifics_'.$specific], true);
+                $rawValue = StringUtil::deserialize($this->ad['specifics_'.$specific], true);
                 $options  = $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'] ?? null;
 
                 if (is_array($rawValue)) {
