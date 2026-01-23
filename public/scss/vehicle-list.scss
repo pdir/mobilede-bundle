@@ -278,17 +278,24 @@
     }
   }
 
-  .consumptions.fields {
-    .label {
-      display: block;
-      font-weight: 700 !important;
-      margin-top: 5px;
-    }
+  .consumptions.fields .label {
+    font-weight: 700 !important;
+    margin-top: 5px;
+  }
 
-    .value > span:not(:last-child)::after {
-      content: " · ";
-      margin: 0 4px;
-    }
+  .item.md-ad-box.vehicle-item .inside .detail ul.consumptions.fields {
+    margin: 5px 0;
+  }
+
+  .consumptions.fields .value > span:not(:last-child)::after,
+  .emission.fields > span:not(:last-child)::after {
+    content: " ● ";
+    margin: 0 4px;
+    color: #c1c1c1;
+  }
+
+  .emission.fields {
+    font-size: .9em;
   }
 }
 

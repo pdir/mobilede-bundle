@@ -496,29 +496,43 @@ class ListingElement extends ContentElement
             // emission values
             $emissionValues = [];
 
-            if ($ad['emission_co2_class']) {
-                $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class'][0];
-
-                if ($ad['hybrid_plugin']) {
-                    $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'];
-                }
-
+            if ($ad['wltp_consumption_power_combined_weighted'] && $ad['wltp_consumption_fuel_combined_weighted']) {
                 $emissionValues[] = [
-                    'label' => $label,
-                    'value' => $ad['emission_co2_class']
+                    'value' => System::getFormattedNumber($ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km + ' . System::getFormattedNumber($ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km',
+                    'unit'  => '(' . $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] . ')'
                 ];
             }
 
             if ($ad['emission_fuel_consumption_co2_emission']) {
-                $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0];
+                $value = preg_replace('/([,.])0$/', '', System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'],1));
+                $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['combined'];
 
                 if ($ad['hybrid_plugin']) {
-                    $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'];
+                    $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'];
                 }
 
                 $emissionValues[] = [
-                    'label' => $label,
-                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'],1) . ' g/km'
+                    'value' => $value . ' g',
+                    'unit'  => 'CO₂/km (' . $unit . ')'
+                ];
+            }
+
+            if ($ad['emission_co2_class']) {
+                $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['combined'];
+
+                if ($ad['hybrid_plugin']) {
+                    $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'];
+                }
+
+                $dischargedCo2Class = '';
+                if ($ad['emission_co2_class_discharged']) {
+                    $dischargedCo2Class = ', ' . $ad['emission_co2_class_discharged'] . ' (' . $GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] . ')';
+                }
+
+                $emissionValues[] = [
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class'][0],
+                    'value' => $ad['emission_co2_class'],
+                    'unit' => '(' . $unit . ')' . $dischargedCo2Class
                 ];
             }
 
@@ -526,20 +540,6 @@ class ListingElement extends ContentElement
                 $emissionValues[] = [
                     'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
                     'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
-                ];
-            }
-
-            if ($ad['wltp_consumption_fuel_combined_weighted']) {
-                $emissionValues[] = [
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0],
-                    'value' => System::getFormattedNumber($ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km'
-                ];
-            }
-
-            if ($ad['wltp_consumption_power_combined_weighted']) {
-                $emissionValues[] = [
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0],
-                    'value' => System::getFormattedNumber($ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km'
                 ];
             }
 

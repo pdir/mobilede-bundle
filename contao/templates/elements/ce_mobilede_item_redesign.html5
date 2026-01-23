@@ -66,20 +66,21 @@
   </div>
   <div class="detail">
     <?php if(!empty($this->emissionValues)): ?>
-      <ul>
+      <div class="emission fields">
       <?php foreach($this->emissionValues as $emissionValue): ?>
-        <li>
+        <span>
           <span class="label"><?= $emissionValue['label'] ?></span>
           <span class="value"><?= $emissionValue['value'] ?></span>
-        </li>
+          <?php if ($emissionValue['unit']): ?><span class="unit"><?= $emissionValue['unit'] ?></span><?php endif; ?>
+        </span>
       <?php endforeach; ?>
-      </ul>
+      </div>
     <?php endif; ?>
 
     <?php if(!empty($this->fuelConsumptions)): ?>
       <ul class="consumptions fields">
         <li>
-          <span class="label"><?= $this->fuelConsumptionLabel ?></span>
+          <span class="label"><?= $this->fuelConsumptionLabel ?>: </span>
           <span class="value">
             <?php foreach($this->fuelConsumptions as $consumption): ?>
               <span><?= $consumption['value'] ?> (<?= $consumption['label'] ?>)</span>
@@ -92,7 +93,7 @@
     <?php if(!empty($this->powerConsumptions)): ?>
       <ul class="consumptions fields">
         <li>
-          <span class="label"><?= $this->powerConsumptionLabel ?></span>
+          <span class="label"><?= $this->powerConsumptionLabel ?>: </span>
           <span class="value">
             <?php foreach($this->powerConsumptions as $consumption): ?>
               <span><?= $consumption['value'] ?> (<?= $consumption['label'] ?>)</span>

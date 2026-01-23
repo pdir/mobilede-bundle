@@ -134,7 +134,8 @@ class ReaderElement extends ContentElement
         $newSpecifics = [];
 
         foreach ($specificsArr as $specific) {
-            if (!$this->ad['specifics_'.$specific]) {
+            if (!$this->ad['specifics_'.$specific] || 'metallic' === $specific) {
+                // Metallic is shown in the features list, not in the specs
                 continue;
             }
 
@@ -243,7 +244,7 @@ class ReaderElement extends ContentElement
         }
 
         if ($this->ad['emission_co2_class']) {
-            $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class'][0];
+            $label = $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'];
 
             if ($this->ad['hybrid_plugin']) {
                 $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'];

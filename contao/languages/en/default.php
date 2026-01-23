@@ -117,6 +117,9 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'] = 'city';
 $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'] = 'suburban';
 $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'] = 'rural';
 $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'] = 'highway';
+$GLOBALS['TL_LANG']['pdirMobileDe']['combined'] = 'comb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] = 'wgt. comb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] = 'discharged, comb.';
 
 /*
  * List View
