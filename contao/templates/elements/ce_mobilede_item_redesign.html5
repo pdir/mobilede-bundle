@@ -69,9 +69,9 @@
       <div class="emission fields">
       <?php foreach($this->emissionValues as $emissionValue): ?>
         <span>
-          <span class="label"><?= $emissionValue['label'] ?></span>
-          <span class="value"><?= $emissionValue['value'] ?></span>
-          <?php if ($emissionValue['unit']): ?><span class="unit"><?= $emissionValue['unit'] ?></span><?php endif; ?>
+          <?php if (isset($emissionValue['label'])): ?><span class="label"><?= $emissionValue['label'] ?></span><?php endif; ?>
+          <?php if (isset($emissionValue['value'])): ?><span class="value"><?= $emissionValue['value'] ?></span><?php endif; ?>
+          <?php if (isset($emissionValue['unit'])): ?><span class="unit"><?= $emissionValue['unit'] ?></span><?php endif; ?>
         </span>
       <?php endforeach; ?>
       </div>

@@ -565,11 +565,6 @@ class ReaderElement extends ContentElement
 
         $this->ad['bodyType'] = $this->ad['vehicle_class'];
 
-        // use placeholder if no image exists
-        if (\is_array($newGallery) && 0 === \count($newGallery)) {
-            $newGallery[] = $this->getImageByPath($webDir.'/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
-        }
-
         $this->ad['images'] = $newGallery;
 
         $this->Template->ad = $this->ad;
@@ -618,50 +613,5 @@ class ReaderElement extends ContentElement
             $this->Template->customer = $this->pdir_md_customer_id;
             $this->Template->rawData = $this->ad;
         }
-    }
-
-    protected function getImageByPath($str, $type = 'allSizes')
-    {
-        $this->image = new Image(new File($str));
-
-        switch ($type) {
-            case 'S':
-                $this->getImagePath(200, 150);
-                break;
-
-            case 'M':
-                return $this->getImagePath(298, 224);
-
-            case 'L':
-                return $this->getImagePath(400, 300);
-
-            case 'XL':
-                return $this->getImagePath(640, 480);
-
-            case 'XXL':
-                return $this->getImagePath(1200, 800);
-
-            case 'ICON':
-                return $this->getImagePath(80, 60);
-
-            case 'ORIGINAL':
-                return $str;
-
-            default:
-                return [
-                    ['@size' => 'S', '@url' => $this->getImagePath(200, 150)],
-                    ['@size' => 'XL', '@url' => $this->getImagePath(640, 480)],
-                    ['@size' => 'XXL', '@url' => $this->getImagePath(1200, 800)],
-                    ['@size' => 'L', '@url' => $this->getImagePath(400, 300)],
-                    ['@size' => 'M', '@url' => $this->getImagePath(298, 224)],
-                    ['@size' => 'ICON', '@url' => $this->getImagePath(80, 60)],
-                    ['@size' => 'ORIGINAL', '@url' => $str],
-                ];
-        }
-    }
-
-    protected function getImagePath($width, $height, $mode = 'center_center')
-    {
-        return $this->image->setTargetWidth($width)->setTargetHeight($height)->setResizeMode($mode)->executeResize()->getResizedPath();
     }
 }

@@ -278,6 +278,10 @@
     }
   }
 
+  .consumptions.fields, .emission.fields {
+    hyphens: auto;
+  }
+
   .consumptions.fields .label {
     font-weight: 700 !important;
     margin-top: 5px;
