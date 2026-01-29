@@ -485,12 +485,36 @@ class ListingElement extends ContentElement
 
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
             $objFilterTemplate->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
-            $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
-            $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
+            $ad['specifics_mileage'] = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
 
             if ($this->featureCss) {
                 $objFilterTemplate->featureCss = $this->featureCss;
+            }
+
+            // format date fields
+            if ($ad['specifics_general_inspection']) {
+                $ad['specifics_general_inspection'] = ListingElement::formatDate($ad['specifics_general_inspection']);
+            }
+
+            if ($ad['specifics_exhaust_inspection']) {
+                $ad['specifics_exhaust_inspection'] = ListingElement::formatDate($ad['specifics_exhaust_inspection']);
+            }
+
+            if ($ad['specifics_delivery_date']) {
+                $ad['specifics_delivery_date'] = ListingElement::formatDate($ad['specifics_delivery_date']);
+            }
+
+            if ($ad['specifics_first_registration']) {
+                $ad['specifics_first_registration'] = ListingElement::formatDate($ad['specifics_first_registration']);
+            }
+
+            if ($ad['specifics_construction_date']) {
+                $ad['specifics_construction_date'] = ListingElement::formatDate($ad['specifics_construction_date']);
+            }
+
+            if ($ad['specifics_first_models_production_date']) {
+                $ad['specifics_first_models_production_date'] = ListingElement::formatDate($ad['specifics_first_models_production_date']);
             }
 
             // emission values
