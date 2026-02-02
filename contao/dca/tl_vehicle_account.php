@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
     'subpalettes' => [
         'apiType_man' => 'man_explanation',
         'apiType_mobilede' => '{credentials_legend},api_explanation,api_user_key,api_user_secret,api_mobilede_customer_number;'.
-            '{sync_legend},enabled;',
+            '{sync_legend},invisible,enabled;',
         'apiType_convertTo' => '{convertTo_legend};',
     ],
 
@@ -165,6 +165,12 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'inputType' => 'checkbox',
             'eval' => ['doNotCopy' => true],
             'sql' => "char(1) NOT NULL default ''",
+        ],
+        'invisible' => [
+            'reverseToggle'           => true,
+            'filter'                  => true,
+            'inputType'               => 'checkbox',
+            'sql'                     => ['type' => 'boolean', 'default' => false]
         ],
     ],
 ];

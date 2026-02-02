@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="button<?php if($this->extMode == 'FREE'): ?> inactive" title="inactive in free version"<?php else: ?>"<?php endif; ?>>
-      <a href="<?= Contao\System::getContainer()->get('router')->generate('contao_backend') ?>?do=vehicleSetup&act=import">
+      <a href="<?= Contao\System::getContainer()->get('router')->generate('contao_backend') ?>/vehicle_import">
         <img src="bundles/pdirmobilede/img/icon_index.png" alt="<?= $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport'] ?>" width="30" height="30" />
         <?= $GLOBALS['TL_LANG']['MOD']['vehicleSetup']['label']['runImport']  ?>
       </a>

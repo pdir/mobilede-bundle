@@ -35,7 +35,7 @@ class VehicleModel extends Model
      *
      * @return string
      */
-    public function generateAliasByName($varValue): string
+    public function generateAliasByName(mixed $varValue): string
     {
         $connection = System::getContainer()->get('database_connection');
 
@@ -44,7 +44,7 @@ class VehicleModel extends Model
         $objAlias = $connection->executeQuery('SELECT id FROM tl_vehicle WHERE alias=?', [$varValue]);
 
         // Check whether the page alias exists
-        if ($objAlias->numRows > 0) {
+        if ($objAlias->rowCount() > 0) {
             $varValue .= '-'.random_int(0, 1000000);
         }
 
