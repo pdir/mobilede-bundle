@@ -10,9 +10,17 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-### [3.7.0](https://github.com/pdir/mobilede-bundle/tree/3.7.0) – 2026-01-15
+### [3.7.0](https://github.com/pdir/mobilede-bundle/tree/3.7.0) – 2026-01-28
 
 - [Changed] Refactor database to use new API endpoints
+- [Changed] Improved and adapted mobile.de import (new specifics, rendering, updated mappings)
+- [Changed] Updated templates, translations and reader views
+- [Changed] Updated vehicle detail view styling (desktop & mobile)
+- [Changed] Updated list view rendering and image handling (including manually added vehicles)
+- [Changed] Updated emission and consumption data handling and rendering
+- [Added] Multi-select support for radio and parking assistant fields
+- [Fixed] Various styling issues (including Contao demo)
+- [Changed] Cleanup: removed unused code and functions
 
 ## [3.6.0](https://github.com/pdir/mobilede-bundle/tree/3.6.0) – 2025-05-16
 

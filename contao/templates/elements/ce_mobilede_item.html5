@@ -6,7 +6,7 @@
     <?php $this->insert('image', $this->arrData); ?>
   <?php elseif($this->imageSrc_L): ?>
     <picture>
-      <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>">
+      <img src="<?= $this->imageSrc_L ?>" srcset="<?= $this->imageSrc_L ?> 1x, <?= $this->imageSrc_XL ?> 1.5x, <?= $this->imageSrc_XXL ?> 2x"  alt="<?= $this->desc ?>" loading="lazy">
     </picture>
   <?php else: ?>
   <picture>

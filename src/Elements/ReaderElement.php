@@ -575,7 +575,12 @@ class ReaderElement extends ContentElement
 
         // Set metadata
         $page->pageTitle = $this->ad['name'];
-        $page->description = htmlspecialchars(wordwrap( $this->ad['vehicle_free_text'], 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+
+        if (isset($this->ad['vehicle_free_text'])) {
+            $page->description = htmlspecialchars(wordwrap( $this->ad['vehicle_free_text'], 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+        } else if (isset($this->ad['htmlDescription'])) {
+            $page->description = htmlspecialchars(wordwrap( strip_tags($this->ad['htmlDescription']), 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+        }
 
         // Overwrite the page metadata (see #2853, #4955 and #87)
         $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
