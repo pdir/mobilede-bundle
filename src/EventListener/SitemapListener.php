@@ -39,11 +39,19 @@ class SitemapListener
         }
 
         $db = Database::getInstance();
-        $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ? AND visible != ?')->execute(0, 1);
+        $result = $db->prepare('SELECT pdir_md_readerPage, pdirVehicleFilterByAccount FROM tl_content WHERE pdir_md_readerPage != ? AND invisible != ?')->execute(0, 1);
 
         $readerPageId = $result->pdir_md_readerPage;
 
+        if (null === $readerPageId) {
+            return;
+        }
+
         foreach ($vehicles as $vehicle) {
+            if (null !== $result->pdirVehicleFilterByAccount && $vehicle->account !== $result->pdirVehicleFilterByAccount) {
+                continue;
+            }
+
             $event->addUrlToDefaultUrlSet(Environment::get('url').$this->getReaderPageLink($vehicle->alias, $readerPageId));
         }
     }
