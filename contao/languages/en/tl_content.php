@@ -22,7 +22,7 @@ declare(strict_types=1);
 $GLOBALS['TL_LANG']['tl_content']['md_settings_legend'] = 'Settings';
 $GLOBALS['TL_LANG']['tl_content']['md_filters_legend'] = 'Filter Settings';
 $GLOBALS['TL_LANG']['tl_content']['md_template_legend'] = 'Template Settings';
-$GLOBALS['TL_LANG']['tl_content']['md_debug_legend'] = 'Cache & Debugging';
+$GLOBALS['TL_LANG']['tl_content']['md_debug_legend'] = 'Debugging';
 
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detail View', 'Please choose here the page for the detail view.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listing View', 'Please choose here the page for the listing view, if the <strong>Only Filter</strong> option is active.'];
@@ -35,8 +35,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_show_gross_price'] = ['Show gross pri
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'] = ['Randomly Order', 'If active the advertisements will be shown in an randomly order.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = ['Skip JavaScript', 'If active the module javascript is not included.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleCss'] = ['Skip Stylesheets', 'If active the module stylesheets will not included.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_forceRefresh'] = ['Skip Cache', 'Load advertisements directly from the Mobile.de API (not recommended)'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_cacheTime'] = ['Cache Time', 'Here you can choose the cache time in minutes. Mobile.de does not recommend times under 60 minutes.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = ['Debug', 'If active, all available field keys are shown.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Activate Price Slider', 'If active you can filter the price with a range slider.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['Activate Power Slider', 'If active you can filter the power with a range slider.'];

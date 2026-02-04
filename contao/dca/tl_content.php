@@ -24,8 +24,8 @@ $strTable = 'tl_content';
  * Add palette to tl_content.
  */
 
-$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdirVehicleFilterByAccount,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage,pdir_md_show_gross_price,pdir_md_show_net_price,size;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_open_filter,pdir_md_combine_filter,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter;{md_template_legend},pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode,pdir_md_forceRefresh,pdir_md_cacheTime;{expert_legend:hide},cssID,space';
-$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdirVehicleFilterByAccount,pdir_md_removeModuleCss,pdir_md_removeModuleJs,pdirVehicleReaderForm;{source_legend},size,fullsize;{md_debug_legend},pdir_md_enableDebugMode;{template_legend},customTpl;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeList'] = '{type_legend},type,headline;{md_settings_legend},pdirVehicleFilterByAccount,pdir_md_listTemplate,pdir_md_itemTemplate,pdir_md_readerPage,pdir_md_listingPage,pdir_md_show_gross_price,pdir_md_show_net_price,size;{md_filters_legend},pdirVehicleFilterFields,pdirVehicleFilterWhere,pdirVehicleFilterMaxItems,pdirVehicleFilterSort,pdir_md_hideFilters,pdir_open_filter,pdir_md_combine_filter,pdir_md_list_shuffle,pdir_md_priceSlider,pdir_md_powerSlider,pdir_md_mileageSlider,pdir_md_only_filter;{md_template_legend},pdir_md_removeModuleCss,pdir_md_removeModuleJs;{md_debug_legend},pdir_md_enableDebugMode;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA'][$strTable]['palettes']['mobileDeReader'] = '{type_legend},type,headline;{md_settings_legend},pdirVehicleFilterByAccount,pdir_md_removeModuleCss,pdir_md_removeModuleJs,pdirVehicleReaderForm;{source_legend},size,fullsize;{md_debug_legend},pdir_md_enableDebugMode;{template_legend},customTpl;{expert_legend:hide},cssID;{invisible_legend:hide},visible,start,stop';
 
 /*
  * Add fields to tl_content
@@ -119,26 +119,6 @@ $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_removeModuleCss'] = [
         'tl_class' => 'w50 m12',
     ],
     'sql' => "char(1) NOT NULL default ''",
-];
-
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_forceRefresh'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_forceRefresh'],
-    'exclude' => true,
-    'inputType' => 'checkbox',
-    'eval' => [
-        'tl_class' => 'w50 m12',
-    ],
-    'sql' => "char(1) NOT NULL default ''",
-];
-
-$GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_cacheTime'] = [
-    'label' => &$GLOBALS['TL_LANG'][$strTable]['pdir_md_cacheTime'],
-    'exclude' => true,
-    'inputType' => 'text',
-    'eval' => [
-        'tl_class' => 'w50 m12',
-    ],
-    'sql' => "int(10) unsigned NOT NULL default '0'",
 ];
 
 $GLOBALS['TL_DCA'][$strTable]['fields']['pdir_md_enableDebugMode'] = [

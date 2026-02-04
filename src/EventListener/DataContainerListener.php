@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2026 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -21,9 +21,10 @@ namespace Pdir\MobileDeBundle\EventListener;
 use Contao\BackendTemplate;
 use Contao\BackendUser;
 use Contao\Controller;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
 use Contao\CoreBundle\Security\ContaoCorePermissions;
-use Contao\CoreBundle\ServiceAnnotation\Callback;
 use Contao\DataContainer;
+use Contao\Frontend;
 use Contao\Image;
 use Contao\StringUtil;
 use Contao\System;
@@ -51,36 +52,27 @@ class DataContainerListener
     }
 
     /**
-     * @Callback(
-     *     table="tl_content",
-     *     target="fields.pdirVehicleFilterByAccount.options"
-     * )
      * builds the account options
      */
+    #[AsCallback(table: 'tl_content', target: 'fields.pdirVehicleFilterByAccount.options')]
     public function getContentVehicleAccountOptions(DataContainer $dc): array
     {
         return $this->buildVehicleAccountOptions(true);
     }
 
     /**
-     * @Callback(
-     *     table="tl_content",
-     *     target="fields.pdir_md_listTemplate.options"
-     * )
      * builds the list template options
      */
+    #[AsCallback(table: 'tl_content', target: 'fields.pdir_md_listTemplate.options')]
     public function getListTemplates(DataContainer $dc): array
     {
         return $this->getElementsTemplates($dc);
     }
 
     /**
-     * @Callback(
-     *     table="tl_content",
-     *     target="fields.pdir_md_itemTemplate.options"
-     * )
      * builds the item template options
      */
+    #[AsCallback(table: 'tl_content', target: 'fields.pdir_md_itemTemplate.options')]
     public function getItemTemplates(DataContainer $dc): array
     {
         return $this->getElementsTemplates($dc, 'item');
@@ -96,11 +88,7 @@ class DataContainerListener
         return Controller::getTemplateGroup('ce_mobilede_'.$strTmpl);
     }
 
-    /**
-     * @Callback(
-     *     table="tl_vehicle",
-     *     target="list.global_operations.toolbar.button")
-     */
+    #[AsCallback(table: 'tl_vehicle', target: 'list.global_operations.toolbar.button')]
     public function renderToolbar(): string
     {
         $template = new BackendTemplate('be_vehicle_toolbar');
@@ -138,12 +126,7 @@ class DataContainerListener
         return $template->parse();
     }
 
-    /**
-     * @Callback(
-     *     table="tl_vehicle",
-     *     target="list.label.label"
-     * )
-     */
+    #[AsCallback(table: 'tl_vehicle', target: 'list.label.label')]
     public function listLabel(array $row, string $label, DataContainer $dc, array $arrLabels): array
     {
         $account = VehicleAccountModel::findByPk($row['account']);
@@ -156,84 +139,18 @@ class DataContainerListener
     }
 
     /**
-     * @Callback(
-     *     table="tl_vehicle",
-     *     target="fields.account.options"
-     * )
      * builds the account options
      */
+    #[AsCallback(table: 'tl_vehicle', target: 'fields.account.options')]
     public function getVehicleVehicleAccountOptions(DataContainer $dc): array
     {
         return $this->buildVehicleAccountOptions();
     }
 
     /**
-     * @Callback(
-     *  table="tl_vehicle_account",
-     *  target="list.operations.toggle.button"
-     * )
-     * button_callback: generates a button for the enabled operation
-     */
-    public function visibleButtonCallback(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
-    {
-        $security = System::getContainer()->get('security.helper');
-
-        // Contao 5.13 and 5 / Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle_account::enabled')) {
-            return '';
-        }
-
-        // Contao 4.9 / Check the permissions (see #5835)
-        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('enabled', 'tl_vehicle_account')) {
-            throw new Contao\CoreBundle\Exception\AccessDeniedException('Not enough permissions to import themes.');
-        }
-
-        $href .= '&amp;id='.$row['id'].'&amp;rt='.$this->requestToken;
-
-        if (!$row['enabled']) {
-            $icon = 'invisible.svg';
-        }
-
-        return '<a href="'.Controller::addToUrl($href).'" title="'.StringUtil::specialchars($title).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">'.Image::getHtml($icon, $label, 'data-icon="'.Image::getPath('visible.svg').'" data-icon-disabled="'.Image::getPath('invisible.svg').'" data-state="'.($row['enabled'] ? 1 : 0).'"').'</a> ';
-    }
-
-    /**
-     * @Callback(
-     *  table="tl_vehicle",
-     *  target="list.operations.toggle.button"
-     * )
-     * button_callback: generates a button for the enabled operation
-     */
-    public function visibleButtonCallbackVehicles(array $row, ?string $href, string $label, string $title, ?string $icon, string $attributes): string
-    {
-        $security = System::getContainer()->get('security.helper');
-
-        // Check permissions AFTER checking the tid, so hacking attempts are logged
-        if (class_exists(ContaoCorePermissions::class) && !$security->isGranted(ContaoCorePermissions::USER_CAN_EDIT_FIELD_OF_TABLE, 'tl_vehicle::published')) {
-            return '';
-        }
-
-        // Contao 4.9 / Check the permissions (see #5835)
-        if (!class_exists(ContaoCorePermissions::class) && !$this->user->hasAccess('published', 'tl_vehicle')) {
-            return '';
-        }
-
-        $href .= '&amp;id='.$row['id'].'&amp;rt='.$this->requestToken;
-
-        if (!$row['published']) {
-            $icon = 'invisible.svg';
-        }
-
-        return '<a href="'.Controller::addToUrl($href).'" title="'.StringUtil::specialchars($title).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleField(this,true)">'.Image::getHtml($icon, $label, 'data-icon="'.Image::getPath('visible.svg').'" data-icon-disabled="'.Image::getPath('invisible.svg').'" data-state="'.($row['published'] ? 1 : 0).'"').'</a> ';
-    }
-
-    /**
-     * @Callback(
-     *     table="tl_content",
-     *     target="fields.pdirVehicleFilterByAccount.options"
-     * )
      * builds the account options
      */
+    #[AsCallback(table: 'tl_content', target: 'fields.pdirVehicleFilterByAccount.options')]
     public function getVehicleFilterByAccountOptions(DataContainer $dc): array
     {
         return $this->buildVehicleAccountOptions();

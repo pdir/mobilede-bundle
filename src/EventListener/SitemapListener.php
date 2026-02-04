@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2026 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -18,32 +18,33 @@ declare(strict_types=1);
 
 namespace Pdir\MobileDeBundle\EventListener;
 
-use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
+use Contao\CoreBundle\Event\ContaoCoreEvents;
+use Contao\CoreBundle\Event\SitemapEvent;
 use Contao\Database;
 use Contao\Environment;
 use Pdir\MobileDeBundle\Model\VehicleModel;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
-#[AsHook('getSearchablePages')]
-class GetSearchablePagesListener
+#[AsEventListener(ContaoCoreEvents::SITEMAP)]
+class SitemapListener
 {
-    public function __invoke(array $pages, $rootId = 0, bool $isSitemap = false, string $language = null): array
-    {
-        dump('addVehiclesToSearchIndex');
-        dump($pages);
+    use ListenerHelperTrait;
 
+    public function __invoke(SitemapEvent $event): void
+    {
         $vehicles = VehicleModel::findAll();
-        $newVehiclePages = [];
+
+        if (null === $vehicles) {
+            return;
+        }
 
         $db = Database::getInstance();
-        $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ?')->execute(0);
+        $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ? AND visible != ?')->execute(0, 1);
 
-        dump($result);
         $readerPageId = $result->pdir_md_readerPage;
 
         foreach ($vehicles as $vehicle) {
-            $newVehiclePages[] = Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
+            $event->addUrlToDefaultUrlSet(Environment::get('url').$this->getReaderPageLink($vehicle->alias, $readerPageId));
         }
-
-        return array_merge($pages, array_unique($newVehiclePages));
     }
 }

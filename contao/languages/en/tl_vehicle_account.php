@@ -31,5 +31,5 @@ $GLOBALS['TL_LANG'][$strTable]['api_user_secret'] = ['Password', 'Enter the pass
 $GLOBALS['TL_LANG'][$strTable]['api_mobilede_customer_number'] = ['Customer ID', 'Enter your mobile.de customer ID here.'];
 $GLOBALS['TL_LANG'][$strTable]['api_explanation'] = 'For the mobile.de API Sync you need the <a href="https://pdir.de/contao-produkte/fahrzeugmanager-f%C3%BCr-contao-cms.html">full version of the vehicle manager</a> and the access data of the mobile.de API and your customer ID. You can get the customer ID from the source code of your mobile.de provider page. (Example: https://home.mobile.de/MEINE-FIRMA, press F12 and search for "customerId" in the source code).';
 $GLOBALS['TL_LANG'][$strTable]['man_explanation'] = 'For this mode you don\'t need any further settings, you can simply maintain your vehicles manually via the vehicle manager.';
-$GLOBALS['TL_LANG'][$strTable]['enabled'] = ['Enable Poor-Man-Cron', 'The account will be automatically synchronized in Contao\'s Poor-Man-Cron, even if it is invisible.'];
-$GLOBALS['TL_LANG'][$strTable]['invisible'] = ['Invisible', 'The account is not included in synchronization (command, manual).'];
+$GLOBALS['TL_LANG'][$strTable]['webCron'] = ['Enable Poor-Man-Cron', 'The account will be automatically synchronized in Contao\'s Poor-Man-Cron, even if it is visible.'];
+$GLOBALS['TL_LANG'][$strTable]['visible'] = ['Visible', 'The account is included in synchronization (command, manual).'];
