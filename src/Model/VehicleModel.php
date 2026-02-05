@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2026 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -35,7 +35,7 @@ class VehicleModel extends Model
      *
      * @return string
      */
-    public function generateAliasByName($varValue): string
+    public function generateAliasByName(mixed $varValue): string
     {
         $connection = System::getContainer()->get('database_connection');
 
@@ -44,7 +44,7 @@ class VehicleModel extends Model
         $objAlias = $connection->executeQuery('SELECT id FROM tl_vehicle WHERE alias=?', [$varValue]);
 
         // Check whether the page alias exists
-        if ($objAlias->numRows > 0) {
+        if ($objAlias->rowCount() > 0) {
             $varValue .= '-'.random_int(0, 1000000);
         }
 

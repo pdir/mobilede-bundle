@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2026 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -134,16 +134,40 @@ class ReaderElement extends ContentElement
         $newSpecifics = [];
 
         foreach ($specificsArr as $specific) {
-            if (!$this->ad['specifics_'.$specific]) {
+            if (!$this->ad['specifics_'.$specific] || 'metallic' === $specific) {
+                // Metallic is shown in the features list, not in the specs
                 continue;
             }
 
             if ('exhaust_inspection' !== $specific && 'general_inspection' !== $specific && 'construction_date' !== $specific && 'first_registration' !== $specific && 'delivery_date' !== $specific && 'first_models_production_date' !== $specific && 'mileage' !== $specific) {
+                $rawValue = StringUtil::deserialize($this->ad['specifics_'.$specific], true);
+                $options  = $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'] ?? null;
+
+                if (is_array($rawValue)) {
+                    // Mehrfachauswahl (Checkbox etc.)
+                    $labels = [];
+
+                    foreach ($rawValue as $v) {
+                        if (isset($options[$v])) {
+                            $labels[] = $options[$v];
+                        } else {
+                            $labels[] = $v;
+                        }
+                    }
+
+                    $value      = implode(', ', $labels);
+                    $plainValue = implode(', ', $rawValue);
+                } else {
+                    // Einzelwert
+                    $value      = isset($options[$rawValue]) ? $options[$rawValue] : $rawValue;
+                    $plainValue = $rawValue;
+                }
+
                 $newSpecifics[] = [
-                    'key' => $specific,
-                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
-                    'value' => isset($GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options']) ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific]['options'][$this->ad['specifics_'.$specific]] : $this->ad['specifics_'.$specific],
-                    'plainValue' => $this->ad['specifics_'.$specific],
+                    'key'        => $specific,
+                    'label'      => $GLOBALS['TL_LANG'][$this->strTable]['specifics_'.$specific][0],
+                    'value'      => $value,
+                    'plainValue' => $plainValue,
                 ];
             } elseif ('mileage' === $specific) {
                 $newSpecifics[] = [
@@ -196,6 +220,10 @@ class ReaderElement extends ContentElement
 
         if (isset($this->ad['emissions'])) {
             $emissions = json_decode($this->ad['emissions']);
+
+            if (isset($emissions->combined->co2)) {
+                $emissions->combined->co2 = System::getFormattedNumber($emissions->combined->co2, 1);
+            }
         }
 
         if (isset($this->ad['consumptions'])) {
@@ -205,16 +233,198 @@ class ReaderElement extends ContentElement
         $this->ad['emissions'] = $emissions;
         $this->ad['consumptions'] = $consumptions;
 
+        // emission values
+        $emissionValues = [];
+
+        if ($this->ad['emission_fuel_consumption_energy_efficiency_class']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_energy_efficiency_class'][0],
+                'value' => $this->ad['emission_fuel_consumption_energy_efficiency_class']
+            ];
+        }
+
+        if ($this->ad['emission_co2_class']) {
+            $label = $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'];
+
+            if ($this->ad['hybrid_plugin']) {
+                $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'];
+            }
+
+            $emissionValues[] = [
+                'label' => $label,
+                'value' => $this->ad['emission_co2_class']
+            ];
+        }
+
+        if ($this->ad['emission_co2_class_discharged']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class_discharged'][0],
+                'value' => $this->ad['emission_co2_class_discharged']
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_co2_emission']) {
+            $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0];
+
+            if ($this->ad['hybrid_plugin']) {
+                $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'];
+            }
+
+            $emissionValues[] = [
+                'label' => $label,
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_co2_emission'],1) . ' g/km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_combined_power_consumption'] && !$this->ad['hybrid_plugin']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_petrol_type']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_petrol_type'][0],
+                'value' => $this->ad['emission_fuel_consumption_petrol_type']
+            ];
+        }
+
+        if ($this->ad['wltp_electric_range']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_electric_range'],1) . ' km'
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_fuel_combined_weighted']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['wltp_consumption_power_combined_weighted']) {
+            $emissionValues[] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0],
+                'value' => System::getFormattedNumber($this->ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km'
+            ];
+        }
+
+        $this->ad['emissionValues'] = $emissionValues;
+
+        // fuel consumptions
+        $fuelConsumptions = [];
+        $this->ad['fuelConsumptionLabel'] =
+            $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
+                ? 'consumptions-fuel'
+                : 'hybrid-consumptions-fuel-consumption-@combined'
+            ];
+
+        if ($this->ad['emission_fuel_consumption_inner']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_inner'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_outer']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_outer'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_rural']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_rural'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_highway']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_highway'],1) . ' l/100km'
+            ];
+        }
+
+        if ($this->ad['emission_fuel_consumption_combined']) {
+            $fuelConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined'],1) . ' l/100km'
+            ];
+        }
+
+        $this->ad['fuelConsumptions'] = $fuelConsumptions;
+
+        // power consumptions
+        $powerConsumptions = [];
+        $this->ad['powerConsumptionLabel'] =
+            $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
+                ? 'consumptions-power'
+                : 'hybrid-consumptions-power-consumption-@combined'
+            ];
+
+        if ($this->ad['emission_power_consumption_inner']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_inner'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_outer']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_outer'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_rural']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_rural'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_highway']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_highway'],1) . ' kWh/100km'
+            ];
+        }
+
+        if ($this->ad['emission_power_consumption_combined']) {
+            $powerConsumptions[] = [
+                'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                'value' => System::getFormattedNumber($this->ad['emission_power_consumption_combined'],1) . ' kWh/100km'
+            ];
+        }
+
+        $this->ad['powerConsumptions'] = $powerConsumptions;
+
         // images
         $newGallery = [];
 
         if (null !== $this->ad['api_images']) {
-            $images = StringUtil::deserialize($this->ad['api_images'])['images']['image'];
+            $images = StringUtil::deserialize($this->ad['api_images']);
 
-            if (\is_array($images) && 0 < \count($images)) {
-                foreach ($images as $row) {
-                    foreach ($row['representation'] as $image) {
-                        $newGallery[$image['@size']][] = $image['@url'];
+            if (isset($images['images']['image'])) {
+                $images = $images['images']['image'];
+
+                if (\is_array($images) && 0 < \count($images)) {
+                    foreach ($images as $row) {
+                        foreach ($row['representation'] as $image) {
+                            $newGallery[$image['@size']][] = $image['@url'];
+                        }
+                    }
+                }
+            } else {
+                if (\is_array($images) && 0 < \count($images)) {
+                    foreach ($images as $row) {
+                        foreach ($row as $key => $image) {
+                            $newGallery[\strtoupper($key)][] = $image;
+                        }
                     }
                 }
             }
@@ -355,11 +565,6 @@ class ReaderElement extends ContentElement
 
         $this->ad['bodyType'] = $this->ad['vehicle_class'];
 
-        // use placeholder if no image exists
-        if (\is_array($newGallery) && 0 === \count($newGallery)) {
-            $newGallery[] = $this->getImageByPath($webDir.'/bundles/pdirmobilede/img/pdir_mobilemodul_platzhalterbild_XL.jpg');
-        }
-
         $this->ad['images'] = $newGallery;
 
         $this->Template->ad = $this->ad;
@@ -370,7 +575,12 @@ class ReaderElement extends ContentElement
 
         // Set metadata
         $page->pageTitle = $this->ad['name'];
-        $page->description = htmlspecialchars(wordwrap( $this->ad['vehicle_free_text'], 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+
+        if (isset($this->ad['vehicle_free_text'])) {
+            $page->description = htmlspecialchars(wordwrap( $this->ad['vehicle_free_text'], 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+        } else if (isset($this->ad['htmlDescription'])) {
+            $page->description = htmlspecialchars(wordwrap( strip_tags($this->ad['htmlDescription']), 320, PHP_EOL ) ?? '', ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+        }
 
         // Overwrite the page metadata (see #2853, #4955 and #87)
         $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
@@ -408,50 +618,5 @@ class ReaderElement extends ContentElement
             $this->Template->customer = $this->pdir_md_customer_id;
             $this->Template->rawData = $this->ad;
         }
-    }
-
-    protected function getImageByPath($str, $type = 'allSizes')
-    {
-        $this->image = new Image(new File($str));
-
-        switch ($type) {
-            case 'S':
-                $this->getImagePath(200, 150);
-                break;
-
-            case 'M':
-                return $this->getImagePath(298, 224);
-
-            case 'L':
-                return $this->getImagePath(400, 300);
-
-            case 'XL':
-                return $this->getImagePath(640, 480);
-
-            case 'XXL':
-                return $this->getImagePath(1200, 800);
-
-            case 'ICON':
-                return $this->getImagePath(80, 60);
-
-            case 'ORIGINAL':
-                return $str;
-
-            default:
-                return [
-                    ['@size' => 'S', '@url' => $this->getImagePath(200, 150)],
-                    ['@size' => 'XL', '@url' => $this->getImagePath(640, 480)],
-                    ['@size' => 'XXL', '@url' => $this->getImagePath(1200, 800)],
-                    ['@size' => 'L', '@url' => $this->getImagePath(400, 300)],
-                    ['@size' => 'M', '@url' => $this->getImagePath(298, 224)],
-                    ['@size' => 'ICON', '@url' => $this->getImagePath(80, 60)],
-                    ['@size' => 'ORIGINAL', '@url' => $str],
-                ];
-        }
-    }
-
-    protected function getImagePath($width, $height, $mode = 'center_center')
-    {
-        return $this->image->setTargetWidth($width)->setTargetHeight($height)->setResizeMode($mode)->executeResize()->getResizedPath();
     }
 }

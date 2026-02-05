@@ -78,12 +78,6 @@ $GLOBALS['TL_MODELS']['tl_vehicle_account'] = VehicleAccountModel::class;
 $GLOBALS['TL_AUTO_ITEM'][] = 'ad';
 
 /*
- * Hooks
- */
-#$GLOBALS['TL_HOOKS']['parseFrontendTemplate'][] = ['pdir.mobileDe.listener.hooks', 'parseFrontendTemplate'];
-#$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = ['pdir.mobileDe.listener.hooks', 'onReplaceInsertTags'];
-
-/*
  * Back end styles & CSS
  */
 

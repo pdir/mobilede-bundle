@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2026 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -18,17 +18,12 @@ declare(strict_types=1);
 
 namespace Pdir\MobileDeBundle\EventListener;
 
-use Contao\Config;
 use Contao\CoreBundle\DependencyInjection\Attribute\AsHook;
 use Contao\Database;
-use Contao\Environment;
-use Contao\PageModel;
-use Pdir\MobileDeBundle\Model\VehicleModel;
 
 class HooksListener
 {
-    public const PARAMETER_KEY = 'ad';
-
+    #[AsHook('parseFrontendTemplate')]
     public function parseFrontendTemplate($strContent, $strTemplate)
     {
         if ('ce_mobilede_list' === $strTemplate || 'ce_mobilede_reader' === $strTemplate) {
@@ -46,53 +41,14 @@ class HooksListener
      *
      * @return bool|string
      */
-    public function onReplaceInsertTags($tag)
+    #[AsHook('replaceInsertTags')]
+    public function onReplaceInsertTags(string $tag): bool|string
     {
         if (preg_match('/^mobileDe([bsrl]?)\:\:/', $tag)) {
             return $this->replaceMobileDeInsertTag($tag);
         }
 
         return false;
-    }
-
-    #[AsHook('getSearchablePages')]
-    public function addVehiclesToSearchIndex(array $pages, $rootId = 0, bool $isSitemap = false, string $language = null): array
-    {
-        dump('addVehiclesToSearchIndex');
-        dump($pages);
-
-        $vehicles = VehicleModel::findAll();
-        $newVehiclePages = [];
-
-        $db = Database::getInstance();
-        $result = $db->prepare('SELECT pdir_md_readerPage FROM tl_content WHERE pdir_md_readerPage != ?')->execute(0);
-        $readerPageId = $result->pdir_md_readerPage;
-
-        foreach ($vehicles as $vehicle) {
-            $newVehiclePages[] = Environment::get('url').'/'.$this->getReaderPageLink($vehicle->alias, $readerPageId);
-        }
-
-        return array_merge($pages, array_unique($newVehiclePages));
-    }
-
-    protected function getReaderPageLink($pageId, $readerPageId)
-    {
-        $paramString = sprintf(
-            '/%s/%s',
-            self::PARAMETER_KEY,
-            $pageId
-        );
-
-        if (Config::get('useAutoItem')) {
-            $paramString = sprintf(
-                '/%s',
-                $pageId
-            );
-        }
-
-        $readerPage = PageModel::findOneById($readerPageId);
-
-        return $readerPage->getFrontendUrl($paramString);
     }
 
     /**
@@ -102,7 +58,7 @@ class HooksListener
      *
      * @return string
      */
-    private function replaceMobileDeInsertTag($tag)
+    private function replaceMobileDeInsertTag($tag): string
     {
         $parts = explode('::', $tag);
 
@@ -118,7 +74,8 @@ class HooksListener
             }
         } catch (\RuntimeException $e) {
             // property of ad item not found
-            return '';
         }
+
+        return '';
     }
 }

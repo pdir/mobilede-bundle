@@ -31,4 +31,5 @@ $GLOBALS['TL_LANG'][$strTable]['api_user_secret'] = ['Passwort', 'Gib hier das P
 $GLOBALS['TL_LANG'][$strTable]['api_mobilede_customer_number'] = ['Kunden ID', 'Gib hier deine mobile.de Kunden ID ein.'];
 $GLOBALS['TL_LANG'][$strTable]['api_explanation'] = 'Für den mobile.de API Sync benötigst du die <a href="https://pdir.de/contao-produkte/fahrzeugmanager-f%C3%BCr-contao-cms.html">Vollversion des Fahrzeugmanager</a> und die Zugangsdaten der mobile.de API und deine Kunden ID. Du kannst die Kunden ID aus dem Quellcode deiner mobile.de Anbieterseite entnehmen. (Beispiel: https://home.mobile.de/MEINE-FIRMA, Drücke F12 und Suche nach "customerId" im Quellcode).';
 $GLOBALS['TL_LANG'][$strTable]['man_explanation'] = 'Für diesen Modus benötigst du keine weiteren Einstellungen, du kannst deine Fahrzeuge einfach über den Fahrzeugmanager manuell pflegen.';
-$GLOBALS['TL_LANG'][$strTable]['enabled'] = ['Aktivieren', 'Wenn aktiv, wird dieses Konto im Poor-Man-Cron von Contao automatisch synchronisiert.'];
+$GLOBALS['TL_LANG'][$strTable]['webCron'] = ['Poor-Man-Cron aktivieren', 'Das Konto wird im Poor-Man-Cron von Contao automatisch synchronisiert, auch wenn es unsichtbar ist.'];
+$GLOBALS['TL_LANG'][$strTable]['visible'] = ['Sichtbar', 'Das Konto wird beim syncronisieren (Command, Manuell) berücksichtigt.'];

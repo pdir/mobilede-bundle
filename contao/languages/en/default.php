@@ -86,6 +86,41 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value']
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Only admins are allowed to change this setting.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manual accounts cannot be synchronized.';
 
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-combined-co2'] = 'CO₂ emissions (combined) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-combined-co2Class'] = 'CO₂ class (combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-discharged-co2'] = 'CO₂ emissions (battery discharged) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-discharged-co2Class'] = 'CO₂ class based on emissions with battery discharged';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined) in kWh/100 km';
+
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-combined-@co2'] = 'CO₂ emissions (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-combined-@co2-class'] = 'CO₂ class (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-discharged-@co2'] = 'CO₂ emissions (battery discharged)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-discharged-@co2-class'] = 'CO₂ class (battery discharged)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-fuel-consumption-@combined'] = 'Fuel consumption with battery discharged (combined)';
+$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-power-consumption-@combined'] = 'Electricity consumption in pure electric mode (combined)';
+
+// Altes Label als Alias (Backward Compatibility)
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2Class'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-consumption-@combined'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-combined'];
+
+// Short labels
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-fuel'] = 'Fuel consumption';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power'] = 'Electricity consumption';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'] = 'combined';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'] = 'city';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'] = 'suburban';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'] = 'rural';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'] = 'highway';
+$GLOBALS['TL_LANG']['pdirMobileDe']['combined'] = 'comb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] = 'wgt. comb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] = 'discharged, comb.';
+
 /*
  * List View
  */

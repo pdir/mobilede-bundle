@@ -87,23 +87,41 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value']
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Nur Admins dürfen diese Einstellung ändern.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manuelle Konten können nicht synchronisiert werden.';
 
-$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] = 'CO2-Emissionen (komb.) in g/km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2-class'] = 'CO2-Klasse (komb.)';
-$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2'] = 'CO2-Emissionen (bei entladener Batterie) in g/km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2-class'] = 'CO2-Klasse auf Grundlage der CO2-Emissionen bei entladener Batterie';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'] = 'CO₂-Emissionen (komb.) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'] = 'CO₂-Klasse (komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2'] = 'CO₂-Emissionen (bei entladener Batterie) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2Class'] = 'CO₂-Klasse auf Grundlage der CO₂-Emissionen bei entladener Batterie';
 $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-weighted-combined-fuel-@value'] = 'Energieverbrauch (komb.) in l/100km';
 $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-weighted-combined-power-@value'] = 'Energieverbrauch (komb.) in kWh/100km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-fuel-consumption-@combined'] = 'Kraftstoffverbrauch (komb.) in l/100km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-consumption-@combined'] = 'Stromverbrauch kombiniert in kWh/100km';
 
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'] = 'CO2-Emissionen (gew. komb.) in g/km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'] = 'CO2-Klasse (gew. komb.)';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2'] = 'CO2-Emissionen (bei entladener Batterie) in g/km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2-class'] = 'CO2-Klasse (bei entladener Batterie)';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energieverbrauch (gew. komb.) in l/100km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energieverbrauch (gew. komb.) in kWh/100km';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-fuel-consumption-@combined'] = 'Kraftstoffverbrauch bei entladener Batterie in l/100km (komb.)';
-$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-power-consumption-@combined'] = 'Stromverbrauch bei rein elektrischem Antrieb in kWh/100km (komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'] = 'CO₂-Emissionen (gew. komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'] = 'CO₂-Klasse (gew. komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2'] = 'CO₂-Emissionen (bei entladener Batterie)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2-class'] = 'CO₂-Klasse (bei entladener Batterie)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energieverbrauch (gew. komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energieverbrauch (gew. komb.)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-fuel-consumption-@combined'] = 'Kraftstoffverbrauch bei entladener Batterie';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-power-consumption-@combined'] = 'Stromverbrauch bei rein elektrischem Antrieb';
+
+// Altes Label als Alias (Backward Compatibility)
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2Class'];
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-consumption-@combined'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power-combined'];
+
+// Short labels
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-fuel'] = 'Kraftstoffverbrauch';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-power'] = 'Stromverbrauch';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'] = 'kombiniert';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'] = 'Innenstadt';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'] = 'Stadtrand';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'] = 'Landstraße';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'] = 'Autobahn';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emission-co2-class'] = 'Autobahn';
+$GLOBALS['TL_LANG']['pdirMobileDe']['combined'] = 'komb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] = 'gew. komb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] = 'entladen, komb.';
 
 /*
  * List View

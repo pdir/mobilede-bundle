@@ -43,8 +43,10 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'panelLayout' => 'sort,search,limit',
         ],
         'label' => [
-            'fields' => ['description', 'id'],
+            'fields' => ['description', 'id', 'webCron'],
+            'format' => '%s [%s] - Cron %s',
         ],
+
         'global_operations' => [
             'all' => [
                 'href' => 'act=select',
@@ -52,6 +54,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"',
             ],
         ],
+
         'operations' => [
             'edit' => [
                 'href' => 'act=edit',
@@ -67,24 +70,15 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'attributes' => 'onclick="if(!confirm(\''.($GLOBALS['TL_LANG']['MSC']['deleteConfirm'] ?? null).'\'))return false;Backend.getScrollOffset()"',
             ],
             'toggle' => [
-                'href' => 'act=toggle&amp;field=enabled',
+                'href' => 'act=toggle&amp;field=visible',
                 'icon' => 'visible.svg'
             ],
             'show' => [
+                'label' => &$GLOBALS['TL_LANG'][$strTable]['show'],
                 'href' => 'act=show',
                 'icon' => 'show.svg',
             ],
         ],
-    ],
-
-    // Select
-    'select' => [
-        'buttons_callback' => [],
-    ],
-
-    // Edit
-    'edit' => [
-        'buttons_callback' => [],
     ],
 
     // Palettes
@@ -97,7 +91,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
     'subpalettes' => [
         'apiType_man' => 'man_explanation',
         'apiType_mobilede' => '{credentials_legend},api_explanation,api_user_key,api_user_secret,api_mobilede_customer_number;'.
-            '{sync_legend},enabled;',
+            '{sync_legend},webCron,visible;',
         'apiType_convertTo' => '{convertTo_legend};',
     ],
 
@@ -158,13 +152,20 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'eval' => ['mandatory' => true, 'maxlength' => 255, 'tl_class' => 'w50', 'preserveTags' => true],
             'sql' => "varchar(64) NOT NULL default ''",
         ],
-        'enabled' => [
+        'webCron' => [
             'exclude' => true,
-            'toggle' => true,
             'filter' => true,
             'inputType' => 'checkbox',
             'eval' => ['doNotCopy' => true],
             'sql' => "char(1) NOT NULL default ''",
+        ],
+        'visible' => [
+            'exclude'  => true,
+            'toggle' => true,
+            #'reverseToggle' => true,
+            'filter' => true,
+            'inputType' => 'checkbox',
+            'sql' => ['type' => 'boolean', 'default' => false]
         ],
     ],
 ];

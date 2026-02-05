@@ -22,7 +22,7 @@ declare(strict_types=1);
 $GLOBALS['TL_LANG']['tl_content']['md_settings_legend'] = 'Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['md_filters_legend'] = 'Filter-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['md_template_legend'] = 'Template-Einstellungen';
-$GLOBALS['TL_LANG']['tl_content']['md_debug_legend'] = 'Cache & Debugging';
+$GLOBALS['TL_LANG']['tl_content']['md_debug_legend'] = 'Debugging';
 
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_readerPage'] = ['Detailansicht', 'Bitte wählen Sie hier die Seite für die Detailansicht aus.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_listingPage'] = ['Listenansicht', 'Wählen Sie hier die Seite für die Listenansicht aus, wenn Sie die Option <strong>Nur Filter</strong> aktiviert haben.'];
@@ -35,8 +35,6 @@ $GLOBALS['TL_LANG']['tl_content']['pdir_md_show_gross_price'] = ['Bruttopreis an
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_list_shuffle'] = ['Zufällig anordnen', 'Wenn aktiv werden die Inserate in zufälliger Reihenfolge ausgegeben.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleJs'] = ['Javascript auslassen', 'Wenn aktiv wird das moduleigene Javascript ausgelassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_removeModuleCss'] = ['Stylesheet auslassen', 'Wenn aktiv wird das moduleigene Stylesheet ausgelassen.'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_forceRefresh'] = ['Cache übergehen', 'Inserate direkt von der Mobile.de API laden. (nicht empfohlen)'];
-$GLOBALS['TL_LANG']['tl_content']['pdir_md_cacheTime'] = ['Cache Zeit', 'Hier kann die Cache Zeit in Minuten angegeben werden. Mobile.de empfiehlt keine Cache Zeiten über 60 min zu verwenden.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_enableDebugMode'] = ['Debug', 'Debug Modus aktivieren, es werden alle verfügbaren Feldschlüssel ausgegeben.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_priceSlider'] = ['Preis-Slider aktivieren', 'Wenn aktiv können Sie den Preis über einen Range Slider filtern lassen.'];
 $GLOBALS['TL_LANG']['tl_content']['pdir_md_powerSlider'] = ['PS-Slider aktivieren', 'Wenn aktiv können Sie den PS-Wert über einen Range Slider filtern lassen.'];

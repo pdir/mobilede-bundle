@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * mobile.de bundle for Contao Open Source CMS
  *
- * Copyright (c) 2025 pdir / digital agentur // pdir GmbH
+ * Copyright (c) 2026 pdir / digital agentur // pdir GmbH
  *
  * @package    mobilede-bundle
  * @link       https://pdir.de/mobilede.html
@@ -284,24 +284,29 @@ class ListingElement extends ContentElement
                     $images = StringUtil::deserialize($ad['api_images'])['images']['image'][0]['representation'];
                 }
 
+                if (isset($apiImages[0])) {
+                    $images = $apiImages[0];
+                }
+
                 // add fallback for images
                 if (!isset($apiImages['images']['image'][0]['representation']) && isset($apiImages['images']['image']['representation'])) {
                     $images = $apiImages['images']['image']['representation'];
                 }
 
                 if (\is_array($images) && 0 < \count($images)) {
-                    $objFilterTemplate->imageSrc_S = $images[0]['@url'];
-                    $objFilterTemplate->imageSrc_XL = $images[1]['@url'];
-                    $objFilterTemplate->imageSrc_L = $images[3]['@url'];
-                    $objFilterTemplate->imageSrc_M = $images[4]['@url'];
-                    $objFilterTemplate->imageSrc_ICON = $images[2]['@url'];
+                    $objFilterTemplate->imageSrc_S = $images[0]['@url'] ?? $images['s'];
+                    $objFilterTemplate->imageSrc_XL = $images[1]['@url'] ?? $images['xl'];
+                    $objFilterTemplate->imageSrc_L = $images[3]['@url'] ?? $images['l'];
+                    $objFilterTemplate->imageSrc_M = $images[4]['@url'] ?? $images['m'];
+                    $objFilterTemplate->imageSrc_ICON = $images[2]['@url'] ?? $images['icon'];
                     // fix for xxl image which is not included in xml response
-                    $objFilterTemplate->imageSrc_XXL = str_replace('$_27.JPG', '$_57.JPG', $images[1]['@url']);
+                    $objFilterTemplate->imageSrc_XXL = str_replace('$_27.JPG', '$_57.JPG', $images[1]['@url'] ?? $images['xxl']);
+                    $objFilterTemplate->imageSrc_XXXL = $images['xxxl'] ?? '';
                 }
             }
 
-            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && null !== $ad['orderSRC']) {
-                $manImages = unserialize($ad['orderSRC']);
+            if (('man' === $ad['type'] || 'sysc' === $ad['type']) && null !== $ad['images']) {
+                $manImages = unserialize($ad['images']);
 
                 $objFile = FilesModel::findByUuid($manImages[0]);
 
@@ -338,9 +343,9 @@ class ListingElement extends ContentElement
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
-            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], $ad['price_vat_rate'] * 100 .' %');
+            $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], System::getFormattedNumber($ad['price_vat_rate'], 0) .' %');
             $objFilterTemplate->netPrice = System::getFormattedNumber($ad['consumer_price_amount'] / (1 + $ad['price_vat_rate']), 2).' '.$ad['price_currency'];
-            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], $ad['price_vat_rate'] * 100 .' %');
+            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], System::getFormattedNumber($ad['price_vat_rate'], 0) .' %');
 
             if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && null !== $ad['pseudo_price']) {
                 $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
@@ -372,6 +377,10 @@ class ListingElement extends ContentElement
 
             if (isset($ad['emissions'])) {
                 $emissions = json_decode($ad['emissions']);
+
+                if (isset($emissions->combined->co2)) {
+                    $emissions->combined->co2 = System::getFormattedNumber($emissions->combined->co2, 1);
+                }
             }
 
             if (isset($ad['consumptions'])) {
@@ -476,13 +485,179 @@ class ListingElement extends ContentElement
 
             $objFilterTemplate->fuelConsumption = $fuelConsumption;
             $objFilterTemplate->onlyFilter = 1 === (int) $this->pdir_md_only_filter;
-            $objFilterTemplate->firstRegistration = $this->formatDate($ad['specifics_first_registration']);
-            $objFilterTemplate->mileage = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
+            $ad['specifics_mileage'] = $ad['specifics_mileage'] ? System::getFormattedNumber($ad['specifics_mileage'], 0) : 0;
             $objFilterTemplate->filterClasses = $this->getFilterClasses($ad);
 
             if ($this->featureCss) {
                 $objFilterTemplate->featureCss = $this->featureCss;
             }
+
+            // format date fields
+            if ($ad['specifics_general_inspection']) {
+                $ad['specifics_general_inspection'] = ListingElement::formatDate($ad['specifics_general_inspection']);
+            }
+
+            if ($ad['specifics_exhaust_inspection']) {
+                $ad['specifics_exhaust_inspection'] = ListingElement::formatDate($ad['specifics_exhaust_inspection']);
+            }
+
+            if ($ad['specifics_delivery_date']) {
+                $ad['specifics_delivery_date'] = ListingElement::formatDate($ad['specifics_delivery_date']);
+            }
+
+            if ($ad['specifics_first_registration']) {
+                $ad['specifics_first_registration'] = ListingElement::formatDate($ad['specifics_first_registration']);
+            }
+
+            if ($ad['specifics_construction_date']) {
+                $ad['specifics_construction_date'] = ListingElement::formatDate($ad['specifics_construction_date']);
+            }
+
+            if ($ad['specifics_first_models_production_date']) {
+                $ad['specifics_first_models_production_date'] = ListingElement::formatDate($ad['specifics_first_models_production_date']);
+            }
+
+            // emission values
+            $emissionValues = [];
+
+            if ($ad['wltp_consumption_power_combined_weighted'] && $ad['wltp_consumption_fuel_combined_weighted']) {
+                $emissionValues[] = [
+                    'value' => System::getFormattedNumber($ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km + ' . System::getFormattedNumber($ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km',
+                    'unit'  => '(' . $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] . ')'
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_co2_emission']) {
+                $value = preg_replace('/([,.])0$/', '', System::getFormattedNumber($ad['emission_fuel_consumption_co2_emission'],1));
+                $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['combined'];
+
+                if ($ad['hybrid_plugin']) {
+                    $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'];
+                }
+
+                $emissionValues[] = [
+                    'value' => $value . ' g',
+                    'unit'  => 'CO₂/km (' . $unit . ')'
+                ];
+            }
+
+            if ($ad['emission_co2_class']) {
+                $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['combined'];
+
+                if ($ad['hybrid_plugin']) {
+                    $unit = $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'];
+                }
+
+                $dischargedCo2Class = '';
+                if ($ad['emission_co2_class_discharged']) {
+                    $dischargedCo2Class = ', ' . $ad['emission_co2_class_discharged'] . ' (' . $GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] . ')';
+                }
+
+                $emissionValues[] = [
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class'][0],
+                    'value' => $ad['emission_co2_class'],
+                    'unit' => '(' . $unit . ')' . $dischargedCo2Class
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_combined_power_consumption'] && !$ad['hybrid_plugin']) {
+                $emissionValues[] = [
+                    'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
+                ];
+            }
+
+            $objFilterTemplate->emissionValues = $emissionValues;
+
+            // fuel consumptions
+            $fuelConsumptions = [];
+            $objFilterTemplate->fuelConsumptionLabel =
+                $GLOBALS['TL_LANG']['pdirMobileDe'][!($ad['hybrid_plugin'])
+                    ? 'consumptions-fuel'
+                    : 'hybrid-consumptions-fuel-consumption-@combined'
+                ]. ' (l/100km)';
+
+            if ($ad['emission_fuel_consumption_inner']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_inner'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_outer']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_outer'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_rural']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_rural'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_highway']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_highway'],1)
+                ];
+            }
+
+            if ($ad['emission_fuel_consumption_combined']) {
+                $fuelConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                    'value' => System::getFormattedNumber($ad['emission_fuel_consumption_combined'],1)
+                ];
+            }
+
+            $objFilterTemplate->fuelConsumptions = $fuelConsumptions;
+
+            // power consumptions
+            $powerConsumptions = [];
+            $objFilterTemplate->powerConsumptionLabel =
+                $GLOBALS['TL_LANG']['pdirMobileDe'][!($ad['hybrid_plugin'])
+                    ? 'consumptions-power'
+                    : 'hybrid-consumptions-power-consumption-@combined'
+                ] . ' (kWh/100km)';
+
+            if ($ad['emission_power_consumption_inner']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-city'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_inner'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_outer']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-suburban'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_outer'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_rural']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-rural'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_rural'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_highway']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_highway'],1)
+                ];
+            }
+
+            if ($ad['emission_power_consumption_combined']) {
+                $powerConsumptions[] = [
+                    'label' => $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-combined'],
+                    'value' => System::getFormattedNumber($ad['emission_power_consumption_combined'],1)
+                ];
+            }
+
+            $objFilterTemplate->powerConsumptions = $powerConsumptions;
 
             // add account
             $objFilterTemplate->account = $ad['account'];
