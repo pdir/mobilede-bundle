@@ -1100,7 +1100,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 clr'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_fuel_consumption_outer' => [
             'exclude' => true,
@@ -1109,7 +1109,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_fuel_consumption_combined' => [
             'exclude' => true,
@@ -1118,7 +1118,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_fuel_consumption_rural' => [
             'exclude' => true,
@@ -1127,7 +1127,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_fuel_consumption_highway' => [
             'exclude' => true,
@@ -1136,7 +1136,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_power_consumption_inner' => [
             'exclude' => true,
@@ -1145,7 +1145,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50 clr'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_power_consumption_outer' => [
             'exclude' => true,
@@ -1154,7 +1154,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_power_consumption_combined' => [
             'exclude' => true,
@@ -1163,7 +1163,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_power_consumption_rural' => [
             'exclude' => true,
@@ -1172,7 +1172,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_power_consumption_highway' => [
             'exclude' => true,
@@ -1181,7 +1181,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
             'inputType' => 'text',
             'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
-            'sql' => 'DECIMAL(5,1) UNSIGNED NULL',
+            'sql' => 'DECIMAL(5,2) UNSIGNED NULL',
         ],
         'emission_fuel_consumption_petrol_type' => [
             'exclude' => true,

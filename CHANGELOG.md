@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+### [3.7.1](https://github.com/pdir/mobilede-bundle/tree/3.7.1) – 2026-02-23
+
+- [Changed] Adjusted emission_fuel_consumption_combined field to DECIMAL(5,2) UNSIGNED NULL
+
 ### [3.7.0](https://github.com/pdir/mobilede-bundle/tree/3.7.0) – 2026-01-28
 
 - [Changed] Refactor database to use new API endpoints
