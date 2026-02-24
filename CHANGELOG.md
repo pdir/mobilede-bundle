@@ -10,10 +10,11 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-### [3.7.1](https://github.com/pdir/mobilede-bundle/tree/3.7.1) – 2026-02-23
+### [3.7.1](https://github.com/pdir/mobilede-bundle/tree/3.7.1) – 2026-02-24
 
 - [Changed] Adjusted emission_fuel_consumption_combined field to DECIMAL(5,2) UNSIGNED NULL
 - [Fixed] Added `not-anchor` class to filter reset link to ensure compatibility with Eclipse theme
+- [Fixed] Fixed mileage slider not displaying a value
 
 ### [3.7.0](https://github.com/pdir/mobilede-bundle/tree/3.7.0) – 2026-01-28
 
