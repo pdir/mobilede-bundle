@@ -1,5 +1,5 @@
 <?php if($this->desc == ''): return ''; endif; ?>
-<div class="item md-ad-box vehicle-item <?= $this->filterClasses ?><?php if($this->onlyFilter): ?> hidden<?php endif; ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= str_replace(",","",$this->mileage) ?>" data-acc="<?= $this->account ?>">
+<div class="item md-ad-box vehicle-item <?= $this->filterClasses ?><?php if($this->onlyFilter): ?> hidden<?php endif; ?>" data-price="<?= $this->plainPrice ?>" data-power="<?= $this->plainPower ?>" data-mileage="<?= $this->plainMileage ?>" data-acc="<?= $this->account ?>">
   <div class="inside">
   <?php if(!$this->onlyFilter): ?>
   <div class="image">

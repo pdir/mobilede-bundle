@@ -141,7 +141,7 @@ $GLOBALS['TL_CSS'][''] = 'bundles/pdirmobilede/scss/vehicle-list.scss|static';
         <div id="mileageSlider" data-filter-group="mileage"></div>
       </div>
     </div>
-    <a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a>
+    <a href="#" class="filter-reset not-anchor" id="filterReset">Filter zurücksetzen</a>
     </div>
 
     <?php if($this->onlyFilter): ?>
