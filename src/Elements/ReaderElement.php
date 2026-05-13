@@ -271,14 +271,14 @@ class ReaderElement extends ContentElement
             }
 
             $emissionValues[] = [
-                'label' => $label . '<sup>2</sup>',
+                'label' => $label . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_co2_emission'],1) . ' g/km'
             ];
         }
 
         if ($this->ad['emission_fuel_consumption_combined_power_consumption'] && !$this->ad['hybrid_plugin']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0] . '<sup>2</sup>',
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
             ];
         }
@@ -292,21 +292,21 @@ class ReaderElement extends ContentElement
 
         if ($this->ad['wltp_electric_range']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0] . '<sup>2</sup>',
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['wltp_electric_range'],1) . ' km'
             ];
         }
 
         if ($this->ad['wltp_consumption_fuel_combined_weighted']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0] . '<sup>2</sup>',
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km'
             ];
         }
 
         if ($this->ad['wltp_consumption_power_combined_weighted']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0] . '<sup>2</sup>',
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km'
             ];
         }
@@ -319,7 +319,7 @@ class ReaderElement extends ContentElement
             $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
                 ? 'consumptions-fuel'
                 : 'hybrid-consumptions-fuel-consumption-@combined'
-            ] . '<sup>2</sup>';
+            ] . '<sup>1</sup>';
 
         if ($this->ad['emission_fuel_consumption_inner']) {
             $fuelConsumptions[] = [
@@ -364,7 +364,7 @@ class ReaderElement extends ContentElement
             $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
                 ? 'consumptions-power'
                 : 'hybrid-consumptions-power-consumption-@combined'
-            ] . '<sup>2</sup>';
+            ] . '<sup>1</sup>';
 
         if ($this->ad['emission_power_consumption_inner']) {
             $powerConsumptions[] = [
@@ -450,7 +450,7 @@ class ReaderElement extends ContentElement
 
         // cost model co2 costs
         $co2costs = [];
-        $this->ad['co2costsLabel'] = $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs'] . '<sup>2</sup> <sup>3</sup>';
+        $this->ad['co2costsLabel'] = $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs'] . '<sup>1</sup> <sup>2</sup>';
 
         if ($this->ad['cost_model_co2costs_middle_accumulated'] && $this->ad['cost_model_co2costs_middle_basePrice']) {
             $co2costs['middle'] = [
