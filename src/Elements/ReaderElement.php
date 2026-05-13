@@ -250,14 +250,14 @@ class ReaderElement extends ContentElement
                 $label = $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'];
             }
 
-            $emissionValues[] = [
+            $emissionValues['co2_class'] = [
                 'label' => $label,
                 'value' => $this->ad['emission_co2_class']
             ];
         }
 
         if ($this->ad['emission_co2_class_discharged']) {
-            $emissionValues[] = [
+            $emissionValues['co2_class_discharged'] = [
                 'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_co2_class_discharged'][0],
                 'value' => $this->ad['emission_co2_class_discharged']
             ];
@@ -271,14 +271,14 @@ class ReaderElement extends ContentElement
             }
 
             $emissionValues[] = [
-                'label' => $label,
+                'label' => $label . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_co2_emission'],1) . ' g/km'
             ];
         }
 
         if ($this->ad['emission_fuel_consumption_combined_power_consumption'] && !$this->ad['hybrid_plugin']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_combined_power_consumption'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['emission_fuel_consumption_combined_power_consumption'],1) . ' kWh/100km'
             ];
         }
@@ -292,21 +292,21 @@ class ReaderElement extends ContentElement
 
         if ($this->ad['wltp_electric_range']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_electric_range'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['wltp_electric_range'],1) . ' km'
             ];
         }
 
         if ($this->ad['wltp_consumption_fuel_combined_weighted']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_fuel_combined_weighted'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['wltp_consumption_fuel_combined_weighted'],1) . ' l/100km'
             ];
         }
 
         if ($this->ad['wltp_consumption_power_combined_weighted']) {
             $emissionValues[] = [
-                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0],
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['wltp_consumption_power_combined_weighted'][0] . '<sup>1</sup>',
                 'value' => System::getFormattedNumber($this->ad['wltp_consumption_power_combined_weighted'],1) . ' kWh/100km'
             ];
         }
@@ -319,7 +319,7 @@ class ReaderElement extends ContentElement
             $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
                 ? 'consumptions-fuel'
                 : 'hybrid-consumptions-fuel-consumption-@combined'
-            ];
+            ] . '<sup>1</sup>';
 
         if ($this->ad['emission_fuel_consumption_inner']) {
             $fuelConsumptions[] = [
@@ -364,7 +364,7 @@ class ReaderElement extends ContentElement
             $GLOBALS['TL_LANG']['pdirMobileDe'][!($this->ad['hybrid_plugin'])
                 ? 'consumptions-power'
                 : 'hybrid-consumptions-power-consumption-@combined'
-            ];
+            ] . '<sup>1</sup>';
 
         if ($this->ad['emission_power_consumption_inner']) {
             $powerConsumptions[] = [
@@ -402,6 +402,102 @@ class ReaderElement extends ContentElement
         }
 
         $this->ad['powerConsumptions'] = $powerConsumptions;
+
+        // cost model
+        $costModel = [];
+
+        if ($this->ad['cost_model_consumption_costs']) {
+            $costModel['consumption_costs'] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['cost_model_consumption_costs'][0],
+                'value' => System::getFormattedNumber($this->ad['cost_model_consumption_costs'],0) . ' €/' . $GLOBALS['TL_LANG']['pdirMobileDe']['year']
+            ];
+        }
+
+        if ($this->ad['cost_model_fuel_price']) {
+            $costModel['fuel_price'] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['cost_model_fuel_price'][0],
+                'value' => System::getFormattedNumber($this->ad['cost_model_fuel_price']) . ' €/l'
+            ];
+        }
+
+        if ($this->ad['cost_model_power_price']) {
+            $costModel['power_price'] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['cost_model_power_price'][0],
+                'value' => System::getFormattedNumber($this->ad['cost_model_power_price']) . ' €/l'
+            ];
+        }
+
+        if ($this->ad['cost_model_consumption_price_year']) {
+            $annualAverage = ' (' . $GLOBALS['TL_LANG']['pdirMobileDe']['annual-average'] . ' ' . $this->ad['cost_model_consumption_price_year'] . ')';
+
+            if (isset($costModel['fuel_price'])) {
+                $costModel['fuel_price']['value'] .= $annualAverage;
+            }
+
+            if (isset($costModel['power_price'])) {
+                $costModel['power_price']['value'] .= $annualAverage;
+            }
+        }
+
+        if ($this->ad['cost_model_tax']) {
+            $costModel['tax'] = [
+                'label' => $GLOBALS['TL_LANG'][$this->strTable]['cost_model_tax'][0],
+                'value' => System::getFormattedNumber($this->ad['cost_model_tax'],0) . ' €/' . $GLOBALS['TL_LANG']['pdirMobileDe']['year']
+            ];
+        }
+
+        $this->ad['costModel'] = $costModel;
+
+        // cost model co2 costs
+        $co2costs = [];
+        $this->ad['co2costsLabel'] = $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs'] . '<sup>1</sup> <sup>2</sup>';
+
+        if ($this->ad['cost_model_co2costs_middle_accumulated'] && $this->ad['cost_model_co2costs_middle_basePrice']) {
+            $co2costs['middle'] = [
+                'label' => sprintf(
+                    $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_middle_basePrice'],
+                    System::getFormattedNumber($this->ad['cost_model_co2costs_middle_basePrice'],0)
+                ),
+                'value' => System::getFormattedNumber($this->ad['cost_model_co2costs_middle_accumulated'],0) . ' €'
+            ];
+        }
+
+        if ($this->ad['cost_model_co2costs_low_accumulated'] && $this->ad['cost_model_co2costs_low_basePrice']) {
+            $co2costs['low'] = [
+                'label' => sprintf(
+                    $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_low_basePrice'],
+                    System::getFormattedNumber($this->ad['cost_model_co2costs_low_basePrice'],0)
+                ),
+                'value' => System::getFormattedNumber($this->ad['cost_model_co2costs_low_accumulated'],0) . ' €'
+            ];
+        }
+
+        if ($this->ad['cost_model_co2costs_high_accumulated'] && $this->ad['cost_model_co2costs_high_basePrice']) {
+            $co2costs['high'] = [
+                'label' => sprintf(
+                    $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_high_basePrice'],
+                    System::getFormattedNumber($this->ad['cost_model_co2costs_high_basePrice'],0)
+                ),
+                'value' => System::getFormattedNumber($this->ad['cost_model_co2costs_high_accumulated'],0) . ' €'
+            ];
+        }
+
+        $this->ad['co2costs'] = $co2costs;
+
+        // footnotes
+        $footnotes = [];
+
+        if ($this->ad['co2costs']) {
+            $footnotes[] = $GLOBALS['TL_LANG']['pdirMobileDe']['fuel_consumption_disclaimer'];
+
+            $footnotes[] = sprintf(
+                $GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_description'],
+                $this->ad['cost_model_time_frame_from'],
+                $this->ad['cost_model_time_frame_till']
+            );
+        }
+
+        $this->ad['footnotes'] = $footnotes;
 
         // images
         $newGallery = [];

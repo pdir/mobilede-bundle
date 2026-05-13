@@ -86,21 +86,28 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['first-registration-no-value']
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackAdminOnly'] = 'Only admins are allowed to change this setting.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['visibleButtonCallbackUnused'] = 'Manual accounts cannot be synchronized.';
 
-$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-combined-co2'] = 'CO₂ emissions (combined) in g/km';
-$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-combined-co2Class'] = 'CO₂ class (combined)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-discharged-co2'] = 'CO₂ emissions (battery discharged) in g/km';
-$GLOBALS['TL_LANG']['pdirMobileEn']['emissions-discharged-co2Class'] = 'CO₂ class based on emissions with battery discharged';
-$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined) in l/100 km';
-$GLOBALS['TL_LANG']['pdirMobileEn']['consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined) in kWh/100 km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'] = 'CO₂ emissions (combined) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'] = 'CO₂ class (combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2'] = 'CO₂ emissions (battery discharged) in g/km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['emissions-discharged-co2Class'] = 'CO₂ class based on emissions with battery discharged';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined) in l/100 km';
+$GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined) in kWh/100 km';
 
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-combined-@co2'] = 'CO₂ emissions (weighted combined)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-combined-@co2-class'] = 'CO₂ class (weighted combined)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-discharged-@co2'] = 'CO₂ emissions (battery discharged)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-emissions-discharged-@co2-class'] = 'CO₂ class (battery discharged)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-fuel-consumption-@combined'] = 'Fuel consumption with battery discharged (combined)';
-$GLOBALS['TL_LANG']['pdirMobileEn']['hybrid-consumptions-power-consumption-@combined'] = 'Electricity consumption in pure electric mode (combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2'] = 'CO₂ emissions (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-combined-@co2-class'] = 'CO₂ class (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2'] = 'CO₂ emissions (battery discharged)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-emissions-discharged-@co2-class'] = 'CO₂ class (battery discharged)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-fuel-@value'] = 'Energy consumption (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-power-@value'] = 'Energy consumption (weighted combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-fuel-consumption-@combined'] = 'Fuel consumption with battery discharged (combined)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-power-consumption-@combined'] = 'Electricity consumption in pure electric mode (combined)';
+
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs'] = 'Possible CO₂ costs over the next 10 years (15,000 km/year)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_low_basePrice'] = 'based on an assumed low average CO₂ price of %s €/t';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_high_basePrice'] = 'based on an assumed high average CO₂ price of %s €/t';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_middle_basePrice'] = 'based on an assumed medium average CO₂ price of %s €/t';
+$GLOBALS['TL_LANG']['pdirMobileDe']['fuel_consumption_disclaimer'] = '<sup>1</sup> The information is provided in accordance with the German Passenger Car Energy Consumption Labelling Ordinance (Pkw-Energieverbrauchskennzeichnungsverordnung). The stated values were determined using the prescribed WLTP (Worldwide Harmonised Light-Duty Vehicles Test Procedure) measurement procedure. The fuel consumption and CO₂ emissions of a passenger car depend not only on the efficient use of fuel by the vehicle, but also on driving style and other non-technical factors. CO₂ is the greenhouse gas primarily responsible for global warming. A guide on the fuel consumption and CO₂ emissions of all new passenger car models offered in Germany is available free of charge at every point of sale in Germany where new passenger cars are displayed or offered. The guide is also available online at <a href="https://www.dat.de/co2/" rel="nofollow noopener noreferrer external" target="_blank">www.dat.de/co2</a>';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_description'] = '<sup>2</sup> <strong>Possible CO₂ costs over the next 10 years</strong> Future increases in fuel costs are possible due to CO₂ pricing. Since future CO₂ price developments are uncertain, the possible CO₂ costs are calculated using three assumed CO₂ prices for the period from %s to %s. The actual CO₂ prices may be either higher or lower than those used in these model calculations. The CO₂ costs must be paid together with the fuel costs when refuelling. Further information is available at <a href="https://alternativ-mobil.info/" rel="nofollow noopener noreferrer external" target="_blank">www.alternativ-mobil.info</a>';
 
 // Altes Label als Alias (Backward Compatibility)
 $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'];
@@ -120,6 +127,8 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['consumptions-short-highway'] = 'highway';
 $GLOBALS['TL_LANG']['pdirMobileDe']['combined'] = 'comb.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] = 'wgt. comb.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] = 'discharged, comb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['year'] = 'Year';
+$GLOBALS['TL_LANG']['pdirMobileDe']['annual-average'] = 'Annual average';
 
 /*
  * List View

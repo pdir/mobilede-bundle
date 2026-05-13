@@ -103,6 +103,13 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-weighted-combined-power
 $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-fuel-consumption-@combined'] = 'Kraftstoffverbrauch bei entladener Batterie';
 $GLOBALS['TL_LANG']['pdirMobileDe']['hybrid-consumptions-power-consumption-@combined'] = 'Stromverbrauch bei rein elektrischem Antrieb';
 
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs'] = 'Mögliche CO₂-Kosten über die nächsten 10 Jahre (15.000 km/Jahr)';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_low_basePrice'] = 'bei einem angenommenen niedrigen durchschnittlichen CO₂-Preis von %s €/t';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_high_basePrice'] = 'bei einem angenommenen hohen durchschnittlichen CO₂-Preis von %s €/t';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_middle_basePrice'] = 'bei einem angenommenen mittleren durchschnittlichen CO₂-Preis von %s €/t';
+$GLOBALS['TL_LANG']['pdirMobileDe']['fuel_consumption_disclaimer'] = '<sup>1</sup> Die Informationen erfolgen gemäß der Pkw-Energieverbrauchskennzeichnungsverordnung. Die angegebenen Werte wurden nach dem vorgeschriebenen Messverfahren WLTP (Worldwide Harmonised Light-Duty Vehicles Test Procedure) ermittelt. Der Kraftstoffverbrauch und der CO₂-Ausstoß eines Pkw sind nicht nur von der effizienten Ausnutzung des Kraftstoffs durch den Pkw, sondern auch vom Fahrstil und anderen nichttechnischen Faktoren abhängig. CO₂ ist das für die Erderwärmung hauptverantwortliche Treibhausgas. Ein Leitfaden über den Kraftstoffverbrauch und die CO₂-Emissionen aller in Deutschland angebotenen neuen Pkw-Modelle ist unentgeltlich einsehbar an jedem Verkaufsort in Deutschland, an dem neue Pkw ausgestellt oder angeboten werden. Der Leitfaden ist auch hier abrufbar: <a href="https://www.dat.de/co2/" rel="nofollow noopener noreferrer external" target="_blank">www.dat.de/co2</a>';
+$GLOBALS['TL_LANG']['pdirMobileDe']['co2costs_description'] = '<sup>2</sup> <strong>Mögliche CO₂-Kosten über die nächsten 10 Jahre</strong> Aufgrund der CO₂-Bepreisung sind künftige Erhöhungen der Kraftstoffkosten möglich. Die künftige CO₂-Preisentwicklung ist unsicher, daher werden die möglichen CO₂-Kosten anhand von drei angenommenen CO₂-Preisen für den Zeitraum %s bis %s berechnet. Die tatsächlichen CO₂-Preise können sowohl höher als auch niedriger als in den hier zugrunde liegenden Modellrechnungen ausfallen. Die CO₂-Kosten sind beim Tanken mit den Kraftstoffkosten zu bezahlen. Weitere Informationen unter <a href="https://alternativ-mobil.info/" rel="nofollow noopener noreferrer external" target="_blank">www.alternativ-mobil.info</a>';
+
 // Altes Label als Alias (Backward Compatibility)
 $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2'];
 $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-@co2-class'] =& $GLOBALS['TL_LANG']['pdirMobileDe']['emissions-combined-co2Class'];
@@ -122,6 +129,8 @@ $GLOBALS['TL_LANG']['pdirMobileDe']['emission-co2-class'] = 'Autobahn';
 $GLOBALS['TL_LANG']['pdirMobileDe']['combined'] = 'komb.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['weighted-combined'] = 'gew. komb.';
 $GLOBALS['TL_LANG']['pdirMobileDe']['discharged-combined'] = 'entladen, komb.';
+$GLOBALS['TL_LANG']['pdirMobileDe']['year'] = 'Jahr';
+$GLOBALS['TL_LANG']['pdirMobileDe']['annual-average'] = 'Jahresdurchschnitt';
 
 /*
  * List View
