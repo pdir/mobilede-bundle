@@ -10,6 +10,15 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+### [3.8.0](https://github.com/pdir/mobilede-bundle/tree/3.8.0) – 2026-05-13
+
+- [Added] Added support for mobile.de vehicle cost model data (fuel price, electricity price, energy costs, vehicle tax and CO₂ costs)
+- [Changed] Updated `ce_mobilede_reader_redesign` template with cost model rendering and improved energy scale display
+- [Changed] Updated energy efficiency scale rendering to include CO₂ class with discharged battery
+- [Changed] Enhanced energy efficiency scale styling and visual presentation
+- [Added] Added legal footnotes and references for WLTP consumption values and estimated CO₂ costs
+- [Fixed] Fixed and completed English translations
+
 ### [3.7.0](https://github.com/pdir/mobilede-bundle/tree/3.7.0) – 2026-01-28
 
 - [Changed] Refactor database to use new API endpoints

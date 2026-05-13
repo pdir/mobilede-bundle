@@ -102,11 +102,31 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
             <?php endif; ?>
 
             <?php if(isset($this->ad['specifics'])): ?>
-            <?php foreach($this->ad['specifics'] as $key=>$feature): ?>
-            <li class="specifics-<?= $feature['key'] ?>">
-                <span class="label"><?= $feature['label'] ?></span><span class="value"><?= $feature['value'] ?></span>
-            </li>
-            <?php endforeach; ?>
+              <?php foreach($this->ad['specifics'] as $key=>$feature): ?>
+                <li class="specifics-<?= $feature['key'] ?>">
+                    <span class="label"><?= $feature['label'] ?></span><span class="value"><?= $feature['value'] ?></span>
+                </li>
+              <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(!empty($this->ad['costModel'])): ?>
+              <?php foreach($this->ad['costModel'] as $costModel): ?>
+                <li>
+                  <span class="label"><?= $costModel['label'] ?></span>
+                  <span class="value"><?= $costModel['value'] ?></span>
+                </li>
+              <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php if(!empty($this->ad['co2costs'])): ?>
+              <li class="co2costs">
+                <span class="label"><?= $this->ad['co2costsLabel'] ?></span>
+                <span class="value">
+                  <?php foreach($this->ad['co2costs'] as $co2costs): ?>
+                    <div><?= $co2costs['value'] ?> (<?= $co2costs['label'] ?>)</div>
+                  <?php endforeach; ?>
+                </span>
+              </li>
             <?php endif; ?>
           </ul>
         </div>
@@ -119,6 +139,10 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         if (isset($this->ad['emission_fuel_consumption_energy_efficiency_class'])) {
           $class = $this->ad['emission_fuel_consumption_energy_efficiency_class'];
         }
+
+        if (isset($this->ad['emission_co2_class_discharged'])) {
+          $classDischarged = $this->ad['emission_co2_class_discharged'];
+        }
         ?>
         <?php if($class != ''): ?>
           <div class="energy-class-label<?php if('' !== $this->ad['emission_co2_class']): ?> co2-class<?php endif; ?>">
@@ -127,18 +151,64 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
               <div class="description">*Auf der Grundlage der gemessenen CO-2 Emissionen unter Berücksichtigung der Masse des Fahrzeugs ermittelt.</div>
             </div>
             <div class="right-col">
-              <?php if($this->ad['emission_fuel_consumption_energy_efficiency_class'] && !$this->ad['emission_co2_class']): ?>
-                <div class="energy-class class-a-plus-plus-plus<?php if($class == 'A+++'): ?> active<?php endif; ?>"><span>A+++</span></div>
-                <div class="energy-class class-a-plus-plus<?php if($class == 'A++'): ?> active<?php endif; ?>"><span>A++</span></div>
-                <div class="energy-class class-a-plus<?php if($class == 'A+'): ?> active<?php endif; ?>"><span>A+</span></div>
-              <?php endif; ?>
-              <div class="energy-class class-a<?php if($class == 'A'): ?> active<?php endif; ?>"><span>A</span></div>
-              <div class="energy-class class-b<?php if($class == 'B'): ?> active<?php endif; ?>"><span>B</span></div>
-              <div class="energy-class class-c<?php if($class == 'C'): ?> active<?php endif; ?>"><span>C</span></div>
-              <div class="energy-class class-d<?php if($class == 'D'): ?> active<?php endif; ?>"><span>D</span></div>
-              <div class="energy-class class-e<?php if($class == 'E'): ?> active<?php endif; ?>"><span>E</span></div>
-              <div class="energy-class class-f<?php if($class == 'F'): ?> active<?php endif; ?>"><span>F</span></div>
-              <div class="energy-class class-g<?php if($class == 'G'): ?> active<?php endif; ?>"><span>G</span></div>
+              <div class="energy-label-new">
+                <div class="co2-class-label"><?= trim(preg_replace('/\s*\(.*?\)/', '', $this->ad['emissionValues']['co2_class']['label'])) ?></div>
+                <div class="energy-label-new__scale">
+                  <div class="energy-label-new__class energy-label-new__class--a">
+                    <span>A</span>
+                  </div>
+
+                  <div class="energy-label-new__class energy-label-new__class--b">
+                    <span>B</span>
+                  </div>
+
+                  <div class="energy-label-new__class energy-label-new__class--c">
+                    <span>C</span>
+                  </div>
+
+                  <div class="energy-label-new__class energy-label-new__class--d">
+                    <span>D</span>
+                  </div>
+
+                  <div class="energy-label-new__class energy-label-new__class--e">
+                    <span>E</span>
+                  </div>
+
+                  <div class="energy-label-new__class energy-label-new__class--f">
+                    <span>F</span>
+                  </div>
+
+                  <div class="energy-label-new__class energy-label-new__class--g">
+                    <span>G</span>
+                  </div>
+                </div>
+
+                <div class="energy-label-new__results<?php if (isset($classDischarged)): ?> with-discharged-class<?php endif; ?>">
+                  <div class="energy-label-new__result">
+                    <div class="energy-label-new__title">
+                      <?= preg_match('/\((.*?)\)/', $this->ad['emissionValues']['co2_class']['label'], $m) ? $m[1] : '' ?>
+                    </div>
+
+                    <div class="energy-label-new__indicator class-<?= strtolower($class) ?>">
+                      <?= $class ?>
+                    </div>
+                  </div>
+
+                  <?php if (isset($classDischarged)): ?>
+                    <div class="energy-label-new__divider"></div>
+
+                    <div class="energy-label-new__result">
+                      <div class="energy-label-new__title">
+                        <?= preg_match('/\((.*?)\)/', $this->ad['emissionValues']['co2_class_discharged']['label'], $m) ? $m[1] : '' ?>
+                      </div>
+
+                      <div class="energy-label-new__indicator class-<?= strtolower($classDischarged) ?>">
+                        <?= $classDischarged ?>
+                      </div>
+                    </div>
+                  <?php endif; ?>
+                </div>
+              </div>
             </div>
           </div>
         <?php endif; ?>
@@ -258,6 +328,13 @@ $GLOBALS['TL_KEYWORDS']=join(',', $matches[0]);
         nextAd['title']; ?> &raquo;</a></span>
       <?php endif; ?>
     </div>
+
+    <?php if(!empty($this->ad['footnotes'])): ?>
+      <?php foreach($this->ad['footnotes'] as $footnotes): ?>
+        <p><?= $footnotes ?></p>
+      <?php endforeach; ?>
+    <?php endif; ?>
+
     <a href="javascript:history.back();" class="back bottom"><?= $GLOBALS['TL_LANG']['pdirMobileDe']['field_keys']['back'] ?></a>
   </div>
 </div>

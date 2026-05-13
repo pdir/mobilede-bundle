@@ -105,6 +105,9 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'specifics_headlight_type,specifics_bending_lights_type,specifics_breakdown_service,specifics_battery,'.
                 'specifics_trailer_coupling_type,specifics_trim_line,specifics_model_range,specifics_first_models_production_date,'.
                 'specifics_battery_capacity,specifics_cylinder,specifics_trailer_load_braked;'.
+                '{cost_model_legend},cost_model_fuel_price,cost_model_power_price,cost_model_consumption_costs,cost_model_consumption_price_year,cost_model_tax,'.
+                'cost_model_time_frame_from,cost_model_time_frame_till,cost_model_co2costs_low_basePrice,cost_model_co2costs_low_accumulated,'.
+                'cost_model_co2costs_high_basePrice,cost_model_co2costs_high_accumulated,cost_model_co2costs_middle_basePrice,cost_model_co2costs_middle_accumulated;'.
                 '{emission_legend},emission_fuel_consumption_envkv_compliant,hybrid_plugin,emission_fuel_consumption_energy_efficiency_class,'.
                 'emission_co2_class,emission_co2_class_discharged,emission_fuel_consumption_co2_emission,emission_fuel_consumption_petrol_type;{emission_fuel_consumption_legend},'.
                 'emission_fuel_consumption_inner,emission_fuel_consumption_outer,emission_fuel_consumption_rural,'.
@@ -1256,6 +1259,110 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'eval' => ['maxlength' => 255, 'tl_class' => 'clr', 'includeBlankOption' => true, 'multiple' => true, 'chosen' => true],
             'options_callback' => ['Pdir\MobileDeBundle\Dca\Ad', 'featuresOptionsCallback'],
             'sql' => 'text NULL',
+        ],
+        'cost_model_fuel_price' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_power_price' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_consumption_costs' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_consumption_price_year' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
+        'cost_model_tax' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
+        'cost_model_time_frame_from' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 255, 'tl_class' => 'w50 clr'],
+            'sql' => 'text NULL',
+        ],
+        'cost_model_time_frame_till' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
+        'cost_model_co2costs_low_basePrice' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_co2costs_low_accumulated' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_co2costs_high_basePrice' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_co2costs_high_accumulated' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_co2costs_middle_basePrice' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
+        ],
+        'cost_model_co2costs_middle_accumulated' => [
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'inputType' => 'text',
+            'eval' => ['maxlength' => 13, 'rgxp' => 'digit', 'tl_class' => 'w50'],
+            'sql' => 'float(10,2) NULL',
         ],
         // wltp-values
         'wltp_consumption_fuel_combined' => [
