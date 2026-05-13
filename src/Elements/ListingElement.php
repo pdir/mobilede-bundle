@@ -342,6 +342,7 @@ class ListingElement extends ContentElement
             $objFilterTemplate->showNetPrice = 1 === (int) $this->pdir_md_show_net_price;
             $objFilterTemplate->plainPrice = $ad['consumer_price_amount']; // rand(1, 20000); //
             $objFilterTemplate->plainPower = $ad['specifics_power'];
+            $objFilterTemplate->plainMileage = $ad['specifics_mileage'] ? str_replace(",","", $ad['specifics_mileage']) : '';
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
             $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], System::getFormattedNumber($ad['price_vat_rate'], 0) .' %');
             $objFilterTemplate->netPrice = System::getFormattedNumber($ad['consumer_price_amount'] / (1 + $ad['price_vat_rate']), 2).' '.$ad['price_currency'];

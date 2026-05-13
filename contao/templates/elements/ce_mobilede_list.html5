@@ -135,7 +135,7 @@
         <div id="mileageSlider" data-filter-group="mileage"></div>
       </div>
 
-      <span><a href="#" class="filter-reset" id="filterReset">Filter zurücksetzen</a></span>
+      <span><a href="#" class="filter-reset not-anchor" id="filterReset">Filter zurücksetzen</a></span>
 
       <?php if($this->onlyFilter): ?>
         <span><a href="{{link_url::<?= $this->listingPage ?>}}" id="vehicleOnlyFilter" class="submit">Suchen</a></span>
