@@ -10,6 +10,11 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21
+
+- [Fixed] CO₂ emissions are now correctly displayed even when the value is 0 (previously, zero values were not rendered)
+- [Changed] Adjusted electric range output by removing the “EAER” label from translations to ensure a more consistent display across all vehicle types
+
 ### [3.8.0](https://github.com/pdir/mobilede-bundle/tree/3.8.0) – 2026-05-13
 
 - [Added] Added support for mobile.de vehicle cost model data (fuel price, electricity price, energy costs, vehicle tax and CO₂ costs)
