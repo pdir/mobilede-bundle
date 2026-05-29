@@ -263,7 +263,7 @@ class ReaderElement extends ContentElement
             ];
         }
 
-        if ($this->ad['emission_fuel_consumption_co2_emission']) {
+        if ('' !== $this->ad['emission_fuel_consumption_co2_emission']) {
             $label = $GLOBALS['TL_LANG'][$this->strTable]['emission_fuel_consumption_co2_emission'][0];
 
             if ($this->ad['hybrid_plugin']) {
