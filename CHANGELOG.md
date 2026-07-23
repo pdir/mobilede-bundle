@@ -10,6 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+### [3.8.2](https://github.com/pdir/mobilede-bundle/tree/3.8.2) – 2026-07-23
+
+- [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
+
 ### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21
 
 - [Fixed] CO₂ emissions are now correctly displayed even when the value is 0 (previously, zero values were not rendered)
