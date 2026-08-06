@@ -523,6 +523,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_interior_type']['options']['IMITATION_
 $GLOBALS['TL_LANG'][$strTable]['specifics_interior_type']['options']['OTHER_INTERIOR_TYPE'] = 'Other';
 $GLOBALS['TL_LANG'][$strTable]['specifics_legend'] = 'Specifics';
 $GLOBALS['TL_LANG'][$strTable]['specifics_licensed_weight'] = ['Licensed Weight (kg)', 'Here you can enter the licensed weight in kg.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_weight'] = ['Weight (kg)', 'Enter the vehicle weight (curb weight) in kg.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_lifting_capacity'] = ['Lifting Capacity (kg)', 'Here you can enter the lifting capacity in kg.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_lifting_height'] = ['Lifting Height (mm)', 'Here you can enter the lifting height in mm.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_load_capacity'] = ['Loading Capacity (kg)', 'Here you can enter the loading capacity in kg.'];

@@ -93,7 +93,7 @@ $GLOBALS['TL_DCA'][$strTable] = [
                 'specifics_exhaust_inspection,specifics_general_inspection,specifics_delivery_date,specifics_delivery_period,'.
                 'specifics_door_count,specifics_first_registration,specifics_emission_class,specifics_emission_sticker,'.
                 'specifics_fuel,specifics_power,specifics_hsn,specifics_tsn,specifics_schwacke_code,specifics_gearbox,'.
-                'specifics_climatisation,specifics_licensed_weight,specifics_axles,specifics_load_capacity,specifics_num_seats,'.
+                'specifics_climatisation,specifics_licensed_weight,specifics_weight,specifics_axles,specifics_load_capacity,specifics_num_seats,'.
                 'specifics_operating_hours,specifics_installation_height,specifics_lifting_capacity,specifics_lifting_height,'.
                 'specifics_construction_year,specifics_construction_date,specifics_cubic_capacity,specifics_driving_mode,'.
                 'specifics_driving_cab,specifics_condition,specifics_usage_type,specifics_wheel_formula,specifics_number_of_bunks,'.
@@ -520,6 +520,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'specifics_licensed_weight' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_licensed_weight'],
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'inputType' => 'text',
+            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
+        'specifics_weight' => [
+            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_weight'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,

@@ -513,6 +513,7 @@ $GLOBALS['TL_LANG'][$strTable]['specifics_interior_type']['options']['IMITATION_
 $GLOBALS['TL_LANG'][$strTable]['specifics_interior_type']['options']['OTHER_INTERIOR_TYPE'] = 'Andere';
 $GLOBALS['TL_LANG'][$strTable]['specifics_legend'] = 'Spezifikationen';
 $GLOBALS['TL_LANG'][$strTable]['specifics_licensed_weight'] = ['Zulässiges Gesamtgewicht (kg)', 'Geben Sie hier das zulässige Gesamtgewicht in kg ein.'];
+$GLOBALS['TL_LANG'][$strTable]['specifics_weight'] = ['Gewicht (kg)', 'Geben Sie hier das Gewicht (Leergewicht) in kg ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_lifting_capacity'] = ['Tragkraft (kg)', 'Geben Sie hier die Tragkraft in kg ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_lifting_height'] = ['Hubhöhe (mm)', 'Geben Sie hier die Hubhöhe in mm ein.'];
 $GLOBALS['TL_LANG'][$strTable]['specifics_load_capacity'] = ['Ladekapazität (kg)', 'Geben Sie hier die Ladekapazität in kg ein.'];
