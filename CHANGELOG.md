@@ -14,6 +14,7 @@ Types of changes
 
 - [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
 - [Changed] Updated the default "OffRoad" vehicle category label to "SUV/Geländewagen/Pickup".
+- [Fixed] Fixed net price calculation
 
 ### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21
 

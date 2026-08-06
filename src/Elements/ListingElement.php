@@ -345,12 +345,27 @@ class ListingElement extends ContentElement
             $objFilterTemplate->plainMileage = $ad['specifics_mileage'] ? str_replace(",","", $ad['specifics_mileage']) : '';
             $objFilterTemplate->price = System::getFormattedNumber($ad['consumer_price_amount'], 2).' '.$ad['price_currency'];
             $objFilterTemplate->priceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['gross_price_label'], System::getFormattedNumber($ad['price_vat_rate'], 0) .' %');
-            $objFilterTemplate->netPrice = System::getFormattedNumber($ad['consumer_price_amount'] / (1 + $ad['price_vat_rate']), 2).' '.$ad['price_currency'];
-            $objFilterTemplate->netPriceLabel = sprintf($GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'], System::getFormattedNumber($ad['price_vat_rate'], 0) .' %');
 
-            if ('' !== $ad['pseudo_price'] && 0 !== $ad['pseudo_price'] && null !== $ad['pseudo_price']) {
-                $objFilterTemplate->pseudoPrice = System::getFormattedNumber($ad['pseudo_price'], 2).' '.$ad['price_currency'];
+            // Support VAT rates in both formats (e.g. 19 and 0.19) and normalize
+            // them for net price calculation and label output.
+            $vatRate = (float) str_replace(',', '.', $ad['price_vat_rate']);
+
+            if ($vatRate > 1) {
+                $vatFactor = 1 + ($vatRate / 100);
+            } else {
+                $vatFactor = 1 + $vatRate;
+                $vatRate *= 100;
             }
+
+            $objFilterTemplate->netPrice = System::getFormattedNumber(
+                    $ad['consumer_price_amount'] / $vatFactor,
+                    2
+                ) . ' ' . $ad['price_currency'];
+
+            $objFilterTemplate->netPriceLabel = sprintf(
+                $GLOBALS['TL_LANG']['pdirMobileDe']['net_price_label'],
+                System::getFormattedNumber($vatRate, 0) . ' %'
+            );
 
             $objFilterTemplate->link = $this->getReaderPageLink($ad['alias']);
             $objFilterTemplate->fuelType = $ad['specifics_fuel'] ? $GLOBALS['TL_LANG'][$this->strTable]['specifics_fuel']['options'][$ad['specifics_fuel']] : '';
