@@ -10,9 +10,10 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-### [3.8.2](https://github.com/pdir/mobilede-bundle/tree/3.8.2) – 2026-07-23
+### [3.8.2](https://github.com/pdir/mobilede-bundle/tree/3.8.2) – 2026-08-06
 
 - [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
+- [Changed] Updated the default "OffRoad" vehicle category label to "SUV/Geländewagen/Pickup".
 
 ### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21
 
