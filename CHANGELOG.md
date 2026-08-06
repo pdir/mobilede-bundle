@@ -14,6 +14,7 @@ Types of changes
 
 - [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
 - [Changed] Updated the default "OffRoad" vehicle category label to "SUV/Geländewagen/Pickup".
+- [Changed] Changed vehicle date formatting to display month/year (MM/YYYY) instead of the system date format.
 - [Fixed] Fixed net price calculation
 - [Removed] Removed the unused `price_vat_rating` field in favor of the existing `price_vat_rate` field.
 

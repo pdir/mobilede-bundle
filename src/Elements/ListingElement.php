@@ -178,16 +178,13 @@ class ListingElement extends ContentElement
 
     public static function formatDate($str)
     {
-        // validate date
         if ($str) {
             if (false !== strpos($str, '-')) {
-                // if date is string
-                return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], strtotime($str));
+                return Date::parse('m/Y', strtotime($str));
             }
 
             if (is_numeric($str)) {
-                // if date is timestamp
-                return Date::parse($GLOBALS['TL_CONFIG']['dateFormat'], $str);
+                return Date::parse('m/Y', $str);
             }
 
             return $str;
