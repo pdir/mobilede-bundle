@@ -10,9 +10,9 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-### [3.8.2](https://github.com/pdir/mobilede-bundle/tree/3.8.2) – 2026-08-06
+### [3.9.0](https://github.com/pdir/mobilede-bundle/tree/3.9.0) – 2026-08-06
 
-- [Added] New "Curb Weight" field for the vehicle's curb weight.
+- [Added] New "Weight" field for the vehicle's curb weight.
 - [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
 - [Changed] Updated the default "OffRoad" vehicle category label to "SUV/Geländewagen/Pickup".
 - [Changed] Changed vehicle date formatting to display month/year (MM/YYYY) instead of the system date format.
