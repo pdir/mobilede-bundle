@@ -10,13 +10,15 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
-### [3.9.0](https://github.com/pdir/mobilede-bundle/tree/3.9.0) – 2026-08-06
+### [3.9.0](https://github.com/pdir/mobilede-bundle/tree/3.9.0) – 2026-08-24
 
 - [Added] New "Weight" field for the vehicle's curb weight.
 - [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
 - [Changed] Updated the default "OffRoad" vehicle category label to "SUV/Geländewagen/Pickup".
 - [Changed] Changed vehicle date formatting to display month/year (MM/YYYY) instead of the system date format.
 - [Fixed] Fixed net price calculation
+- [Fixed] Fixed display issues in the vehicle manager backend template, including the broken demo data import link
+  [Fixed] Fixed incorrect icon display in the backend navigation
 - [Removed] Removed the unused `price_vat_rating` field in favor of the existing `price_vat_rate` field.
 
 ### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21

@@ -7,7 +7,7 @@ $pdir-color: #7AC0BC;
   }
 
   .vehicle_show {
-    background: url(/bundles/pdirmobilede/img/pdir_icon_mobilemodul.svg) 14px 4px no-repeat;
+    background: url(/bundles/pdirmobilede/img/pdir_icon_mobilemodul.svg) 0 6px no-repeat;
     background-size: 15px 15px;
   }
 
@@ -52,6 +52,19 @@ $pdir-color: #7AC0BC;
         }
       }
     }
+  }
+}
+
+.operations-menu .be_vehicle_toolbar {
+  height: auto;
+
+  .container {
+    position: relative;
+  }
+
+  img.logo {
+    width: 30px;
+    height: auto;
   }
 }
 

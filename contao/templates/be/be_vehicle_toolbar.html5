@@ -2,7 +2,8 @@
   <div class="container">
     <div class="logo">
       <a href="https://pdir.de/mobilede.html" target="_blank">
-        <img src="bundles/pdirmobilede/img/icon.svg" alt="Fahrzeugmanager für Contao" width="50" height="50" class="logo">&nbsp; <?= $GLOBALS['TL_LANG']['MOD']['vehicle_show'][0] ?>
+        <img src="bundles/pdirmobilede/img/icon.svg" alt="Fahrzeugmanager für Contao" width="50" height="50" class="logo">
+        <?= $GLOBALS['TL_LANG']['MOD']['vehicle_show'][0] ?>
       </a>
     </div>
     <div class="button<?php if($this->extMode == 'FREE'): ?> inactive" title="inactive in free version"<?php else: ?>"<?php endif; ?>>
@@ -36,7 +37,7 @@
       <div class="flex">
         <?php foreach($this->arrButtons as $button): ?>
           <div class="button">
-            <a href="<?= $button['href'] ?>&ref=<?= $this->ref ?>"<?php if (isset($button['onclick'])): ?>onclick="<?= $button['onclick'] ?>"<?php endif; ?>>
+            <a href="<?= $button['href'] ?><?php if (false !== strpos($button['href'], 'download')): ?>&ref=<?= $this->ref ?><?php endif; ?>"<?php if (isset($button['onclick'])): ?>onclick="<?= $button['onclick'] ?>"<?php endif; ?>>
               <img src="<?= $button['image'] ?>" alt="<?= $button['alt'] ?>" width="40" height="40" />
                 <?= $button['alt'] ?>
             </a>
