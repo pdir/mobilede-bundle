@@ -20,6 +20,7 @@ Types of changes
 - [Fixed] Fixed display issues in the vehicle manager backend template, including the broken demo data import link
   [Fixed] Fixed incorrect icon display in the backend navigation
 - [Removed] Removed the unused `price_vat_rating` field in favor of the existing `price_vat_rate` field.
+- [Removed] Removed Contao 4.13 compatibility; users of Contao 4.13 must use version 3.8.x
 
 ### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21
 
