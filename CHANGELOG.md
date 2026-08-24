@@ -18,7 +18,8 @@ Types of changes
 - [Changed] Changed vehicle date formatting to display month/year (MM/YYYY) instead of the system date format.
 - [Fixed] Fixed net price calculation
 - [Fixed] Fixed display issues in the vehicle manager backend template, including the broken demo data import link
-  [Fixed] Fixed incorrect icon display in the backend navigation
+- [Fixed] Fixed incorrect icon display in the backend navigation
+- [Fixed] Fixed minor CSS issues in the Contao backend dark mode
 - [Removed] Removed the unused `price_vat_rating` field in favor of the existing `price_vat_rate` field.
 - [Removed] Removed Contao 4.13 compatibility; users of Contao 4.13 must use version 3.8.x
 

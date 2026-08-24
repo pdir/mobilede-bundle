@@ -254,6 +254,8 @@ $pdir-color: #7AC0BC;
         .feature_list {
           width: 90%;
           padding-bottom: 1rem;
+          padding-left: 0;
+          list-style: none;
 
           li {
             line-height: 1.3rem;
@@ -318,16 +320,6 @@ $pdir-color: #7AC0BC;
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 .be_vehicle_setup {
   line-height: 1.2em;
@@ -523,4 +515,8 @@ $pdir-color: #7AC0BC;
     height: 100%;
     border: none;
   }
+}
+
+[data-color-scheme=dark] .be_vehicle_info .bundle_editions .editions_list .button_container .button {
+  background: #303236;
 }
