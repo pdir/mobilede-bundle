@@ -87,13 +87,13 @@ $GLOBALS['TL_DCA'][$strTable] = [
         'default' => '{title_legend},name,alias,type,account,vehicle_id,published;'.
             '{vehicle_legend},vehicle_class,vehicle_category,vehicle_make,vehicle_model,vehicle_model_description,vehicle_free_text,'.
                 'features,vehicle_damage,images;'.
-            '{price_legend},dealer_price_amount,consumer_price_amount,pseudo_price,price_vat_rate,price_currency,price_vat_rating,'.
+            '{price_legend},dealer_price_amount,consumer_price_amount,pseudo_price,price_vat_rate,price_currency,'.
                 'price_rating,price_included_delivery_costs;'.
             '{specifics_legend},specifics_exterior_color,specifics_manufacturer_color_name,specifics_metallic,specifics_mileage,'.
                 'specifics_exhaust_inspection,specifics_general_inspection,specifics_delivery_date,specifics_delivery_period,'.
                 'specifics_door_count,specifics_first_registration,specifics_emission_class,specifics_emission_sticker,'.
                 'specifics_fuel,specifics_power,specifics_hsn,specifics_tsn,specifics_schwacke_code,specifics_gearbox,'.
-                'specifics_climatisation,specifics_licensed_weight,specifics_axles,specifics_load_capacity,specifics_num_seats,'.
+                'specifics_climatisation,specifics_licensed_weight,specifics_weight,specifics_axles,specifics_load_capacity,specifics_num_seats,'.
                 'specifics_operating_hours,specifics_installation_height,specifics_lifting_capacity,specifics_lifting_height,'.
                 'specifics_construction_year,specifics_construction_date,specifics_cubic_capacity,specifics_driving_mode,'.
                 'specifics_driving_cab,specifics_condition,specifics_usage_type,specifics_wheel_formula,specifics_number_of_bunks,'.
@@ -200,16 +200,6 @@ $GLOBALS['TL_DCA'][$strTable] = [
             'exclude' => true,
             'inputType' => 'text',
             'eval' => ['tl_class' => 'w50'],
-            'sql' => 'text NULL',
-        ],
-        'price_vat_rating' => [
-            'exclude' => true,
-            'search' => true,
-            'sorting' => true,
-            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
-            'inputType' => 'select',
-            'options' => &$GLOBALS['TL_LANG'][$strTable]['price_vat_rating']['options'],
-            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50', 'includeBlankOption' => true],
             'sql' => 'text NULL',
         ],
         'price_currency' => [
@@ -530,6 +520,16 @@ $GLOBALS['TL_DCA'][$strTable] = [
         ],
         'specifics_licensed_weight' => [
             'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_licensed_weight'],
+            'exclude' => true,
+            'search' => true,
+            'sorting' => true,
+            'flag' => DataContainer::SORT_INITIAL_LETTER_ASC,
+            'inputType' => 'text',
+            'eval' => ['mandatory' => false, 'maxlength' => 255, 'tl_class' => 'w50'],
+            'sql' => 'text NULL',
+        ],
+        'specifics_weight' => [
+            'label' => &$GLOBALS['TL_LANG'][$strTable]['specifics_weight'],
             'exclude' => true,
             'search' => true,
             'sorting' => true,

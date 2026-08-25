@@ -154,6 +154,10 @@
   margin-left: -15px;
   margin-right: -15px;
 
+  .gross-price, .net-price {
+    display: block;
+  }
+
   .item.md-ad-box.vehicle-item {
     width: calc((100% / 3) - 30px);
     margin: 15px;

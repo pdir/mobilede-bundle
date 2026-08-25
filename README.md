@@ -59,13 +59,12 @@ Screenshot
 System requirements
 -------------------
 
-* [Contao 3](https://contao.org/de/download.html)
-* [Contao 4](https://github.com/contao/managed-edition) or higher
+* [Contao 5](https://github.com/contao/managed-edition) or higher
 
 Installation & Configuration
 ----------------------------
 
-see documentation at https://docs.pdir.de/mobilede/mobilede_inserate.html
+see documentation at https://pdir.de/docs/de/contao/extensions/mobilede/
 
 Demo
 ----
@@ -75,14 +74,14 @@ https://demo.pdir.de/mobile-de-inserate-demo.html
 See this Extension in the Contao Extension-Repository
 -----------------------------------------------------
 
-https://contao.org/de/erweiterungsliste/view/pdirMobileDe.10000099.de.html
+https://extensions.contao.org/?q=Fahrzeugmanager&pages=1
 
 
 License
 -------
 This is a commercial extension for Contao Open Source CMS<br>
 You can buy a license at https://pdir.de/mobilede<br>
-2017-2022 pdir GmbH - All-rights-reserved<br>
+2017-2026 pdir GmbH - All-rights-reserved<br>
 
 
 *mobile.de sowie das mobile.de Logo sind eingetragene Warenzeichen einer Drittpartei und stehen in keiner Verbindung zur pdir GmbH oder der mobile.de* Erweiterung für Contao. Die Erweiterung verwendet die mobile.de* API zum Import der Fahrzeugdaten.

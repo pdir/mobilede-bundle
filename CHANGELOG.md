@@ -10,6 +10,19 @@ Types of changes
     Security in case of vulnerabilities.
 )
 
+### [3.9.0](https://github.com/pdir/mobilede-bundle/tree/3.9.0) – 2026-08-24
+
+- [Added] New "Weight" field for the vehicle's curb weight.
+- [Changed] Replaced `Connection::getSchemaManager()` with `Connection::createSchemaManager()` to ensure compatibility with Doctrine DBAL 4.
+- [Changed] Updated the default "OffRoad" vehicle category label to "SUV/Geländewagen/Pickup".
+- [Changed] Changed vehicle date formatting to display month/year (MM/YYYY) instead of the system date format.
+- [Fixed] Fixed net price calculation
+- [Fixed] Fixed display issues in the vehicle manager backend template, including the broken demo data import link
+- [Fixed] Fixed incorrect icon display in the backend navigation
+- [Fixed] Fixed minor CSS issues in the Contao backend dark mode
+- [Removed] Removed the unused `price_vat_rating` field in favor of the existing `price_vat_rate` field.
+- [Removed] Removed Contao 4.13 compatibility; users of Contao 4.13 must use version 3.8.x
+
 ### [3.8.1](https://github.com/pdir/mobilede-bundle/tree/3.8.1) – 2026-05-21
 
 - [Fixed] CO₂ emissions are now correctly displayed even when the value is 0 (previously, zero values were not rendered)
